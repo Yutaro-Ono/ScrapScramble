@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:ScrapScramble/Assets/Scripts/SceneTransition.meta
 guid: 20faf482e27a6354b819a9dde9c54f5a
+=======
+guid: 0e5748bba1a60cf408989d9009fd1179
+>>>>>>> Result:ScrapScramble/Assets/Scripts/SceneTransition.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

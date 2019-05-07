@@ -7,6 +7,6 @@ public class ResultToTitle : MonoBehaviour
 {
     public void GameStart()
     {
-        SceneManager.LoadScene("Title");
+        SceneManager.LoadScene("TitleScene");
     }
 }

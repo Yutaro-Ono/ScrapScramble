@@ -8,7 +8,7 @@ public class ResourceCollision : MonoBehaviour
     Color color;
 
     //プレイヤーが獲得した時の資源ポイントの増分
-    const int pointAddition = 10;
+    public const int pointAddition = 100;
 
     //ドロップ時からの経過時間
     float timeFromDropped;

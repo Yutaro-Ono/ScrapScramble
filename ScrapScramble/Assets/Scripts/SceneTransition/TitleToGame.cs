@@ -24,6 +24,6 @@ public class TitleToGame : MonoBehaviour
     public void SceneTransition(int in_playerNum)
     {
         playerNum = in_playerNum;
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("BattleScene");
     }
 }

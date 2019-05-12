@@ -374,18 +374,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   atkSpeed: 50
---- !u!114 &559906967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 559906961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 584ba0e3e10e54a4f8ff1a16c181eefe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &659483511
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,7 +577,7 @@ MeshRenderer:
   m_GameObject: {fileID: 1473026473}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -743,15 +731,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 463770, guid: 59320ed1ba3b61241bc6d7c0bb56b63e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.88
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 463770, guid: 59320ed1ba3b61241bc6d7c0bb56b63e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 30.45539
+      value: 23.61
       objectReference: {fileID: 0}
     - target: {fileID: 463770, guid: 59320ed1ba3b61241bc6d7c0bb56b63e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.2387655
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 463770, guid: 59320ed1ba3b61241bc6d7c0bb56b63e, type: 3}
       propertyPath: m_LocalRotation.x
@@ -785,8 +773,44 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 463770, guid: 59320ed1ba3b61241bc6d7c0bb56b63e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 463770, guid: 59320ed1ba3b61241bc6d7c0bb56b63e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 463770, guid: 59320ed1ba3b61241bc6d7c0bb56b63e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5472890, guid: 59320ed1ba3b61241bc6d7c0bb56b63e, type: 3}
       propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5472890, guid: 59320ed1ba3b61241bc6d7c0bb56b63e, type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 5472890, guid: 59320ed1ba3b61241bc6d7c0bb56b63e, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5472890, guid: 59320ed1ba3b61241bc6d7c0bb56b63e, type: 3}
+      propertyPath: m_Mass
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6566336, guid: 59320ed1ba3b61241bc6d7c0bb56b63e, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6518990, guid: 59320ed1ba3b61241bc6d7c0bb56b63e, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6581872, guid: 59320ed1ba3b61241bc6d7c0bb56b63e, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

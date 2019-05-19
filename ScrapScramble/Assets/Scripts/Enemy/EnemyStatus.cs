@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyStatus : MonoBehaviour
 {
+    EnemyDrop enemyDrop;
+
     //エネミーのヒットポイントの最大値
     const short enemyHitPointMax = 50;
 
@@ -40,12 +42,24 @@ public class EnemyStatus : MonoBehaviour
             bonusEnemyFlag = false;
             Debug.Log("ノーマルエネミー : " + bonusEnemyJudgeNumber);
         }
+
+        enemyDrop = GetComponent<EnemyDrop>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //デバッグ的に、コマンド入力でエネミーHPを0に
+        if (Input.GetKeyDown(KeyCode.D) && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
+        {
+            hitPoint = 0;
+        }
         
+        //HP0かつドロップが完了している場合、ゲームオブジェクトを破壊する
+        if (hitPoint <= 0 && enemyDrop.GetDroppedFlag())
+        {
+            Destroy(gameObject);
+        }
     }
 
     //bonusEnemyFlagのゲッター

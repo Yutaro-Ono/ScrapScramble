@@ -45,7 +45,7 @@ public class PlayerMovememt : MonoBehaviour
 
         Vector3 force = new Vector3(moveX*speed, 0.0f, moveZ*speed);  // 力を設定
 
-        if (rb.velocity.magnitude < 50f)
+        if (rb.velocity.magnitude < 40f)
         {
             rb.AddForce(force, ForceMode.Acceleration);
         }
@@ -56,7 +56,7 @@ public class PlayerMovememt : MonoBehaviour
             chargeController += Time.deltaTime;
 
         }
-        if (chargeController >2.0f)
+        if (chargeController >1.5f)
         {
             if (Input.GetMouseButtonUp(0))
             {

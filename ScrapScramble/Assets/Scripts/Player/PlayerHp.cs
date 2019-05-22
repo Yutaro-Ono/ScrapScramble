@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStatus : MonoBehaviour
+public class PlayerHp : MonoBehaviour
 {
-    public int score;
-    public int armedStage;
-
     // Start is called before the first frame update
     void Start()
     {

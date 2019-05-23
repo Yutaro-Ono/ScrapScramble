@@ -23,6 +23,9 @@ public class EnemyManagerSpawn : MonoBehaviour
     //ゲームスタートからの時間
     float timeFromStart;
 
+    //ステージの隅っこの一つとその対角の座標をもったオブジェクト
+    public GameObject stageCorner1, stageCorner2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -65,6 +68,9 @@ public class EnemyManagerSpawn : MonoBehaviour
 
             //生成したオブジェクトをエネミーマネージャーの子に設定
             instance.transform.parent = transform;
+
+            EnemyMovement enemyMovement = instance.GetComponent<EnemyMovement>();
+            enemyMovement.SetStageCornerObject(stageCorner1, stageCorner2);
 
             //スポーン回数の記録
             spawnNum++;

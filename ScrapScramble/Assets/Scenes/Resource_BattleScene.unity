@@ -896,8 +896,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b75d8d7f85976ff4b9fd123bdd520693, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageCorner1: {fileID: 1547297370}
-  stageCorner2: {fileID: 1648538882}
+  stageCorner1: {fileID: 1547297371}
+  stageCorner2: {fileID: 1648538883}
 --- !u!4 &1336240329
 Transform:
   m_ObjectHideFlags: 0

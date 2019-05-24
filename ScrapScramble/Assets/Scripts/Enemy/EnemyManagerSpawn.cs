@@ -24,7 +24,7 @@ public class EnemyManagerSpawn : MonoBehaviour
     float timeFromStart;
 
     //ステージの隅っこの一つとその対角の座標をもったオブジェクト
-    public GameObject stageCorner1, stageCorner2;
+    public Transform stageCorner1, stageCorner2;
 
     // Start is called before the first frame update
     void Start()

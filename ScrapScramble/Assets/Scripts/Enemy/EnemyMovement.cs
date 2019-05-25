@@ -29,7 +29,7 @@ public class EnemyMovement : MonoBehaviour
     Vector3 destinationDirection;
     
     //個体の移動スピード(/フレーム)
-    public const float moveSpeed = 0.1f;
+    const float moveSpeed = 0.3f;
 
     //ステージの隅っこの一つとその対角の座標をもったオブジェクト
     Transform stageCorner1, stageCorner2;
@@ -47,34 +47,27 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
+        
 
         //次工程に行くかのフラグを更新
         goNextProcessFlag = false;
 
-
-
+        
         //個体のHPが残っているなら
         if (enemyStatus.hitPoint > 0)
         {
 
-
             if (nowProcess == EnemyMovementProcess.DecideDestination)
             {
 
-
-
                 //目的地の座標
                 float destinationX, destinationZ;
-
 
 
                 //各隅っこの座標
                 //目的地座標のランダム生成に使う
                 float cornerXLarger, cornerXSmaller;
                 float cornerZLarger, cornerZSmaller;
-
 
 
                 //隅っこのx座標の大小を比較
@@ -86,11 +79,9 @@ public class EnemyMovement : MonoBehaviour
                     cornerXSmaller = stageCorner2.position.x;
 
 
-
                     //間違っていたら値入れ替え
                     if (cornerXSmaller > cornerXLarger)
                     {
-
 
 
                         float tmp = cornerXLarger;
@@ -98,20 +89,13 @@ public class EnemyMovement : MonoBehaviour
                         cornerXSmaller = tmp;
 
 
-
                     }
-
 
 
                     //rangeTakenWithWall分だけ壁と距離を取る
                     cornerXLarger -= rangeTakenWithWall;
-                    cornerXSmaller -= rangeTakenWithWall;
-
-
-
-                    Debug.Log("worldX : " + cornerXLarger);
-                    Debug.Log("localX : " + stageCorner1.localPosition.x);
-
+                    cornerXSmaller += rangeTakenWithWall;
+                    
 
                 }
 
@@ -124,11 +108,9 @@ public class EnemyMovement : MonoBehaviour
                     cornerZSmaller = stageCorner2.transform.position.z;
 
 
-
                     //間違っていたら値入れ替え
                     if (cornerZSmaller > cornerZLarger)
                     {
-
 
 
                         float tmp = cornerZLarger;
@@ -136,19 +118,12 @@ public class EnemyMovement : MonoBehaviour
                         cornerZSmaller = tmp;
 
 
-
                     }
-
 
 
                     //rangeTakenWithWall分だけ壁と距離を取る
                     cornerZLarger -= rangeTakenWithWall;
-                    cornerZSmaller -= rangeTakenWithWall;
-
-
-
-                    Debug.Log("worldZ : " + cornerZLarger);
-                    Debug.Log("localZ : " + stageCorner1.localPosition.z);
+                    cornerZSmaller += rangeTakenWithWall;
 
 
                 }
@@ -160,18 +135,11 @@ public class EnemyMovement : MonoBehaviour
                 destinationZ = Random.Range(cornerZSmaller, cornerZLarger);
 
 
-
                 //目的地を示す変数に代入
                 destination = new Vector3(destinationX, gameObject.transform.position.y, destinationZ);
-                destinationDirection = destination.normalized;
+                destinationDirection = (destination - gameObject.transform.position).normalized;
 
-
-
-                Debug.Log("destination : " + destination);
-                Debug.Log("direction : " + destinationDirection);
-
-
-
+                
                 //次の工程へ
                 nowProcess++;
 
@@ -182,17 +150,17 @@ public class EnemyMovement : MonoBehaviour
 
 
                 //進む方向を取得しなおす
-                destinationDirection = destination.normalized;
-
+                destinationDirection = (destination - gameObject.transform.position).normalized;
 
 
                 //現在地と目的地との距離の計測
-                float length = Vector3.Distance(destination, gameObject.transform.position);
+                float distance = Vector3.Distance(destination, gameObject.transform.position);
+                float moveLength = Vector3.Magnitude(destinationDirection * moveSpeed);
 
-
+                Debug.Log("MoveLength : " + moveLength + ", Distance : " + distance);
 
                 //目的地まで十分な距離がある場合は目的の方向まで一定スピードで進む
-                if (length > Vector3.Magnitude(destinationDirection * moveSpeed))
+                if (distance > moveLength)
                 {
 
 

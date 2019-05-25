@@ -4,8 +4,20 @@ using UnityEngine;
 
 public class EnemyStatus : MonoBehaviour
 {
+    ////////////////////////////
+    //自身のコンポーネント
+    ////////////////////////////
     EnemyDrop enemyDrop;
 
+    ////////////////////////////
+    //状況
+    ////////////////////////////
+    //ステージの一角とその対角にあるオブジェクトの座標
+    public Transform stageCorner1, stageCorner2;
+
+    ////////////////////////////
+    //自身の情報
+    ////////////////////////////
     //エネミーのヒットポイントの最大値
     const short enemyHitPointMax = 50;
 

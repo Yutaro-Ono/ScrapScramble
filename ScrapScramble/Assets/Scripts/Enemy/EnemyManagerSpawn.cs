@@ -12,6 +12,8 @@ public enum EnemyPattern
 
 public class EnemyManagerSpawn : MonoBehaviour
 {
+    EnemyManagerManagement enemyManagerManagement;
+
     //スポーンするエネミーの行動パターン
     EnemyPattern spawnEnemyPattern;
 
@@ -23,12 +25,11 @@ public class EnemyManagerSpawn : MonoBehaviour
     //ゲームスタートからの時間
     float timeFromStart;
 
-    //ステージの隅っこの一つとその対角の座標をもったオブジェクト
-    public Transform stageCorner1, stageCorner2;
-
     // Start is called before the first frame update
     void Start()
     {
+        enemyManagerManagement = GetComponent<EnemyManagerManagement>();
+
         spawnNum = 0;
 
         timeFromStart = 0.00f;
@@ -69,8 +70,9 @@ public class EnemyManagerSpawn : MonoBehaviour
             //生成したオブジェクトをエネミーマネージャーの子に設定
             instance.transform.parent = transform;
 
-            EnemyMovement enemyMovement = instance.GetComponent<EnemyMovement>();
-            enemyMovement.SetStageCornerObject(stageCorner1, stageCorner2);
+            //個体に必要な情報を代入
+            EnemyStatus enemyStatus = instance.GetComponent<EnemyStatus>();
+            enemyManagerManagement.TellInformationsToEnemy(enemyStatus);
 
             //スポーン回数の記録
             spawnNum++;

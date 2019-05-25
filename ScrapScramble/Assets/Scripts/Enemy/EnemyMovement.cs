@@ -23,7 +23,11 @@ public class EnemyMovement : MonoBehaviour
 
     //撃破演出が終わったかのフラグ
     bool finishBusteredAnimationFlag = false;
-    
+
+    ///////////////////////////////////
+    //行き先の決定、移動に関わる変数
+    ///////////////////////////////////
+
     //個体が移動する際の目的地の座標とその正規化ベクトル
     Vector3 destination;
     Vector3 destinationDirection;
@@ -38,10 +42,21 @@ public class EnemyMovement : MonoBehaviour
     //移動した後に壁と取っている距離
     const float rangeTakenWithWall = 10.0f;
 
+    ///////////////////////////////////
+    //ターゲッティングに関わる変数
+    ///////////////////////////////////
+
+    //プレイヤーの位置情報
+    //どのように受け取るかはのちに考える
+    Transform playerTransform;
+
     // Start is called before the first frame update
     void Start()
     {
         enemyStatus = GetComponent<EnemyStatus>();
+
+        stageCorner1 = enemyStatus.stageCorner1;
+        stageCorner2 = enemyStatus.stageCorner2;
     }
 
     // Update is called once per frame
@@ -60,112 +75,37 @@ public class EnemyMovement : MonoBehaviour
             if (nowProcess == EnemyMovementProcess.DecideDestination)
             {
 
-                //目的地の座標
-                float destinationX, destinationZ;
+                //行き先のランダム設定
+                SetDestinationAtRandom();
 
-
-                //各隅っこの座標
-                //目的地座標のランダム生成に使う
-                float cornerXLarger, cornerXSmaller;
-                float cornerZLarger, cornerZSmaller;
-
-
-                //隅っこのx座標の大小を比較
-                {
-
-
-                    //とりあえず代入
-                    cornerXLarger = stageCorner1.position.x;
-                    cornerXSmaller = stageCorner2.position.x;
-
-
-                    //間違っていたら値入れ替え
-                    if (cornerXSmaller > cornerXLarger)
-                    {
-
-
-                        float tmp = cornerXLarger;
-                        cornerXLarger = cornerXSmaller;
-                        cornerXSmaller = tmp;
-
-
-                    }
-
-
-                    //rangeTakenWithWall分だけ壁と距離を取る
-                    cornerXLarger -= rangeTakenWithWall;
-                    cornerXSmaller += rangeTakenWithWall;
-                    
-
-                }
-
-                //隅っこのz座標の大小を比較
-                {
-
-
-                    //とりあえず代入
-                    cornerZLarger = stageCorner1.transform.position.z;
-                    cornerZSmaller = stageCorner2.transform.position.z;
-
-
-                    //間違っていたら値入れ替え
-                    if (cornerZSmaller > cornerZLarger)
-                    {
-
-
-                        float tmp = cornerZLarger;
-                        cornerZLarger = cornerZSmaller;
-                        cornerZSmaller = tmp;
-
-
-                    }
-
-
-                    //rangeTakenWithWall分だけ壁と距離を取る
-                    cornerZLarger -= rangeTakenWithWall;
-                    cornerZSmaller += rangeTakenWithWall;
-
-
-                }
-
-
-
-                //ランダム生成
-                destinationX = Random.Range(cornerXSmaller, cornerXLarger);
-                destinationZ = Random.Range(cornerZSmaller, cornerZLarger);
-
-
-                //目的地を示す変数に代入
-                destination = new Vector3(destinationX, gameObject.transform.position.y, destinationZ);
-                destinationDirection = (destination - gameObject.transform.position).normalized;
-
+                //方向ベクトルの格納
+                SetDestinationDirection();
                 
                 //次の工程へ
                 nowProcess++;
 
-
             }
             else if (nowProcess == EnemyMovementProcess.Move)
             {
-
-
+                
                 //進む方向を取得しなおす
-                destinationDirection = (destination - gameObject.transform.position).normalized;
+                SetDestinationDirection();
+
+
+                //進む方向を見る
+                gameObject.transform.LookAt(destination);
 
 
                 //現在地と目的地との距離の計測
                 float distance = Vector3.Distance(destination, gameObject.transform.position);
                 float moveLength = Vector3.Magnitude(destinationDirection * moveSpeed);
 
-                Debug.Log("MoveLength : " + moveLength + ", Distance : " + distance);
 
                 //目的地まで十分な距離がある場合は目的の方向まで一定スピードで進む
                 if (distance > moveLength)
                 {
 
-
                     gameObject.transform.position += destinationDirection * moveSpeed;
-
 
                 }
                 //そうでないときは目的地の座標を自身の座標に代入
@@ -200,7 +140,7 @@ public class EnemyMovement : MonoBehaviour
 
 
             }
-            else
+            else if (nowProcess >= EnemyMovementProcess.Invalid)
             {
 
 
@@ -215,6 +155,10 @@ public class EnemyMovement : MonoBehaviour
 
         }
     }
+
+    /////////////////////////////////
+    //自作関数群
+    /////////////////////////////////
 
     //エネミーのgoNextProcessFlagを評価し、trueなら次の工程へ
     bool CheckGoNextProcessFlag()
@@ -232,6 +176,95 @@ public class EnemyMovement : MonoBehaviour
     {
         stageCorner1 = cornerObject1;
         stageCorner2 = cornerObject2;
+    }
+
+    //エネミーの移動先をランダムに設定する
+    void SetDestinationAtRandom()
+    {
+
+        //目的地の座標
+        float destinationX, destinationZ;
+
+
+        //各隅っこの座標
+        //目的地座標のランダム生成に使う
+        float cornerXLarger, cornerXSmaller;
+        float cornerZLarger, cornerZSmaller;
+
+
+        //隅っこのx座標の大小を比較
+        {
+
+
+            //とりあえず代入
+            cornerXLarger = stageCorner1.position.x;
+            cornerXSmaller = stageCorner2.position.x;
+
+
+            //間違っていたら値入れ替え
+            if (cornerXSmaller > cornerXLarger)
+            {
+
+
+                float tmp = cornerXLarger;
+                cornerXLarger = cornerXSmaller;
+                cornerXSmaller = tmp;
+
+
+            }
+
+
+            //rangeTakenWithWall分だけ壁と距離を取る
+            cornerXLarger -= rangeTakenWithWall;
+            cornerXSmaller += rangeTakenWithWall;
+
+
+        }
+
+        //隅っこのz座標の大小を比較
+        {
+
+
+            //とりあえず代入
+            cornerZLarger = stageCorner1.transform.position.z;
+            cornerZSmaller = stageCorner2.transform.position.z;
+
+
+            //間違っていたら値入れ替え
+            if (cornerZSmaller > cornerZLarger)
+            {
+
+
+                float tmp = cornerZLarger;
+                cornerZLarger = cornerZSmaller;
+                cornerZSmaller = tmp;
+
+
+            }
+
+
+            //rangeTakenWithWall分だけ壁と距離を取る
+            cornerZLarger -= rangeTakenWithWall;
+            cornerZSmaller += rangeTakenWithWall;
+
+
+        }
+
+
+
+        //ランダム生成
+        destinationX = Random.Range(cornerXSmaller, cornerXLarger);
+        destinationZ = Random.Range(cornerZSmaller, cornerZLarger);
+
+
+        //目的地を示す変数に代入
+        destination = new Vector3(destinationX, gameObject.transform.position.y, destinationZ);
+    }
+
+    //エネミーが動く方向ベクトルを正規化して格納
+    void SetDestinationDirection()
+    {
+        destinationDirection = (destination - gameObject.transform.position).normalized;
     }
 
     //finishBusteredAnimationFlagのゲッター

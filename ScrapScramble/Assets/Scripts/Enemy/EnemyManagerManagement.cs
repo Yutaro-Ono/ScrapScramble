@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyManagerManagement : MonoBehaviour
 {
-    const int playerNum = 4;
+    public const int playerNum = 4;
 
     //プレイヤーの情報
     public GameObject[] player = new GameObject[playerNum];
@@ -28,5 +28,10 @@ public class EnemyManagerManagement : MonoBehaviour
     {
         status.stageCorner1 = stageCorner1;
         status.stageCorner2 = stageCorner2;
+
+        for (int i = 0; i < playerNum; i++)
+        {
+            status.player[i] = player[i];
+        }
     }
 }

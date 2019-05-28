@@ -25,6 +25,9 @@ public class EnemyManagerSpawn : MonoBehaviour
     //ゲームスタートからの時間
     float timeFromStart;
 
+    //エネミーのプレハブデータ
+    GameObject prefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +36,25 @@ public class EnemyManagerSpawn : MonoBehaviour
         spawnNum = 0;
 
         timeFromStart = 0.00f;
+
+        //エネミーの行動パターンをランダム設定。キャストとかの関係でちょっと読みづらいかも
+        spawnEnemyPattern = (EnemyPattern)Random.Range((int)EnemyPattern.PatternA, (int)EnemyPattern.Invalid);
+
+        //生成するプレハブのパスを設定。
+        string prefabPath;
+        if (spawnEnemyPattern != EnemyPattern.Invalid)
+        {
+            prefabPath = "Prefabs/Enemy/Enemy";
+        }
+        else
+        {
+            prefabPath = null;
+            Debug.Log("エネミーのインスタンス生成に失敗");
+        }
+
+        //プレハブ取得
+        prefab = (GameObject)Resources.Load(prefabPath);
+
     }
 
     // Update is called once per frame
@@ -47,21 +69,6 @@ public class EnemyManagerSpawn : MonoBehaviour
         {
             //エネミーの行動パターンをランダム設定。キャストとかの関係でちょっと読みづらいかも
             spawnEnemyPattern = (EnemyPattern)Random.Range((int)EnemyPattern.PatternA, (int)EnemyPattern.Invalid);
-
-            //生成するプレハブのパスを設定。
-            string prefabPath;
-            if (spawnEnemyPattern != EnemyPattern.Invalid)
-            {
-                prefabPath = "Prefabs/Enemy/Enemy";
-            }
-            else
-            {
-                prefabPath = null;
-                Debug.Log("エネミーのインスタンス生成に失敗");
-            }
-
-            //プレハブ取得
-            GameObject prefab = (GameObject)Resources.Load(prefabPath);
 
             //プレハブをもとにオブジェクト生成
             GameObject instance = (GameObject)Instantiate(prefab, new Vector3(Random.Range(-90.0f, 90.0f), 4, Random.Range(-90.0f, 90.0f)),

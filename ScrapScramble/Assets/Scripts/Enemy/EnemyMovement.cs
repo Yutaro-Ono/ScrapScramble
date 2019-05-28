@@ -6,7 +6,7 @@ public enum EnemyMovementProcess
 {
     DecideDestination,
     Move,
-    Aim,
+    Targeting,
     Shoot,
     Invalid,
 }
@@ -46,17 +46,71 @@ public class EnemyMovement : MonoBehaviour
     //ターゲッティングに関わる変数
     ///////////////////////////////////
 
-    //プレイヤーの位置情報
+    //プレイヤーの人数（読み込むことが多いのでこちらでも格納することにしました）
+    const int playerNum = EnemyManagerManagement.playerNum;
+
+    //プレイヤーの情報
     //どのように受け取るかはのちに考える
-    Transform playerTransform;
+    GameObject[] playerObj = new GameObject[playerNum];
+
+    //ターゲッティング方向
+    //プレイヤーのTransformをそのまま使うとやや上方向を向いてしまうので
+    Transform targetingTransform;
+
+    //ターゲッティングする秒数
+    //インスペクタからも変更可能とする
+    public float targetingSeconds = 3.0f;
+
+    //タイマー
+    float targetingTimer = 0.0f;
+
+    //ターゲットにするプレイヤーの番号
+    //ターゲッティング工程にてこれが0未満の時、プレイヤーのランダム設定を行う
+    int targetPlayerNumber = -1;
+
+    ///////////////////////////////////
+    //射撃に関わる変数
+    ///////////////////////////////////
+
+    //撃ち出す弾のオブジェクトのプレハブデータ
+    GameObject bulletPrefab;
+    const string bulletPath = "Prefabs/Enemy/Enemy's Bullet";
+
+    //弾を撃ち出す位置の情報
+    Transform shootPoint;
+
+    //撃ち出すまでの待機時間（これがなければプレイヤーは弾を避けにくくなる）
+    public float shootWaitingTime = 1.0f;
+
+    //タイマー
+    float shootTimer = 0.0f;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        //エネミーのステータス取得
         enemyStatus = GetComponent<EnemyStatus>();
 
+        //ステージの角の位置を取得
         stageCorner1 = enemyStatus.stageCorner1;
         stageCorner2 = enemyStatus.stageCorner2;
+
+        //全プレイヤーの情報を取得
+        for (int i = 0; i < playerNum; i++)
+        {
+            playerObj[i] = enemyStatus.player[i];
+        }
+
+        //弾のプレハブを取得
+        bulletPrefab = (GameObject)Resources.Load(bulletPath);
+        if (bulletPrefab == null)
+        {
+            Debug.Log("エネミー：弾のプレハブデータ取得に失敗しました");
+        }
+
+        //弾を発射する座標を取得
+        shootPoint = transform.FindChild("Shoot Point").gameObject.transform;
     }
 
     // Update is called once per frame
@@ -124,9 +178,45 @@ public class EnemyMovement : MonoBehaviour
 
 
             }
-            else if (nowProcess == EnemyMovementProcess.Aim)
+            else if (nowProcess == EnemyMovementProcess.Targeting)
             {
 
+                //ターゲッティング対象が未決定の時、対象をランダム設定
+                if (targetPlayerNumber < 0)
+                {
+                    targetPlayerNumber = Random.Range(0, playerNum);
+                    //targetPlayerNumber = 0;
+
+                    Debug.Log("狙っているプレイヤー番号：" + targetPlayerNumber);
+                }
+
+                
+                //プレイヤーの位置（y座標考えないver）を格納
+                targetingTransform = playerObj[targetPlayerNumber].transform;
+                //targetingTransform.position = new Vector3(playerObj[targetPlayerNumber].transform.position.x, gameObject.transform.position.y, playerObj[targetPlayerNumber].transform.position.z);
+                
+
+                //ターゲッティングしたプレイヤーの方を向く
+                gameObject.transform.LookAt(targetingTransform);
+                
+                //ただし、x軸回転は0のまま
+                {
+                    //x軸回転の値を取得する
+                    float xRotation = gameObject.transform.rotation.x;
+
+                    //取得した値分逆回転させる
+                    gameObject.transform.Rotate(new Vector3(-xRotation, 0, 0));
+                }
+
+                //指定した秒数ターゲッティングしたら次の工程へ
+                targetingTimer += Time.deltaTime;
+
+                if (targetingTimer >= targetingSeconds)
+                {
+                    Debug.Log("ターゲッティング完了");
+
+                    goNextProcessFlag = true;
+                }
 
                 CheckGoNextProcessFlag();
 
@@ -135,6 +225,22 @@ public class EnemyMovement : MonoBehaviour
             else if (nowProcess == EnemyMovementProcess.Shoot)
             {
 
+                //発砲待機時間の計測
+                shootTimer += Time.deltaTime;
+
+                if (shootTimer >= shootWaitingTime)
+                {
+
+                    //弾のインスタンスを生成
+                    GameObject bulletInstance = (GameObject)Instantiate(bulletPrefab, shootPoint.transform.position, shootPoint.transform.rotation);
+
+
+                    Debug.Log("バン！：エネミーがプレイヤーに向けて発砲した");
+
+
+                    goNextProcessFlag = true;
+
+                }
 
                 CheckGoNextProcessFlag();
 
@@ -143,10 +249,15 @@ public class EnemyMovement : MonoBehaviour
             else if (nowProcess >= EnemyMovementProcess.Invalid)
             {
 
+                //初期化を行う
+                targetingTimer = 0.0f;
+                targetPlayerNumber = -1;
 
+                shootTimer = 0.0f;
+
+                //一番最初の工程に戻る
                 nowProcess = (EnemyMovementProcess)0;
-
-
+                
             }
         }
         //個体が死んだら

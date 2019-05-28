@@ -7,6 +7,15 @@ public class BulletOfEnemyMovement : MonoBehaviour
     //弾が進むスピード
     public float speed = 2.0f;
 
+    //弾の威力（プレイヤーの資源を落とさせる量）
+    public int power = 1;
+
+    //万が一、壁にぶつかっても消滅しなかったとき、一定距離進むことで消滅させる
+    const float disappearDistance = 3000.0f;
+
+    //進んだ距離
+    float advanceDistance = 0.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +27,15 @@ public class BulletOfEnemyMovement : MonoBehaviour
     {
         //前に進む
         gameObject.transform.position += gameObject.transform.forward * speed;
+
+        //距離の記録
+        advanceDistance += speed;
+
+        //一定距離進んだとき消滅
+        if (advanceDistance >= disappearDistance)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -25,6 +43,10 @@ public class BulletOfEnemyMovement : MonoBehaviour
         //プレイヤーに当たった時
         if (other.tag == "Player")
         {
+            {
+                //ここでプレイヤーが資源をドロップする関数を呼ぶ
+            }
+
             Debug.Log("エネミーの弾がプレイヤーにヒット");
 
             Destroy(gameObject);

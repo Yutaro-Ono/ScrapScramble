@@ -29,7 +29,7 @@ public class PlayerJudgment : MonoBehaviour
 
             if (other.gameObject.tag == "Enemy")
             {
-                d2.hp -= 1;
+                //d2.hp -= 1;
             }
         }
     }

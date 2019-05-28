@@ -77,6 +77,7 @@ public class ResourceCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        PlayerStatus d1 = GetComponent<PlayerStatus>();
         //衝突物がプレイヤーであれば、その資源獲得数に追加する。
         if (other.tag == "Player")
         {

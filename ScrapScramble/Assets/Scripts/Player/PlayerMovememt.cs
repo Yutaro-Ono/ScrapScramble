@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class PlayerMovememt : MonoBehaviour
 {
-    public float speed;          //プレイヤーの動くスピード
-    public float atkSpeed;
-    Vector3 Player_pos;          //プレイヤーのポジション
+    public float speed;                  //プレイヤーの動くスピード
+    public float atkSpeed;               //プレーヤーの攻撃スピード
+    Vector3 Player_pos;                  //プレイヤーのポジション
     private float moveX = 0f;            //x方向のImputの値
     private float moveZ = 0f;            //z方向のInputの値
-    public float lapseTime;
+    public float lapseTime;              //チャージ攻撃のクールタイム
     Rigidbody rb;
-    private float chargeController;
-    private float chargePower;
-    bool coolTimeFlg;
-    public bool chargePlayerStop;
+    public float chargeController;       //溜時間
+    public short chargePower;              //溜め時間での攻撃力変動
+    bool coolTimeFlg;                    //クールタイムのフラグ
+    public bool chargePlayerStop;        //プレーヤーが止まっているかどうか
     bool moveFlg;
-    bool chargFlg;
+    public bool chargFlg;
+    public bool timeFlg;
     private void Start()
     {
      
@@ -24,18 +25,18 @@ public class PlayerMovememt : MonoBehaviour
         Player_pos = GetComponent<Transform>().position; //最初の時点でのプレイヤーのポジションを取得
         chargePlayerStop = false;
         moveFlg = true;
-        //isAttackableをtrueにしておく
         coolTimeFlg = true;
         chargFlg = false;
         //lapseTimeを初期化
         lapseTime = 0.0f;
     }
-
+    //プレーヤーの停止
     void Stop()
     {
         rb.velocity = Vector3.zero;
         //rb.angularVelocity = Vector3.zero;
     }
+    //チャージアタック処理
     void PushCharge()
     {
         if (coolTimeFlg==true)
@@ -43,7 +44,7 @@ public class PlayerMovememt : MonoBehaviour
             if (Input.GetMouseButton(0))
             {
                 chargeController += Time.deltaTime;
-                chargePower += Time.deltaTime;
+                chargePower++; ;
                 chargePlayerStop = true;
                 chargFlg = true;
             }
@@ -51,27 +52,34 @@ public class PlayerMovememt : MonoBehaviour
         
         if (chargeController > 1.5f)
         {
-            
+            timeFlg = true;
+           
+          
+        }
+        if (timeFlg == true)
+        {
             if (Input.GetMouseButtonUp(0))
+
             {
                 rb.AddForce(transform.TransformDirection(Vector3.forward) * atkSpeed, ForceMode.Impulse);
-             
-                coolTimeFlg = false;
-                chargePlayerStop = false;
-                
-            }
 
+                coolTimeFlg = false;
+
+                chargePlayerStop = false;
+                chargeController = 0;
+                timeFlg = false;
+            }
         }
-     
         if (!Input.GetMouseButton(0))
         {
-          
+
             chargePower = 0;
             chargeController = 0;
-           chargePlayerStop = false;
+            chargePlayerStop = false;
         }
 
     }
+    //空気抵抗値の変更
     void PlayerStop()
     {
         rb.drag = 20;
@@ -80,6 +88,7 @@ public class PlayerMovememt : MonoBehaviour
     {
         rb.drag = 0;
     }
+    //ボタンを押しているかどうか
     void InputKey()
     {
         if (Input.anyKey)
@@ -106,6 +115,7 @@ public class PlayerMovememt : MonoBehaviour
  
         Player_pos = transform.position;                              //プレイヤーの位置を更新
     }
+    //クールタイム
     void CoolTime()
     {
         if (coolTimeFlg == false)
@@ -116,9 +126,13 @@ public class PlayerMovememt : MonoBehaviour
             //次に備えて、lapseTimeを0で初期化
             if (lapseTime >= 5)
             {
-                chargFlg = false;
+              
                 coolTimeFlg = true;
                 lapseTime = 0.0f;
+            }
+            if (lapseTime >= 2)
+            {
+                chargFlg = false;
             }
         }
     }
@@ -129,24 +143,26 @@ public class PlayerMovememt : MonoBehaviour
         PushCharge();
         CoolTime();
         Vector3 force = new Vector3(moveX * speed, 0.0f, moveZ * speed);  // 力を設定
+     
+        InputKey();   //ボタンを押しているかどうか 
 
-        InputKey();
-       
-        rb.AddForce(force);
+        rb.AddForce(force);  //プレイヤーに力を加える
+        //プレイヤーを動かしていなかったら
         if (moveFlg == false&&chargFlg==false)
         {
             Stop();
         }
+        //チャージ攻撃をしていたら
         if (chargePlayerStop == true)
         {
             PlayerStop();
         }
+        //チャージ攻撃をしていなかったら
         if (chargePlayerStop == false)
         {
             ChangDrag();
         }
 
-        //rb.velocity = new Vector3(moveX, 0, moveZ);
 
     }
 

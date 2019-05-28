@@ -4,8 +4,24 @@ using UnityEngine;
 
 public class EnemyStatus : MonoBehaviour
 {
+    ////////////////////////////
+    //自身のコンポーネント
+    ////////////////////////////
     EnemyDrop enemyDrop;
+    EnemyMovement enemyMovement;
 
+    ////////////////////////////
+    //状況
+    ////////////////////////////
+    //ステージの一角とその対角にあるオブジェクトの座標
+    public Transform stageCorner1, stageCorner2;
+
+    //全プレイヤーの情報
+    public GameObject[] player = new GameObject[EnemyManagerManagement.playerNum];
+
+    ////////////////////////////
+    //自身の情報
+    ////////////////////////////
     //エネミーのヒットポイントの最大値
     const short enemyHitPointMax = 50;
 
@@ -43,7 +59,11 @@ public class EnemyStatus : MonoBehaviour
             Debug.Log("ノーマルエネミー : " + bonusEnemyJudgeNumber);
         }
 
+        //同個体のドロップスクリプトと同期
         enemyDrop = GetComponent<EnemyDrop>();
+
+        //同個体のムーブメントスクリプトと同期
+        enemyMovement = GetComponent<EnemyMovement>();
     }
 
     // Update is called once per frame

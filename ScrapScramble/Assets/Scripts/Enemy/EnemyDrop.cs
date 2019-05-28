@@ -94,7 +94,7 @@ public class EnemyDrop : MonoBehaviour
             //飛ばす強さを設定
             //この時各方向の成分は取りうる最大値である
             //Vector3 dropDirection = new Vector3(1, Mathf.Sin(Mathf.PI / 4), 1) * dropAddForceStlength;
-            Vector3 dropDirection = new Vector3(1, 1, 1) * dropAddForceStlength;
+            Vector3 dropDirection = new Vector3(1, 0.001f, 1) * dropAddForceStlength;
 
             //角度に応じた値にx,z成分を設定する
             dropDirection.x *= Mathf.Sin(angle);

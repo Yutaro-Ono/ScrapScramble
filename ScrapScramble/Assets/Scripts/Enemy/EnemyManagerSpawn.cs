@@ -79,7 +79,8 @@ public class EnemyManagerSpawn : MonoBehaviour
 
             //個体に必要な情報を代入
             EnemyStatus enemyStatus = instance.GetComponent<EnemyStatus>();
-            enemyManagerManagement.TellInformationsToEnemy(enemyStatus);
+            EnemyDrop enemyDrop = instance.GetComponent<EnemyDrop>();
+            enemyManagerManagement.TellInformationsToEnemy(enemyStatus, enemyDrop);
 
             //スポーン回数の記録
             spawnNum++;

@@ -19,8 +19,8 @@ public class PlayerJudgment : MonoBehaviour
 
         //lapseTimeを初期化
         lapseTime = 0.0f;
-    }
 
+    }
     void LapseTime()
     {
         //isAttackableがfalseなら、直前のフレームからの経過時間を足す
@@ -37,13 +37,14 @@ public class PlayerJudgment : MonoBehaviour
             }
         }
     }
-    private void Update()
+    private void FixedUpdate()
     {
         LapseTime();
     }
     void OnCollisionEnter(Collision other)
     {
-       
+            Vector3 force = new Vector3(3.0f, 2.0f, 3.0f); //飛ばす位置
+        
         PlayerMovememt d1 = GetComponent<PlayerMovememt>();
         PlayerStatus d2 = GetComponent<PlayerStatus>();
         EnemyStatus d3 = other.gameObject.GetComponent<EnemyStatus>();
@@ -67,14 +68,22 @@ public class PlayerJudgment : MonoBehaviour
                 if (other.gameObject.tag == "Enemy")
 
                 {
-                   
-                    //d2.hp -= 1;
-                    //　設定したアイテムをプレイヤーのの1m上から落とす
-                    GameObject.Instantiate(dropObj, transform.position + Vector3.up, Quaternion.identity);
+
+                    d2.score -= 100;
+                    //　設定したアイテムをプレイヤーのの3m上から落とす
+                    GameObject.Instantiate(dropObj, transform.position + force, Quaternion.identity);
                     isAttackable = false;
+                   
                 }
             }
+
         }
+        //if(d2.hp==0)
+        //{
+        //    d2.score = 0;
+        //    GameObject.Instantiate(dropObj, transform.position + Vector3.up, Quaternion.identity);
+         
+        //}
         
     }
 }

@@ -112,7 +112,7 @@ public class PlayerMovememt : MonoBehaviour
         {
             transform.rotation = Quaternion.LookRotation(diff);       //ベクトルの情報をQuaternion.LookRotationに引き渡し回転量を取得しプレイヤーを回転させる
         }
- 
+        PushCharge();
         Player_pos = transform.position;                              //プレイヤーの位置を更新
     }
     //クールタイム
@@ -140,9 +140,9 @@ public class PlayerMovememt : MonoBehaviour
     void FixedUpdate()
     {
 
-        PushCharge();
+       
         CoolTime();
-        Vector3 force = new Vector3(moveX * speed, 0.0f, moveZ * speed);  // 力を設定
+        Vector3 force = new Vector3(moveX * speed, 0, moveZ * speed);  // 力を設定
      
         InputKey();   //ボタンを押しているかどうか 
 

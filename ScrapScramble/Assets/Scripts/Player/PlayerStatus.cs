@@ -58,11 +58,19 @@ public class PlayerStatus : MonoBehaviour
             gameObject.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
         }
     }
+    void PlayerDeath()
+    {
+        if(score<=0)
+        {
+
+            Destroy(this.gameObject);
+        }
+    }
 
     void Update()
     {
         BodyBigger();
         ChargeAttack();
-
+        PlayerDeath();
     }
 }

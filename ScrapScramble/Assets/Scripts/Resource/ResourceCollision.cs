@@ -81,6 +81,7 @@ public class ResourceCollision : MonoBehaviour
         //衝突物がプレイヤーであれば、その資源獲得数に追加する。
         if (other.tag == "Player")
         {
+            d1.score += pointAddition;
             Destroy(gameObject);
         }
     }

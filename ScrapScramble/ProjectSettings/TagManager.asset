@@ -9,6 +9,8 @@ TagManager:
   - Enemy
   - Item
   - BulletOfEnemy
+  - Fire
+  - SearchItemArea
   layers:
   - Default
   - TransparentFX

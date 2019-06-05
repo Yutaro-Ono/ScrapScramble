@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HammerAttack : StateMachineBehaviour
 {
+    public string collisionBoolName = "CollisionActive";
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
@@ -19,8 +21,8 @@ public class HammerAttack : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Debug.Log("アニメーション終了");
-        animator.SetTrigger("CollisionActive");
+        Debug.Log("ハンマー：攻撃アニメーション終了");
+        animator.SetBool(collisionBoolName, true);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

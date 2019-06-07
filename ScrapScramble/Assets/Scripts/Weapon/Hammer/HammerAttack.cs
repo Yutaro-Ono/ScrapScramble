@@ -6,11 +6,13 @@ public class HammerAttack : StateMachineBehaviour
 {
     public string collisionBoolName = "CollisionActive";
 
+    HammerControl control;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        control = animator.gameObject.GetComponent<HammerControl>();
+    }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -22,7 +24,8 @@ public class HammerAttack : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         Debug.Log("ハンマー：攻撃アニメーション終了");
-        animator.SetBool(collisionBoolName, true);
+        //animator.SetBool(collisionBoolName, true);
+        control.collider.enabled = true;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

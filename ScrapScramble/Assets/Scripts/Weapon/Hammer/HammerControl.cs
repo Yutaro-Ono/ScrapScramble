@@ -7,6 +7,8 @@ public class HammerControl : MonoBehaviour
     Animator animator;
     HammerAttack attackAnimScript;
 
+    public BoxCollider collider;
+
     //攻撃アニメーション、準備アニメーションが再生中かどうかのフラグ
     //これがfalseの時にアニメーションが再生可能とする
     bool attackingFlag = false;
@@ -40,15 +42,18 @@ public class HammerControl : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
-        if (animator.GetBool(attackAnimScript.collisionBoolName) && collision.gameObject.tag == "Player")
+        //if (animator.GetBool(attackAnimScript.collisionBoolName) && collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
             //ここにプレイヤー被ダメージ時の関数を呼ぶ
             Debug.Log("ハンマー：プレイヤーにヒット");
 
             //フラグをfalseにすることで、ハンマーを振り下ろした一瞬だけ判定を有効にする
             animator.SetBool(attackAnimScript.collisionBoolName, false);
+
+            collider.enabled = false;
         }
     }
 
@@ -59,5 +64,10 @@ public class HammerControl : MonoBehaviour
             animator.SetTrigger("Attack");
             attackingFlag = true;
         }
+    }
+
+    public bool SetAttackingFlag(bool value)
+    {
+        return (attackingFlag = value);
     }
 }

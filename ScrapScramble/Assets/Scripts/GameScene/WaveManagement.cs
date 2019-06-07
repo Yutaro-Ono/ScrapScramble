@@ -6,17 +6,22 @@ using UnityEngine.UI;
 
 public class WaveManagement : MonoBehaviour
 {
-    // 制限時間
-    private const float limitTime = 30;
+    // バトルWAVEの制限時間
+    private const float limitTime = 31.0f;
+    // WAVE間のインターバルタイマー
+    public const float intervalTime = 6.0f;
 
-    // 制限時間表示用タイマー
+    // 制限時間カウント用タイマー
     private float timer;
 
     // タイマー表示UI(テキスト)格納用
     public Text timerText;
 
-    // 次のWAVEに進む際に立つフラグ
+    // インターバルタイムに入る際に立つフラグ
+    private bool toInterval;
+    // インターバルタイム終了後、次WAVEに進む際に立つフラグ
     private bool toNextWave;
+
 
     // WAVE番号管理
     public enum WAVE_NUM
@@ -24,10 +29,13 @@ public class WaveManagement : MonoBehaviour
         WAVE_1_PVE = 0,
         WAVE_2_PVP,
         WAVE_3_PVE,
-        WAVE_4_PVP
+        WAVE_4_PVP,
+        WAVE_INTERVAL
     }
 
     public WAVE_NUM wave;
+    // 前回のWAVE番号の保管用
+    public WAVE_NUM tmpWave;
 
     // Start is called before the first frame update
     void Start()
@@ -40,29 +48,41 @@ public class WaveManagement : MonoBehaviour
     void Update()
     {
 
+        if(toInterval == true)
+        {
+            EnterInterval();
+        }
+
         if(toNextWave == true)
         {
             InitTime();
         }
-        
-        if(wave == WAVE_NUM.WAVE_1_PVE)
-        {
-            FirstWave();
-        }
 
-        if (wave == WAVE_NUM.WAVE_2_PVP)
+        // WAVE管理
+        switch (wave)
         {
-            SecondWave();
-        }
+            case WAVE_NUM.WAVE_1_PVE:
+                FirstWave();
+                break;
 
-        if (wave == WAVE_NUM.WAVE_3_PVE)
-        {
-            ThirdWave();
-        }
+            case WAVE_NUM.WAVE_2_PVP:
+                SecondWave();
+                break;
 
-        if (wave == WAVE_NUM.WAVE_4_PVP)
-        {
-            FourthWave();
+            case WAVE_NUM.WAVE_3_PVE:
+                ThirdWave();
+                break;
+
+            case WAVE_NUM.WAVE_4_PVP:
+                FourthWave();
+                break;
+
+            case WAVE_NUM.WAVE_INTERVAL:
+                IntervalWave();
+                break;
+
+            default:
+                break;
         }
 
 
@@ -72,15 +92,28 @@ public class WaveManagement : MonoBehaviour
     void InitTime()
     {
         timer = limitTime;
+
+        // timer.textを表示
+        timerText.enabled = true;
+
         toNextWave = false;
+    }
+
+    // WAVE終了時のインターバルタイムに入った時の処理
+    void EnterInterval()
+    {
+        // timer.textを非表示
+        timerText.enabled = false;
+
+        timer = intervalTime;
+        wave = WAVE_NUM.WAVE_INTERVAL;
+        toInterval = false;
     }
 
     // timerを1秒につき1ずつ減らす
     void ReduceTimer()
     {
         timer -= Time.deltaTime;
-
-
     }
 
     // timerをUIのテキストに変換し表示
@@ -88,6 +121,12 @@ public class WaveManagement : MonoBehaviour
     {
         timerText.text = ((int)timer).ToString();
     }
+
+//----------------------------------------------------------//
+//
+// WAVEごとの処理
+//
+//--------------------------------------------------------//
 
     // 第一ウェーブの処理
     void FirstWave()
@@ -97,8 +136,8 @@ public class WaveManagement : MonoBehaviour
         // タイマーが0になったら次のウェーブに移動
         if (timer <= 0)
         {
-            wave = WAVE_NUM.WAVE_2_PVP;
-            toNextWave = true;
+            tmpWave = wave;
+            toInterval = true;
         }
     }
 
@@ -108,10 +147,10 @@ public class WaveManagement : MonoBehaviour
         ReduceTimer();
         ToStringTimer();
         // タイマーが0になったら次のウェーブに移動
-        if (timer == 0)
+        if (timer <= 0)
         {
-            toNextWave = true;
-            wave = WAVE_NUM.WAVE_3_PVE;
+            tmpWave = wave;
+            toInterval = true;
         }
     }
 
@@ -121,10 +160,10 @@ public class WaveManagement : MonoBehaviour
         ReduceTimer();
         ToStringTimer();
         // タイマーが0になったら次のウェーブに移動
-        if (timer == 0)
+        if (timer <= 0)
         {
-            toNextWave = true;
-            wave = WAVE_NUM.WAVE_4_PVP;
+            tmpWave = wave;
+            toInterval = true;
         }
     }
 
@@ -133,5 +172,22 @@ public class WaveManagement : MonoBehaviour
     {
         ReduceTimer();
         ToStringTimer();
+    }
+
+    void IntervalWave()
+    {
+        // WAVEテキストの表示
+
+        // スタートテキストの表示
+
+
+
+        ReduceTimer();
+
+        if(timer <= 0)
+        {
+            wave = tmpWave++;
+            toNextWave = true;
+        }
     }
 }

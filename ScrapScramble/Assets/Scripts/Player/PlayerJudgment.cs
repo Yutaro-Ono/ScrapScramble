@@ -4,14 +4,28 @@ using UnityEngine;
 
 public class PlayerJudgment : MonoBehaviour
 {
+
     public GameObject dropObj;
     bool mutekiFlag;
+    //public int ItemNum;
     float mutekiTIme;
     float timeStep;
     public bool isAttackable;
     // 当たった時に呼ばれる関数
     public float lapseTime;
-
+    public void DropScrap(int ScrapNumMin, int ScrapNumMax)
+    {
+        Vector3 dropPoint = new Vector3(3.0f, 2.0f, 3.0f); //飛ばす位置
+        int ItemRandom = Random.Range(ScrapNumMin, ScrapNumMax);
+        GameObject[] scrap = new GameObject[ItemRandom];
+       
+        for (int i = 0; i < ItemRandom; i++)
+        {
+            //　設定したアイテムをプレイヤーのの3m上から落とす
+            scrap[i]= GameObject.Instantiate(dropObj, transform.position + dropPoint, Quaternion.identity);
+        }
+          
+    }
     void Start()
     {
         //isAttackableをtrueにしておく
@@ -39,12 +53,12 @@ public class PlayerJudgment : MonoBehaviour
     }
     private void FixedUpdate()
     {
+       
         LapseTime();
     }
     void OnCollisionEnter(Collision other)
     {
-            Vector3 force = new Vector3(3.0f, 2.0f, 3.0f); //飛ばす位置
-        
+     
         PlayerMovememt d1 = GetComponent<PlayerMovememt>();
         PlayerStatus d2 = GetComponent<PlayerStatus>();
         EnemyStatus d3 = other.gameObject.GetComponent<EnemyStatus>();
@@ -68,22 +82,16 @@ public class PlayerJudgment : MonoBehaviour
                 if (other.gameObject.tag == "Enemy")
 
                 {
-
+                   
                     d2.score -= 100;
-                    //　設定したアイテムをプレイヤーのの3m上から落とす
-                    GameObject.Instantiate(dropObj, transform.position + force, Quaternion.identity);
+                    DropScrap(1,4);
                     isAttackable = false;
                    
                 }
             }
 
         }
-        //if(d2.hp==0)
-        //{
-        //    d2.score = 0;
-        //    GameObject.Instantiate(dropObj, transform.position + Vector3.up, Quaternion.identity);
-         
-        //}
+       
         
     }
 }

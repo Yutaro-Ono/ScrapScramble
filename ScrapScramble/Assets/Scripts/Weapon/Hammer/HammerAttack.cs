@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class HammerAttack : StateMachineBehaviour
 {
-    public string collisionBoolName = "CollisionActive";
+    //アニメーター内のパラメーター名
+    //この名前のbool型変数によってコリジョンの有効・無効を操作する
+    //public string collisionBoolName = "CollisionActive";
 
+    //攻撃トリガー名
+    public string attackTrigger = "Attack";
+
+    //ハンマー本体のスクリプト
     HammerControl control;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -24,7 +30,7 @@ public class HammerAttack : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         Debug.Log("ハンマー：攻撃アニメーション終了");
-        //animator.SetBool(collisionBoolName, true);
+        //コリジョンを有効化
         control.collider.enabled = true;
     }
 

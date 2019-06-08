@@ -9,6 +9,7 @@ public class HammerStay : StateMachineBehaviour
    {
         HammerControl control = animator.gameObject.GetComponent<HammerControl>();
 
+        //攻撃モーションが終了してStayアニメーションに戻ってきた際、ハンマースクリプトの攻撃フラグを負に更新
         control.SetAttackingFlag(false);
    }
 

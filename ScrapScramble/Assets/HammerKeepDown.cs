@@ -4,21 +4,26 @@ using UnityEngine;
 
 public class HammerKeepDown : StateMachineBehaviour
 {
+    //アニメーター内のパラメーター名
     public string floatParamName = "StayAttackingTime";
 
+    //タイマー。ハンマーを振り下ろしたままにしてる時間を計る。
     float timer;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        //タイマーの初期化
         timer = 0.0f;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        //経過時間の記録
         timer += Time.deltaTime;
 
+        //代入
         animator.SetFloat(floatParamName, timer);
     }
 

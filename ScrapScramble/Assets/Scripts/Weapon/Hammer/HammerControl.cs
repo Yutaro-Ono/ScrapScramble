@@ -29,13 +29,7 @@ public class HammerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //当たり判定を行うかのフラグを更新
-        //Update関数はOnCollisionEnter関数より後に呼ばれるらしいので、ここで行って問題ないはず
-        if (animator.GetBool(attackAnimScript.collisionBoolName))
-        {
-            animator.SetBool(attackAnimScript.collisionBoolName, false);
-        }
-
+        //とりあえずコマンド発動
         if (Input.GetKeyDown(KeyCode.H) && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
         {
             Attack();
@@ -50,18 +44,22 @@ public class HammerControl : MonoBehaviour
             //ここにプレイヤー被ダメージ時の関数を呼ぶ
             Debug.Log("ハンマー：プレイヤーにヒット");
 
-            //フラグをfalseにすることで、ハンマーを振り下ろした一瞬だけ判定を有効にする
-            animator.SetBool(attackAnimScript.collisionBoolName, false);
-
+            //コリジョンを無効にすることで一瞬だけ判定を行う
             collider.enabled = false;
         }
     }
 
+    //プレイヤー側操作で発動できるようにする場合は、プレイヤースクリプト内でこの関数を呼ぶことでハンマー攻撃を発動できます
     public void Attack()
     {
+        //ハンマー攻撃が作動中かどうかを判定。作動中でないときに攻撃モーションが発動
         if (attackingFlag == false)
         {
-            animator.SetTrigger("Attack");
+            //トリガーによって攻撃モーション発動
+            animator.SetTrigger(attackAnimScript.attackTrigger);
+
+            //攻撃中のフラグを設定
+            //攻撃モーションが一通り終わったときに、アニメーター側でfalseを代入する
             attackingFlag = true;
         }
     }

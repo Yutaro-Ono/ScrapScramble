@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletOfEnemyMovement : MonoBehaviour
+public class RailgunBulletMovement : MonoBehaviour
 {
     //弾が進むスピード
-    public float speed = 2.0f;
+    public float speed = 3.0f;
 
     //弾の威力（プレイヤーの資源を落とさせる量）
-    public int power = 1;
+    public int power = 3;
 
     //壁にぶつかっても消滅しなかったとき、一定距離進むことで消滅させる
     const float disappearDistance = 1500.0f;
@@ -19,7 +19,7 @@ public class BulletOfEnemyMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -47,9 +47,7 @@ public class BulletOfEnemyMovement : MonoBehaviour
                 //ここでプレイヤーが資源をドロップする関数を呼ぶ
             }
 
-            Debug.Log("エネミーの弾がプレイヤーにヒット");
-
-            Destroy(gameObject);
+            Debug.Log("レールガンの弾がプレイヤーにヒット");
         }
     }
 
@@ -58,7 +56,7 @@ public class BulletOfEnemyMovement : MonoBehaviour
         //壁に当たった時
         if (collision.gameObject.tag == "Wall")
         {
-            Debug.Log("エネミーの弾が壁にぶち当たった");
+            Debug.Log("レールガンの弾が壁にぶち当たった");
 
             Destroy(gameObject);
         }

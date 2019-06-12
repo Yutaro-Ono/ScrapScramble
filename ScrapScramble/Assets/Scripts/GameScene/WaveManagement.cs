@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class WaveManagement : MonoBehaviour
 {
     // バトルWAVEの制限時間
-    private const float limitTime = 31.0f;
+    private const float limitTime = 8.0f;
     // WAVE間のインターバルタイマー
     public const float intervalTime = 6.0f;
 
@@ -16,6 +16,9 @@ public class WaveManagement : MonoBehaviour
 
     // タイマー表示UI(テキスト)格納用
     public Text timerText;
+
+    // ウェーブ表示UI(テキスト)格納用
+    public Text waveText;
 
     // インターバルタイムに入る際に立つフラグ
     private bool toInterval;
@@ -37,23 +40,33 @@ public class WaveManagement : MonoBehaviour
     // 前回のWAVE番号の保管用
     public WAVE_NUM tmpWave;
 
+    // テキスト表示enable
+    public bool enableText;
+
+    // WAVEデバッグ用 & WAVE番号
+    public int waveCount;
+
     // Start is called before the first frame update
     void Start()
     {
         InitTime();
         wave = WAVE_NUM.WAVE_1_PVE;
+
+        waveCount = 1;
+        enableText = false;
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if(toInterval == true)
+        if (toInterval == true)
         {
+            enableText = true;
             EnterInterval();
         }
 
-        if(toNextWave == true)
+        if (toNextWave == true)
         {
             InitTime();
         }
@@ -85,6 +98,8 @@ public class WaveManagement : MonoBehaviour
                 break;
         }
 
+        // WAVEのUI表示
+        ToStringWave(enableText);
 
     }
 
@@ -95,6 +110,8 @@ public class WaveManagement : MonoBehaviour
 
         // timer.textを表示
         timerText.enabled = true;
+
+        enableText = false;
 
         toNextWave = false;
     }
@@ -122,17 +139,38 @@ public class WaveManagement : MonoBehaviour
         timerText.text = ((int)timer).ToString();
     }
 
-//----------------------------------------------------------//
-//
-// WAVEごとの処理
-//
-//--------------------------------------------------------//
+    void ToStringWave(bool enable)
+    {
+        if (enable == true)
+        {
+            waveText.text = "WAVE" + ((int)waveCount).ToString();
+        }
+        else
+        {
+            waveText.text = " ".ToString();
+        }
+
+    }
+
+    //----------------------------------------------------------//
+    //
+    // WAVEごとの処理
+    //
+    //--------------------------------------------------------//
 
     // 第一ウェーブの処理
     void FirstWave()
     {
         ReduceTimer();
         ToStringTimer();
+
+        if (waveCount == 1)
+        {
+            Debug.Log("第1ウェーブに入った");
+            waveCount += 1;
+        }
+
+
         // タイマーが0になったら次のウェーブに移動
         if (timer <= 0)
         {
@@ -146,6 +184,13 @@ public class WaveManagement : MonoBehaviour
     {
         ReduceTimer();
         ToStringTimer();
+
+        if (waveCount == 2)
+        {
+            Debug.Log("第2ウェーブに入った");
+            waveCount += 1;
+        }
+
         // タイマーが0になったら次のウェーブに移動
         if (timer <= 0)
         {
@@ -159,6 +204,13 @@ public class WaveManagement : MonoBehaviour
     {
         ReduceTimer();
         ToStringTimer();
+
+        if (waveCount == 3)
+        {
+            Debug.Log("第3ウェーブに入った");
+            waveCount += 1;
+        }
+
         // タイマーが0になったら次のウェーブに移動
         if (timer <= 0)
         {
@@ -172,6 +224,13 @@ public class WaveManagement : MonoBehaviour
     {
         ReduceTimer();
         ToStringTimer();
+
+        if (waveCount == 4)
+        {
+            Debug.Log("第4ウェーブに入った");
+
+        }
+
     }
 
     void IntervalWave()
@@ -184,10 +243,13 @@ public class WaveManagement : MonoBehaviour
 
         ReduceTimer();
 
-        if(timer <= 0)
+        // インターバルタイムが過ぎたら次WAVEに移行
+        if (timer <= 0)
         {
-            wave = tmpWave++;
+            wave = ++tmpWave;
             toNextWave = true;
         }
     }
+
+
 }

@@ -13,6 +13,7 @@ public enum EnemyPattern
 public class EnemyManagerSpawn : MonoBehaviour
 {
     EnemyManagerManagement enemyManagerManagement;
+    WaveManagement waveManager;
 
     //スポーンするエネミーの行動パターン
     EnemyPattern spawnEnemyPattern;
@@ -21,9 +22,12 @@ public class EnemyManagerSpawn : MonoBehaviour
     //行動パターンの順番が決まっているときに使う
     //完全ランダムで行動パターンを定めるなら不要
     int spawnNum = 0;
+    
+    //スポーンした時間
+    float timeFromLastSpawn;
 
-    //ゲームスタートからの時間
-    float timeFromStart;
+    //スポーン間隔
+    public float spawnInterval = 2.0f;
 
     //エネミーのプレハブデータ
     GameObject prefab;
@@ -33,10 +37,10 @@ public class EnemyManagerSpawn : MonoBehaviour
     {
         enemyManagerManagement = GetComponent<EnemyManagerManagement>();
 
+        waveManager = enemyManagerManagement.waveManager;
+
         spawnNum = 0;
-
-        timeFromStart = 0.00f;
-
+        
         //エネミーの行動パターンをランダム設定。キャストとかの関係でちょっと読みづらいかも
         spawnEnemyPattern = (EnemyPattern)Random.Range((int)EnemyPattern.PatternA, (int)EnemyPattern.Invalid);
 
@@ -55,17 +59,19 @@ public class EnemyManagerSpawn : MonoBehaviour
         //プレハブ取得
         prefab = (GameObject)Resources.Load(prefabPath);
 
+        //タイマー設定
+        timeFromLastSpawn = WaveManagement.limitTime + spawnInterval;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //ゲーム開始からの時間の計測
-        timeFromStart += Time.deltaTime;
-
         //条件を満たしたらマネージャーの子にエネミーを生成
         //現在はデバッグ的にコマンド入力でスポーン
-        if (Input.GetKeyDown(KeyCode.I) && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
+        //if (Input.GetKeyDown(KeyCode.I) && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
+
+        //特定ウェーブ　＆＆　最後のスポーンから一定時間経過でマネージャーの子にエネミーを生成
+        if ((waveManager.wave == WaveManagement.WAVE_NUM.WAVE_1_PVE || waveManager.wave == WaveManagement.WAVE_NUM.WAVE_3_PVE) && timeFromLastSpawn - waveManager.timer >= spawnInterval)
         {
             //エネミーの行動パターンをランダム設定。キャストとかの関係でちょっと読みづらいかも
             spawnEnemyPattern = (EnemyPattern)Random.Range((int)EnemyPattern.PatternA, (int)EnemyPattern.Invalid);
@@ -84,6 +90,13 @@ public class EnemyManagerSpawn : MonoBehaviour
 
             //スポーン回数の記録
             spawnNum++;
+
+            //スポーン時間の記録
+            timeFromLastSpawn = waveManager.timer;
+        }
+        else if (waveManager.wave == WaveManagement.WAVE_NUM.WAVE_INTERVAL)
+        {
+            timeFromLastSpawn = WaveManagement.limitTime + spawnInterval;
         }
     }
 }

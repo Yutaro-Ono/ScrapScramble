@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyManagerManagement : MonoBehaviour
 {
+    public WaveManagement waveManager;
+
     public const int playerNum = 4;
 
     //プレイヤーの情報
@@ -28,7 +30,14 @@ public class EnemyManagerManagement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //エネミーがいるべきウェーブでない場合、このエネミーオブジェクトを全削除
+        if (waveManager.wave != WaveManagement.WAVE_NUM.WAVE_1_PVE && waveManager.wave != WaveManagement.WAVE_NUM.WAVE_3_PVE)
+        {
+            foreach(Transform n in gameObject.transform)
+            {
+                Destroy(n.gameObject);
+            }
+        }
     }
 
     public void TellInformationsToEnemy(EnemyStatus status, EnemyDrop drop)

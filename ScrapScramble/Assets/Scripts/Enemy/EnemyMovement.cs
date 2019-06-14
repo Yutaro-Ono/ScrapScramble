@@ -244,9 +244,6 @@ public class EnemyMovement : MonoBehaviour
                     //弾のインスタンスを生成
                     GameObject bulletInstance = (GameObject)Instantiate(bulletPrefab, shootPoint.transform.position, shootPoint.transform.rotation);
 
-                    //弾にプレイヤー情報を教える
-                    BulletOfEnemyMovement bulletScript = bulletInstance.GetComponent<BulletOfEnemyMovement>();
-                    bulletScript.SetPlayerObject(playerObj, playerNum);
 
                     Debug.Log("バン！：エネミーがプレイヤーに向けて発砲した");
 

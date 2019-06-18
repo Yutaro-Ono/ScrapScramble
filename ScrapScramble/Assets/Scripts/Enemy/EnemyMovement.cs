@@ -28,7 +28,7 @@ public class EnemyMovement : MonoBehaviour
     //行き先の決定、移動に関わる変数
     ///////////////////////////////////
 
-    //個体が移動する際の目的地の座標とその正規化ベクトル
+    //個体が移動する際の目的地の座標と、自身から見たその相対ベクトルを正規化したものを格納
     Vector3 destination;
     Vector3 destinationDirection;
     
@@ -50,7 +50,6 @@ public class EnemyMovement : MonoBehaviour
     const int playerNum = EnemyManagerManagement.playerNum;
 
     //プレイヤーの情報
-    //どのように受け取るかはのちに考える
     GameObject[] playerObj = new GameObject[playerNum];
 
     //ターゲッティング方向
@@ -59,7 +58,7 @@ public class EnemyMovement : MonoBehaviour
 
     //ターゲッティングする秒数
     //インスペクタからも変更可能とする
-    public float targetingSeconds = 3.0f;
+    public float targetingSeconds = 2.0f;
 
     //タイマー
     float targetingTimer = 0.0f;
@@ -110,7 +109,7 @@ public class EnemyMovement : MonoBehaviour
         }
 
         //弾を発射する座標を取得
-        shootPoint = transform.FindChild("Shoot Point").gameObject.transform;
+        shootPoint = transform.Find("Shoot Point");
     }
 
     // Update is called once per frame
@@ -125,7 +124,9 @@ public class EnemyMovement : MonoBehaviour
         //個体のHPが残っているなら
         if (enemyStatus.hitPoint > 0)
         {
-
+            /////////////////////////////////////
+            //目的地決定プロセス
+            /////////////////////////////////////
             if (nowProcess == EnemyMovementProcess.DecideDestination)
             {
 
@@ -139,6 +140,9 @@ public class EnemyMovement : MonoBehaviour
                 nowProcess++;
 
             }
+            /////////////////////////////////////
+            //移動プロセス
+            /////////////////////////////////////
             else if (nowProcess == EnemyMovementProcess.Move)
             {
                 
@@ -178,6 +182,9 @@ public class EnemyMovement : MonoBehaviour
 
 
             }
+            /////////////////////////////////////
+            //ターゲッティングプロセス
+            /////////////////////////////////////
             else if (nowProcess == EnemyMovementProcess.Targeting)
             {
 
@@ -222,6 +229,9 @@ public class EnemyMovement : MonoBehaviour
 
 
             }
+            /////////////////////////////////////
+            //発射プロセス
+            /////////////////////////////////////
             else if (nowProcess == EnemyMovementProcess.Shoot)
             {
 
@@ -246,6 +256,9 @@ public class EnemyMovement : MonoBehaviour
 
 
             }
+            /////////////////////////////////////
+            //全工程終了プロセス
+            /////////////////////////////////////
             else if (nowProcess >= EnemyMovementProcess.Invalid)
             {
 

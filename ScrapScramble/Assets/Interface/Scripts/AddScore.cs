@@ -6,11 +6,13 @@ using UnityEngine.UI;
 public class AddScore : MonoBehaviour
 {
 
+    [SerializeField]
+
+
     // 参照してきたスコアを格納用
     public Text scoreText = null;
 
-    // プレーヤーのスコア参照用
-    GameObject playerTank;
+
 
 
 
@@ -18,13 +20,17 @@ public class AddScore : MonoBehaviour
     void Start()
     {
 
-        // プレーヤーのスクリプトからスコアを取ってくるためのゲッター
-        //playerTank.GetComponent<>;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        ToStringScore();
+    }
+
+    void ToStringScore()
+    {
+        // "this"アタッチされたプレーヤーのスコアをセット
+        scoreText.text = " " + ((int)this.GetComponent<PlayerStatus>().score).ToString() + "/1000";
     }
 }

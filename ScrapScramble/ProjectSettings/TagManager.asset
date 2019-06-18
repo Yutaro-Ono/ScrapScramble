@@ -10,7 +10,6 @@ TagManager:
   - Item
   - BulletOfEnemy
   - Fire
-  - SearchItemArea
   layers:
   - Default
   - TransparentFX
@@ -23,8 +22,8 @@ TagManager:
   - PostProcessing
   - Resource
   - UnlightByDirectional
-  - Player
-  - Scrap
+  - Weapon
+  - 
   - 
   - 
   - 

@@ -23,11 +23,18 @@ public class EnemyDrop : MonoBehaviour
     //通常エネミーがドロップする資源の最小個数
     const short normalEnemyDropResourceNumMin = 1;
 
-    //資源のプレハブのパス
-    const string resourcePrefabPath = "Prefabs/Item/Resource/Resource";
-    
     //アイテムドロップ時に物理的に放り投げる強さ
     const float dropAddForceStlength = 500.0f;
+
+    //資源のプレハブデータ
+    //スポーン時にEnemyManagerManagementスクリプトから取得済み
+    GameObject resourcePrefab;
+
+    //各武器のプレハブデータ
+    //資源プレハブデータと同じく別スクリプトにて取得済み
+    GameObject hammerPrefab;
+    GameObject gatlingPrefab;
+    GameObject railgunPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -68,9 +75,6 @@ public class EnemyDrop : MonoBehaviour
         //資源を何個落とすかを設定
         int dropResourceNum = Random.Range(resourceNumMin, resourceNumMax + 1);
 
-        //資源のプレハブを取得
-        GameObject resourcePrefab = (GameObject)Resources.Load(resourcePrefabPath);
-
         //資源のインスタンス生成
         GameObject[] resource = new GameObject[dropResourceNum];
         for (int i = 0; i < dropResourceNum; i++)
@@ -104,4 +108,53 @@ public class EnemyDrop : MonoBehaviour
             resourceRigidbody[i].AddForce(dropDirection);
         }
     }
+
+    //資源プレハブデータのセッター
+    public void SetResourcePrefab(GameObject in_resourcePrefab)
+    {
+        resourcePrefab = in_resourcePrefab;
+        if (resourcePrefab == null)
+        {
+            Debug.Log("資源プレハブのデータ取得に失敗");
+        }
+    }
+
+    //武器：ハンマープレハブデータのセッター
+    public void SetHammerPrefab(GameObject in_hammerPrefab)
+    {
+        hammerPrefab = in_hammerPrefab;
+        if (hammerPrefab == null)
+        {
+            Debug.Log("ハンマープレハブのデータ取得に失敗");
+        }
+    }
+
+    //武器：ガトリングプレハブデータのセッター
+    public void SetGatlingPrefab(GameObject in_gatlingPrefab)
+    {
+        gatlingPrefab = in_gatlingPrefab;
+        if (gatlingPrefab == null)
+        {
+            Debug.Log("ガトリングプレハブのデータ取得に失敗");
+        }
+    }
+
+    //武器：レールガンプレハブデータのセッター
+    public void SetRailgunPrefab(GameObject in_railgunPrefab)
+    {
+        railgunPrefab = in_railgunPrefab;
+        if (railgunPrefab == null)
+        {
+            Debug.Log("レールガンプレハブのデータ取得に失敗");
+        }
+    }
+
+    //各武器のプレハブデータのセッターを一つの関数にまとめて使いやすく
+    //ふと「これ、いる？」と思ったのでとりあえずコメント化
+    /*
+    public void SetWeaponsPrefab(GameObject in_hammerPrefab, GameObject in_gatlingPrefab, GameObject in_railgunPrefab)
+    {
+
+    }
+    */
 }

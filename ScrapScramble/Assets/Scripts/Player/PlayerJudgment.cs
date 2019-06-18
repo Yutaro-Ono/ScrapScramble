@@ -62,7 +62,7 @@ public class PlayerJudgment : MonoBehaviour
         PlayerMovememt d1 = GetComponent<PlayerMovememt>();
         PlayerStatus d2 = GetComponent<PlayerStatus>();
         EnemyStatus d3 = other.gameObject.GetComponent<EnemyStatus>();
-        if (d1.chargFlg == true)
+        if (d1.chargeFlg == true)
         {
             
 
@@ -73,7 +73,7 @@ public class PlayerJudgment : MonoBehaviour
             }
          
         }
-        if (d1.chargFlg == false)
+        if (d1.chargeFlg == false)
         {
 
             //エネミーに当たったらスクラップを落とす

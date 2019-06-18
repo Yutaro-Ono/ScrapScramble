@@ -19,12 +19,12 @@ public class PlayerStatus : MonoBehaviour
 
     void ChargeAttack()
     {
-        PlayerMovememt d1 = GetComponent<PlayerMovememt>();
-        if (d1.chargePower <= 100)
+        PlayerMovememt moveScript = GetComponent<PlayerMovememt>();
+        if (moveScript.chargePower <= 100)
         {
-            chargeAttackPower = d1.chargePower;
+            chargeAttackPower = moveScript.chargePower;
         }
-        if (d1.chargFlg==true)
+        if (moveScript.chargeFlg==true)
         {
             atk = chargeAttackPower;
         }
@@ -58,19 +58,10 @@ public class PlayerStatus : MonoBehaviour
             gameObject.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
         }
     }
-    void PlayerDeath()
-    {
-        if(score<=0)
-        {
-
-            Destroy(this.gameObject);
-        }
-    }
 
     void Update()
     {
         BodyBigger();
         ChargeAttack();
-        PlayerDeath();
     }
 }

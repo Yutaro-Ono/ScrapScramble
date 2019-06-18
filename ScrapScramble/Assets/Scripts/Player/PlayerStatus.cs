@@ -4,17 +4,30 @@ using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
 {
+    // 現在装備している武器
+    Weapon currentWeapon;
+
     public int score;
+    int prevScore;
     public int hp;
     public short atk;
     private float increase;
-    public int armedStage;
+    public int armedStage = 0;
+    const int armedStageLimit = 4;      // 巨大化の段階数
+    // 次の巨大化までいくつの資源オブジェクトが必要か。
+    const int armedStageUpResourceMass = 10;
     public short chargeAttackPower;
     bool getItem;
     bool nextBody;
+
+    float initialScale;
+
     void Start()
     {
-    
+        currentWeapon = Weapon.None;
+
+        // 元々のスケール値
+        initialScale = transform.localScale.x;
     }
 
     void ChargeAttack()
@@ -30,38 +43,54 @@ public class PlayerStatus : MonoBehaviour
         }
        
     }
+
     void BodyBigger()
     {
-        
-        if (score>=100)
+        // 巨大化の段階チェック
+        for (int i = 0; i < armedStageLimit; i++)
         {
-            armedStage = 1;
+            if (score >= i * armedStageUpResourceMass * ResourceCollision.pointAddition)
+            {
+                armedStage = i;
+            }
         }
-        if (score >= 200)
+
+        // 巨大化を行う
+        for (int i = 0; i < armedStageLimit; i++)
         {
-            armedStage = 2;
-        }
-        if (score >= 300)
-        {
-            armedStage = 3;
-        }
-        if (armedStage == 1)
-        {
-            gameObject.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
-        }
-        if (armedStage == 2)
-        {
-            gameObject.transform.localScale = new Vector3(3.0f, 3.0f, 3.0f);
-        }
-        if (armedStage == 3)
-        {
-            gameObject.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
+            if (i == armedStage)
+            {
+                float scale = initialScale + (0.5f * i);
+
+                gameObject.transform.localScale = new Vector3(scale, scale, scale);
+            }
         }
     }
 
     void Update()
     {
-        BodyBigger();
+        if (prevScore != score)
+        {
+            BodyBigger();
+        }
         ChargeAttack();
+    }
+
+    private void LateUpdate()
+    {
+        prevScore = score;
+    }
+
+    // 現在装備している武器を取得
+    public Weapon GetCurrentWeapon()
+    {
+        return currentWeapon;
+    }
+
+    // 任意の武器を装備
+    // equipment->装備したい武器
+    public void EquipWeapon(Weapon equipment)
+    {
+        currentWeapon = equipment;
     }
 }

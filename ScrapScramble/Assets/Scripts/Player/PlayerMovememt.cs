@@ -39,7 +39,7 @@ public class PlayerMovememt : MonoBehaviour
         //lapseTimeを初期化
         lapseTime = 0.0f;
 
-        resourcePrefab = (GameObject)Resources.Load("Prefabs/Item/Resouce/Resource");
+        resourcePrefab = (GameObject)Resources.Load("Prefabs/Item/Resource/Resource");
         if (resourcePrefab == null)
         {
             Debug.Log("プレイヤー：資源プレハブの読み込みに失敗");

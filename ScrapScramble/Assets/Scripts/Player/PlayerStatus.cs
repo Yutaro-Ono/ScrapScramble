@@ -7,6 +7,11 @@ public class PlayerStatus : MonoBehaviour
     // 現在装備している武器
     Weapon currentWeapon;
 
+    // 自分の武器
+    GameObject myHammer;
+    GameObject myGatling;
+    GameObject myRailgun;
+
     public int score;
     int prevScore;
     public int hp;
@@ -28,6 +33,10 @@ public class PlayerStatus : MonoBehaviour
 
         // 元々のスケール値
         initialScale = transform.localScale.x;
+
+        myHammer = transform.Find("Hammer").gameObject;
+        myGatling = transform.Find("Gatling").gameObject;
+        myRailgun = transform.Find("Railgun").gameObject;
     }
 
     void ChargeAttack()
@@ -74,6 +83,27 @@ public class PlayerStatus : MonoBehaviour
             BodyBigger();
         }
         ChargeAttack();
+
+        // デバッグ的にコマンドで装備変更
+        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        {
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                EquipWeapon(Weapon.Hammer);
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                EquipWeapon(Weapon.Gatling);
+            }
+            else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                EquipWeapon(Weapon.Railgun);
+            }
+            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                EquipWeapon(Weapon.None);
+            }
+        }
     }
 
     private void LateUpdate()
@@ -91,6 +121,45 @@ public class PlayerStatus : MonoBehaviour
     // equipment->装備したい武器
     public void EquipWeapon(Weapon equipment)
     {
+        // 現在の装備を非アクティブ化
+        {
+            GameObject currentWeaponObj = GetWeaponObjectFromEnum(currentWeapon);
+            if (currentWeaponObj != null)
+            {
+                currentWeaponObj.SetActive(false);
+            }
+        }
+
+        // 新たな装備をアクティブ化
+        {
+            GameObject newWeaponObj = GetWeaponObjectFromEnum(equipment);
+            if (newWeaponObj != null)
+            {
+                newWeaponObj.SetActive(true);
+            }
+        }
+
         currentWeapon = equipment;
+    }
+
+    // 武器のenumを入力すると対応するゲームオブジェクトを返す関数
+    GameObject GetWeaponObjectFromEnum(Weapon weapon)
+    {
+        GameObject ret = null;
+
+        if (weapon == Weapon.Hammer)
+        {
+            ret = myHammer;
+        }
+        else if (weapon == Weapon.Gatling)
+        {
+            ret = myGatling;
+        }
+        else if (weapon == Weapon.Railgun)
+        {
+            ret = myRailgun;
+        }
+
+        return ret;
     }
 }

@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿//--------------------------------------------------------//
+// GameシーンにおけるWAVEの流れを管理
+// シーンに一つだけ配置
+//-------------------------------------------------------//
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;

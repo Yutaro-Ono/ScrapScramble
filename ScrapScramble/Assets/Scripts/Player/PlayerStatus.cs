@@ -85,7 +85,7 @@ public class PlayerStatus : MonoBehaviour
         ChargeAttack();
 
         // デバッグ的にコマンドで装備変更
-        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        if (CommonFunction.GetAnyShiftPressed())
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
@@ -104,13 +104,11 @@ public class PlayerStatus : MonoBehaviour
                 EquipWeapon(Weapon.None);
             }
         }
-    }
 
-    private void LateUpdate()
-    {
+        // スコア値を記録
         prevScore = score;
     }
-
+    
     // 現在装備している武器を取得
     public Weapon GetCurrentWeapon()
     {
@@ -143,7 +141,7 @@ public class PlayerStatus : MonoBehaviour
     }
 
     // 武器のenumを入力すると対応するゲームオブジェクトを返す関数
-    GameObject GetWeaponObjectFromEnum(Weapon weapon)
+    public GameObject GetWeaponObjectFromEnum(Weapon weapon)
     {
         GameObject ret = null;
 

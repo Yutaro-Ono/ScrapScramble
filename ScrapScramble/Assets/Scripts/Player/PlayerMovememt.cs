@@ -54,7 +54,7 @@ public class PlayerMovememt : MonoBehaviour
     //チャージアタック処理
     void PushCharge()
     {
-        if (coolTimeFlg==true)
+        if (coolTimeFlg == true)
         {
             if (Input.GetMouseButton(0))
             {
@@ -64,12 +64,12 @@ public class PlayerMovememt : MonoBehaviour
                 chargeFlg = true;
             }
         }
-        
+
         if (chargeController > 1.5f)
         {
             timeFlg = true;
-           
-          
+
+
         }
         if (timeFlg == true)
         {
@@ -112,13 +112,19 @@ public class PlayerMovememt : MonoBehaviour
         }
         else
         {
-           
+
             moveFlg = false;
         }
     }
     void Update()
     {
-        moveX = Input.GetAxis("Horizontal") ; //x方向のInputの値を取得
+        // 武器攻撃操作の受付
+        if (Input.GetKey(KeyCode.F))
+        {
+            Attack();
+        }
+
+        moveX = Input.GetAxis("Horizontal"); //x方向のInputの値を取得
         moveZ = Input.GetAxis("Vertical"); //z方向のInputの値を取得
 
         Vector3 diff = transform.position - Player_pos;               //プレイヤーがどの方向に進んでいるかがわかるように、初期位置と現在地の座標差分を取得
@@ -130,6 +136,7 @@ public class PlayerMovememt : MonoBehaviour
         PushCharge();
         Player_pos = transform.position;                              //プレイヤーの位置を更新
     }
+
     //クールタイム
     void CoolTime()
     {
@@ -141,7 +148,7 @@ public class PlayerMovememt : MonoBehaviour
             //次に備えて、lapseTimeを0で初期化
             if (lapseTime >= 5)
             {
-              
+
                 coolTimeFlg = true;
                 lapseTime = 0.0f;
             }
@@ -151,19 +158,19 @@ public class PlayerMovememt : MonoBehaviour
             }
         }
     }
-  
+
     void FixedUpdate()
     {
 
-       
+
         CoolTime();
         Vector3 force = new Vector3(moveX * speed, 0, moveZ * speed);  // 力を設定
-     
+
         InputKey();   //ボタンを押しているかどうか 
 
         rb.AddForce(force);  //プレイヤーに力を加える
         //プレイヤーを動かしていなかったら
-        if (moveFlg == false&&chargeFlg==false)
+        if (moveFlg == false && chargeFlg == false)
         {
             Stop();
         }
@@ -240,4 +247,43 @@ public class PlayerMovememt : MonoBehaviour
         return dropMass;
     }
 
+    // 武器による攻撃関数
+    void Attack()
+    {
+        // 現在装備している武器を取得
+        // 装備していないなら直ちに関数を抜ける
+        // できれば今後、継承を使った効率的なコードに書き換えたい。
+        Weapon currentWeapon = status.GetCurrentWeapon();
+        if (currentWeapon == Weapon.None)
+        {
+            return;
+        }
+
+        // ゲームオブジェクトを取得
+        GameObject currentWeaponObj = status.GetWeaponObjectFromEnum(currentWeapon);
+        if (currentWeaponObj == null)
+        {
+            Debug.Log("ゲームオブジェクトの取得に失敗");
+            return;
+        }
+
+        // それぞれのスクリプトを取得して、攻撃関数を呼び出す
+        // めんどくさいし初心者っぽい書き方だしメモリも食うでしょ？
+        // だから今度時間ができたときに継承を使った書き方を試みます。
+        if (currentWeapon == Weapon.Hammer)
+        {
+            HammerControl hammer = currentWeaponObj.GetComponent<HammerControl>();
+            hammer.Attack();
+        }
+        else if (currentWeapon == Weapon.Gatling)
+        {
+            GatlingControl gatling = currentWeaponObj.GetComponent<GatlingControl>();
+            gatling.Attack();
+        }
+        else if (currentWeapon == Weapon.Railgun)
+        {
+            RailgunControl railgun = currentWeaponObj.GetComponent<RailgunControl>();
+            railgun.Attack();
+        }
+    }
 }

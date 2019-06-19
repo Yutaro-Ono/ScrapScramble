@@ -56,9 +56,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 808349636310152191}
-  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children:
   - {fileID: 4636648107122989932}
   - {fileID: 5109063071236508033}
@@ -283,10 +283,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1089019627475360014}
     m_Modifications:
-    - target: {fileID: 1558985746343146, guid: 19e1a030c6ce5db4491378d9558c6c9a, type: 3}
-      propertyPath: m_Name
-      value: Exhaust_pipe_v2_2
-      objectReference: {fileID: 0}
     - target: {fileID: 4382579862309768, guid: 19e1a030c6ce5db4491378d9558c6c9a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.053
@@ -332,16 +328,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4382579862309768, guid: 19e1a030c6ce5db4491378d9558c6c9a, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4382579862309768, guid: 19e1a030c6ce5db4491378d9558c6c9a, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4382579862309768, guid: 19e1a030c6ce5db4491378d9558c6c9a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382579862309768, guid: 19e1a030c6ce5db4491378d9558c6c9a, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1558985746343146, guid: 19e1a030c6ce5db4491378d9558c6c9a, type: 3}
+      propertyPath: m_Name
+      value: Exhaust_pipe_v2_2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19e1a030c6ce5db4491378d9558c6c9a, type: 3}
@@ -358,10 +358,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3963402859896006457}
     m_Modifications:
-    - target: {fileID: 1733668525715190, guid: 083e5194886057e44a27b6b58d43a65c, type: 3}
-      propertyPath: m_Name
-      value: Tire_v2_R_Front
-      objectReference: {fileID: 0}
     - target: {fileID: 4854742251776210, guid: 083e5194886057e44a27b6b58d43a65c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.852
@@ -418,6 +414,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.6000007
       objectReference: {fileID: 0}
+    - target: {fileID: 1733668525715190, guid: 083e5194886057e44a27b6b58d43a65c, type: 3}
+      propertyPath: m_Name
+      value: Tire_v2_R_Front
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 083e5194886057e44a27b6b58d43a65c, type: 3}
 --- !u!4 &1030884121358446774 stripped
@@ -433,10 +433,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4863588727588842370}
     m_Modifications:
-    - target: {fileID: 1492905705780164, guid: 211a9e4b3e6c4eb498e19d646c608d4c, type: 3}
-      propertyPath: m_Name
-      value: Roof_attachments_v3
-      objectReference: {fileID: 0}
     - target: {fileID: 4644207876293154, guid: 211a9e4b3e6c4eb498e19d646c608d4c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.026
@@ -482,12 +478,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4644207876293154, guid: 211a9e4b3e6c4eb498e19d646c608d4c, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4644207876293154, guid: 211a9e4b3e6c4eb498e19d646c608d4c, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.8000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492905705780164, guid: 211a9e4b3e6c4eb498e19d646c608d4c, type: 3}
+      propertyPath: m_Name
+      value: Roof_attachments_v3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 211a9e4b3e6c4eb498e19d646c608d4c, type: 3}
@@ -504,10 +500,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4419001151819929631}
     m_Modifications:
-    - target: {fileID: 1733668525715190, guid: 083e5194886057e44a27b6b58d43a65c, type: 3}
-      propertyPath: m_Name
-      value: Tire_v2_L_Front
-      objectReference: {fileID: 0}
     - target: {fileID: 4854742251776210, guid: 083e5194886057e44a27b6b58d43a65c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.852
@@ -563,6 +555,10 @@ PrefabInstance:
     - target: {fileID: 4854742251776210, guid: 083e5194886057e44a27b6b58d43a65c, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.6000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 1733668525715190, guid: 083e5194886057e44a27b6b58d43a65c, type: 3}
+      propertyPath: m_Name
+      value: Tire_v2_L_Front
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 083e5194886057e44a27b6b58d43a65c, type: 3}
@@ -721,10 +717,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3963402859896006457}
     m_Modifications:
-    - target: {fileID: 1733668525715190, guid: 083e5194886057e44a27b6b58d43a65c, type: 3}
-      propertyPath: m_Name
-      value: Tire_v2_R_Back
-      objectReference: {fileID: 0}
     - target: {fileID: 4854742251776210, guid: 083e5194886057e44a27b6b58d43a65c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.872
@@ -780,6 +772,10 @@ PrefabInstance:
     - target: {fileID: 4854742251776210, guid: 083e5194886057e44a27b6b58d43a65c, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.7000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 1733668525715190, guid: 083e5194886057e44a27b6b58d43a65c, type: 3}
+      propertyPath: m_Name
+      value: Tire_v2_R_Back
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 083e5194886057e44a27b6b58d43a65c, type: 3}
@@ -863,10 +859,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5109063071236508033}
     m_Modifications:
-    - target: {fileID: 1324580770307130, guid: a348a4cb3cae66b48b1a5ea318a04253, type: 3}
-      propertyPath: m_Name
-      value: Protection_v2_3
-      objectReference: {fileID: 0}
     - target: {fileID: 4152321620743740, guid: a348a4cb3cae66b48b1a5ea318a04253, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.13
@@ -911,6 +903,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1324580770307130, guid: a348a4cb3cae66b48b1a5ea318a04253, type: 3}
+      propertyPath: m_Name
+      value: Protection_v2_3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a348a4cb3cae66b48b1a5ea318a04253, type: 3}
 --- !u!4 &8076144605851296456 stripped
@@ -926,10 +922,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4419001151819929631}
     m_Modifications:
-    - target: {fileID: 1733668525715190, guid: 083e5194886057e44a27b6b58d43a65c, type: 3}
-      propertyPath: m_Name
-      value: Tire_v2_L_Back
-      objectReference: {fileID: 0}
     - target: {fileID: 4854742251776210, guid: 083e5194886057e44a27b6b58d43a65c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.872
@@ -986,6 +978,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.70000046
       objectReference: {fileID: 0}
+    - target: {fileID: 1733668525715190, guid: 083e5194886057e44a27b6b58d43a65c, type: 3}
+      propertyPath: m_Name
+      value: Tire_v2_L_Back
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 083e5194886057e44a27b6b58d43a65c, type: 3}
 --- !u!4 &8394455479426314459 stripped
@@ -1001,10 +997,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 109870145598063958}
     m_Modifications:
-    - target: {fileID: 1589469195356064, guid: b8c16ea362cc4b949898bd74e99768d2, type: 3}
-      propertyPath: m_Name
-      value: Bullbar_v3
-      objectReference: {fileID: 0}
     - target: {fileID: 4518725104125208, guid: b8c16ea362cc4b949898bd74e99768d2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1049,6 +1041,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1589469195356064, guid: b8c16ea362cc4b949898bd74e99768d2, type: 3}
+      propertyPath: m_Name
+      value: Bullbar_v3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8c16ea362cc4b949898bd74e99768d2, type: 3}
 --- !u!4 &8758621489312570758 stripped
@@ -1064,10 +1060,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5109063071236508033}
     m_Modifications:
-    - target: {fileID: 1324580770307130, guid: a348a4cb3cae66b48b1a5ea318a04253, type: 3}
-      propertyPath: m_Name
-      value: Protection_v2_3 (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 4152321620743740, guid: a348a4cb3cae66b48b1a5ea318a04253, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.164
@@ -1112,6 +1104,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1324580770307130, guid: a348a4cb3cae66b48b1a5ea318a04253, type: 3}
+      propertyPath: m_Name
+      value: Protection_v2_3 (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a348a4cb3cae66b48b1a5ea318a04253, type: 3}
 --- !u!4 &8925819216775454288 stripped
@@ -1127,10 +1123,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1089019627475360014}
     m_Modifications:
-    - target: {fileID: 1575848676587592, guid: ac9089e0f2500ce4285c80833cf3e002, type: 3}
-      propertyPath: m_Name
-      value: Exhaust_pipe_v2_2M
-      objectReference: {fileID: 0}
     - target: {fileID: 4629411641455682, guid: ac9089e0f2500ce4285c80833cf3e002, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.044
@@ -1186,6 +1178,10 @@ PrefabInstance:
     - target: {fileID: 4629411641455682, guid: ac9089e0f2500ce4285c80833cf3e002, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1575848676587592, guid: ac9089e0f2500ce4285c80833cf3e002, type: 3}
+      propertyPath: m_Name
+      value: Exhaust_pipe_v2_2M
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac9089e0f2500ce4285c80833cf3e002, type: 3}

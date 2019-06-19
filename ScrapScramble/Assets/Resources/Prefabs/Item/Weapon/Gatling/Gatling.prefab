@@ -393,7 +393,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4351315298056788
 Transform:
   m_ObjectHideFlags: 0
@@ -20131,7 +20131,6 @@ GameObject:
   - component: {fileID: 4514986444668122}
   - component: {fileID: 135749318806271514}
   - component: {fileID: 205676091413216282}
-  - component: {fileID: 114048599433676842}
   - component: {fileID: 1010417276456338134}
   m_Layer: 0
   m_Name: Gatling
@@ -20139,7 +20138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4514986444668122
 Transform:
   m_ObjectHideFlags: 0
@@ -20147,9 +20146,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1979706888108350}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children:
   - {fileID: 4014590737078988}
   - {fileID: 2379545025126083798}
@@ -20208,24 +20207,6 @@ LODGroup:
     - renderer: {fileID: 23170395206664584}
     - renderer: {fileID: 23686297716175772}
   m_Enabled: 1
---- !u!114 &114048599433676842
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1979706888108350}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 918170c09d88a7f47991f97e2ae42f62, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  go_baseRotation: {fileID: 4144936528890730}
-  go_GunBody: {fileID: 4856386421184550}
-  go_barrel: {fileID: 4575810401582574}
-  barrelRotationSpeed: 1000
-  firingRange: 10
-  muzzelFlash: {fileID: 198562569527715984}
 --- !u!114 &1010417276456338134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20238,6 +20219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e14a3e2726567f45b578a02baf10e96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootInterval: 0.1
 --- !u!1 &4135905509063233210
 GameObject:
   m_ObjectHideFlags: 0

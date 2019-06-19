@@ -186,9 +186,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8073799147957700645}
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3.5, y: 3.5, z: 3.5}
   m_Children:
   - {fileID: 4438455647829276713}
   - {fileID: 902980997922486041}
@@ -281,10 +281,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1904834418962241410}
     m_Modifications:
-    - target: {fileID: 1558985746343146, guid: 19e1a030c6ce5db4491378d9558c6c9a, type: 3}
-      propertyPath: m_Name
-      value: Exhaust_pipe_v2_2
-      objectReference: {fileID: 0}
     - target: {fileID: 4382579862309768, guid: 19e1a030c6ce5db4491378d9558c6c9a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.972
@@ -328,6 +324,10 @@ PrefabInstance:
     - target: {fileID: 4382579862309768, guid: 19e1a030c6ce5db4491378d9558c6c9a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1558985746343146, guid: 19e1a030c6ce5db4491378d9558c6c9a, type: 3}
+      propertyPath: m_Name
+      value: Exhaust_pipe_v2_2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19e1a030c6ce5db4491378d9558c6c9a, type: 3}
@@ -460,12 +460,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4800650373342260, guid: 316ec9cd7016bb0489fccf6e2c09f3b4, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800650373342260, guid: 316ec9cd7016bb0489fccf6e2c09f3b4, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.90000093
+      objectReference: {fileID: 0}
+    - target: {fileID: 4800650373342260, guid: 316ec9cd7016bb0489fccf6e2c09f3b4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 4800650373342260, guid: 316ec9cd7016bb0489fccf6e2c09f3b4, type: 3}
       propertyPath: m_LocalScale.z
@@ -486,10 +486,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 902980997922486041}
     m_Modifications:
-    - target: {fileID: 1315951012608534, guid: 0bbdf44fd03bc344e8f5cb902ee534ec, type: 3}
-      propertyPath: m_Name
-      value: Gas_balloon_v1 (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 4816533093984586, guid: 0bbdf44fd03bc344e8f5cb902ee534ec, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.229
@@ -545,6 +541,10 @@ PrefabInstance:
     - target: {fileID: 4816533093984586, guid: 0bbdf44fd03bc344e8f5cb902ee534ec, type: 3}
       propertyPath: m_LocalScale.z
       value: 1.2000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 1315951012608534, guid: 0bbdf44fd03bc344e8f5cb902ee534ec, type: 3}
+      propertyPath: m_Name
+      value: Gas_balloon_v1 (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bbdf44fd03bc344e8f5cb902ee534ec, type: 3}
@@ -609,18 +609,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4800650373342260, guid: 316ec9cd7016bb0489fccf6e2c09f3b4, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800650373342260, guid: 316ec9cd7016bb0489fccf6e2c09f3b4, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800650373342260, guid: 316ec9cd7016bb0489fccf6e2c09f3b4, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 316ec9cd7016bb0489fccf6e2c09f3b4, type: 3}
 --- !u!4 &2981104594392265421 stripped
@@ -636,10 +624,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1904834418962241410}
     m_Modifications:
-    - target: {fileID: 1575848676587592, guid: ac9089e0f2500ce4285c80833cf3e002, type: 3}
-      propertyPath: m_Name
-      value: Exhaust_pipe_v2_2M
-      objectReference: {fileID: 0}
     - target: {fileID: 4629411641455682, guid: ac9089e0f2500ce4285c80833cf3e002, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.987
@@ -683,6 +667,10 @@ PrefabInstance:
     - target: {fileID: 4629411641455682, guid: ac9089e0f2500ce4285c80833cf3e002, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1575848676587592, guid: ac9089e0f2500ce4285c80833cf3e002, type: 3}
+      propertyPath: m_Name
+      value: Exhaust_pipe_v2_2M
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac9089e0f2500ce4285c80833cf3e002, type: 3}
@@ -815,12 +803,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4800650373342260, guid: 316ec9cd7016bb0489fccf6e2c09f3b4, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800650373342260, guid: 316ec9cd7016bb0489fccf6e2c09f3b4, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.90000093
+      objectReference: {fileID: 0}
+    - target: {fileID: 4800650373342260, guid: 316ec9cd7016bb0489fccf6e2c09f3b4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 4800650373342260, guid: 316ec9cd7016bb0489fccf6e2c09f3b4, type: 3}
       propertyPath: m_LocalScale.z
@@ -890,11 +878,11 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4990844645302308, guid: 559c452643b09dd4795a6496246cef29, type: 3}
-      propertyPath: m_LocalScale.z
+      propertyPath: m_LocalScale.x
       value: 1.2000005
       objectReference: {fileID: 0}
     - target: {fileID: 4990844645302308, guid: 559c452643b09dd4795a6496246cef29, type: 3}
-      propertyPath: m_LocalScale.x
+      propertyPath: m_LocalScale.z
       value: 1.2000005
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -960,18 +948,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4800650373342260, guid: 316ec9cd7016bb0489fccf6e2c09f3b4, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800650373342260, guid: 316ec9cd7016bb0489fccf6e2c09f3b4, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800650373342260, guid: 316ec9cd7016bb0489fccf6e2c09f3b4, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 316ec9cd7016bb0489fccf6e2c09f3b4, type: 3}
 --- !u!4 &7368424212934046540 stripped
@@ -987,10 +963,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 902980997922486041}
     m_Modifications:
-    - target: {fileID: 1315951012608534, guid: 0bbdf44fd03bc344e8f5cb902ee534ec, type: 3}
-      propertyPath: m_Name
-      value: Gas_balloon_v1
-      objectReference: {fileID: 0}
     - target: {fileID: 4816533093984586, guid: 0bbdf44fd03bc344e8f5cb902ee534ec, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.179
@@ -1046,6 +1018,10 @@ PrefabInstance:
     - target: {fileID: 4816533093984586, guid: 0bbdf44fd03bc344e8f5cb902ee534ec, type: 3}
       propertyPath: m_LocalScale.z
       value: 1.2000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 1315951012608534, guid: 0bbdf44fd03bc344e8f5cb902ee534ec, type: 3}
+      propertyPath: m_Name
+      value: Gas_balloon_v1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bbdf44fd03bc344e8f5cb902ee534ec, type: 3}

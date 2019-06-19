@@ -73,25 +73,5 @@ public class PlayerJudgment : MonoBehaviour
             }
          
         }
-        if (d1.chargeFlg == false)
-        {
-
-            //エネミーに当たったらスクラップを落とす
-            if (isAttackable == true)
-            {
-                if (other.gameObject.tag == "Enemy")
-
-                {
-                   
-                    d2.score -= 100;
-                    DropScrap(1,4);
-                    isAttackable = false;
-                   
-                }
-            }
-
-        }
-       
-        
     }
 }

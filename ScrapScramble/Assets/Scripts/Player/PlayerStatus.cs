@@ -29,14 +29,39 @@ public class PlayerStatus : MonoBehaviour
 
     void Start()
     {
+        // なにも装備していない状態
         currentWeapon = Weapon.None;
 
         // 元々のスケール値
         initialScale = transform.localScale.x;
 
-        myHammer = transform.Find("Hammer").gameObject;
-        myGatling = transform.Find("Gatling").gameObject;
-        myRailgun = transform.Find("Railgun").gameObject;
+        // 各武器のオブジェクトを子から取得し、各々装備されるまで非アクティブ化
+        if ((myHammer = transform.Find("Hammer").gameObject) == null)
+        {
+            Debug.Log("プレイヤー：ハンマーのオブジェクト取得に失敗");
+        }
+        else
+        {
+            myHammer.SetActive(false);
+        }
+
+        if ((myGatling = transform.Find("Gatling").gameObject) == null)
+        {
+            Debug.Log("プレイヤー：ガトリングのオブジェクト取得に失敗");
+        }
+        else
+        {
+            myGatling.SetActive(false);
+        }
+
+        if ((myRailgun = transform.Find("Railgun").gameObject) == null)
+        {
+            Debug.Log("プレイヤー：レールガンのオブジェクト取得に失敗");
+        }
+        else
+        {
+            myRailgun.SetActive(false);
+        }
     }
 
     void ChargeAttack()

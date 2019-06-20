@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovememt : MonoBehaviour
 {
     PlayerStatus status;
+    PlayerInput input;
 
     public float speed;                  //プレイヤーの動くスピード
     public float atkSpeed;               //プレーヤーの攻撃スピード
@@ -30,7 +31,9 @@ public class PlayerMovememt : MonoBehaviour
     private void Start()
     {
         status = GetComponent<PlayerStatus>();
+        input = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody>();
+
         Player_pos = GetComponent<Transform>().position; //最初の時点でのプレイヤーのポジションを取得
         chargePlayerStop = false;
         moveFlg = true;
@@ -51,12 +54,13 @@ public class PlayerMovememt : MonoBehaviour
         rb.velocity = Vector3.zero;
         //rb.angularVelocity = Vector3.zero;
     }
+
     //チャージアタック処理
     void PushCharge()
     {
         if (coolTimeFlg == true)
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) || input.GetTackleInput())
             {
                 chargeController += Time.deltaTime;
                 chargePower++; ;
@@ -119,13 +123,44 @@ public class PlayerMovememt : MonoBehaviour
     void Update()
     {
         // 武器攻撃操作の受付
-        if (Input.GetKey(KeyCode.F))
+        if (input.GetWeaponAttackInput())
         {
+            Debug.Log("武器攻撃ボタンが押されたピョン！踊り狂え！");
             Attack();
         }
 
+        /*
         moveX = Input.GetAxis("Horizontal"); //x方向のInputの値を取得
         moveZ = Input.GetAxis("Vertical"); //z方向のInputの値を取得
+        */
+        // 移動操作の受付
+        // デバッグがしやすいようにパッドとキーボード両方の操作を受け付ける
+        moveX = (input.GetHorizontalInput() + Input.GetAxis("Horizontal"));
+        moveZ = (input.GetVerticalInput() + Input.GetAxis("Vertical"));
+
+        // 移動操作の入力値をクランプ
+        // パッドとキーボードの両対応のため、入力された値を足し合わせている
+        // したがって大きすぎる値は調整しなければならない
+        {
+            // X
+            if (moveX > 1.0f)
+            {
+                moveX = 1.0f;
+            }
+            else if (moveX < -1.0f)
+            {
+                moveX = -1.0f;
+            }
+            // Z
+            if (moveZ > 1.0f)
+            {
+                moveZ = 1.0f;
+            }
+            else if (moveZ < -1.0f)
+            {
+                moveZ = -1.0f;
+            }
+        }
 
         Vector3 diff = transform.position - Player_pos;               //プレイヤーがどの方向に進んでいるかがわかるように、初期位置と現在地の座標差分を取得
 

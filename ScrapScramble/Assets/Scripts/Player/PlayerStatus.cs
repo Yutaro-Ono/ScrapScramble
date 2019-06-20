@@ -7,6 +7,10 @@ public class PlayerStatus : MonoBehaviour
     // 現在装備している武器
     Weapon currentWeapon;
 
+    // プレイヤーID
+    // 0から数えることに注意->例えばプレイヤー1のIDは0
+    int id;
+
     // 自分の武器
     GameObject myHammer;
     GameObject myGatling;
@@ -184,5 +188,15 @@ public class PlayerStatus : MonoBehaviour
         }
 
         return ret;
+    }
+
+    public int SetId(int in_id)
+    {
+        return (id = in_id);
+    }
+
+    public int GetId()
+    {
+        return id;
     }
 }

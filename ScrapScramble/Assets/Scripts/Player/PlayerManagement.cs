@@ -18,6 +18,18 @@ public class PlayerManagement : MonoBehaviour
     // プレイヤーオブジェクト内に格納されたモデルオブジェクトの数
     uint modelObjectNum = 4;
 
+    // Start関数よりも前に呼び出される関数
+    private void Awake()
+    {
+        // プレイヤー番号（ID)を個体に設定
+        for (int i = 0; i < playerNum; i++)
+        {
+            PlayerStatus status = player[i].GetComponent<PlayerStatus>();
+
+            status.SetId(i);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {

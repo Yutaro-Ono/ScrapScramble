@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1588183376096560181}
   - component: {fileID: 1635658774341768446}
   - component: {fileID: 2292730108480100333}
+  - component: {fileID: 4148006966247536908}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -137,6 +138,18 @@ MonoBehaviour:
   atk: 0
   armedStage: 0
   chargeAttackPower: 0
+--- !u!114 &4148006966247536908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6605167736261938096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13da8eb231411d9469c2ba987fe30545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &69372543380491812
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -77,7 +77,7 @@ public class PlayerMovememt : MonoBehaviour
         }
         if (timeFlg == true)
         {
-            if (Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonUp(0) || input.GetTackleInputUp())
 
             {
                 rb.AddForce(transform.TransformDirection(Vector3.forward) * atkSpeed, ForceMode.Impulse);
@@ -89,7 +89,7 @@ public class PlayerMovememt : MonoBehaviour
                 timeFlg = false;
             }
         }
-        if (!Input.GetMouseButton(0))
+        if (!(Input.GetMouseButton(0) || input.GetTackleInput()))
         {
 
             chargePower = 0;
@@ -134,9 +134,13 @@ public class PlayerMovememt : MonoBehaviour
         moveZ = Input.GetAxis("Vertical"); //z方向のInputの値を取得
         */
         // 移動操作の受付
+        /*
         // デバッグがしやすいようにパッドとキーボード両方の操作を受け付ける
         moveX = (input.GetHorizontalInput() + Input.GetAxis("Horizontal"));
         moveZ = (input.GetVerticalInput() + Input.GetAxis("Vertical"));
+        */
+        moveX = input.GetHorizontalInput();
+        moveZ = input.GetVerticalInput();
 
         // 移動操作の入力値をクランプ
         // パッドとキーボードの両対応のため、入力された値を足し合わせている

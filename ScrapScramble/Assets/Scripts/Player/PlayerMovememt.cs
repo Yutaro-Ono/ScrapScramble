@@ -16,7 +16,7 @@ public class PlayerMovememt : MonoBehaviour
     Rigidbody rb;
     public float chargeController;       //溜時間
     public short chargePower;              //溜め時間での攻撃力変動
-    bool coolTimeFlg;                    //クールタイムのフラグ
+    bool finishedCoolTimeFlg;                    //クールタイムのフラグ
     public bool chargePlayerStop;        //プレーヤーが止まっているかどうか
     bool moveFlg;
     public bool chargeFlg;
@@ -36,8 +36,8 @@ public class PlayerMovememt : MonoBehaviour
 
         Player_pos = GetComponent<Transform>().position; //最初の時点でのプレイヤーのポジションを取得
         chargePlayerStop = false;
-        moveFlg = true;
-        coolTimeFlg = true;
+        moveFlg = false;
+        finishedCoolTimeFlg = true;
         chargeFlg = false;
         //lapseTimeを初期化
         lapseTime = 0.0f;
@@ -58,7 +58,7 @@ public class PlayerMovememt : MonoBehaviour
     //チャージアタック処理
     void PushCharge()
     {
-        if (coolTimeFlg == true)
+        if (finishedCoolTimeFlg == true)
         {
             if (Input.GetMouseButton(0) || input.GetTackleInput())
             {
@@ -66,6 +66,11 @@ public class PlayerMovememt : MonoBehaviour
                 chargePower++;
                 chargePlayerStop = true;
                 chargeFlg = true;
+            }
+            else
+            {
+                // chargeFlgの更新
+                chargeFlg = false;
             }
         }
 
@@ -82,7 +87,7 @@ public class PlayerMovememt : MonoBehaviour
             {
                 rb.AddForce(transform.TransformDirection(Vector3.forward) * atkSpeed, ForceMode.Impulse);
 
-                coolTimeFlg = false;
+                finishedCoolTimeFlg = false;
 
                 chargePlayerStop = false;
                 chargeController = 0;
@@ -107,10 +112,11 @@ public class PlayerMovememt : MonoBehaviour
     {
         rb.drag = 0;
     }
-    //ボタンを押しているかどうか
+
+    // 移動操作をしているかどうか
     void InputKey()
     {
-        if (Input.anyKey)
+        if (input.GetHorizontalInput() != 0 || input.GetVerticalInput() != 0)
         {
             moveFlg = true;
         }
@@ -179,7 +185,7 @@ public class PlayerMovememt : MonoBehaviour
     //クールタイム
     void CoolTime()
     {
-        if (coolTimeFlg == false)
+        if (finishedCoolTimeFlg == false)
         {
             lapseTime += Time.deltaTime;
 
@@ -188,7 +194,7 @@ public class PlayerMovememt : MonoBehaviour
             if (lapseTime >= 5)
             {
 
-                coolTimeFlg = true;
+                finishedCoolTimeFlg = true;
                 lapseTime = 0.0f;
             }
             if (lapseTime >= 2)

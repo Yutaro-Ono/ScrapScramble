@@ -31,7 +31,7 @@ public class HammerAttack : StateMachineBehaviour
     {
         Debug.Log("ハンマー：攻撃アニメーション終了");
         //コリジョンを有効化
-        control.collider.enabled = true;
+        control.hitCollider.enabled = true;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

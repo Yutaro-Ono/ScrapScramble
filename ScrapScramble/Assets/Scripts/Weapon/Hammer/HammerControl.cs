@@ -7,7 +7,10 @@ public class HammerControl : MonoBehaviour
     Animator animator;
     HammerAttack attackAnimScript;
 
-    public BoxCollider collider;
+    public BoxCollider hitCollider;
+
+    // 攻撃力（プレイヤーに対しては落とす資源の数）
+    public short power = 3;
 
     //攻撃アニメーション、準備アニメーションが再生中かどうかのフラグ
     //これがfalseの時にアニメーションが再生可能とする
@@ -29,11 +32,7 @@ public class HammerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //とりあえずコマンド発動
-        if (Input.GetKeyDown(KeyCode.H) && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
-        {
-            Attack();
-        }
+        
     }
 
     private void OnCollisionStay(Collision collision)
@@ -43,10 +42,20 @@ public class HammerControl : MonoBehaviour
         {
             //ここにプレイヤー被ダメージ時の関数を呼ぶ
             Debug.Log("ハンマー：プレイヤーにヒット");
-
-            //コリジョンを無効にすることで一瞬だけ判定を行う
-            collider.enabled = false;
         }
+
+        // エネミーに対しての判定
+        else if (collision.gameObject.tag == "Enemy")
+        {
+            // 対象のステータスを取得
+            EnemyStatus status = collision.gameObject.GetComponent<EnemyStatus>();
+
+            // 敵にダメージ
+            status.hitPoint -= power;
+        }
+
+        //コリジョンを無効にすることで一瞬だけ判定を行う
+        hitCollider.enabled = false;
     }
 
     //プレイヤー側操作で発動できるようにする場合は、プレイヤースクリプト内でこの関数を呼ぶことでハンマー攻撃を発動できます

@@ -11,12 +11,7 @@ public class PlayerInput : MonoBehaviour
     string verticalInputName;
     string tackleInputName;
     string weaponAttackInputName;
-
-    // ボタン状態把握用変数
-    // 忙しいし容量の無駄だし、武器攻撃用のは必要になってから作ろう？ね？(*´Д｀)
-    bool[] tackleButton = new bool[2];
-    int nowTackleButtonNumber;
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -28,9 +23,6 @@ public class PlayerInput : MonoBehaviour
         verticalInputName = "Vertical" + id;
         tackleInputName = "Tackle" + id;
         weaponAttackInputName = "WeaponAttack" + id;
-
-        // ボタン状態把握用変数の初期化
-
     }
 
     // Update is called once per frame

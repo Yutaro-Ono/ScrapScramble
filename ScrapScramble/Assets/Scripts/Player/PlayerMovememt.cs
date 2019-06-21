@@ -63,7 +63,7 @@ public class PlayerMovememt : MonoBehaviour
             if (Input.GetMouseButton(0) || input.GetTackleInput())
             {
                 chargeController += Time.deltaTime;
-                chargePower++; ;
+                chargePower++;
                 chargePlayerStop = true;
                 chargeFlg = true;
             }

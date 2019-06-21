@@ -14,6 +14,11 @@ public class GatlingControl : MonoBehaviour
 
     float shootTimer;
 
+    public bool droppedMode = true;
+
+    [SerializeField]
+    Vector3 droppedModeScale;
+
     // Start is called before the first frame update
     void Start()
     {

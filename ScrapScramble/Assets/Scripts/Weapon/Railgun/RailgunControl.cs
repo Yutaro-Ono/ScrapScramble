@@ -6,6 +6,11 @@ public class RailgunControl : MonoBehaviour
 {
     GameObject bulletPrefab;
 
+    public bool droppedMode = true;
+
+    [SerializeField]
+    Vector3 droppedModeScale;
+
     //発射位置の位置データ
     Transform shootPoint;
 

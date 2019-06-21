@@ -9,6 +9,11 @@ public class HammerControl : MonoBehaviour
 
     public BoxCollider hitCollider;
 
+    public bool droppedMode = true;
+
+    [SerializeField]
+    Vector3 droppedModeScale;
+
     // 攻撃力（プレイヤーに対しては落とす資源の数）
     public short power = 3;
 

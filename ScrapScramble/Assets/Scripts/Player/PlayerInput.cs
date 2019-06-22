@@ -33,14 +33,7 @@ public class PlayerInput : MonoBehaviour
 
     public float GetHorizontalInput()
     {
-        float ret = Input.GetAxis(horizontalInputName);
-
-        if (ret != 0)
-        {
-            Debug.Log("プレイヤー" + (status.GetId() + 1) + "：縦方向操作入力");
-        }
-
-        return ret;
+        return Input.GetAxis(horizontalInputName);
     }
 
     public float GetVerticalInput()
@@ -50,14 +43,7 @@ public class PlayerInput : MonoBehaviour
 
     public bool GetTackleInput()
     {
-        bool ret = Input.GetButton(tackleInputName);
-
-        if (ret)
-        {
-            Debug.Log("プレイヤー" + (status.GetId() + 1) + "：体当たり操作入力");
-        }
-
-        return ret;
+        return Input.GetButton(tackleInputName);
     }
 
     public bool GetTackleInputUp()

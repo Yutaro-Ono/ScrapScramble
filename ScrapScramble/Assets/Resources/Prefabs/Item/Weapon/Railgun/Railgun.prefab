@@ -211,6 +211,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40b5ab1912338dc478563def5727c146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  droppedMode: 1
+  droppedModeScale: {x: 0.8, y: 0.8, z: 0.8}
   shootInterval: 3
 --- !u!1 &1742749454881922
 GameObject:

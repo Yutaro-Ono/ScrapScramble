@@ -32,6 +32,11 @@ public class HammerControl : MonoBehaviour
         {
             Debug.Log("ハンマー攻撃アニメーションのスクリプト取得に失敗");
         }
+
+        if (droppedMode)
+        {
+            gameObject.transform.localScale = droppedModeScale;
+        }
     }
 
     // Update is called once per frame

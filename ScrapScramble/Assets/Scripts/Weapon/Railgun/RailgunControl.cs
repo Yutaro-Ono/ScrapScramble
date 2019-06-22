@@ -32,6 +32,11 @@ public class RailgunControl : MonoBehaviour
         shootPoint = transform.Find("Shoot Point");
 
         shootTimer = shootInterval;
+
+        if (droppedMode)
+        {
+            gameObject.transform.localScale = droppedModeScale;
+        }
     }
 
     // Update is called once per frame

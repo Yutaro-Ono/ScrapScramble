@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 4148006966247536908}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -201,17 +201,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4514986444668122, guid: 77702e1410c8fd24bacd86936b26cab3, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4514986444668122, guid: 77702e1410c8fd24bacd86936b26cab3, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4514986444668122, guid: 77702e1410c8fd24bacd86936b26cab3, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1979706888108350, guid: 77702e1410c8fd24bacd86936b26cab3, type: 3}
       propertyPath: m_Name
       value: Gatling
       objectReference: {fileID: 0}
     - target: {fileID: 1979706888108350, guid: 77702e1410c8fd24bacd86936b26cab3, type: 3}
       propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1010417276456338134, guid: 77702e1410c8fd24bacd86936b26cab3,
-        type: 3}
-      propertyPath: droppedMode
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -273,17 +280,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4935858836924492, guid: c9852089bfb8d074e8b7b63adf7185ef, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4935858836924492, guid: c9852089bfb8d074e8b7b63adf7185ef, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4935858836924492, guid: c9852089bfb8d074e8b7b63adf7185ef, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1697484151181636, guid: c9852089bfb8d074e8b7b63adf7185ef, type: 3}
       propertyPath: m_Name
       value: Railgun
       objectReference: {fileID: 0}
     - target: {fileID: 1697484151181636, guid: c9852089bfb8d074e8b7b63adf7185ef, type: 3}
       propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6895950892912943326, guid: c9852089bfb8d074e8b7b63adf7185ef,
-        type: 3}
-      propertyPath: droppedMode
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -430,9 +444,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hammer
       objectReference: {fileID: 0}
-    - target: {fileID: 8265415133898321617, guid: 26b10f298e1343741aba58bd50c18a39,
+    - target: {fileID: 613270248957774675, guid: 26b10f298e1343741aba58bd50c18a39,
         type: 3}
-      propertyPath: droppedMode
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

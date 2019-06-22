@@ -119,6 +119,7 @@ public class PlayerMovememt : MonoBehaviour
         if (input.GetHorizontalInput() != 0 || input.GetVerticalInput() != 0)
         {
             moveFlg = true;
+            Debug.Log("プレイヤー" + (status.GetId() + 1) + "：縦方向操作入力");
         }
         else
         {
@@ -131,7 +132,7 @@ public class PlayerMovememt : MonoBehaviour
         // 武器攻撃操作の受付
         if (input.GetWeaponAttackInput())
         {
-            Debug.Log("武器攻撃ボタンが押されたピョン！踊り狂え！");
+            Debug.Log("武器攻撃ボタンが押された！");
             Attack();
         }
 
@@ -288,6 +289,9 @@ public class PlayerMovememt : MonoBehaviour
                 resourceRigidbody[i].AddForce(dropDirection);
             }
         }
+
+        // 資源の減算
+        status.score -= (int)(dropMass * ResourceCollision.pointAddition);
 
         return dropMass;
     }

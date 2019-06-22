@@ -32,6 +32,9 @@ public class EnemyManagerSpawn : MonoBehaviour
     //エネミーのプレハブデータ
     GameObject prefab;
 
+    [SerializeField]
+    float enemySpawnPosY = 10;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -77,7 +80,7 @@ public class EnemyManagerSpawn : MonoBehaviour
             spawnEnemyPattern = (EnemyPattern)Random.Range((int)EnemyPattern.PatternA, (int)EnemyPattern.Invalid);
 
             //プレハブをもとにオブジェクト生成
-            GameObject instance = (GameObject)Instantiate(prefab, new Vector3(Random.Range(-90.0f, 90.0f), 4, Random.Range(-90.0f, 90.0f)),
+            GameObject instance = (GameObject)Instantiate(prefab, new Vector3(Random.Range(-90.0f, 90.0f), enemySpawnPosY, Random.Range(-90.0f, 90.0f)),
                 Quaternion.identity);
 
             //生成したオブジェクトをエネミーマネージャーの子に設定

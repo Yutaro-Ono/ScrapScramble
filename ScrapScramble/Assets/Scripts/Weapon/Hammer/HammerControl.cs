@@ -9,6 +9,9 @@ public class HammerControl : MonoBehaviour
 
     public BoxCollider hitCollider;
 
+    [SerializeField]
+    BoxCollider obtainCollider;
+
     public bool droppedMode = true;
 
     [SerializeField]
@@ -42,30 +45,52 @@ public class HammerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        obtainCollider.enabled = droppedMode;
     }
 
-    private void OnCollisionStay(Collision collision)
+    private void OnTriggerStay(Collider other)
     {
-        //if (animator.GetBool(attackAnimScript.collisionBoolName) && collision.gameObject.tag == "Player")
-        if (collision.gameObject.tag == "Player")
+        if (droppedMode)
         {
-            //ここにプレイヤー被ダメージ時の関数を呼ぶ
-            Debug.Log("ハンマー：プレイヤーにヒット");
-        }
+            if (other.tag == "Player")
+            {
+                PlayerStatus status = other.GetComponent<PlayerStatus>();
 
-        // エネミーに対しての判定
-        else if (collision.gameObject.tag == "Enemy")
+                status.EquipWeapon(Weapon.Hammer);
+
+                Debug.Log("ハンマー：プレイヤー" + (status.GetId() + 1) + "が取得");
+
+                Destroy(gameObject);
+            }
+        }
+        else
         {
-            // 対象のステータスを取得
-            EnemyStatus status = collision.gameObject.GetComponent<EnemyStatus>();
+            //if (animator.GetBool(attackAnimScript.otherBoolName) && other.tag == "Player")
+            if (other.tag == "Player")
+            {
+                //ここにプレイヤー被ダメージ時の関数を呼ぶ
+                Debug.Log("ハンマー：プレイヤーにヒット");
+            }
 
-            // 敵にダメージ
-            status.hitPoint -= power;
+            // エネミーに対しての判定
+            else if (other.tag == "Enemy")
+            {
+                Debug.Log("ハンマー：エネミーにヒット");
+
+                // 対象のステータスを取得
+                EnemyStatus status = other.GetComponent<EnemyStatus>();
+                if (status == null)
+                {
+                    Debug.Log("ステータス取得失敗");
+                }
+
+                // 敵にダメージ
+                status.hitPoint -= power;
+            }
+
+            //コリジョンを無効にすることで一瞬だけ判定を行う
+            hitCollider.enabled = false;
         }
-
-        //コリジョンを無効にすることで一瞬だけ判定を行う
-        hitCollider.enabled = false;
     }
 
     //プレイヤー側操作で発動できるようにする場合は、プレイヤースクリプト内でこの関数を呼ぶことでハンマー攻撃を発動できます

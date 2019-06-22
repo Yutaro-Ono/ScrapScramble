@@ -64,4 +64,14 @@ public class GatlingControl : MonoBehaviour
             shootTimer = 0.0f;
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            PlayerStatus status = other.GetComponent<PlayerStatus>();
+
+            status.EquipWeapon(Weapon.Gatling);
+        }
+    }
 }

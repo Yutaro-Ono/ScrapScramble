@@ -156,6 +156,7 @@ GameObject:
   - component: {fileID: 4935858836924492}
   - component: {fileID: 95616457010950706}
   - component: {fileID: 6895950892912943326}
+  - component: {fileID: 4537570717856627742}
   m_Layer: 0
   m_Name: Railgun
   m_TagString: Untagged
@@ -214,6 +215,19 @@ MonoBehaviour:
   droppedMode: 1
   droppedModeScale: {x: 0.8, y: 0.8, z: 0.8}
   shootInterval: 3
+--- !u!65 &4537570717856627742
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697484151181636}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.64, z: 4.16}
+  m_Center: {x: 0, y: 0.56, z: 0.74}
 --- !u!1 &1742749454881922
 GameObject:
   m_ObjectHideFlags: 0

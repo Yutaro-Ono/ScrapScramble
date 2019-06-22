@@ -12,7 +12,7 @@ using UnityEngine.UI;
 public class WaveManagement : MonoBehaviour
 {
     // バトルWAVEの制限時間
-    public const float limitTime = 8.0f;
+    public const float limitTime = 100.0f;
     // WAVE間のインターバルタイマー
     public const float intervalTime = 6.0f;
 

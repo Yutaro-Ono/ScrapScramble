@@ -23,7 +23,7 @@ public class EnemyStatus : MonoBehaviour
     //自身の情報
     ////////////////////////////
     //エネミーのヒットポイントの最大値
-    const short enemyHitPointMax = 50;
+    const short enemyHitPointMax = 3;
 
     //エネミーのヒットポイント
     //プレイヤーからの攻撃がヒットすると減少する

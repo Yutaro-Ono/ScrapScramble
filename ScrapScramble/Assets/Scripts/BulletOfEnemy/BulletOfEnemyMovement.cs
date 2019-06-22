@@ -8,7 +8,7 @@ public class BulletOfEnemyMovement : MonoBehaviour
     public float speed = 2.0f;
 
     //弾の威力（プレイヤーの資源を落とさせる量）
-    public int power = 1;
+    int power = 1;
 
     //壁にぶつかっても消滅しなかったとき、一定距離進むことで消滅させる
     const float disappearDistance = 1500.0f;
@@ -44,7 +44,13 @@ public class BulletOfEnemyMovement : MonoBehaviour
         if (other.tag == "Player")
         {
             {
-                //ここでプレイヤーが資源をドロップする関数を呼ぶ
+                PlayerMovememt move = other.GetComponent<PlayerMovememt>();
+                if (!move)
+                {
+                    Debug.Log("エネミー弾：プレイヤーの資源のドロップに失敗");
+                }
+
+                move.DropResource((uint)power);
             }
 
             Debug.Log("エネミーの弾がプレイヤーにヒット");
@@ -62,5 +68,10 @@ public class BulletOfEnemyMovement : MonoBehaviour
 
             Destroy(gameObject);
         }
+    }
+
+    public void SetPower(int value)
+    {
+        power = value;
     }
 }

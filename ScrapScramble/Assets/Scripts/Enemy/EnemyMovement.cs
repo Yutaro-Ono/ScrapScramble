@@ -24,6 +24,9 @@ public class EnemyMovement : MonoBehaviour
     //撃破演出が終わったかのフラグ
     bool finishBusteredAnimationFlag = false;
 
+    //AIの停止フラグ
+    public bool stopAIFlag;
+
     ///////////////////////////////////
     //行き先の決定、移動に関わる変数
     ///////////////////////////////////
@@ -115,168 +118,170 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-
-        //次工程に行くかのフラグを更新
-        goNextProcessFlag = false;
-
-        
-        //個体のHPが残っているなら
-        if (enemyStatus.hitPoint > 0)
+        // デバッグ機能、エネミーのAI停止フラグが偽である場合のみ履行
+        if (stopAIFlag == false)
         {
-            /////////////////////////////////////
-            //目的地決定プロセス
-            /////////////////////////////////////
-            if (nowProcess == EnemyMovementProcess.DecideDestination)
+            //次工程に行くかのフラグを更新
+            goNextProcessFlag = false;
+
+
+            //個体のHPが残っているなら
+            if (enemyStatus.hitPoint > 0)
+            {
+                /////////////////////////////////////
+                //目的地決定プロセス
+                /////////////////////////////////////
+                if (nowProcess == EnemyMovementProcess.DecideDestination)
+                {
+
+                    //行き先のランダム設定
+                    SetDestinationAtRandom();
+
+                    //方向ベクトルの格納
+                    SetDestinationDirection();
+
+                    //次の工程へ
+                    nowProcess++;
+
+                }
+                /////////////////////////////////////
+                //移動プロセス
+                /////////////////////////////////////
+                else if (nowProcess == EnemyMovementProcess.Move)
+                {
+
+                    //進む方向を取得しなおす
+                    SetDestinationDirection();
+
+
+                    //進む方向を見る
+                    gameObject.transform.LookAt(destination);
+
+
+                    //現在地と目的地との距離の計測
+                    float distance = Vector3.Distance(destination, gameObject.transform.position);
+                    float moveLength = Vector3.Magnitude(destinationDirection * moveSpeed);
+
+
+                    //目的地まで十分な距離がある場合は目的の方向まで一定スピードで進む
+                    if (distance > moveLength)
+                    {
+
+                        gameObject.transform.position += destinationDirection * moveSpeed;
+
+                    }
+                    //そうでないときは目的地の座標を自身の座標に代入
+                    else
+                    {
+
+
+                        gameObject.transform.position = destination;
+                        goNextProcessFlag = true;
+
+
+                    }
+
+
+                    CheckGoNextProcessFlag();
+
+
+                }
+                /////////////////////////////////////
+                //ターゲッティングプロセス
+                /////////////////////////////////////
+                else if (nowProcess == EnemyMovementProcess.Targeting)
+                {
+
+                    //ターゲッティング対象が未決定の時、対象をランダム設定
+                    if (targetPlayerNumber < 0)
+                    {
+                        targetPlayerNumber = Random.Range(0, playerNum);
+                        //targetPlayerNumber = 0;
+
+                        Debug.Log("狙っているプレイヤー番号：" + targetPlayerNumber);
+                    }
+
+
+                    //プレイヤーの位置（y座標考えないver）を格納
+                    targetingTransform = playerObj[targetPlayerNumber].transform;
+                    //targetingTransform.position = new Vector3(playerObj[targetPlayerNumber].transform.position.x, gameObject.transform.position.y, playerObj[targetPlayerNumber].transform.position.z);
+
+
+                    //ターゲッティングしたプレイヤーの方を向く
+                    gameObject.transform.LookAt(targetingTransform);
+
+                    //ただし、x軸回転は0のまま
+                    {
+                        //x軸回転の値を取得する
+                        float xRotation = gameObject.transform.rotation.x;
+
+                        //取得した値分逆回転させる
+                        gameObject.transform.Rotate(new Vector3(-xRotation, 0, 0));
+                    }
+
+                    //指定した秒数ターゲッティングしたら次の工程へ
+                    targetingTimer += Time.deltaTime;
+
+                    if (targetingTimer >= targetingSeconds)
+                    {
+                        Debug.Log("ターゲッティング完了");
+
+                        goNextProcessFlag = true;
+                    }
+
+                    CheckGoNextProcessFlag();
+
+
+                }
+                /////////////////////////////////////
+                //発射プロセス
+                /////////////////////////////////////
+                else if (nowProcess == EnemyMovementProcess.Shoot)
+                {
+
+                    //発砲待機時間の計測
+                    shootTimer += Time.deltaTime;
+
+                    if (shootTimer >= shootWaitingTime)
+                    {
+
+                        //弾のインスタンスを生成
+                        GameObject bulletInstance = (GameObject)Instantiate(bulletPrefab, shootPoint.transform.position, shootPoint.transform.rotation);
+
+
+                        Debug.Log("バン！：エネミーがプレイヤーに向けて発砲した");
+
+
+                        goNextProcessFlag = true;
+
+                    }
+
+                    CheckGoNextProcessFlag();
+
+
+                }
+                /////////////////////////////////////
+                //全工程終了プロセス
+                /////////////////////////////////////
+                else if (nowProcess >= EnemyMovementProcess.Invalid)
+                {
+
+                    //初期化を行う
+                    targetingTimer = 0.0f;
+                    targetPlayerNumber = -1;
+
+                    shootTimer = 0.0f;
+
+                    //一番最初の工程に戻る
+                    nowProcess = (EnemyMovementProcess)0;
+
+                }
+            }
+            //個体が死んだら
+            else
             {
 
-                //行き先のランダム設定
-                SetDestinationAtRandom();
-
-                //方向ベクトルの格納
-                SetDestinationDirection();
-                
-                //次の工程へ
-                nowProcess++;
-
             }
-            /////////////////////////////////////
-            //移動プロセス
-            /////////////////////////////////////
-            else if (nowProcess == EnemyMovementProcess.Move)
-            {
-                
-                //進む方向を取得しなおす
-                SetDestinationDirection();
-
-
-                //進む方向を見る
-                gameObject.transform.LookAt(destination);
-
-
-                //現在地と目的地との距離の計測
-                float distance = Vector3.Distance(destination, gameObject.transform.position);
-                float moveLength = Vector3.Magnitude(destinationDirection * moveSpeed);
-
-
-                //目的地まで十分な距離がある場合は目的の方向まで一定スピードで進む
-                if (distance > moveLength)
-                {
-
-                    gameObject.transform.position += destinationDirection * moveSpeed;
-
-                }
-                //そうでないときは目的地の座標を自身の座標に代入
-                else
-                {
-
-
-                    gameObject.transform.position = destination;
-                    goNextProcessFlag = true;
-
-
-                }
-
-
-                CheckGoNextProcessFlag();
-
-
-            }
-            /////////////////////////////////////
-            //ターゲッティングプロセス
-            /////////////////////////////////////
-            else if (nowProcess == EnemyMovementProcess.Targeting)
-            {
-
-                //ターゲッティング対象が未決定の時、対象をランダム設定
-                if (targetPlayerNumber < 0)
-                {
-                    targetPlayerNumber = Random.Range(0, playerNum);
-                    //targetPlayerNumber = 0;
-
-                    Debug.Log("狙っているプレイヤー番号：" + targetPlayerNumber);
-                }
-
-                
-                //プレイヤーの位置（y座標考えないver）を格納
-                targetingTransform = playerObj[targetPlayerNumber].transform;
-                //targetingTransform.position = new Vector3(playerObj[targetPlayerNumber].transform.position.x, gameObject.transform.position.y, playerObj[targetPlayerNumber].transform.position.z);
-                
-
-                //ターゲッティングしたプレイヤーの方を向く
-                gameObject.transform.LookAt(targetingTransform);
-                
-                //ただし、x軸回転は0のまま
-                {
-                    //x軸回転の値を取得する
-                    float xRotation = gameObject.transform.rotation.x;
-
-                    //取得した値分逆回転させる
-                    gameObject.transform.Rotate(new Vector3(-xRotation, 0, 0));
-                }
-
-                //指定した秒数ターゲッティングしたら次の工程へ
-                targetingTimer += Time.deltaTime;
-
-                if (targetingTimer >= targetingSeconds)
-                {
-                    Debug.Log("ターゲッティング完了");
-
-                    goNextProcessFlag = true;
-                }
-
-                CheckGoNextProcessFlag();
-
-
-            }
-            /////////////////////////////////////
-            //発射プロセス
-            /////////////////////////////////////
-            else if (nowProcess == EnemyMovementProcess.Shoot)
-            {
-
-                //発砲待機時間の計測
-                shootTimer += Time.deltaTime;
-
-                if (shootTimer >= shootWaitingTime)
-                {
-
-                    //弾のインスタンスを生成
-                    GameObject bulletInstance = (GameObject)Instantiate(bulletPrefab, shootPoint.transform.position, shootPoint.transform.rotation);
-
-
-                    Debug.Log("バン！：エネミーがプレイヤーに向けて発砲した");
-
-
-                    goNextProcessFlag = true;
-
-                }
-
-                CheckGoNextProcessFlag();
-
-
-            }
-            /////////////////////////////////////
-            //全工程終了プロセス
-            /////////////////////////////////////
-            else if (nowProcess >= EnemyMovementProcess.Invalid)
-            {
-
-                //初期化を行う
-                targetingTimer = 0.0f;
-                targetPlayerNumber = -1;
-
-                shootTimer = 0.0f;
-
-                //一番最初の工程に戻る
-                nowProcess = (EnemyMovementProcess)0;
-                
-            }
-        }
-        //個体が死んだら
-        else
-        {
-
         }
     }
 

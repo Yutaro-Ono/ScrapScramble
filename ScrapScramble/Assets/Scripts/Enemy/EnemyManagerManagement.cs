@@ -21,6 +21,9 @@ public class EnemyManagerManagement : MonoBehaviour
     //資源のプレハブのパス
     const string resourcePrefabPath = "Prefabs/Item/Resource/Resource";
 
+    //エネミーAIの停止
+    public bool stopAIFlag = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,18 +41,25 @@ public class EnemyManagerManagement : MonoBehaviour
                 Destroy(n.gameObject);
             }
         }
+
+        //AI停止フラグのコピー
+        foreach(Transform n in gameObject.transform)
+        {
+            EnemyMovement movement = n.GetComponent<EnemyMovement>();
+            movement.stopAIFlag = this.stopAIFlag;
+        }
     }
 
     public void TellInformationsToEnemy(EnemyStatus status, EnemyDrop drop)
     {
         //ステージ隅の情報を格納
-        status.stageCorner1 = stageCorner1;
-        status.stageCorner2 = stageCorner2;
+        status.stageCorner1 = this.stageCorner1;
+        status.stageCorner2 = this.stageCorner2;
 
         //プレイヤーの情報を格納
         for (int i = 0; i < playerNum; i++)
         {
-            status.player[i] = player[i];
+            status.player[i] = this.player[i];
         }
 
         //ドロップする資源、武器のプレハブデータ格納

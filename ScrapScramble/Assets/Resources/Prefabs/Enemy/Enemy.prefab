@@ -98,7 +98,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  hitPoint: 50
+  hitPoint: 3
 --- !u!114 &2879519906808625733
 MonoBehaviour:
   m_ObjectHideFlags: 0

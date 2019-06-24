@@ -77,11 +77,16 @@ public class ResourceCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        PlayerStatus d1 = GetComponent<PlayerStatus>();
         //衝突物がプレイヤーであれば、その資源獲得数に追加する。
         if (other.tag == "Player")
         {
-            d1.score += pointAddition;
+            PlayerStatus playerStatus = GetComponent<PlayerStatus>();
+            if (playerStatus == null)
+            {
+                Debug.Log("資源：プレイヤーステータスの取得失敗");
+            }
+
+            playerStatus.score += pointAddition;
             Destroy(gameObject);
         }
     }

@@ -16,8 +16,6 @@ public class weaponIcon : MonoBehaviour
 
     public Image RailgunIcon;
 
-    private Weapon weaponKind;
-
     // プレーヤーオブジェクト格納用
     public GameObject playerObj;
 
@@ -69,19 +67,6 @@ public class weaponIcon : MonoBehaviour
         else
         {
             RailgunIcon.enabled = false;
-        }
-
-
-
-        // ↑押下によるアイコンチェンジデバッグ
-        if(Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            if((int)weaponKind == 4)
-            {
-                weaponKind = Weapon.None;
-            }
-
-            ++weaponKind;
         }
 
     }

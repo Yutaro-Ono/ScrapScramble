@@ -18,17 +18,30 @@ public class weaponIcon : MonoBehaviour
 
     private Weapon weaponKind;
 
+    // プレーヤーオブジェクト格納用
+    public GameObject playerObj;
+
+    // ステータス格納用
+    PlayerStatus status;
+
     // Start is called before the first frame update
     void Start()
     {
-        weaponKind = Weapon.None;
+        hammerIcon.enabled = false;
+        GatlingIcon.enabled = false;
+        RailgunIcon.enabled = false;
+
+        status = playerObj.GetComponent<PlayerStatus>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(status.GetCurrentWeapon());
+
         // 表示・非表示の管理
-        if(weaponKind == Weapon.Hammer)
+        if (status.GetCurrentWeapon() == Weapon.Hammer)
         {
             hammerIcon.enabled = true;
             Debug.Log("ハンマー表示");
@@ -38,7 +51,7 @@ public class weaponIcon : MonoBehaviour
             hammerIcon.enabled = false;
         }
 
-        if (weaponKind == Weapon.Gatling)
+        if (status.GetCurrentWeapon() == Weapon.Gatling)
         {
             GatlingIcon.enabled = true;
             Debug.Log("ガトリング表示");
@@ -48,7 +61,7 @@ public class weaponIcon : MonoBehaviour
             GatlingIcon.enabled = false;
         }
 
-        if (weaponKind == Weapon.Railgun)
+        if (status.GetCurrentWeapon() == Weapon.Railgun)
         {
             RailgunIcon.enabled = true;
             Debug.Log("レールガン表示");
@@ -57,6 +70,8 @@ public class weaponIcon : MonoBehaviour
         {
             RailgunIcon.enabled = false;
         }
+
+
 
         // ↑押下によるアイコンチェンジデバッグ
         if(Input.GetKeyDown(KeyCode.UpArrow))

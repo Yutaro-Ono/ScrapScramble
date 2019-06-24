@@ -9,6 +9,7 @@ public class PlayerMovememt : MonoBehaviour
 
     public float speed;                  //プレイヤーの動くスピード
     public float atkSpeed;               //プレーヤーの攻撃スピード
+    public int tacklePower;             //体当たりで与えるダメージ値
     Vector3 Player_pos;                  //プレイヤーのポジション
     private float moveX = 0f;            //x方向のImputの値
     private float moveZ = 0f;            //z方向のInputの値
@@ -20,7 +21,10 @@ public class PlayerMovememt : MonoBehaviour
     public bool chargePlayerStop;        //プレーヤーが止まっているかどうか
     bool moveFlg;
     public bool chargeFlg;
-    public bool timeFlg;
+    public bool tackleReadyFlag;
+    public bool tacklingFlag;
+
+    const float tackleForceScalar = 100.0f;
 
     // ドロップする資源オブジェクトのプレハブデータ
     GameObject resourcePrefab;
@@ -39,6 +43,7 @@ public class PlayerMovememt : MonoBehaviour
         moveFlg = false;
         finishedCoolTimeFlg = true;
         chargeFlg = false;
+        tacklingFlag = false;
         //lapseTimeを初期化
         lapseTime = 0.0f;
 
@@ -66,6 +71,8 @@ public class PlayerMovememt : MonoBehaviour
                 chargePower++;
                 chargePlayerStop = true;
                 chargeFlg = true;
+
+                tackleReadyFlag = true;
             }
             else
             {
@@ -74,24 +81,33 @@ public class PlayerMovememt : MonoBehaviour
             }
         }
 
-        if (chargeController > 1.5f)
+        // 0.5秒につき1ダメージ増加し、3秒で最大ダメージ値に
+        for (int i = 0; i < (3.0f / 0.5f); i++)
         {
-            timeFlg = true;
-
-
+            if (chargeController >= 0.5f * (i + 1))
+            {
+                tacklePower = (short)(i + 1);
+            }
+            else
+            {
+                break;
+            }
         }
-        if (timeFlg == true)
+
+        if (tackleReadyFlag == true)
         {
             if (Input.GetMouseButtonUp(0) || input.GetTackleInputUp())
 
             {
-                rb.AddForce(transform.TransformDirection(Vector3.forward) * atkSpeed, ForceMode.Impulse);
+                rb.AddForce(transform.TransformDirection(Vector3.forward) * chargeController * tackleForceScalar, ForceMode.Impulse);
 
-                finishedCoolTimeFlg = false;
+                // わずかにしか動かなかったタックルでクールタイムを取られるのは不憫なので、
+                // 一定秒数未満のチャージしか行わなかった場合、クールタイムを免除する
+                finishedCoolTimeFlg = (chargeController < 0.5f);
 
                 chargePlayerStop = false;
                 chargeController = 0;
-                timeFlg = false;
+                tackleReadyFlag = false;
             }
         }
         if (!(Input.GetMouseButton(0) || input.GetTackleInput()))
@@ -116,7 +132,7 @@ public class PlayerMovememt : MonoBehaviour
     // 移動操作をしているかどうか
     void InputKey()
     {
-        if (input.GetHorizontalInput() != 0 || input.GetVerticalInput() != 0)
+        if (moveX != 0 || moveZ != 0)
         {
             moveFlg = true;
             Debug.Log("プレイヤー" + (status.GetId() + 1) + "：縦方向操作入力");
@@ -198,6 +214,8 @@ public class PlayerMovememt : MonoBehaviour
                 finishedCoolTimeFlg = true;
                 lapseTime = 0.0f;
             }
+
+            //体当たり実行から二秒経過でchargeFlgを負に
             if (lapseTime >= 2)
             {
                 chargeFlg = false;

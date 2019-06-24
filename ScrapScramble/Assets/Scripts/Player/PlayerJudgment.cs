@@ -59,16 +59,16 @@ public class PlayerJudgment : MonoBehaviour
     void OnCollisionEnter(Collision other)
     {
      
-        PlayerMovememt d1 = GetComponent<PlayerMovememt>();
-        PlayerStatus d2 = GetComponent<PlayerStatus>();
-        EnemyStatus d3 = other.gameObject.GetComponent<EnemyStatus>();
-        if (d1.chargeFlg == true)
+        PlayerMovememt playerMove = GetComponent<PlayerMovememt>();
+        PlayerStatus playerStatus = GetComponent<PlayerStatus>();
+        if (playerMove.chargeFlg == true)
         {
             
 
             if (other.gameObject.tag == "Enemy")
             {
-                d3.hitPoint -= d2.atk;
+                EnemyStatus eneStatus = other.gameObject.GetComponent<EnemyStatus>();
+                eneStatus.hitPoint -= (short)playerMove.tacklePower;
                 //Destroy(other.gameObject);
             }
          

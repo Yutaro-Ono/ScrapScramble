@@ -143,7 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitCollider: {fileID: 2850275662959946040}
   obtainCollider: {fileID: 7671741389575801871}
-  droppedMode: 1
+  droppedMode: 0
   droppedModeScale: {x: 0.1, y: 0.1, z: 0.1}
   power: 3
 --- !u!1 &1179144249897207867
@@ -190,8 +190,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 8.6, y: 9.1, z: 14.58}
-  m_Center: {x: 0, y: 19.5, z: 0}
+  m_Size: {x: 20, y: 20, z: 14.58}
+  m_Center: {x: 0, y: 22.89, z: 0}
 --- !u!114 &5716145631353076956
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,6 +18,10 @@ public class HammerAttack : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         control = animator.gameObject.GetComponent<HammerControl>();
+        if (control == null)
+        {
+            Debug.Log("ハンマーコントロールの取得失敗");
+        }
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

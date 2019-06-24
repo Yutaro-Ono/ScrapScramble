@@ -80,7 +80,7 @@ public class ResourceCollision : MonoBehaviour
         //衝突物がプレイヤーであれば、その資源獲得数に追加する。
         if (other.tag == "Player")
         {
-            PlayerStatus playerStatus = GetComponent<PlayerStatus>();
+            PlayerStatus playerStatus = other.GetComponent<PlayerStatus>();
             if (playerStatus == null)
             {
                 Debug.Log("資源：プレイヤーステータスの取得失敗");

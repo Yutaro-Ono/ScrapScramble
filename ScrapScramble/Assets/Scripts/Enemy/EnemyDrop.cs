@@ -36,6 +36,9 @@ public class EnemyDrop : MonoBehaviour
     GameObject gatlingPrefab;
     GameObject railgunPrefab;
 
+    //武器格納
+    public GameObject[]weaponPrefeb;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +55,8 @@ public class EnemyDrop : MonoBehaviour
             {
                 //ボーナスエネミーのドロップの挙動を記述する
                 DropItems(bonusEnemyDropResourceNumMin, bonusEnemyDropResourceNumMax, 0, 0);
+                //武器をドロップする
+                DropWeapon();
             }
             else
             {
@@ -148,7 +153,13 @@ public class EnemyDrop : MonoBehaviour
             Debug.Log("レールガンプレハブのデータ取得に失敗");
         }
     }
+    //武器をドロップ
+    public void DropWeapon()
+    {
+        GameObject dropWepon = weaponPrefeb[Random.Range(0, weaponPrefeb.Length)];
 
+        Instantiate(dropWepon, transform.position + Vector3.up, Quaternion.identity);
+    }
     //各武器のプレハブデータのセッターを一つの関数にまとめて使いやすく
     //ふと「これ、いる？」と思ったのでとりあえずコメント化
     /*

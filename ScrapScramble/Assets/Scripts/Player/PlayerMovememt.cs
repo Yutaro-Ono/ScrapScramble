@@ -116,7 +116,7 @@ public class PlayerMovememt : MonoBehaviour
     // 移動操作をしているかどうか
     void InputKey()
     {
-        if (input.GetHorizontalInput() != 0 || input.GetVerticalInput() != 0)
+        if (moveZ != 0 || moveX != 0)
         {
             moveFlg = true;
             Debug.Log("プレイヤー" + (status.GetId() + 1) + "：縦方向操作入力");
@@ -141,13 +141,13 @@ public class PlayerMovememt : MonoBehaviour
         moveZ = Input.GetAxis("Vertical"); //z方向のInputの値を取得
         */
         // 移動操作の受付
-        /*
+
         // デバッグがしやすいようにパッドとキーボード両方の操作を受け付ける
         moveX = (input.GetHorizontalInput() + Input.GetAxis("Horizontal"));
         moveZ = (input.GetVerticalInput() + Input.GetAxis("Vertical"));
-        */
-        moveX = input.GetHorizontalInput();
-        moveZ = input.GetVerticalInput();
+
+        //moveX = input.GetHorizontalInput();
+        //moveZ = input.GetVerticalInput();
 
         // 移動操作の入力値をクランプ
         // パッドとキーボードの両対応のため、入力された値を足し合わせている

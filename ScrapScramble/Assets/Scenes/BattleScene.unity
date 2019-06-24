@@ -136,6 +136,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2e35ff103dd5a40ac6d64482b364f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropObj: {fileID: 0}
+  isAttackable: 0
+  lapseTime: 0
 --- !u!114 &66546676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,6 +261,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2e35ff103dd5a40ac6d64482b364f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropObj: {fileID: 0}
+  isAttackable: 0
+  lapseTime: 0
 --- !u!114 &116947745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,7 +282,7 @@ MonoBehaviour:
   chargeController: 0
   chargePower: 0
   chargePlayerStop: 0
-  chargFlg: 0
+  chargeFlg: 0
   timeFlg: 0
 --- !u!65 &116947746
 BoxCollider:
@@ -513,6 +519,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2e35ff103dd5a40ac6d64482b364f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropObj: {fileID: 0}
+  isAttackable: 0
+  lapseTime: 0
 --- !u!114 &301402302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -675,6 +684,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2879519906808625733, guid: 19ddfe22f3f4b1947b9f55d18a5a1450,
+        type: 3}
+      propertyPath: weaponPrefeb.Array.size
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19ddfe22f3f4b1947b9f55d18a5a1450, type: 3}
@@ -1205,11 +1219,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 808349636310152191, guid: 4be66dd997501c04ea96b0dd6c0ca3e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Player_1
-      objectReference: {fileID: 0}
     - target: {fileID: 109870145598063958, guid: 4be66dd997501c04ea96b0dd6c0ca3e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1279,6 +1288,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 808349636310152191, guid: 4be66dd997501c04ea96b0dd6c0ca3e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Player_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4be66dd997501c04ea96b0dd6c0ca3e4, type: 3}
@@ -1526,6 +1540,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2e35ff103dd5a40ac6d64482b364f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropObj: {fileID: 0}
+  isAttackable: 0
+  lapseTime: 0
 --- !u!114 &885798383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1622,11 +1639,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6996618062329517590, guid: 24ec4c8d7f3197942a62b016fdca4895,
-        type: 3}
-      propertyPath: m_Name
-      value: Player_4
-      objectReference: {fileID: 0}
     - target: {fileID: 2044766094091926136, guid: 24ec4c8d7f3197942a62b016fdca4895,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1697,6 +1709,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6996618062329517590, guid: 24ec4c8d7f3197942a62b016fdca4895,
+        type: 3}
+      propertyPath: m_Name
+      value: Player_4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24ec4c8d7f3197942a62b016fdca4895, type: 3}
 --- !u!1 &952005255 stripped
@@ -1762,6 +1779,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2e35ff103dd5a40ac6d64482b364f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropObj: {fileID: 0}
+  isAttackable: 0
+  lapseTime: 0
 --- !u!114 &952005260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1780,7 +1800,7 @@ MonoBehaviour:
   chargeController: 0
   chargePower: 0
   chargePlayerStop: 0
-  chargFlg: 0
+  chargeFlg: 0
   timeFlg: 0
 --- !u!65 &952005261
 BoxCollider:
@@ -2395,6 +2415,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2e35ff103dd5a40ac6d64482b364f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropObj: {fileID: 0}
+  isAttackable: 0
+  lapseTime: 0
 --- !u!114 &1236286897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2413,7 +2436,7 @@ MonoBehaviour:
   chargeController: 0
   chargePower: 0
   chargePlayerStop: 0
-  chargFlg: 0
+  chargeFlg: 0
   timeFlg: 0
 --- !u!65 &1236286898
 BoxCollider:
@@ -2474,6 +2497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnInterval: 2
+  enemySpawnPosY: 10
 --- !u!4 &1336240329
 Transform:
   m_ObjectHideFlags: 0
@@ -2495,11 +2519,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8334447350676948398, guid: 29fc3aeb8be99404898ccd3fe5332623,
-        type: 3}
-      propertyPath: m_Name
-      value: Player_2
-      objectReference: {fileID: 0}
     - target: {fileID: 843619913, guid: 29fc3aeb8be99404898ccd3fe5332623, type: 3}
       propertyPath: m_LocalPosition.x
       value: 25.17
@@ -2555,6 +2574,11 @@ PrefabInstance:
     - target: {fileID: 843619913, guid: 29fc3aeb8be99404898ccd3fe5332623, type: 3}
       propertyPath: m_LocalScale.z
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334447350676948398, guid: 29fc3aeb8be99404898ccd3fe5332623,
+        type: 3}
+      propertyPath: m_Name
+      value: Player_2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29fc3aeb8be99404898ccd3fe5332623, type: 3}
@@ -3201,6 +3225,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2e35ff103dd5a40ac6d64482b364f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropObj: {fileID: 0}
+  isAttackable: 0
+  lapseTime: 0
 --- !u!114 &1661761166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3755,6 +3782,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2e35ff103dd5a40ac6d64482b364f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropObj: {fileID: 0}
+  isAttackable: 0
+  lapseTime: 0
 --- !u!114 &2064371753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3773,7 +3803,7 @@ MonoBehaviour:
   chargeController: 0
   chargePower: 0
   chargePlayerStop: 0
-  chargFlg: 0
+  chargeFlg: 0
   timeFlg: 0
 --- !u!65 &2064371754
 BoxCollider:

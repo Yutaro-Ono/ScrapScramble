@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// 残念ながらまだ使えません
 public class CommonFunction : MonoBehaviour
 {
     public static bool GetAnyShiftPressed()

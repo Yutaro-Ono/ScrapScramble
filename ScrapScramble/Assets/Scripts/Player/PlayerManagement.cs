@@ -21,8 +21,18 @@ public class PlayerManagement : MonoBehaviour
     // Start関数よりも前に呼び出される関数
     private void Awake()
     {
+        // 子のプレイヤーオブジェクトを取得
+        for (int i = 0; i < playerNum; ++i)
+        {
+            player[i] = transform.Find("Player" + (i + 1)).gameObject;
+            if (player[i] == null)
+            {
+                Debug.Log("プレイヤーオブジェクトの取得失敗");
+            }
+        }
+
         // プレイヤー番号（ID)を個体に設定
-        for (int i = 0; i < playerNum; i++)
+        for (int i = 0; i < playerNum; ++i)
         {
             PlayerStatus status = player[i].GetComponent<PlayerStatus>();
 
@@ -47,7 +57,7 @@ public class PlayerManagement : MonoBehaviour
                 bool active = (lplayerNum == lmodelNum);
 
                 // 検索、およびアクティブor非アクティブ化
-                GameObject modelObj = (player[lplayerNum].transform.Find(modelObjName)).gameObject;
+                GameObject modelObj = (player[lplayerNum].transform.Find("Core").transform.Find(modelObjName)).gameObject;
                 if (modelObj == null)
                 {
                     Debug.Log("プレイヤー" + (lplayerNum + 1) + "：" + modelObjName + "の取得に失敗");

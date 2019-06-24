@@ -40,7 +40,7 @@ public class PlayerStatus : MonoBehaviour
         initialScale = transform.localScale.x;
 
         // 各武器のオブジェクトを子から取得し、各々装備されるまで非アクティブ化
-        if ((myHammer = transform.Find("Hammer").gameObject) == null)
+        if ((myHammer = transform.Find("Core").transform.Find("Hammer").gameObject) == null)
         {
             Debug.Log("プレイヤー：ハンマーのオブジェクト取得に失敗");
         }
@@ -49,7 +49,7 @@ public class PlayerStatus : MonoBehaviour
             myHammer.SetActive(false);
         }
 
-        if ((myGatling = transform.Find("Gatling").gameObject) == null)
+        if ((myGatling = transform.Find("Core").transform.Find("Gatling").gameObject) == null)
         {
             Debug.Log("プレイヤー：ガトリングのオブジェクト取得に失敗");
         }
@@ -58,7 +58,7 @@ public class PlayerStatus : MonoBehaviour
             myGatling.SetActive(false);
         }
 
-        if ((myRailgun = transform.Find("Railgun").gameObject) == null)
+        if ((myRailgun = transform.Find("Core").transform.Find("Railgun").gameObject) == null)
         {
             Debug.Log("プレイヤー：レールガンのオブジェクト取得に失敗");
         }

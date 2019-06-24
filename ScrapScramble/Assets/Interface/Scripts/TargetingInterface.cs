@@ -1,6 +1,6 @@
 ﻿//----------------------------------------------------------//
-// World座標をScreen座標に置換する
-//       ※Playerタグに紐付け
+// PlayerのWorld座標を取得する
+//       ※動くUIの親オブジェクトにアタッチ
 //--------------------------------------------------------//
 
 using System.Collections;
@@ -10,31 +10,25 @@ using UnityEngine.UI;
 
 public class TargetingInterface : MonoBehaviour
 {
-    public GameObject targetObj;        // ターゲットオブジェクト(Player)
-    private Vector3 targetPos;       // ターゲットオブジェクトの座標
+    public GameObject playerObj;
 
-    private RectTransform myRect;     // タグのtransform
-    private Vector3 offset = new Vector3(0, 20.5f, 0);    // 表示位置調整用オフセット(Playerの頭上に表示するため)
+    private Vector3 pos;
 
-
-
+    // 位置調整用
+    private Vector3 offset = new Vector3(0, 10.0f, 8.0f);
 
     void Start()
     {
-        // GUI上のタグの座標を取得
-        myRect = GetComponent<RectTransform>();
-
-        targetPos = targetObj.transform.position;
-
+        pos.x = playerObj.transform.position.x;
+        pos.z = playerObj.transform.position.z;
     }
 
     void Update()
     {
-        // ターゲット座標を更新
-        targetPos = targetObj.transform.position;
+        pos.x = playerObj.transform.position.x;
+        pos.z = playerObj.transform.position.z;
 
-        // ターゲットの移動に伴って、GUI上の座標を更新
-        myRect.position
-            = RectTransformUtility.WorldToScreenPoint(Camera.main, targetPos + offset);
+        gameObject.transform.position = pos + offset;
+
     }
 }

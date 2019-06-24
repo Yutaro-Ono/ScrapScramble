@@ -5,7 +5,7 @@ using UnityEngine;
 public class ResultResource : MonoBehaviour
 {
     GameObject Player1;
-    int sco = 1000;
+    int sco = 2000;
     PlayerStatus script; 
     public GameObject Resource;
     float time = 0.1f;
@@ -16,7 +16,7 @@ public class ResultResource : MonoBehaviour
     }
     void ResourceGenerate()
     {
-        float x = Random.Range(-70, -60);
+        float x = Random.Range(-120, -110);
        
         time -= Time.deltaTime;
         if (time <= 0)
@@ -26,7 +26,7 @@ public class ResultResource : MonoBehaviour
             if (sco % 50 == 0&&sco>0)
             {
               
-                Vector3 CreatePoint = new Vector3(x,20,95);
+                Vector3 CreatePoint = new Vector3(x,20,135);
                 Instantiate(Resource, CreatePoint, Quaternion.identity);
                 sco -= 50;
             }

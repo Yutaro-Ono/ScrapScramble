@@ -108,6 +108,8 @@ public class PlayerMovememt : MonoBehaviour
                 chargePlayerStop = false;
                 chargeController = 0;
                 tackleReadyFlag = false;
+
+                tacklingFlag = true;
             }
         }
         if (!(Input.GetMouseButton(0) || input.GetTackleInput()))
@@ -227,10 +229,10 @@ public class PlayerMovememt : MonoBehaviour
                 lapseTime = 0.0f;
             }
 
-            //体当たり実行から二秒経過でchargeFlgを負に
+            //体当たり実行から二秒経過で体当たり中フラグを負に
             if (lapseTime >= 2)
             {
-                chargeFlg = false;
+                tacklingFlag = false;
                 tacklePower = 0;
             }
         }

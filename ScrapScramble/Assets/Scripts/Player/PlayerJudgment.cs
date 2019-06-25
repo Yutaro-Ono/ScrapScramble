@@ -61,7 +61,7 @@ public class PlayerJudgment : MonoBehaviour
      
         PlayerMovememt playerMove = GetComponent<PlayerMovememt>();
         PlayerStatus playerStatus = GetComponent<PlayerStatus>();
-        if (playerMove.chargeFlg == true)
+        if (playerMove.tacklingFlag == true)
         {
             
 

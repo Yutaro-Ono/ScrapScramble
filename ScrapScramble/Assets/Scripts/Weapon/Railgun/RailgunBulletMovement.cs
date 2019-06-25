@@ -7,6 +7,9 @@ public class RailgunBulletMovement : MonoBehaviour
     // 発射したプレイヤーのオブジェクト
     GameObject shooterPlayer;
 
+    // ヒットしたプレーヤーの情報を保存する
+    GameObject prevPlayerObj;
+
     //弾が進むスピード
     public float speed = 3.0f;
 
@@ -67,8 +70,20 @@ public class RailgunBulletMovement : MonoBehaviour
                 PlayerStatus status = other.GetComponent<PlayerStatus>();
                 Debug.Log("レールガンの弾がプレイヤーにヒット");
 
-                // ヒットカウントを進める
-                numHit++;
+                // 当たったプレーヤーの情報を保存
+                prevPlayerObj = other.gameObject;
+
+                if(numHit == 0)
+                {
+                    numHit++;
+                }
+
+                // 当たったのが同じプレーヤーでなければヒットカウントを進める
+                else if(prevPlayerObj != other.gameObject)
+                {
+                    // ヒットカウントを進める
+                    numHit++;
+                }
 
                 if (numHit >= maxHit)
                 {

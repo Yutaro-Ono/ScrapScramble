@@ -16,9 +16,6 @@ public class weaponIcon : MonoBehaviour
 
     public Image RailgunIcon;
 
-    // プレーヤーオブジェクト格納用
-    public GameObject playerObj;
-
     // ステータス格納用
     PlayerStatus status;
 
@@ -29,7 +26,7 @@ public class weaponIcon : MonoBehaviour
         GatlingIcon.enabled = false;
         RailgunIcon.enabled = false;
 
-        status = playerObj.GetComponent<PlayerStatus>();
+        status = this.GetComponent<PlayerStatus>();
 
     }
 

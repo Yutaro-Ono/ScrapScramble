@@ -148,6 +148,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2e35ff103dd5a40ac6d64482b364f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropObj: {fileID: 0}
+  isAttackable: 0
+  lapseTime: 0
 --- !u!114 &66546676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,6 +166,7 @@ MonoBehaviour:
   hammerIcon: {fileID: 0}
   GatlingIcon: {fileID: 0}
   RailgunIcon: {fileID: 0}
+  playerObj: {fileID: 0}
 --- !u!1 &116947740 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8334447350676948398, guid: 29fc3aeb8be99404898ccd3fe5332623,
@@ -201,6 +205,7 @@ MonoBehaviour:
   hammerIcon: {fileID: 133703616}
   GatlingIcon: {fileID: 16713967}
   RailgunIcon: {fileID: 1237550758}
+  playerObj: {fileID: 0}
 --- !u!114 &116947743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,6 +231,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2e35ff103dd5a40ac6d64482b364f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropObj: {fileID: 0}
+  isAttackable: 0
+  lapseTime: 0
 --- !u!114 &116947745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,7 +252,7 @@ MonoBehaviour:
   chargeController: 0
   chargePower: 0
   chargePlayerStop: 0
-  chargFlg: 0
+  chargeFlg: 0
   timeFlg: 0
 --- !u!65 &116947746
 BoxCollider:
@@ -481,6 +489,7 @@ MonoBehaviour:
   hammerIcon: {fileID: 0}
   GatlingIcon: {fileID: 0}
   RailgunIcon: {fileID: 0}
+  playerObj: {fileID: 0}
 --- !u!114 &301402300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -493,6 +502,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2e35ff103dd5a40ac6d64482b364f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropObj: {fileID: 0}
+  isAttackable: 0
+  lapseTime: 0
 --- !u!114 &301402302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1172,6 +1184,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2e35ff103dd5a40ac6d64482b364f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropObj: {fileID: 0}
+  isAttackable: 0
+  lapseTime: 0
 --- !u!114 &885798383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1187,6 +1202,7 @@ MonoBehaviour:
   hammerIcon: {fileID: 0}
   GatlingIcon: {fileID: 0}
   RailgunIcon: {fileID: 0}
+  playerObj: {fileID: 0}
 --- !u!1001 &924574786
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1321,6 +1337,7 @@ MonoBehaviour:
   hammerIcon: {fileID: 646495284}
   GatlingIcon: {fileID: 1364312061}
   RailgunIcon: {fileID: 611316217}
+  playerObj: {fileID: 0}
 --- !u!114 &952005258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1346,6 +1363,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2e35ff103dd5a40ac6d64482b364f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropObj: {fileID: 0}
+  isAttackable: 0
+  lapseTime: 0
 --- !u!114 &952005260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1364,7 +1384,7 @@ MonoBehaviour:
   chargeController: 0
   chargePower: 0
   chargePlayerStop: 0
-  chargFlg: 0
+  chargeFlg: 0
   timeFlg: 0
 --- !u!65 &952005261
 BoxCollider:
@@ -1768,6 +1788,7 @@ MonoBehaviour:
   hammerIcon: {fileID: 1897851530}
   GatlingIcon: {fileID: 1689396214}
   RailgunIcon: {fileID: 2107055220}
+  playerObj: {fileID: 0}
 --- !u!114 &1236286895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1793,6 +1814,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2e35ff103dd5a40ac6d64482b364f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropObj: {fileID: 0}
+  isAttackable: 0
+  lapseTime: 0
 --- !u!114 &1236286897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1811,7 +1835,7 @@ MonoBehaviour:
   chargeController: 0
   chargePower: 0
   chargePlayerStop: 0
-  chargFlg: 0
+  chargeFlg: 0
   timeFlg: 0
 --- !u!65 &1236286898
 BoxCollider:
@@ -1884,6 +1908,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnInterval: 2
+  enemySpawnPosY: 10
 --- !u!4 &1336240329
 Transform:
   m_ObjectHideFlags: 0
@@ -2259,6 +2284,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2e35ff103dd5a40ac6d64482b364f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropObj: {fileID: 0}
+  isAttackable: 0
+  lapseTime: 0
 --- !u!114 &1661761166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2274,6 +2302,7 @@ MonoBehaviour:
   hammerIcon: {fileID: 0}
   GatlingIcon: {fileID: 0}
   RailgunIcon: {fileID: 0}
+  playerObj: {fileID: 0}
 --- !u!114 &1689396214 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 795519341413093153, guid: 250eccd4eb9be184a88f35276768a07e,
@@ -2738,6 +2767,7 @@ MonoBehaviour:
   hammerIcon: {fileID: 947408538}
   GatlingIcon: {fileID: 1110359677}
   RailgunIcon: {fileID: 1483307603}
+  playerObj: {fileID: 0}
 --- !u!114 &2064371751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2763,6 +2793,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2e35ff103dd5a40ac6d64482b364f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropObj: {fileID: 0}
+  isAttackable: 0
+  lapseTime: 0
 --- !u!114 &2064371753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2781,7 +2814,7 @@ MonoBehaviour:
   chargeController: 0
   chargePower: 0
   chargePlayerStop: 0
-  chargFlg: 0
+  chargeFlg: 0
   timeFlg: 0
 --- !u!65 &2064371754
 BoxCollider:
@@ -3286,5 +3319,25 @@ PrefabInstance:
       propertyPath: playerObj
       value: 
       objectReference: {fileID: 1236286892}
+    - target: {fileID: 7381717632468473300, guid: f6927b97a97a14b429dc090531f7e3d5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7381717632688486399, guid: f6927b97a97a14b429dc090531f7e3d5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7381717633125079718, guid: f6927b97a97a14b429dc090531f7e3d5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7381717633341802537, guid: f6927b97a97a14b429dc090531f7e3d5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6927b97a97a14b429dc090531f7e3d5, type: 3}

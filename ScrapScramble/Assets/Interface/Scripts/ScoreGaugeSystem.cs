@@ -1,7 +1,7 @@
-﻿//
+﻿//------------------------------------------------------//
 // ScoreUIのFillメソッド管理
-//
-//
+//          GaugeUIにアタッチ
+//----------------------------------------------------//
 
 using System.Collections;
 using System.Collections.Generic;
@@ -13,6 +13,8 @@ public class ScoreGaugeSystem : MonoBehaviour
     public GameObject playerObj;
 
     PlayerStatus playerStatus;
+
+    float nextScore = 1000.0f;
 
     Image scoreGauge;
 
@@ -27,6 +29,33 @@ public class ScoreGaugeSystem : MonoBehaviour
     void Update()
     {
         scoreGauge = this.GetComponent<Image>();
-        scoreGauge.fillAmount = playerStatus.score / 1000;
+
+        // プレイヤーのスコアを参照し、ゲージを増減させる
+        scoreGauge.fillAmount = (float)playerStatus.score / nextScore;
+
+        //if (playerStatus.armedStage == 0)
+        //{
+        //    scoreGauge.fillAmount = (float)playerStatus.score / nextScore;
+        //}
+
+        //if (playerStatus.armedStage == 1)
+        //{
+        //    scoreGauge.fillAmount = (float)playerStatus.score / nextScore / 2.0f;
+        //}
+
+        //if (playerStatus.armedStage == 2)
+        //{
+        //    scoreGauge.fillAmount = (float)playerStatus.score / nextScore / 3.0f;
+        //}
+
+        //if (playerStatus.armedStage == 3)
+        //{
+        //    scoreGauge.fillAmount = (float)playerStatus.score / nextScore / 4.0f;
+        //}
+
+        //if (playerStatus.armedStage == 4)
+        //{
+        //    scoreGauge.fillAmount = (float)playerStatus.score / nextScore / 5.0f;
+        //}
     }
 }

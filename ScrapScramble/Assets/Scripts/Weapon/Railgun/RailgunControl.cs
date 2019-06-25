@@ -67,11 +67,13 @@ public class RailgunControl : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && droppedMode)
         {
             PlayerStatus status = other.GetComponent<PlayerStatus>();
 
             status.EquipWeapon(Weapon.Railgun);
+
+            Destroy(gameObject);
         }
     }
 }

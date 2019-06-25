@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   droppedMode: 1
-  droppedModeScale: {x: 0.8, y: 0.8, z: 0.8}
+  droppedModeScale: {x: 4, y: 4, z: 4}
   shootInterval: 3
 --- !u!65 &4537570717856627742
 BoxCollider:

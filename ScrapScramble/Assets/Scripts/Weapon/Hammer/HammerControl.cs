@@ -45,7 +45,12 @@ public class HammerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // コライダーの適宜切り替え
         obtainCollider.enabled = droppedMode;
+        if (droppedMode)
+        {
+            hitCollider.enabled = false;
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -68,15 +73,17 @@ public class HammerControl : MonoBehaviour
             //if (animator.GetBool(attackAnimScript.otherBoolName) && other.tag == "Player")
             if (other.tag == "Player")
             {
-                //ここにプレイヤー被ダメージ時の関数を呼ぶ
-                Debug.Log("ハンマー：プレイヤーにヒット");
+                // 当たったプレイヤーが装備者自身でなければダメージ処理
+                if (other.gameObject != transform.parent.gameObject)
+                {
+                    //ここにプレイヤー被ダメージ時の関数を呼ぶ
+                    Debug.Log("ハンマー：プレイヤーにヒット");
+                }
             }
 
             // エネミーに対しての判定
             else if (other.tag == "Enemy")
             {
-                Debug.Log("ハンマー：エネミーにヒット");
-
                 // 対象のステータスを取得
                 EnemyStatus status = other.GetComponent<EnemyStatus>();
                 if (status == null)
@@ -86,6 +93,8 @@ public class HammerControl : MonoBehaviour
 
                 // 敵にダメージ
                 status.hitPoint -= power;
+
+                Debug.Log("ハンマー：エネミーにヒット、残りHP" + status.hitPoint);
             }
 
             //コリジョンを無効にすることで一瞬だけ判定を行う

@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 7104591386017792455}
   - component: {fileID: 2608931753862015991}
   - component: {fileID: 6408939647370437395}
-  - component: {fileID: 8057534767543140618}
+  - component: {fileID: 6197949497196561722}
   m_Layer: 0
-  m_Name: Enemy's Bullet
+  m_Name: GatlingBullet
   m_TagString: BulletOfEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,7 +123,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &8057534767543140618
+--- !u!114 &6197949497196561722
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,8 +132,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7074245177704785701}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d97c5322abc3328489c4256f5b920168, type: 3}
+  m_Script: {fileID: 11500000, guid: d6aadd23f15f6f14fb22a865e00260c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  power: 1

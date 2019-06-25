@@ -24,7 +24,7 @@ public class PlayerStatus : MonoBehaviour
     public int armedStage = 0;
     const int armedStageLimit = 4;      // 巨大化の段階数
     // 次の巨大化までいくつの資源オブジェクトが必要か。
-    const int armedStageUpResourceMass = 10;
+    public const int armedStageUpResourceMass = 10;
     public short chargeAttackPower;
     bool getItem;
     bool nextBody;

@@ -153,18 +153,18 @@ public class PlayerMovememt : MonoBehaviour
             Attack();
         }
 
-        /*
-        moveX = Input.GetAxis("Horizontal"); //x方向のInputの値を取得
-        moveZ = Input.GetAxis("Vertical"); //z方向のInputの値を取得
-        */
+        
+        //moveX = Input.GetAxis("Horizontal"); //x方向のInputの値を取得
+        //moveZ = Input.GetAxis("Vertical"); //z方向のInputの値を取得
+
         // 移動操作の受付
-        /*
+
         // デバッグがしやすいようにパッドとキーボード両方の操作を受け付ける
         moveX = (input.GetHorizontalInput() + Input.GetAxis("Horizontal"));
         moveZ = (input.GetVerticalInput() + Input.GetAxis("Vertical"));
-        */
-        moveX = input.GetHorizontalInput();
-        moveZ = input.GetVerticalInput();
+
+        //moveX = input.GetHorizontalInput();
+        //moveZ = input.GetVerticalInput();
 
         // 移動操作の入力値をクランプ
         // パッドとキーボードの両対応のため、入力された値を足し合わせている

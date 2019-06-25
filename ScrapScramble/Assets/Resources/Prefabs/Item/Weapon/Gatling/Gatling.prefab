@@ -20221,7 +20221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootInterval: 0.1
   droppedMode: 1
-  droppedModeScale: {x: 0.8, y: 0.8, z: 0.8}
+  droppedModeScale: {x: 4, y: 4, z: 4}
 --- !u!1 &4135905509063233210
 GameObject:
   m_ObjectHideFlags: 0

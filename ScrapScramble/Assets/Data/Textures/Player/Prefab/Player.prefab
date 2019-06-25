@@ -92,14 +92,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a43707b8138a7e428b16bd4c783900c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 50
   atkSpeed: 200
+  tacklePower: 0
   lapseTime: 0
   chargeController: 0
   chargePower: 0
   chargePlayerStop: 0
   chargeFlg: 0
-  timeFlg: 0
+  tackleReadyFlag: 0
+  tacklingFlag: 0
 --- !u!114 &2070231447138582477
 MonoBehaviour:
   m_ObjectHideFlags: 0

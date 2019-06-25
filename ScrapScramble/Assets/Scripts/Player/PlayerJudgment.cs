@@ -69,7 +69,6 @@ public class PlayerJudgment : MonoBehaviour
             {
                 EnemyStatus eneStatus = other.gameObject.GetComponent<EnemyStatus>();
                 eneStatus.hitPoint -= (short)playerMove.tacklePower;
-                //Destroy(other.gameObject);
             }
          
         }

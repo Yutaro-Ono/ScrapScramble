@@ -18,8 +18,17 @@ public class EnemyManagerManagement : MonoBehaviour
     //スポーンしたエネミーに渡す
     GameObject resourcePrefab;
 
+    //各武器のプレハブデータ
+    //上と同じく
+    GameObject hammerPrefab;
+    GameObject gatlingPrefab;
+    GameObject railgunPrefab;
+
     //資源のプレハブのパス
     const string resourcePrefabPath = "Prefabs/Item/Resource/Resource";
+
+    //武器のプレハブデータを格納しているフォルダのディレクトリ
+    const string weaponPrefabFolderDirectory = "Prefabs/Item/Weapon/";
 
     //エネミーAIの停止
     public bool stopAIFlag = false;
@@ -28,6 +37,10 @@ public class EnemyManagerManagement : MonoBehaviour
     void Start()
     {
         resourcePrefab = (GameObject)Resources.Load(resourcePrefabPath);
+
+        hammerPrefab = (GameObject)Resources.Load(weaponPrefabFolderDirectory + "Hammer/Hammer");
+        gatlingPrefab = (GameObject)Resources.Load(weaponPrefabFolderDirectory + "Gatling/Gatling");
+        railgunPrefab = (GameObject)Resources.Load(weaponPrefabFolderDirectory + "Railgun/Railgun");
     }
 
     // Update is called once per frame
@@ -63,6 +76,12 @@ public class EnemyManagerManagement : MonoBehaviour
         }
 
         //ドロップする資源、武器のプレハブデータ格納
+        // 資源
         drop.SetResourcePrefab(resourcePrefab);
+
+        //武器
+        drop.SetHammerPrefab(hammerPrefab);
+        drop.SetGatlingPrefab(gatlingPrefab);
+        drop.SetRailgunPrefab(gatlingPrefab);
     }
 }

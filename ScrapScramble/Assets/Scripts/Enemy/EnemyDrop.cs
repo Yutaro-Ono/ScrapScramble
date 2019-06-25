@@ -37,7 +37,7 @@ public class EnemyDrop : MonoBehaviour
     GameObject railgunPrefab;
 
     //武器格納
-    public GameObject[]weaponPrefeb;
+    //public GameObject[]weaponPrefeb;
 
     // Start is called before the first frame update
     void Start()
@@ -156,9 +156,29 @@ public class EnemyDrop : MonoBehaviour
     //武器をドロップ
     public void DropWeapon()
     {
-        GameObject dropWepon = weaponPrefeb[Random.Range(0, weaponPrefeb.Length)];
+        Weapon drop = (Weapon)Random.Range((int)Weapon.Hammer, (int)Weapon.Invalid);
 
-        Instantiate(dropWepon, transform.position + Vector3.up, Quaternion.identity);
+        GameObject dropObjPrefab;
+        switch(drop)
+        {
+            case Weapon.Hammer:
+                dropObjPrefab = hammerPrefab;
+                break;
+
+            case Weapon.Gatling:
+                dropObjPrefab = gatlingPrefab;
+                break;
+
+            case Weapon.Railgun:
+                dropObjPrefab = railgunPrefab;
+                break;
+
+            default:
+                Debug.Log("エラー");
+                return;
+        }
+
+        Instantiate(dropObjPrefab, gameObject.transform.position + Vector3.up, Quaternion.identity);
     }
     //各武器のプレハブデータのセッターを一つの関数にまとめて使いやすく
     //ふと「これ、いる？」と思ったのでとりあえずコメント化

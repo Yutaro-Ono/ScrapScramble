@@ -140,7 +140,6 @@ public class PlayerMovememt : MonoBehaviour
         }
         else
         {
-
             moveFlg = false;
         }
     }
@@ -158,13 +157,13 @@ public class PlayerMovememt : MonoBehaviour
         //moveZ = Input.GetAxis("Vertical"); //z方向のInputの値を取得
 
         // 移動操作の受付
-
+        /*
         // デバッグがしやすいようにパッドとキーボード両方の操作を受け付ける
         moveX = (input.GetHorizontalInput() + Input.GetAxis("Horizontal"));
         moveZ = (input.GetVerticalInput() + Input.GetAxis("Vertical"));
-
-        //moveX = input.GetHorizontalInput();
-        //moveZ = input.GetVerticalInput();
+        */
+        moveX = input.GetHorizontalInput();
+        moveZ = input.GetVerticalInput();
 
         // 移動操作の入力値をクランプ
         // パッドとキーボードの両対応のため、入力された値を足し合わせている
@@ -324,7 +323,7 @@ public class PlayerMovememt : MonoBehaviour
         }
 
         // 資源の減算
-        status.score -= (int)(dropMass * ResourceCollision.pointAddition);
+        status.score -= (int)(dropMass * ResourceCollision.pointAddition) * 2;
 
         return dropMass;
     }

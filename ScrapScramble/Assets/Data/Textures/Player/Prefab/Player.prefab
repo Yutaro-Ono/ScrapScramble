@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2070231447138582477}
   - component: {fileID: 5285382701883947360}
   - component: {fileID: 2611237456323759676}
+  - component: {fileID: 7412779095273335527}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -146,6 +147,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13da8eb231411d9469c2ba987fe30545, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7412779095273335527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908218819157281842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5183475fa6442c4db608aa8e17b2b95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hammerIcon: {fileID: 0}
+  GatlingIcon: {fileID: 0}
+  RailgunIcon: {fileID: 0}
 --- !u!1001 &4640609691013105853
 PrefabInstance:
   m_ObjectHideFlags: 0

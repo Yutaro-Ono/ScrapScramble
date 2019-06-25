@@ -143,7 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitCollider: {fileID: 2850275662959946040}
   obtainCollider: {fileID: 7671741389575801871}
-  droppedMode: 0
+  droppedMode: 1
   droppedModeScale: {x: 0.5, y: 0.5, z: 0.5}
   power: 3
 --- !u!1 &1179144249897207867

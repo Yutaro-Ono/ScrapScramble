@@ -74,7 +74,7 @@ public class HammerControl : MonoBehaviour
             if (other.tag == "Player")
             {
                 // 当たったプレイヤーが装備者自身でなければダメージ処理
-                if (other.gameObject != transform.parent.gameObject)
+                if (other.gameObject != transform.parent.parent.gameObject)
                 {
                     //ここにプレイヤー被ダメージ時の関数を呼ぶ
                     Debug.Log("ハンマー：プレイヤーにヒット");

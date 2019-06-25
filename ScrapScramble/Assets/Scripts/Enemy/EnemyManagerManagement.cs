@@ -82,6 +82,6 @@ public class EnemyManagerManagement : MonoBehaviour
         //武器
         drop.SetHammerPrefab(hammerPrefab);
         drop.SetGatlingPrefab(gatlingPrefab);
-        drop.SetRailgunPrefab(gatlingPrefab);
+        drop.SetRailgunPrefab(railgunPrefab);
     }
 }

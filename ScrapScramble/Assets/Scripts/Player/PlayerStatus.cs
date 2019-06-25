@@ -29,6 +29,9 @@ public class PlayerStatus : MonoBehaviour
     bool getItem;
     bool nextBody;
 
+    // 次の巨大化段階までどのくらいのスコアが必要か
+    public const int armedStageUpScore = armedStageUpResourceMass * ResourceCollision.pointAddition;
+
     float initialScale;
 
     void Start()

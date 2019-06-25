@@ -62,7 +62,7 @@ public class GatlingControl : MonoBehaviour
 
             //発射したプレイヤーが誰か教える
             GatlingBulletMovement bulletScript = instance.GetComponent<GatlingBulletMovement>();
-            bulletScript.SetShooterPlayer(transform.parent.gameObject);
+            bulletScript.SetShooterPlayer(transform.parent.parent.gameObject);
 
             //タイマーを0秒にリセット
             shootTimer = 0.0f;

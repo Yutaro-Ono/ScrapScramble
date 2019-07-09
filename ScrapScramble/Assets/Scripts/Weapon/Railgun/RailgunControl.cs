@@ -15,7 +15,7 @@ public class RailgunControl : MonoBehaviour
     Transform shootPoint;
 
     //発射間隔。一発撃ってから次撃てるようになるまでの秒数。
-    public float shootInterval = 3.0f;
+    public float shootInterval = 2.0f;
 
     float shootTimer;
 
@@ -50,6 +50,12 @@ public class RailgunControl : MonoBehaviour
         {
             Attack();
         }
+    }
+
+    private void OnEnable()
+    {
+        // クールタイム初期化
+        shootTimer = shootInterval;
     }
 
     public void Attack()

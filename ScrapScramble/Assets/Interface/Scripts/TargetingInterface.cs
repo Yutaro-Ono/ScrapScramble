@@ -15,7 +15,7 @@ public class TargetingInterface : MonoBehaviour
     private Vector3 pos;
 
     // 位置調整用
-    private Vector3 offset = new Vector3(0, 10.0f, 8.0f);
+    private Vector3 offset = new Vector3(0, 30.0f, 18.0f);
 
     void Start()
     {

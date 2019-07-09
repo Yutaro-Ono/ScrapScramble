@@ -53,6 +53,12 @@ public class HammerControl : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        // ハンマー本体の回転の初期化
+        hitCollider.gameObject.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (droppedMode)
@@ -76,7 +82,9 @@ public class HammerControl : MonoBehaviour
                 // 当たったプレイヤーが装備者自身でなければダメージ処理
                 if (other.gameObject != transform.parent.parent.gameObject)
                 {
-                    //ここにプレイヤー被ダメージ時の関数を呼ぶ
+                    PlayerMovememt move = other.GetComponent<PlayerMovememt>();
+                    move.DropResource((uint)power);
+                    
                     Debug.Log("ハンマー：プレイヤーにヒット");
                 }
             }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.3529284, g: 0.5736776, b: 0.8686604, a: 1}
+  m_IndirectSpecularColor: {r: 0.35280895, g: 0.57363033, b: 0.8686661, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1197,6 +1197,21 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6330359070627677103, guid: f6927b97a97a14b429dc090531f7e3d5,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6330359070627677103, guid: f6927b97a97a14b429dc090531f7e3d5,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6330359070627677103, guid: f6927b97a97a14b429dc090531f7e3d5,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4785601836842665795, guid: f6927b97a97a14b429dc090531f7e3d5,
         type: 3}
       propertyPath: playerObj
@@ -1420,8 +1435,8 @@ MonoBehaviour:
   m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
+  m_HorizontalAxis: Hoge
+  m_VerticalAxis: Voge
   m_SubmitButton: Submit
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
@@ -1474,6 +1489,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaveManager
       objectReference: {fileID: 0}
+    - target: {fileID: 54047350397341485, guid: ef84db157c77fc64fb722378c0b6b941,
+        type: 3}
+      propertyPath: timerText
+      value: 
+      objectReference: {fileID: 323982851}
+    - target: {fileID: 54047350397341485, guid: ef84db157c77fc64fb722378c0b6b941,
+        type: 3}
+      propertyPath: waveText
+      value: 
+      objectReference: {fileID: 1361379584}
     - target: {fileID: 54047350397341484, guid: ef84db157c77fc64fb722378c0b6b941,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1529,16 +1554,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 54047350397341485, guid: ef84db157c77fc64fb722378c0b6b941,
-        type: 3}
-      propertyPath: timerText
-      value: 
-      objectReference: {fileID: 323982851}
-    - target: {fileID: 54047350397341485, guid: ef84db157c77fc64fb722378c0b6b941,
-        type: 3}
-      propertyPath: waveText
-      value: 
-      objectReference: {fileID: 1361379584}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef84db157c77fc64fb722378c0b6b941, type: 3}
 --- !u!1001 &7095185481589555068

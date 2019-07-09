@@ -65,7 +65,8 @@ public class PlayerMovememt : MonoBehaviour
     {
         if (finishedCoolTimeFlg == true)
         {
-            if (Input.GetMouseButton(0) || input.GetTackleInput())
+            //if (Input.GetMouseButton(0) || input.GetTackleInput())
+            if (input.GetTackleInput())
             {
                 chargeController += Time.deltaTime;
                 chargePower++;
@@ -165,6 +166,7 @@ public class PlayerMovememt : MonoBehaviour
         moveX = input.GetHorizontalInput();
         moveZ = input.GetVerticalInput();
 
+        /*
         // 移動操作の入力値をクランプ
         // パッドとキーボードの両対応のため、入力された値を足し合わせている
         // したがって大きすぎる値は調整しなければならない
@@ -188,6 +190,7 @@ public class PlayerMovememt : MonoBehaviour
                 moveZ = -1.0f;
             }
         }
+        */
 
         {
             Vector3 diff = transform.position - Player_pos;               //プレイヤーがどの方向に進んでいるかがわかるように、初期位置と現在地の座標差分を取得
@@ -292,7 +295,7 @@ public class PlayerMovememt : MonoBehaviour
             GameObject[] resource = new GameObject[dropMass];
             for (int i = 0; i < dropMass; i++)
             {
-                resource[i] = GameObject.Instantiate(resourcePrefab, gameObject.transform.position, Quaternion.identity);
+                resource[i] = GameObject.Instantiate(resourcePrefab, gameObject.transform.position + new Vector3(0, 50, 0), Quaternion.identity);
             }
 
             //資源を物理的に飛ばすため、資源ゲームオブジェクトのリジッドボディを取得

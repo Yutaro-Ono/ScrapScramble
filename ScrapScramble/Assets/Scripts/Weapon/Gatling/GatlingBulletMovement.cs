@@ -71,6 +71,8 @@ public class GatlingBulletMovement : MonoBehaviour
             EnemyStatus status = other.GetComponent<EnemyStatus>();
 
             status.hitPoint -= (short)power;
+
+            Destroy(gameObject);
         }
     }
 

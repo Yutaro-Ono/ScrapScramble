@@ -36,11 +36,7 @@ public class ChargeGauge : MonoBehaviour
     {
         CheckChargeValue();
 
-        if (drawGaugeFlg == true)
-        {
-            DrawGauge();
-        }
-
+        DrawGauge();
     }
 
     // PlayerMovementクラスのチャージ関係の変数を監視する

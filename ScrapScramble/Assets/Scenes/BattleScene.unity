@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.35280895, g: 0.57363033, b: 0.8686661, a: 1}
+  m_IndirectSpecularColor: {r: 0.3529284, g: 0.5736776, b: 0.8686604, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1242,6 +1242,41 @@ PrefabInstance:
       propertyPath: playerObj
       value: 
       objectReference: {fileID: 29292116}
+    - target: {fileID: 2064749356, guid: f6927b97a97a14b429dc090531f7e3d5, type: 3}
+      propertyPath: playerObj
+      value: 
+      objectReference: {fileID: 2068370303}
+    - target: {fileID: 438298749, guid: f6927b97a97a14b429dc090531f7e3d5, type: 3}
+      propertyPath: playerObj
+      value: 
+      objectReference: {fileID: 2068370303}
+    - target: {fileID: 806062090027028859, guid: f6927b97a97a14b429dc090531f7e3d5,
+        type: 3}
+      propertyPath: playerObj
+      value: 
+      objectReference: {fileID: 29292116}
+    - target: {fileID: 152519654, guid: f6927b97a97a14b429dc090531f7e3d5, type: 3}
+      propertyPath: playerObj
+      value: 
+      objectReference: {fileID: 29292116}
+    - target: {fileID: 8217991190577612581, guid: f6927b97a97a14b429dc090531f7e3d5,
+        type: 3}
+      propertyPath: playerObj
+      value: 
+      objectReference: {fileID: 699836144}
+    - target: {fileID: 1250149622, guid: f6927b97a97a14b429dc090531f7e3d5, type: 3}
+      propertyPath: playerObj
+      value: 
+      objectReference: {fileID: 699836144}
+    - target: {fileID: 530195566384404503, guid: f6927b97a97a14b429dc090531f7e3d5,
+        type: 3}
+      propertyPath: playerObj
+      value: 
+      objectReference: {fileID: 1234209211}
+    - target: {fileID: 117125074, guid: f6927b97a97a14b429dc090531f7e3d5, type: 3}
+      propertyPath: playerObj
+      value: 
+      objectReference: {fileID: 1234209211}
     m_RemovedComponents:
     - {fileID: 1301627158458382984, guid: f6927b97a97a14b429dc090531f7e3d5, type: 3}
     - {fileID: 1301627159193319489, guid: f6927b97a97a14b429dc090531f7e3d5, type: 3}

@@ -13,7 +13,7 @@ public class FadeSprite : MonoBehaviour
 
     private bool alphaSwitch;              
 
-    public Image spriteObject;        // Sprite画像格納用
+    Image spriteImg;        // Sprite画像格納用
 
     // フェード処理の種類
     public enum FadeType
@@ -30,7 +30,7 @@ public class FadeSprite : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        spriteImg = this.GetComponent<Image>();
     }
 
     // Update is called once per frame
@@ -69,7 +69,7 @@ public class FadeSprite : MonoBehaviour
 
     void SetAlpha()
     {
-        spriteObject.color = new Color(255, 255, 255, alpha);
+        spriteImg.color = new Color(255, 255, 255, alpha);
     }
 
 }

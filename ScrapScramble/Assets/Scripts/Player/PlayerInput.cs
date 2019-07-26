@@ -24,26 +24,32 @@ public class PlayerInput : MonoBehaviour
         tackleInputName = "Tackle" + id;
         weaponAttackInputName = "WeaponAttack" + id;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     public float GetHorizontalInput()
     {
-        return Input.GetAxis(horizontalInputName);
+        float ret = Input.GetAxis(horizontalInputName);
+        if (ret != 0)
+        {
+            Debug.Log(horizontalInputName + ":" + ret);
+        }
+        return ret;
     }
 
     public float GetVerticalInput()
     {
-        return Input.GetAxis(verticalInputName);
+        float ret = Input.GetAxis(verticalInputName);
+        if (ret != 0)
+        {
+            Debug.Log(verticalInputName + ":" + ret);
+        }
+        return ret;
     }
 
     public bool GetTackleInput()
     {
-        return Input.GetButton(tackleInputName);
+        bool ret = Input.GetButton(tackleInputName);
+        Debug.Log(tackleInputName + ":" + ret);
+        return ret;
     }
 
     public bool GetTackleInputUp()
@@ -53,6 +59,8 @@ public class PlayerInput : MonoBehaviour
 
     public bool GetWeaponAttackInput()
     {
-        return Input.GetButton(weaponAttackInputName);
+        bool ret = Input.GetButton(weaponAttackInputName);
+        Debug.Log(weaponAttackInputName + ":" + ret);
+        return ret;
     }
 }

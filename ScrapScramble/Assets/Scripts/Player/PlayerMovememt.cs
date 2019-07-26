@@ -11,7 +11,7 @@ public class PlayerMovememt : MonoBehaviour
     public float atkSpeed;               //プレーヤーの攻撃スピード
     public int tacklePower;             //体当たりで与えるダメージ値
     Vector3 Player_pos;                  //プレイヤーのポジション
-    private float moveX = 0f;            //x方向のImputの値
+    private float moveX = 0f;            //x方向のInputの値
     private float moveZ = 0f;            //z方向のInputの値
     public float lapseTime;              //チャージ攻撃のクールタイム
     Rigidbody rb;
@@ -165,6 +165,10 @@ public class PlayerMovememt : MonoBehaviour
         */
         moveX = input.GetHorizontalInput();
         moveZ = input.GetVerticalInput();
+        if (moveX != 0 || moveZ != 0)
+        {
+            Debug.Log("Player" + (status.GetId() + 1) + "に移動操作が入力された。");
+        }
 
         /*
         // 移動操作の入力値をクランプ

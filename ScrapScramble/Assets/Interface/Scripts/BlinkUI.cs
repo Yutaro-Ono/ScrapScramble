@@ -22,7 +22,7 @@ public class BlinkUI : MonoBehaviour
     // Alpha値を更新してColorを返す
     public Color GetAlphaColor(Color color)
     {
-        color.a = Mathf.Sin(time) * 0.5f + 0.5f;
+        color.a = Mathf.Sin(time) * 0.4f + 0.7f;
 
         return color;
     }

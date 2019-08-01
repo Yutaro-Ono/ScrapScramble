@@ -711,7 +711,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: aa786db5c07d73e4daeb4710c6960193, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e50f3063c86efed4fb524df97bc75291, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -735,6 +735,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1262147028}
     m_Modifications:
+    - target: {fileID: 6996618062329517590, guid: 24ec4c8d7f3197942a62b016fdca4895,
+        type: 3}
+      propertyPath: m_Name
+      value: Player_4
+      objectReference: {fileID: 0}
     - target: {fileID: 2044766094091926136, guid: 24ec4c8d7f3197942a62b016fdca4895,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -789,11 +794,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6996618062329517590, guid: 24ec4c8d7f3197942a62b016fdca4895,
-        type: 3}
-      propertyPath: m_Name
-      value: Player_4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24ec4c8d7f3197942a62b016fdca4895, type: 3}
@@ -910,6 +910,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1262147028}
     m_Modifications:
+    - target: {fileID: 808349636310152191, guid: 4be66dd997501c04ea96b0dd6c0ca3e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Player_1
+      objectReference: {fileID: 0}
     - target: {fileID: 109870145598063958, guid: 4be66dd997501c04ea96b0dd6c0ca3e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -964,11 +969,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 808349636310152191, guid: 4be66dd997501c04ea96b0dd6c0ca3e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Player_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4be66dd997501c04ea96b0dd6c0ca3e4, type: 3}
@@ -1304,6 +1304,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1262147028}
     m_Modifications:
+    - target: {fileID: 8334447350676948398, guid: 29fc3aeb8be99404898ccd3fe5332623,
+        type: 3}
+      propertyPath: m_Name
+      value: Player_2
+      objectReference: {fileID: 0}
     - target: {fileID: 843619913, guid: 29fc3aeb8be99404898ccd3fe5332623, type: 3}
       propertyPath: m_LocalPosition.x
       value: 22
@@ -1347,11 +1352,6 @@ PrefabInstance:
     - target: {fileID: 843619913, guid: 29fc3aeb8be99404898ccd3fe5332623, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8334447350676948398, guid: 29fc3aeb8be99404898ccd3fe5332623,
-        type: 3}
-      propertyPath: m_Name
-      value: Player_2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29fc3aeb8be99404898ccd3fe5332623, type: 3}

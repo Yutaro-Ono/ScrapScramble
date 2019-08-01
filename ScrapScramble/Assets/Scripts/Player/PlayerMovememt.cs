@@ -32,6 +32,12 @@ public class PlayerMovememt : MonoBehaviour
     // ドロップ時に資源を放る強さ
     const float dropAddForceStlength = 500.0f;
 
+    // 通常時のレイヤー名
+    const string normalLayerName = "PlayerLayer";
+
+    // 体当たり中のレイヤー名
+    const string tacklingLayerName = "TacklingPlayerLayer";
+
     private void Start()
     {
         status = GetComponent<PlayerStatus>();
@@ -270,7 +276,8 @@ public class PlayerMovememt : MonoBehaviour
             ChangDrag();
         }
 
-
+        // レイヤーの更新
+        gameObject.layer = LayerMask.NameToLayer((tacklingFlag) ? tacklingLayerName : normalLayerName);
     }
 
     // dropMass->排出する資源オブジェクトの個数

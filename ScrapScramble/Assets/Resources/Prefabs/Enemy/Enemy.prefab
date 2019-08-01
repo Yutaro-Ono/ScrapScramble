@@ -45,8 +45,7 @@ GameObject:
   - component: {fileID: 4596688287290933845}
   - component: {fileID: 2879519906808625733}
   - component: {fileID: 6898684111606523803}
-  - component: {fileID: 3690736539765187387}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -158,18 +157,6 @@ MonoBehaviour:
   stopAIFlag: 0
   targetingSeconds: 3
   shootWaitingTime: 1
---- !u!114 &3690736539765187387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8587845608178356823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db31bbaf3dc449f4484d902ae19708a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &9125420450887747526
 PrefabInstance:
   m_ObjectHideFlags: 0

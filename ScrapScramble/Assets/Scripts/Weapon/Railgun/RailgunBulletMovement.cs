@@ -121,4 +121,9 @@ public class RailgunBulletMovement : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void SetShooterPlayer(GameObject in_shooterPlayer)
+    {
+        this.shooterPlayer = in_shooterPlayer;
+    }
 }

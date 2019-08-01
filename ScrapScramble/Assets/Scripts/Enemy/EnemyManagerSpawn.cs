@@ -23,8 +23,8 @@ public class EnemyManagerSpawn : MonoBehaviour
     //完全ランダムで行動パターンを定めるなら不要
     int spawnNum = 0;
     
-    //スポーンした時間
-    float timeFromLastSpawn;
+    //スポーンタイマー
+    float spawnTimer;
 
     //スポーン間隔
     public float spawnInterval = 2.0f;
@@ -63,18 +63,30 @@ public class EnemyManagerSpawn : MonoBehaviour
         prefab = (GameObject)Resources.Load(prefabPath);
 
         //タイマー設定
-        timeFromLastSpawn = WaveManagement.limitTime + spawnInterval;
+        spawnTimer = spawnInterval;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //条件を満たしたらマネージャーの子にエネミーを生成
-        //現在はデバッグ的にコマンド入力でスポーン
-        //if (Input.GetKeyDown(KeyCode.I) && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
+        // タイマーの更新
+        if (waveManager.wave == WaveManagement.WAVE_NUM.WAVE_1_PVE || waveManager.wave == WaveManagement.WAVE_NUM.WAVE_3_PVE)
+        {
+            spawnTimer += Time.deltaTime;
+        }
+        else
+        {
+            spawnTimer = spawnInterval;
+        }
+
+        // エネミー排出停止フラグが立っているときはこの先を実行しない。
+        if (enemyManagerManagement.stopSpawnFlag)
+        {
+            return;
+        }
 
         //特定ウェーブ　＆＆　最後のスポーンから一定時間経過でマネージャーの子にエネミーを生成
-        if ((waveManager.wave == WaveManagement.WAVE_NUM.WAVE_1_PVE || waveManager.wave == WaveManagement.WAVE_NUM.WAVE_3_PVE) && timeFromLastSpawn - waveManager.timer >= spawnInterval)
+        if ((waveManager.wave == WaveManagement.WAVE_NUM.WAVE_1_PVE || waveManager.wave == WaveManagement.WAVE_NUM.WAVE_3_PVE) && spawnTimer >= spawnInterval)
         {
             //エネミーの行動パターンをランダム設定。キャストとかの関係でちょっと読みづらいかも
             spawnEnemyPattern = (EnemyPattern)Random.Range((int)EnemyPattern.PatternA, (int)EnemyPattern.Invalid);
@@ -94,12 +106,8 @@ public class EnemyManagerSpawn : MonoBehaviour
             //スポーン回数の記録
             spawnNum++;
 
-            //スポーン時間の記録
-            timeFromLastSpawn = waveManager.timer;
-        }
-        else if (waveManager.wave == WaveManagement.WAVE_NUM.WAVE_INTERVAL)
-        {
-            timeFromLastSpawn = WaveManagement.limitTime + spawnInterval;
+            //スポーンタイマーのリセット
+            spawnTimer = 0.0f;
         }
     }
 }

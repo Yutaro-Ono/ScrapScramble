@@ -82,7 +82,7 @@ public class HammerControl : MonoBehaviour
                 // 当たったプレイヤーが装備者自身でなければダメージ処理
                 if (other.gameObject != transform.parent.parent.gameObject)
                 {
-                    PlayerMovememt move = other.GetComponent<PlayerMovememt>();
+                    PlayerMovement move = other.GetComponent<PlayerMovement>();
                     move.DropResource((uint)power);
                     
                     Debug.Log("ハンマー：プレイヤーにヒット");

@@ -50,7 +50,7 @@ public class GatlingBulletMovement : MonoBehaviour
             if (other.gameObject != shooterPlayer)
             {
                 {
-                    PlayerMovememt move = other.GetComponent<PlayerMovememt>();
+                    PlayerMovement move = other.GetComponent<PlayerMovement>();
                     if (!move)
                     {
                         Debug.Log("ガトリング弾：プレイヤーの資源のドロップに失敗");

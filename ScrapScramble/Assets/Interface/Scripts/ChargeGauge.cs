@@ -42,7 +42,7 @@ public class ChargeGauge : MonoBehaviour
     // PlayerMovementクラスのチャージ関係の変数を監視する
     void CheckChargeValue()
     {
-        PlayerMovememt moveScript = playerObj.GetComponent<PlayerMovememt>();
+        PlayerMovement moveScript = playerObj.GetComponent<PlayerMovement>();
 
         drawGaugeFlg = moveScript.chargeFlg;
 

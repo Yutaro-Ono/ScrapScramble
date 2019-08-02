@@ -59,7 +59,7 @@ public class PlayerJudgment : MonoBehaviour
     void OnCollisionEnter(Collision other)
     {
      
-        PlayerMovememt playerMove = GetComponent<PlayerMovememt>();
+        PlayerMovement playerMove = GetComponent<PlayerMovement>();
         PlayerStatus playerStatus = GetComponent<PlayerStatus>();
         if (playerMove.tacklingFlag == true)
         {

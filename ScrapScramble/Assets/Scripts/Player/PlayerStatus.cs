@@ -73,7 +73,7 @@ public class PlayerStatus : MonoBehaviour
 
     void ChargeAttack()
     {
-        PlayerMovememt moveScript = GetComponent<PlayerMovememt>();
+        PlayerMovement moveScript = GetComponent<PlayerMovement>();
         if (moveScript.chargePower <= 100)
         {
             chargeAttackPower = moveScript.chargePower;

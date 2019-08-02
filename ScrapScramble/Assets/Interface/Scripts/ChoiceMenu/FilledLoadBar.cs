@@ -34,7 +34,7 @@ public class FilledLoadBar : MonoBehaviour
         {
             if(nowHoldTime <= maxHoldTime)
             {
-                nowHoldTime += 1.0f * Time.deltaTime;
+                nowHoldTime += 1.5f * Time.deltaTime;
             }
         }
         else if(nowHoldTime < maxHoldTime && nowHoldTime > 0.0f)

@@ -678,6 +678,7 @@ GameObject:
   - component: {fileID: 602332025}
   - component: {fileID: 602332027}
   - component: {fileID: 602332026}
+  - component: {fileID: 602332028}
   m_Layer: 5
   m_Name: Title_Logo
   m_TagString: Untagged
@@ -699,10 +700,10 @@ RectTransform:
   m_Father: {fileID: 800422761}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 287}
-  m_SizeDelta: {x: -1818, y: -980}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -253}
+  m_SizeDelta: {x: 102, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &602332026
 MonoBehaviour:
@@ -741,6 +742,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 602332024}
   m_CullTransparentMesh: 0
+--- !u!95 &602332028
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602332024}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 624b51cb72cd171458adfb7800fd7300, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &716383453
 GameObject:
   m_ObjectHideFlags: 0
@@ -1442,6 +1462,7 @@ GameObject:
   - component: {fileID: 1822372861}
   - component: {fileID: 1822372860}
   - component: {fileID: 1822372862}
+  - component: {fileID: 1822372863}
   m_Layer: 5
   m_Name: PushButton_Window
   m_TagString: Untagged
@@ -1458,7 +1479,7 @@ RectTransform:
   m_GameObject: {fileID: 1822372858}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 8, y: 1.3, z: 1}
+  m_LocalScale: {x: 8, y: 0.05, z: 1}
   m_Children:
   - {fileID: 1277277184}
   - {fileID: 381548066}
@@ -1519,6 +1540,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4c82a4d89949df4ea2f2ae461bb92e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1822372863
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1822372858}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 910fb331c5ea4104599706afda2f6d44, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &2097560796
 PrefabInstance:
   m_ObjectHideFlags: 0

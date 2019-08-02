@@ -14,8 +14,15 @@ public class FilledLoadBar : MonoBehaviour
     // 現在の長押し時間
     float nowHoldTime;
 
+    GameObject sceneManager;
+
+    ChoiceMenuSceneController scene;
+
     void Start()
     {
+        sceneManager = GameObject.Find("SceneManager");
+        scene = sceneManager.GetComponent<ChoiceMenuSceneController>();
+
         loadBar = GetComponent<Image>();
         nowHoldTime = 0.0f;
     }
@@ -29,12 +36,19 @@ public class FilledLoadBar : MonoBehaviour
             {
                 nowHoldTime += 1.0f * Time.deltaTime;
             }
-            // ロードゲージ描画
-            loadBar.fillAmount = nowHoldTime / maxHoldTime;
         }
-        else if(nowHoldTime < maxHoldTime)
+        else if(nowHoldTime < maxHoldTime && nowHoldTime > 0.0f)
         {
-            nowHoldTime = 0.0f;
+            nowHoldTime -= 1.0f * Time.deltaTime;
+        }
+
+        // ロードゲージ描画
+        loadBar.fillAmount = nowHoldTime / maxHoldTime;
+
+        // ロードバーが十分だったら次のシーンへ
+        if (nowHoldTime >= maxHoldTime)
+        {
+            scene.SceneTransition(4);
         }
     }
 }

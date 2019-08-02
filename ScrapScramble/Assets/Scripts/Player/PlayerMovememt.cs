@@ -15,7 +15,7 @@ public class PlayerMovememt : MonoBehaviour
     private float moveZ = 0f;            //z方向のInputの値
     public float lapseTime;              //チャージ攻撃のクールタイム
     Rigidbody rb;
-    public float chargeController;       //溜時間
+    public float chargeTimer;       //溜時間
     public short chargePower;              //溜め時間での攻撃力変動
     bool finishedCoolTimeFlg;                    //クールタイムのフラグ
     public bool chargePlayerStop;        //プレーヤーが止まっているかどうか
@@ -74,7 +74,7 @@ public class PlayerMovememt : MonoBehaviour
             //if (Input.GetMouseButton(0) || input.GetTackleInput())
             if (input.GetTackleInput())
             {
-                chargeController += Time.deltaTime;
+                chargeTimer += Time.deltaTime;
                 chargePower++;
                 chargePlayerStop = true;
                 chargeFlg = true;
@@ -91,7 +91,7 @@ public class PlayerMovememt : MonoBehaviour
         // 0.5秒につき1ダメージ増加し、3秒で最大ダメージ値に
         for (int i = 0; i < (3.0f / 0.5f); i++)
         {
-            if (chargeController >= 0.5f * (i + 1))
+            if (chargeTimer >= 0.5f * (i + 1))
             {
                 tacklePower = (short)(i + 1);
             }
@@ -106,24 +106,33 @@ public class PlayerMovememt : MonoBehaviour
             if (Input.GetMouseButtonUp(0) || input.GetTackleInputUp())
 
             {
-                rb.AddForce(transform.TransformDirection(Vector3.forward) * chargeController * tackleForceScalar, ForceMode.Impulse);
+                rb.AddForce(transform.TransformDirection(Vector3.forward) * chargeTimer * tackleForceScalar, ForceMode.Impulse);
 
                 // わずかにしか動かなかったタックルでクールタイムを取られるのは不憫なので、
                 // 一定秒数未満のチャージしか行わなかった場合、クールタイムを免除する
-                finishedCoolTimeFlg = (chargeController < 0.5f);
+                finishedCoolTimeFlg = (chargeTimer < 0.5f);
 
                 chargePlayerStop = false;
-                chargeController = 0;
+                chargeTimer = 0;
                 tackleReadyFlag = false;
 
-                tacklingFlag = true;
+                // クールタイムを課せられるほどチャージしていた場合は体当たりフラグを真に
+                if (!finishedCoolTimeFlg)
+                {
+                    tacklingFlag = true;
+                }
+                // わずかにしか動けないほどのチャージしかしていなかった場合は、体当たり中とみなさない
+                else
+                {
+                    tacklingFlag = false;
+                }
             }
         }
         if (!(Input.GetMouseButton(0) || input.GetTackleInput()))
         {
 
             chargePower = 0;
-            chargeController = 0;
+            chargeTimer = 0;
             chargePlayerStop = false;
         }
 
@@ -223,6 +232,9 @@ public class PlayerMovememt : MonoBehaviour
         }
         PushCharge();
         Player_pos = transform.position;                              //プレイヤーの位置を更新
+
+        // レイヤーの更新
+        gameObject.layer = LayerMask.NameToLayer((tacklingFlag) ? tacklingLayerName : normalLayerName);
     }
 
     //クールタイム
@@ -275,9 +287,6 @@ public class PlayerMovememt : MonoBehaviour
         {
             ChangDrag();
         }
-
-        // レイヤーの更新
-        gameObject.layer = LayerMask.NameToLayer((tacklingFlag) ? tacklingLayerName : normalLayerName);
     }
 
     // dropMass->排出する資源オブジェクトの個数

@@ -36,7 +36,7 @@ public class PlayerManagement : MonoBehaviour
         {
             PlayerStatus status = player[i].GetComponent<PlayerStatus>();
 
-            status.SetId(i);
+            status.SetId(i + 1);
         }
     }
 

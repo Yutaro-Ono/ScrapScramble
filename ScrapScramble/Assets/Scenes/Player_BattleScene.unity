@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.3529284, g: 0.5736776, b: 0.8686604, a: 1}
+  m_IndirectSpecularColor: {r: 0.35292408, g: 0.57367617, b: 0.8686605, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1078,11 +1078,6 @@ PrefabInstance:
       propertyPath: RailgunIcon
       value: 
       objectReference: {fileID: 750119756}
-    - target: {fileID: 1269227889324131854, guid: 7ed4c2820c1b46d42957cc22f5f0d314,
-        type: 3}
-      propertyPath: tackleReadyFlag
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ed4c2820c1b46d42957cc22f5f0d314, type: 3}
 --- !u!1001 &1472869083

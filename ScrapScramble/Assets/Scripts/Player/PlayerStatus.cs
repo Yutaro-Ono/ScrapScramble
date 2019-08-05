@@ -8,7 +8,6 @@ public class PlayerStatus : MonoBehaviour
     Weapon currentWeapon;
 
     // プレイヤーID
-    // 0から数えることに注意->例えばプレイヤー1のIDは0
     int id;
 
     // 自分の武器
@@ -201,5 +200,10 @@ public class PlayerStatus : MonoBehaviour
     public int GetId()
     {
         return id;
+    }
+
+    public GamepadInput.GamePad.Index GetControlIndex()
+    {
+        return GamepadInput.GamePad.CastIntToIndex(id);
     }
 }

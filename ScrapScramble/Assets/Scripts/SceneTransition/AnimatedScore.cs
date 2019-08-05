@@ -4,15 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 public class AnimatedScore : MonoBehaviour
 {
-    public Text  playerScoreText;
+    public Text [] playerScoreText;
    
 
-    PlayerStatus status;
+   PlayerStatus status;
 
     void Start()
     {
         status = GetComponent<PlayerStatus>();
-      
+        status.GetId();
+     
         StartCoroutine(ScoreAnimation(0, 1000, 2));
     }
    
@@ -33,19 +34,23 @@ public class AnimatedScore : MonoBehaviour
 
             // 数値を更新
             float updateValue = (float)((endScore - startScore) * timeRate + startScore);
-          
+            for (int i = 0; i < 4; i++)
+            {
 
-            playerScoreText.text = updateValue.ToString("f0"); // （"f0" の "0" は、小数点以下の桁数指定）
-                                                                      // テキストの更新
+                playerScoreText[i].text = updateValue.ToString("f0"); // （"f0" の "0" は、小数点以下の桁数指定）
+
+            }                                                    // テキストの更新
             
             // 1フレーム待つ
             yield return null;
 
         } while (Time.time < endTime);
-      
-         // 最終的な着地のスコア
 
-            playerScoreText.text = endScore.ToString();
+        // 最終的な着地のスコア
+        for (int i = 0; i < 4; i++)
+        {
+            playerScoreText[i].text = endScore.ToString();
+        }
 
         
     }

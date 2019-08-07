@@ -83,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
         moveZ = input.GetVerticalInput();
         if (moveX != 0 || moveZ != 0)
         {
-            Debug.Log("Player" + (status.GetId() + 1) + "に移動操作が入力された。");
+            Debug.Log("Player" + status.GetId() + "に移動操作が入力された。");
         }
 
         /*

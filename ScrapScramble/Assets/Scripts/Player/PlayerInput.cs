@@ -6,9 +6,7 @@ using GamepadInput;
 public class PlayerInput : MonoBehaviour
 {
     PlayerStatus status;
-    
-    GamepadState keyState;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,19 +16,14 @@ public class PlayerInput : MonoBehaviour
         int id = status.GetId();
     }
 
-    private void Update()
-    {
-        keyState = GamePad.GetState(status.GetControlIndex(), false);
-    }
-
     public float GetHorizontalInput()
     {
-        return keyState.LeftStickAxis.x;
+        return GamePad.GetAxis(GamePad.Axis.LeftStick, status.GetControlIndex(), false).x;
     }
 
     public float GetVerticalInput()
     {
-        return keyState.LeftStickAxis.y;
+        return GamePad.GetAxis(GamePad.Axis.LeftStick, status.GetControlIndex(), false).y;
     }
 
     public bool GetTackleInput()

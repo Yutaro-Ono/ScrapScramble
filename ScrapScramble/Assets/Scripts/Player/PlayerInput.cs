@@ -1,13 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GamepadInput;
 
 public class PlayerInput : MonoBehaviour
 {
     PlayerStatus status;
-    
-    GamepadState keyState;
+
+    // 各種操作の入力値の名前
+    string horizontalInputName;
+    string verticalInputName;
+    string tackleInputName;
+    string weaponAttackInputName;
     
     // Start is called before the first frame update
     void Start()
@@ -16,35 +19,34 @@ public class PlayerInput : MonoBehaviour
 
         // 操作入力値名の設定
         int id = status.GetId();
+        horizontalInputName = "GamePadLeftStickHorizontal" + id;
+        verticalInputName = "GamePadLeftStickVertical" + id;
+        tackleInputName = "GamePadButtonA" + id;
+        weaponAttackInputName = "GamePadButtonB" + id;
     }
-
-    private void Update()
-    {
-        keyState = GamePad.GetState(status.GetControlIndex(), false);
-    }
-
+    
     public float GetHorizontalInput()
     {
-        return keyState.LeftStickAxis.x;
+        return Input.GetAxis(horizontalInputName);
     }
 
     public float GetVerticalInput()
     {
-        return keyState.LeftStickAxis.y;
+        return Input.GetAxis(verticalInputName);
     }
 
     public bool GetTackleInput()
     {
-        return GamePad.GetButton(GamePad.Button.A, status.GetControlIndex());
+        return Input.GetButton(tackleInputName);
     }
 
     public bool GetTackleInputUp()
     {
-        return GamePad.GetButtonUp(GamePad.Button.A, status.GetControlIndex());
+        return Input.GetButtonUp(tackleInputName);
     }
 
     public bool GetWeaponAttackInput()
     {
-        return GamePad.GetButton(GamePad.Button.B, status.GetControlIndex());
+        return Input.GetButton(weaponAttackInputName);
     }
 }

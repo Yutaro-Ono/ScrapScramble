@@ -78,7 +78,7 @@ public class GamePadTest : MonoBehaviour
         if(isLeftStickVerticalDown) { Debug.Log("パッドの[ " + _padNum + " ]番の左スティックが下方向に入力されました。"); }
 
         //  十字ボタン水平方向への入力
-        float dpadHorizontallValue = Input.GetAxis("GamePadDpadHorizontall" + _padNum);
+        float dpadHorizontallValue = Input.GetAxis("GamePadDpadHorizontal" + _padNum);
         bool isDpadHorizontallRight = dpadHorizontallValue >= DPAD_DEAD_ZONE;
         bool isDpadHorizontallLeft = dpadHorizontallValue <= -DPAD_DEAD_ZONE;
         if(isDpadHorizontallRight) { Debug.Log("パッドの[ " + _padNum + " ]番の十字ボタンが右方向に入力されました。"); }

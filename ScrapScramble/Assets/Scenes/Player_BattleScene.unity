@@ -618,6 +618,25 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &779899232 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1936792801224855285, guid: 7ed4c2820c1b46d42957cc22f5f0d314,
+    type: 3}
+  m_PrefabInstance: {fileID: 1449109273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &779899235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 779899232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a780fc934a6da246990bd88a1e8a059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_padNum: 1
 --- !u!1 &1003929376
 GameObject:
   m_ObjectHideFlags: 0
@@ -1693,5 +1712,10 @@ PrefabInstance:
       propertyPath: waveManager
       value: 
       objectReference: {fileID: 1203261477}
+    - target: {fileID: 3638127834124104114, guid: 01fe1e50dbf26054bae9024fef06bbea,
+        type: 3}
+      propertyPath: stopSpawnFlag
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01fe1e50dbf26054bae9024fef06bbea, type: 3}

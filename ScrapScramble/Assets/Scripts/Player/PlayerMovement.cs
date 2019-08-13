@@ -6,23 +6,23 @@ public class PlayerMovement : MonoBehaviour
 {
     PlayerStatus status;
     PlayerInput input;
+    Rigidbody myRigidbody;
 
-    public float speed;                  //プレイヤーの動くスピード
-    public float atkSpeed;               //プレーヤーの攻撃スピード
-    public int tacklePower;             //体当たりで与えるダメージ値
-    Vector3 Player_pos;                  //プレイヤーのポジション
-    private float moveX = 0f;            //x方向のInputの値
-    private float moveZ = 0f;            //z方向のInputの値
-    public float lapseTime;              //チャージ攻撃のクールタイム
-    Rigidbody rb;
-    public float chargeTimer;       //溜時間
-    public short chargePower;              //溜め時間での攻撃力変動
-    bool finishedCoolTimeFlg;                    //クールタイムのフラグ
-    public bool chargePlayerStop;        //プレーヤーが止まっているかどうか
-    bool moveFlg;
-    public bool chargeFlg;
-    public bool tackleReadyFlag;
-    public bool tacklingFlag;
+    Vector3 prevPos;
+    
+    // 移動関連
+    float speed = 50.0f;
+    float moveX = 0.0f;
+    float moveZ = 0.0f;
+
+    // 体当たり関連
+    public bool chargeFlg = false;
+    float chargeTimer = 0.0f;
+    [SerializeField] bool tacklingFlag;
+    public float tacklePower = 0.0f;
+    bool coolTimeFlag = false;
+    float coolTimer = 0.0f;
+    const float CoolTime = 5.0f;
 
     const float tackleForceScalar = 100.0f;
 
@@ -42,16 +42,12 @@ public class PlayerMovement : MonoBehaviour
     {
         status = GetComponent<PlayerStatus>();
         input = GetComponent<PlayerInput>();
-        rb = GetComponent<Rigidbody>();
+        myRigidbody = GetComponent<Rigidbody>();
 
-        Player_pos = GetComponent<Transform>().position; //最初の時点でのプレイヤーのポジションを取得
-        chargePlayerStop = false;
-        moveFlg = false;
-        finishedCoolTimeFlg = true;
-        chargeFlg = false;
+        //最初の時点でのプレイヤーのポジションを取得
+        prevPos = GetComponent<Transform>().position;
+
         tacklingFlag = false;
-        //lapseTimeを初期化
-        lapseTime = 0.0f;
 
         resourcePrefab = (GameObject)Resources.Load("Prefabs/Item/Resource/Resource");
         if (resourcePrefab == null)
@@ -60,232 +56,130 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
-        // 武器攻撃操作の受付
-        if (input.GetWeaponAttackInput())
-        {
-            Debug.Log("武器攻撃ボタンが押された！");
-            Attack();
-        }
+        // 武器攻撃の受付
+        CheckAttackCommand();
 
+        // 移動操作受付
+        CheckMoveCommand();
 
-        //moveX = Input.GetAxis("Horizontal"); //x方向のInputの値を取得
-        //moveZ = Input.GetAxis("Vertical"); //z方向のInputの値を取得
-
-        // 移動操作の受付
-        /*
-        // デバッグがしやすいようにパッドとキーボード両方の操作を受け付ける
-        moveX = (input.GetHorizontalInput() + Input.GetAxis("Horizontal"));
-        moveZ = (input.GetVerticalInput() + Input.GetAxis("Vertical"));
-        */
-        moveX = input.GetHorizontalInput();
-        moveZ = input.GetVerticalInput();
-        if (moveX != 0 || moveZ != 0)
-        {
-            Debug.Log("Player" + status.GetId() + "に移動操作が入力された。");
-        }
-
-        /*
-        // 移動操作の入力値をクランプ
-        // パッドとキーボードの両対応のため、入力された値を足し合わせている
-        // したがって大きすぎる値は調整しなければならない
-        {
-            // X
-            if (moveX > 1.0f)
-            {
-                moveX = 1.0f;
-            }
-            else if (moveX < -1.0f)
-            {
-                moveX = -1.0f;
-            }
-            // Z
-            if (moveZ > 1.0f)
-            {
-                moveZ = 1.0f;
-            }
-            else if (moveZ < -1.0f)
-            {
-                moveZ = -1.0f;
-            }
-        }
-        */
-
-        {
-            Vector3 diff = transform.position - Player_pos;               //プレイヤーがどの方向に進んでいるかがわかるように、初期位置と現在地の座標差分を取得
-
-            if (diff.magnitude > 0.01f)                                   //ベクトルの長さが0.01fより大きい場合にプレイヤーの向きを変える処理を入れる(0では入れないので）
-            {
-                transform.rotation = Quaternion.LookRotation(diff);       //ベクトルの情報をQuaternion.LookRotationに引き渡し回転量を取得しプレイヤーを回転させる
-            }
-        }
-        {
-            /*
-            //入力されている方向を向く
-            Vector3 moveDirection = new Vector3(moveX, 0, moveZ);
-
-            if (moveDirection.magnitude > 0.01f)                                   //ベクトルの長さが0.01fより大きい場合にプレイヤーの向きを変える処理を入れる(0では入れないので）
-            {
-                transform.rotation = Quaternion.LookRotation(moveDirection);       //ベクトルの情報をQuaternion.LookRotationに引き渡し回転量を取得しプレイヤーを回転させる
-            }
-            */
-        }
-        PushCharge();
-        Player_pos = transform.position;                              //プレイヤーの位置を更新
+        // 体当たり操作受付
+        CheckTackleCommand();
 
         // レイヤーの更新
-        gameObject.layer = LayerMask.NameToLayer((tacklingFlag) ? tacklingLayerName : normalLayerName);
+        string layerName = tacklingFlag ? tacklingLayerName : normalLayerName;
+        gameObject.layer = LayerMask.NameToLayer(layerName);
+
+        // 進行方向を向く
+        Vector3 positionDifference = transform.position - prevPos;
+        if (positionDifference.magnitude > 0.01f)
+        {
+            transform.rotation = Quaternion.LookRotation(positionDifference);
+        }
+
+        // 現フレームでの座標を記録
+        prevPos = transform.position;
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        CoolTime();
-        Vector3 force = new Vector3(moveX * speed, 0, moveZ * speed);  // 力を設定
+        CheckCoolTime();
+        
+        // 移動
+        Vector3 force = new Vector3(moveX * speed, 0.0f, moveZ * speed);
+        myRigidbody.AddForce(force);
 
-        InputKey();   //ボタンを押しているかどうか 
+        // 静止処理
+        Brake();
+    }
 
-        rb.AddForce(force);  //プレイヤーに力を加える
-        //プレイヤーを動かしていなかったら
-        if (moveFlg == false && chargeFlg == false)
+    void CheckAttackCommand()
+    {
+        if (input.GetWeaponAttackInput())
         {
-            Stop();
-        }
-        //チャージ攻撃をしていたら
-        if (chargePlayerStop == true)
-        {
-            PlayerStop();
-        }
-        //チャージ攻撃をしていなかったら
-        if (chargePlayerStop == false)
-        {
-            ChangDrag();
+            Attack();
         }
     }
 
-    //プレーヤーの停止
-    void Stop()
+    void CheckMoveCommand()
     {
-        rb.velocity = Vector3.zero;
-        //rb.angularVelocity = Vector3.zero;
+        moveX = input.GetHorizontalInput();
+        moveZ = input.GetVerticalInput();
     }
 
-    //チャージアタック処理
-    void PushCharge()
+    void CheckTackleCommand()
     {
-        if (finishedCoolTimeFlg == true)
+        // クールタイム中なら関数を抜ける
+        if (coolTimeFlag)
         {
-            //if (Input.GetMouseButton(0) || input.GetTackleInput())
-            if (input.GetTackleInput())
-            {
-                chargeTimer += Time.deltaTime;
-                chargePower++;
-                chargePlayerStop = true;
-                chargeFlg = true;
-
-                tackleReadyFlag = true;
-            }
-            else
-            {
-                // chargeFlgの更新
-                chargeFlg = false;
-            }
+            return;
         }
 
-        // 0.5秒につき1ダメージ増加し、3秒で最大ダメージ値に
-        for (int i = 0; i < (3.0f / 0.5f); i++)
+        chargeFlg = input.GetTackleInput();
+        if (chargeFlg)
         {
-            if (chargeTimer >= 0.5f * (i + 1))
+            // チャージタイマー加算
+            chargeTimer += Time.deltaTime;
+
+            // 0.5秒につき1ダメージ増加し、3秒で最大ダメージ値に
+            for (int i = 0; i < (3.0f / 0.5f); i++)
             {
-                tacklePower = (short)(i + 1);
-            }
-            else
-            {
-                break;
-            }
-        }
-
-        if (tackleReadyFlag == true)
-        {
-            if (Input.GetMouseButtonUp(0) || input.GetTackleInputUp())
-
-            {
-                rb.AddForce(transform.TransformDirection(Vector3.forward) * chargeTimer * tackleForceScalar, ForceMode.Impulse);
-
-                // わずかにしか動かなかったタックルでクールタイムを取られるのは不憫なので、
-                // 一定秒数未満のチャージしか行わなかった場合、クールタイムを免除する
-                finishedCoolTimeFlg = (chargeTimer < 0.5f);
-
-                chargePlayerStop = false;
-                chargeTimer = 0;
-                tackleReadyFlag = false;
-
-                // クールタイムを課せられるほどチャージしていた場合は体当たりフラグを真に
-                if (!finishedCoolTimeFlg)
+                if (chargeTimer >= 0.5f * (i + 1))
                 {
-                    tacklingFlag = true;
+                    tacklePower = (short)(i + 1);
                 }
-                // わずかにしか動けないほどのチャージしかしていなかった場合は、体当たり中とみなさない
                 else
                 {
-                    tacklingFlag = false;
+                    break;
                 }
             }
         }
-        if (!(Input.GetMouseButton(0) || input.GetTackleInput()))
-        {
 
-            chargePower = 0;
-            chargeTimer = 0;
-            chargePlayerStop = false;
+        if (input.GetTackleInputUp())
+        {
+            // 体当たり実行
+            myRigidbody.AddForce(transform.TransformDirection(Vector3.forward) * chargeTimer * tackleForceScalar, ForceMode.Impulse);
+
+            // ダメージを与えられるレベルのチャージがされていた場合
+            // 体当たり中フラグとクールタイム中フラグを真に
+            tacklingFlag = coolTimeFlag = (chargeTimer >= 0.5f);
+
+            // タイマー初期化
+            chargeTimer = 0.0f;
         }
     }
 
-    //空気抵抗値の変更
-    void PlayerStop()
+    void CheckCoolTime()
     {
-        rb.drag = 20;
-    }
-    void ChangDrag()
-    {
-        rb.drag = 0;
-    }
-
-    // 移動操作をしているかどうか
-    void InputKey()
-    {
-        if (moveX != 0 || moveZ != 0)
+        // クールタイム処理
+        if (coolTimeFlag)
         {
-            moveFlg = true;
-        }
-        else
-        {
-            moveFlg = false;
-        }
-    }
+            // クールタイムのタイマー計算
+            coolTimer += Time.deltaTime;
 
-    //クールタイム
-    void CoolTime()
-    {
-        if (finishedCoolTimeFlg == false)
-        {
-            lapseTime += Time.deltaTime;
-
-            //lapsetimeが5秒を越えたら、isAttackableをtrueに戻して
-            //次に備えて、lapseTimeを0で初期化
-            if (lapseTime >= 5)
-            {
-
-                finishedCoolTimeFlg = true;
-                lapseTime = 0.0f;
-            }
-
-            //体当たり実行から二秒経過で体当たり中フラグを負に
-            if (lapseTime >= 2)
+            // 体当たり中フラグの更新
+            if (coolTimer >= 2.0f)
             {
                 tacklingFlag = false;
-                tacklePower = 0;
             }
+
+            // クールタイム終了判定＆処理
+            if (coolTimer >= CoolTime)
+            {
+                coolTimeFlag = false;
+                coolTimer = 0.0f;
+            }
+        }
+    }
+
+    void Brake()
+    {
+        bool moveFlag = (moveX != 0 || moveZ != 0);
+
+        if ((!moveFlag && !tacklingFlag) || chargeFlg)
+        {
+            myRigidbody.velocity = Vector3.zero;
         }
     }
 

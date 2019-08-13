@@ -18,7 +18,6 @@ public class PlayerStatus : MonoBehaviour
     public int score;
     int prevScore;
     public int hp;
-    public short atk;
     private float increase;
     public int armedStage = 0;
     const int armedStageLimit = 4;      // 巨大化の段階数
@@ -69,21 +68,7 @@ public class PlayerStatus : MonoBehaviour
             myRailgun.SetActive(false);
         }
     }
-
-    void ChargeAttack()
-    {
-        PlayerMovement moveScript = GetComponent<PlayerMovement>();
-        if (moveScript.chargePower <= 100)
-        {
-            chargeAttackPower = moveScript.chargePower;
-        }
-        if (moveScript.chargeFlg==true)
-        {
-            atk = chargeAttackPower;
-        }
-       
-    }
-
+    
     void BodyBigger()
     {
         // 巨大化の段階チェック
@@ -113,7 +98,6 @@ public class PlayerStatus : MonoBehaviour
         {
             BodyBigger();
         }
-        ChargeAttack();
 
         // デバッグ的にコマンドで装備変更
         if (CommonFunction.GetAnyShiftPressed())

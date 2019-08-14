@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     public bool chargeFlg = false;
     float chargeTimer = 0.0f;
     [SerializeField] bool tacklingFlag;
-    public float tacklePower = 0.0f;
+    public int tacklePower = 0;
     bool coolTimeFlag = false;
     float coolTimer = 0.0f;
     const float CoolTime = 5.0f;
@@ -127,7 +127,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (chargeTimer >= 0.5f * (i + 1))
                 {
-                    tacklePower = (short)(i + 1);
+                    tacklePower = i + 1;
                 }
                 else
                 {
@@ -162,6 +162,7 @@ public class PlayerMovement : MonoBehaviour
             if (coolTimer >= 2.0f)
             {
                 tacklingFlag = false;
+                tacklePower = 0;
             }
 
             // クールタイム終了判定＆処理

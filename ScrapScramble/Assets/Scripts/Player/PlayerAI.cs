@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class PlayerAI : MonoBehaviour
 {
-    // コンポーネント類
+    // 自分のコンポーネント類
+    PlayerStatus status;
+    PlayerMovement moveScript;
+
+    // Waveを見て動きを判定する
     WaveManagement waveManager;
 
     // 検出されたエネミー
@@ -20,6 +24,9 @@ public class PlayerAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        status = GetComponent<PlayerStatus>();
+        moveScript = GetComponent<PlayerMovement>();
+
         targetVector = new Vector3(0, 0, 0);
     }
 

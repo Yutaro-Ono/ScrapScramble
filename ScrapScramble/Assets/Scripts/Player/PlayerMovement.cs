@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     PlayerStatus status;
     PlayerInput input;
+    PlayerAI AI;
     Rigidbody myRigidbody;
 
     Vector3 prevPos;
@@ -38,12 +39,24 @@ public class PlayerMovement : MonoBehaviour
     // 体当たり中のレイヤー名
     const string tacklingLayerName = "TacklingPlayerLayer";
 
-    private void Start()
+    private void Awake()
     {
         status = GetComponent<PlayerStatus>();
         input = GetComponent<PlayerInput>();
         myRigidbody = GetComponent<Rigidbody>();
 
+        if (status.AIFlag)
+        {
+            AI = gameObject.AddComponent<PlayerAI>();
+        }
+        else
+        {
+            AI = null;
+        }
+    }
+
+    private void Start()
+    {
         //最初の時点でのプレイヤーのポジションを取得
         prevPos = GetComponent<Transform>().position;
 

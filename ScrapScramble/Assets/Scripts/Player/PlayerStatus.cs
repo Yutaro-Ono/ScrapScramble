@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
 {
+    // AI行動を行うかどうか
+    public bool AIFlag;
+
     // 現在装備している武器
     Weapon currentWeapon;
 

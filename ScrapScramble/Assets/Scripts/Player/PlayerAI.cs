@@ -26,6 +26,9 @@ public class PlayerAI : MonoBehaviour
     // 移動、体当たりの方向
     Vector3 targetVector;
 
+    // ランダム移動目的地
+    Vector3 destination;
+
     // ランダム移動中であるかのフラグ
     bool randomWalkingFlag;
 
@@ -70,18 +73,21 @@ public class PlayerAI : MonoBehaviour
         // 対エネミーWave？
         vsEnemyWave = (waveManager.wave == WaveManagement.WAVE_NUM.WAVE_1_PVE || waveManager.wave == WaveManagement.WAVE_NUM.WAVE_3_PVE);
 
+        // 距離がある程度近ければランダム移動を完了とする
+        if (randomWalkingFlag)
+        {
+            CheckTargetDistance();
+
+            // 移動方向の更新
+            targetVector = destination - transform.position;
+        }
+
         // 対エネミーWaveであれば
         if (vsEnemyWave)
         {
             // 検出範囲内にエネミーがいれば
             if (detectedEnemy.Count != 0)
             {
-                // 距離がある程度近ければランダム移動を完了とする
-                if (randomWalkingFlag)
-                {
-                    CheckTargetDistance();
-                }
-
                 if (!randomWalkingFlag)
                 {
                     // 敵との距離を比較
@@ -99,7 +105,7 @@ public class PlayerAI : MonoBehaviour
                         }
                     }
 
-                    targetVector = leastDistance;
+                    targetVector = leastDistance - transform.position;
                 }
 
                 // 行動判断
@@ -195,6 +201,10 @@ public class PlayerAI : MonoBehaviour
 
     private void LateUpdate()
     {
+        int debugPlayerID = 1;
+        if (randomWalkingFlag && status.GetId() == debugPlayerID)
+        { Debug.Log("Player" + status.GetId() + targetVector); }
+
         // リストをクリア
         detectedEnemy.Clear();
         detectedPlayer.Clear();
@@ -291,7 +301,8 @@ public class PlayerAI : MonoBehaviour
         moveX = Random.Range(smaller.x, larger.x);
         moveZ = Random.Range(smaller.z, larger.z);
 
-        targetVector.Set(moveX, 0, moveZ);
+        destination = new Vector3(moveX, 0, moveZ);
+        targetVector = destination - transform.position;
     }
 
     void CheckTargetDistance()

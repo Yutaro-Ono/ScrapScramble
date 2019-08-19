@@ -29,8 +29,8 @@ public class FilledLoadBar : MonoBehaviour
 
     void Update()
     {
-        // スペースキーを長押しでゲーム開始
-        if(Input.GetKey(KeyCode.Space))
+        // 1Pの準備が完了している状態の時、スペースキーを長押しでゲーム開始
+        if(Input.GetKey(KeyCode.Space)　&& scene.GetPushStart() == true)
         {
             if(nowHoldTime <= maxHoldTime)
             {
@@ -48,7 +48,7 @@ public class FilledLoadBar : MonoBehaviour
         // ロードバーが十分だったら次のシーンへ
         if (nowHoldTime >= maxHoldTime)
         {
-            scene.SceneTransition(4);
+            scene.SetStartGame(true);
         }
     }
 }

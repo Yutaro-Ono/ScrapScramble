@@ -4,20 +4,26 @@ using UnityEngine;
 using UnityEngine.UI;
 public class AnimatedScore : MonoBehaviour
 {
-    public Text [] playerScoreText;
-   
 
-   PlayerStatus status;
+    PlayerStatus status;
+
+    public Text [] playerScoreText;
+
+    //プレイヤーごとのスコア
+    int finalScore ;
 
     void Start()
     {
         status = GetComponent<PlayerStatus>();
-        status.GetId();
-     
-        StartCoroutine(ScoreAnimation(0, 1000, 2));
+       
+        for (int i = 0; i < 4; i++)
+        {
+            finalScore= GameToResult.finalScore[i];
+            StartCoroutine(ScoreAnimation(0, finalScore, 2));
+        }
     }
    
-    
+
     // スコアをアニメーションさせる
     private IEnumerator ScoreAnimation(float startScore, float endScore, float duration)
     {
@@ -54,4 +60,5 @@ public class AnimatedScore : MonoBehaviour
 
         
     }
+  
 }

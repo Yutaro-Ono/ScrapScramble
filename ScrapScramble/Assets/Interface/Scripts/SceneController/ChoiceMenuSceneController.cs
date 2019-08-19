@@ -1,5 +1,5 @@
 ﻿//--------------------------------------------------------------------------------//
-// 出撃画面のコントローラー
+// 出撃画面のコントローラー(scene遷移の処理を担当)
 //-------------------------------------------------------------------------------//
 using System.Collections;
 using System.Collections.Generic;
@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 
 public class ChoiceMenuSceneController : MonoBehaviour
 {
-
     //選択されたプレイ人数
     //staticによってシーン遷移後もこの変数は残る(ChoiceMenuSceneController.playerNumでアクセス可能)
     public static int playerNum = 0;
@@ -25,7 +24,7 @@ public class ChoiceMenuSceneController : MonoBehaviour
     // 次のシーン(ゲームを開始するかどうかのフラグ)
     private bool startGame;
 
-    // Start is called before the first frame update
+    // scene開始時処理
     void Start()
     {
         //// プレイヤーの準備状況を初期化
@@ -46,7 +45,7 @@ public class ChoiceMenuSceneController : MonoBehaviour
         startGame = false;
     }
 
-    // Update is called once per frame
+    // 更新処理
     void Update()
     {
 
@@ -69,13 +68,16 @@ public class ChoiceMenuSceneController : MonoBehaviour
         CheckReady();
     }
 
+    //-------------------------------------------------------------------------------------------------------------//
+    // 関数
+    //-------------------------------------------------------------------------------------------------------------//
     // プレイヤー毎のパッド入力情報をチェックし、準備状況を更新 ※input関連の環境が整ったら実装する
     private void CheckReady()
     {
         // プレイヤーの準備状況を更新
         for (int i = 0; i < maxPlayer; i++)
         {
-           　
+
         }
 
         // 1Pの準備が完了していたらゲーム開始を可能とする(1Pが起点)
@@ -90,6 +92,22 @@ public class ChoiceMenuSceneController : MonoBehaviour
         }
     }
 
+    // ゲームシーンへ遷移させる
+    public void SceneTransition()
+    {
+        SceneManager.LoadScene("BattleScene");
+    }
+
+
+    //------------------------------------------------------------------------------------------------------------//
+    // ゲッター / セッター
+    //-----------------------------------------------------------------------------------------------------------//
+    // 準備完了したプレイヤーの人数のゲッター
+    public int GetPlayerNum()
+    {
+        return playerNum;
+    }
+
     // プレイヤーの準備が完了しているかどうかのゲッター
     public bool GetPushStart()
     {
@@ -102,9 +120,4 @@ public class ChoiceMenuSceneController : MonoBehaviour
         startGame = in_start;
     }
 
-    // ゲームシーンへ遷移させる
-    public void SceneTransition()
-    {
-        SceneManager.LoadScene("BattleScene");
-    }
 }

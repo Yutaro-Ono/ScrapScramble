@@ -107,9 +107,17 @@ public class PlayerMovement : MonoBehaviour
         Brake();
     }
 
+    public bool GetCoolTimeFlag()
+    {
+        return coolTimeFlag;
+    }
+
     void CheckAttackCommand()
     {
-        if (input.GetWeaponAttackInput())
+        // AIではなく、武器攻撃操作がされている or AIであり、武器攻撃の判断がなされた
+        bool attackCommand = (!status.AIFlag && input.GetWeaponAttackInput()) || (status.AIFlag && AI.GetWeaponAttackFlag());
+
+        if (attackCommand)
         {
             Attack();
         }
@@ -117,8 +125,18 @@ public class PlayerMovement : MonoBehaviour
 
     void CheckMoveCommand()
     {
-        moveX = input.GetHorizontalInput();
-        moveZ = input.GetVerticalInput();
+        if (status.AIFlag)
+        {
+            Vector3 AIMove = AI.GetTargetVector();
+
+            moveX = AIMove.x;
+            moveZ = AIMove.z;
+        }
+        else
+        {
+            moveX = input.GetHorizontalInput();
+            moveZ = input.GetVerticalInput();
+        }
     }
 
     void CheckTackleCommand()
@@ -129,7 +147,8 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        chargeFlg = input.GetTackleInput();
+        // AIではなく、チャージ操作がされている or AIであり、チャージ判断がなされている
+        chargeFlg = (!status.AIFlag && input.GetTackleInput()) || (status.AIFlag && AI.GetChargeFlag());
         if (chargeFlg)
         {
             // チャージタイマー加算
@@ -149,7 +168,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (input.GetTackleInputUp())
+        if ((!status.AIFlag && input.GetTackleInputUp()) || (status.AIFlag && AI.GetTackleFlag()))
         {
             // 体当たり実行
             myRigidbody.AddForce(transform.TransformDirection(Vector3.forward) * chargeTimer * tackleForceScalar, ForceMode.Impulse);

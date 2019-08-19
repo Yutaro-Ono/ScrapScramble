@@ -679,7 +679,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1107165919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1078,6 +1078,11 @@ PrefabInstance:
       propertyPath: RailgunIcon
       value: 
       objectReference: {fileID: 750119756}
+    - target: {fileID: 3925899113119328912, guid: 7ed4c2820c1b46d42957cc22f5f0d314,
+        type: 3}
+      propertyPath: score
+      value: 500
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ed4c2820c1b46d42957cc22f5f0d314, type: 3}
 --- !u!1001 &1472869083

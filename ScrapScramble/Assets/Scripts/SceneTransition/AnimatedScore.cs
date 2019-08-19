@@ -5,60 +5,44 @@ using UnityEngine.UI;
 public class AnimatedScore : MonoBehaviour
 {
 
-    PlayerStatus status;
-
     public Text [] playerScoreText;
 
     //プレイヤーごとのスコア
-    int finalScore ;
+    int []finalScore ;
 
     void Start()
     {
-        status = GetComponent<PlayerStatus>();
-       
-        for (int i = 0; i < 4; i++)
-        {
-            finalScore= GameToResult.finalScore[i];
-            StartCoroutine(ScoreAnimation(0, finalScore, 2));
-        }
+        ScoreAnimation(300,2);
     }
-   
 
-    // スコアをアニメーションさせる
-    private IEnumerator ScoreAnimation(float startScore, float endScore, float duration)
+    IEnumerator ScoreAnimation(float Score, float time)
     {
-        // 開始時間
+        
+        //0fを経過時間にする
+        float elapsedTime = 0.0f;
         float startTime = Time.time;
-
         // 終了時間
-        float endTime = startTime + duration;
-
+        float endTime = startTime + time;
+        //timeが０になるまでループさせる
         do
         {
-            // 現在の時間の割合
-            float timeRate = (Time.time - startTime) / duration;
-
-            // 数値を更新
-            float updateValue = (float)((endScore - startScore) * timeRate + startScore);
+            float timeRate = (Time.time - startTime) / time;
+           
+        
+            // テキストの更新
             for (int i = 0; i < 4; i++)
             {
+                playerScoreText[i].text = (Score  * timeRate).ToString("f0");
+            }
 
-                playerScoreText[i].text = updateValue.ToString("f0"); // （"f0" の "0" は、小数点以下の桁数指定）
-
-            }                                                    // テキストの更新
-            
-            // 1フレーム待つ
-            yield return null;
-
+            elapsedTime += Time.deltaTime;
+            // 0.01秒待つ
+            yield return new WaitForSeconds(0.01f);
         } while (Time.time < endTime);
-
-        // 最終的な着地のスコア
-        for (int i = 0; i < 4; i++)
+            // 最終的な着地のスコア
+            for (int i = 0; i < 4; i++)
         {
-            playerScoreText[i].text = endScore.ToString();
+            playerScoreText[i].text = Score.ToString();
         }
-
-        
     }
-  
 }

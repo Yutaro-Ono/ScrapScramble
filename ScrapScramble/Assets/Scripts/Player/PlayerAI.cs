@@ -11,6 +11,9 @@ public class PlayerAI : MonoBehaviour
     // Waveを見て動きを判定する
     WaveManagement waveManager;
 
+    // ステージの隅っこ
+    Vector3 cornerPos1, cornerPos2;
+
     // 対エネミーWaveであるか
     bool vsEnemyWave;
     
@@ -36,6 +39,9 @@ public class PlayerAI : MonoBehaviour
     private void Awake()
     {
         waveManager = GameObject.Find("WaveManager").GetComponent<WaveManagement>();
+
+        cornerPos1 = GameObject.Find("Corner Point1").transform.position;
+        cornerPos2 = GameObject.Find("Corner Point2").transform.position;
     }
 
     // Start is called before the first frame update
@@ -55,6 +61,9 @@ public class PlayerAI : MonoBehaviour
         // 体当たり実行フラグの更新
         tackleFlag = false;
 
+        // 武器攻撃フラグの更新
+        weaponAttackFlag = false;
+
         // 現在装備している武器情報の更新
         Weapon weapon = status.GetCurrentWeapon();
         
@@ -67,26 +76,36 @@ public class PlayerAI : MonoBehaviour
             // 検出範囲内にエネミーがいれば
             if (detectedEnemy.Count != 0)
             {
-                // 敵との距離を比較
-                Vector3 leastDistance = detectedEnemy[0].transform.position - gameObject.transform.position;
-                leastDistance.y = 0;
-
-                for (int i = 1; i < detectedEnemy.Count; ++i)
+                // 距離がある程度近ければランダム移動を完了とする
+                if (randomWalkingFlag)
                 {
-                    Vector3 compareDistance = detectedEnemy[i].transform.position - gameObject.transform.position;
-                    compareDistance.y = 0;
-
-                    if (leastDistance.magnitude > compareDistance.magnitude)
-                    {
-                        leastDistance = compareDistance;
-                    }
+                    CheckTargetDistance();
                 }
 
-                targetVector = leastDistance;
+                if (!randomWalkingFlag)
+                {
+                    // 敵との距離を比較
+                    Vector3 leastDistance = detectedEnemy[0].transform.position - gameObject.transform.position;
+                    leastDistance.y = 0;
+
+                    for (int i = 1; i < detectedEnemy.Count; ++i)
+                    {
+                        Vector3 compareDistance = detectedEnemy[i].transform.position - gameObject.transform.position;
+                        compareDistance.y = 0;
+
+                        if (leastDistance.magnitude > compareDistance.magnitude)
+                        {
+                            leastDistance = compareDistance;
+                        }
+                    }
+
+                    targetVector = leastDistance;
+                }
 
                 // 行動判断
                 // 武器を持っている場合
-                if (weapon != Weapon.None)
+                // かつ、体当たりのチャージをしていない場合
+                if (weapon != Weapon.None && !chargeFlag)
                 {
                     // ハンマー
                     if (weapon == Weapon.Hammer)
@@ -102,6 +121,8 @@ public class PlayerAI : MonoBehaviour
                     {
                         weaponAttackFlag = true;
                     }
+
+                    randomWalkingFlag = false;
                 }
 
                 // 体当たりが可能な場合
@@ -119,20 +140,27 @@ public class PlayerAI : MonoBehaviour
                         chargeFlag = true;
                     }
 
-                    
+                    randomWalkingFlag = false;
                 }
 
                 // 攻撃手段がない場合
                 else
                 {
-
+                    if (!randomWalkingFlag)
+                    {
+                        SetRandomDestination();
+                    }
                 }
             }
 
             // 検出範囲内にエネミーがいない場合
             else
             {
-
+                // チャージ中なら行わない
+                if (!randomWalkingFlag && !chargeFlag)
+                {
+                    SetRandomDestination();
+                }
             }
         }
 
@@ -141,17 +169,26 @@ public class PlayerAI : MonoBehaviour
         {
             // じゃあどのWave？
             bool vsPlayerWave = (waveManager.wave == WaveManagement.WAVE_NUM.WAVE_2_PVP || waveManager.wave == WaveManagement.WAVE_NUM.WAVE_4_PVP);
-            
+
             // 対プレイヤーWaveの場合
             if (vsPlayerWave)
             {
-
+                // とりあえずランダム移動
+                if (!randomWalkingFlag)
+                {
+                    SetRandomDestination();
+                }
             }
 
             // そうでない（インターバルWave）場合
             else
             {
-
+                // とりあえずランダム移動
+                // これでもOKかも？
+                if (!randomWalkingFlag)
+                {
+                    SetRandomDestination();
+                }
             }
         }
     }
@@ -215,5 +252,57 @@ public class PlayerAI : MonoBehaviour
     public bool GetWeaponAttackFlag()
     {
         return weaponAttackFlag;
+    }
+
+    void SetRandomDestination()
+    {
+        randomWalkingFlag = true;
+
+        Vector3 larger, smaller;
+        if (cornerPos1.x > cornerPos2.x)
+        {
+            larger.x = cornerPos1.x;
+            smaller.x = cornerPos2.x;
+        }
+        else
+        {
+            larger.x = cornerPos2.x;
+            smaller.x = cornerPos1.x;
+        }
+
+        if (cornerPos1.z > cornerPos2.z)
+        {
+            larger.z    = cornerPos1.z;
+            smaller.z   = cornerPos2.z;
+        }
+        else
+        {
+            larger.z    = cornerPos2.z;
+            smaller.z   = cornerPos1.z;
+        }
+
+        float margin = 20.0f;
+        larger.x -= margin;
+        smaller.x += margin;
+        larger.z -= margin;
+        smaller.z += margin;
+
+        float moveX, moveZ;
+        moveX = Random.Range(smaller.x, larger.x);
+        moveZ = Random.Range(smaller.z, larger.z);
+
+        targetVector.Set(moveX, 0, moveZ);
+    }
+
+    void CheckTargetDistance()
+    {
+        Vector3 pos = transform.position;
+        pos.y = 0;
+
+        Vector3 distance = targetVector - pos;
+        if (distance.magnitude <= 10.0f)
+        {
+            randomWalkingFlag = false;
+        }
     }
 }

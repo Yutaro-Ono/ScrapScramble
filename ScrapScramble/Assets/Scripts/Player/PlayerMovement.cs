@@ -52,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             AI = null;
+            transform.Find("Detector").GetComponent<SphereCollider>().enabled = false;
         }
     }
 

@@ -36,8 +36,11 @@ public class ChoiceMenuSceneController : MonoBehaviour
         // ※デバッグ用初期化(準備状況が最初からtrue)※
         for (int i = 0; i < maxPlayer; i++)
         {
-            getReady[i] = false;
+            getReady[i] = true;
         }
+
+        // プレイ人数を初期化
+        playerNum = 0;
 
         //pushStart = false;
         // ※デバッグ用初期化(1Pが完了していなくてもスタート可能)※
@@ -112,6 +115,12 @@ public class ChoiceMenuSceneController : MonoBehaviour
     public bool GetPushStart()
     {
         return pushStart;
+    }
+
+    // プレイヤーの準備状態ゲッター
+    public bool GetPlayerReady(int in_playerNum)
+    {
+        return getReady[in_playerNum];
     }
 
     // ゲームをスタートするかどうかのセッター

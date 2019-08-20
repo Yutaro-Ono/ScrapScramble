@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GamepadInput;
 
 public class PlayerInput : MonoBehaviour
 {
     PlayerStatus status;
+    Rewired.Player input;
 
     // Start is called before the first frame update
     void Start()
@@ -14,30 +14,33 @@ public class PlayerInput : MonoBehaviour
 
         // 操作入力値名の設定
         int id = status.GetId();
+
+        // 参照の取得
+        input = Rewired.ReInput.players.GetPlayer(id);
     }
 
     public float GetHorizontalInput()
     {
-        return GamePad.GetAxis(GamePad.Axis.LeftStick, status.GetControlIndex(), false).x;
+        return input.GetAxis("HorizontalMove");
     }
 
     public float GetVerticalInput()
     {
-        return GamePad.GetAxis(GamePad.Axis.LeftStick, status.GetControlIndex(), false).y;
+        return input.GetAxis("VerticalMove");
     }
 
     public bool GetTackleInput()
     {
-        return GamePad.GetButton(GamePad.Button.A, status.GetControlIndex());
+        return input.GetButton("Tackle");
     }
 
     public bool GetTackleInputUp()
     {
-        return GamePad.GetButtonUp(GamePad.Button.A, status.GetControlIndex());
+        return input.GetButtonUp("Tackle");
     }
 
     public bool GetWeaponAttackInput()
     {
-        return GamePad.GetButton(GamePad.Button.B, status.GetControlIndex());
+        return input.GetButton("WeaponAttack");
     }
 }

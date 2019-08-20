@@ -36,7 +36,7 @@ public class PlayerManagement : MonoBehaviour
         {
             PlayerStatus status = player[i].GetComponent<PlayerStatus>();
 
-            status.SetId(i + 1);
+            status.SetId(i);
         }
 
         // AIか否かの設定

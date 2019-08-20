@@ -59,7 +59,7 @@ public class GatlingBulletMovement : MonoBehaviour
                     move.DropResource((uint)power);
                 }
                 PlayerStatus status = other.GetComponent<PlayerStatus>();
-                Debug.Log("ガトリング：プレイヤー" + (status.GetId() + 1) + "にヒット");
+                Debug.Log("ガトリング：プレイヤー" + (status.GetId()) + "にヒット");
 
                 Destroy(gameObject);
             }

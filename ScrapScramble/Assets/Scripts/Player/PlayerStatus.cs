@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
 {
+    // AI行動を行うかどうか
+    public bool AIFlag;
+
     // 現在装備している武器
     Weapon currentWeapon;
 
     // プレイヤーID
-    // 0から数えることに注意->例えばプレイヤー1のIDは0
     int id;
 
     // 自分の武器
@@ -19,7 +21,6 @@ public class PlayerStatus : MonoBehaviour
     public int score;
     int prevScore;
     public int hp;
-    public short atk;
     private float increase;
     public int armedStage = 0;
     const int armedStageLimit = 4;      // 巨大化の段階数
@@ -70,21 +71,7 @@ public class PlayerStatus : MonoBehaviour
             myRailgun.SetActive(false);
         }
     }
-
-    void ChargeAttack()
-    {
-        PlayerMovememt moveScript = GetComponent<PlayerMovememt>();
-        if (moveScript.chargePower <= 100)
-        {
-            chargeAttackPower = moveScript.chargePower;
-        }
-        if (moveScript.chargeFlg==true)
-        {
-            atk = chargeAttackPower;
-        }
-       
-    }
-
+    
     void BodyBigger()
     {
         // 巨大化の段階チェック
@@ -114,7 +101,6 @@ public class PlayerStatus : MonoBehaviour
         {
             BodyBigger();
         }
-        ChargeAttack();
 
         // デバッグ的にコマンドで装備変更
         if (CommonFunction.GetAnyShiftPressed())
@@ -201,5 +187,10 @@ public class PlayerStatus : MonoBehaviour
     public int GetId()
     {
         return id;
+    }
+
+    public GamepadInput.GamePad.Index GetControlIndex()
+    {
+        return GamepadInput.GamePad.CastIntToIndex(id);
     }
 }

@@ -5,13 +5,8 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
     PlayerStatus status;
+    Rewired.Player input;
 
-    // 各種操作の入力値の名前
-    string horizontalInputName;
-    string verticalInputName;
-    string tackleInputName;
-    string weaponAttackInputName;
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -19,40 +14,33 @@ public class PlayerInput : MonoBehaviour
 
         // 操作入力値名の設定
         int id = status.GetId();
-        horizontalInputName = "Horizontal" + id;
-        verticalInputName = "Vertical" + id;
-        tackleInputName = "Tackle" + id;
-        weaponAttackInputName = "WeaponAttack" + id;
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // 参照の取得
+        input = Rewired.ReInput.players.GetPlayer(id);
     }
 
     public float GetHorizontalInput()
     {
-        return Input.GetAxis(horizontalInputName);
+        return input.GetAxis("HorizontalMove");
     }
 
     public float GetVerticalInput()
     {
-        return Input.GetAxis(verticalInputName);
+        return input.GetAxis("VerticalMove");
     }
 
     public bool GetTackleInput()
     {
-        return Input.GetButton(tackleInputName);
+        return input.GetButton("Tackle");
     }
 
     public bool GetTackleInputUp()
     {
-        return Input.GetButtonUp(tackleInputName);
+        return input.GetButtonUp("Tackle");
     }
 
     public bool GetWeaponAttackInput()
     {
-        return Input.GetButton(weaponAttackInputName);
+        return input.GetButton("WeaponAttack");
     }
 }

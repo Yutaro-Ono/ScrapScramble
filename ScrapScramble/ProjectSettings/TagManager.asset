@@ -23,9 +23,9 @@ TagManager:
   - Resource
   - UnlightByDirectional
   - Weapon
-  - 
-  - 
-  - 
+  - PlayerLayer
+  - TacklingPlayerLayer
+  - EnemyLayer
   - 
   - 
   - 

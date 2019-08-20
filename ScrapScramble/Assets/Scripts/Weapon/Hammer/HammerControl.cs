@@ -69,7 +69,7 @@ public class HammerControl : MonoBehaviour
 
                 status.EquipWeapon(Weapon.Hammer);
 
-                Debug.Log("ハンマー：プレイヤー" + (status.GetId() + 1) + "が取得");
+                Debug.Log("ハンマー：プレイヤー" + (status.GetId()) + "が取得");
 
                 Destroy(gameObject);
             }
@@ -82,7 +82,7 @@ public class HammerControl : MonoBehaviour
                 // 当たったプレイヤーが装備者自身でなければダメージ処理
                 if (other.gameObject != transform.parent.parent.gameObject)
                 {
-                    PlayerMovememt move = other.GetComponent<PlayerMovememt>();
+                    PlayerMovement move = other.GetComponent<PlayerMovement>();
                     move.DropResource((uint)power);
                     
                     Debug.Log("ハンマー：プレイヤーにヒット");

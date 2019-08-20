@@ -66,6 +66,10 @@ public class RailgunControl : MonoBehaviour
             //発射
             GameObject instance = (GameObject)Instantiate(bulletPrefab, shootPoint.position, shootPoint.rotation);
 
+            //発射したプレイヤー情報を代入
+            RailgunBulletMovement bulletScript = instance.GetComponent<RailgunBulletMovement>();
+            bulletScript.SetShooterPlayer(transform.parent.parent.gameObject);
+
             //タイマーを0秒にリセット
             shootTimer = 0.0f;
         }

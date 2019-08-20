@@ -59,7 +59,7 @@ public class RailgunBulletMovement : MonoBehaviour
             if (other.gameObject != shooterPlayer)
             {
                 {
-                    PlayerMovememt move = other.GetComponent<PlayerMovememt>();
+                    PlayerMovement move = other.GetComponent<PlayerMovement>();
                     if (!move)
                     {
                         Debug.Log("レールガン：プレイヤーの資源のドロップに失敗");
@@ -120,5 +120,10 @@ public class RailgunBulletMovement : MonoBehaviour
 
             Destroy(gameObject);
         }
+    }
+
+    public void SetShooterPlayer(GameObject in_shooterPlayer)
+    {
+        this.shooterPlayer = in_shooterPlayer;
     }
 }

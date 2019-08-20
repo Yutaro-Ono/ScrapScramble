@@ -38,6 +38,24 @@ public class PlayerManagement : MonoBehaviour
 
             status.SetId(i);
         }
+
+        // AIか否かの設定
+        if (TitleToGame.playerNum != 0)
+        {
+            for (int lplayerNum = 0; lplayerNum < playerNum; lplayerNum++)
+            {
+                PlayerStatus status = player[lplayerNum].GetComponent<PlayerStatus>();
+
+                if (TitleToGame.playerNum <= lplayerNum + 1)
+                {
+                    status.AIFlag = false;
+                }
+                else
+                {
+                    status.AIFlag = true;
+                }
+            }
+        }
     }
 
     // Start is called before the first frame update

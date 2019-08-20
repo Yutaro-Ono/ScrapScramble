@@ -33,6 +33,9 @@ public class EnemyManagerManagement : MonoBehaviour
     //エネミーAIの停止
     public bool stopAIFlag = false;
 
+    //エネミー排出の停止
+    public bool stopSpawnFlag = false;
+
     // Start is called before the first frame update
     void Start()
     {

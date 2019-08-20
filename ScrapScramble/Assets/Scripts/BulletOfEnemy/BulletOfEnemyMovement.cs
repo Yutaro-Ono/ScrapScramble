@@ -44,7 +44,7 @@ public class BulletOfEnemyMovement : MonoBehaviour
         if (other.tag == "Player")
         {
             {
-                PlayerMovememt move = other.GetComponent<PlayerMovememt>();
+                PlayerMovement move = other.GetComponent<PlayerMovement>();
                 if (!move)
                 {
                     Debug.Log("エネミー弾：プレイヤーの資源のドロップに失敗");

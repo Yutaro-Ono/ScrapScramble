@@ -50,7 +50,7 @@ public class GatlingBulletMovement : MonoBehaviour
             if (other.gameObject != shooterPlayer)
             {
                 {
-                    PlayerMovememt move = other.GetComponent<PlayerMovememt>();
+                    PlayerMovement move = other.GetComponent<PlayerMovement>();
                     if (!move)
                     {
                         Debug.Log("ガトリング弾：プレイヤーの資源のドロップに失敗");
@@ -59,7 +59,7 @@ public class GatlingBulletMovement : MonoBehaviour
                     move.DropResource((uint)power);
                 }
                 PlayerStatus status = other.GetComponent<PlayerStatus>();
-                Debug.Log("ガトリング：プレイヤー" + (status.GetId() + 1) + "にヒット");
+                Debug.Log("ガトリング：プレイヤー" + (status.GetId()) + "にヒット");
 
                 Destroy(gameObject);
             }

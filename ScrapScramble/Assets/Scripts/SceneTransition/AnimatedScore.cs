@@ -13,28 +13,27 @@ public class AnimatedScore : MonoBehaviour
 
     void Start()
     {
-        
-       
-     
+
+
+        StartCoroutine(ScoreAnimation(GameToResult.finalScore[PlayerNum], 2));
     }
-    private void Update()
-    {
-        ScoreAnimation(GameToResult.finalScore[PlayerNum], 2);
-    }
-   
-   public void ScoreAnimation( float Score,float time)
+
+
+    private IEnumerator ScoreAnimation( float Score,float time)
     {
         float startTime = Time.time;
 
-        float endTime = startTime +Score;
-        float elapsedTime = 0.0f;
+        float endTime = startTime + time;
 
-        while (elapsedTime < endTime) 
+        do
         {
+
             float timeRate = (Time.time - startTime) / time;
-            playerScoreText.text = (Score * timeRate).ToString();
-            elapsedTime += Time.deltaTime;
-        } 
-               playerScoreText.text = Score.ToString();
+            float updateValue = Score * timeRate;
+            playerScoreText.text = updateValue.ToString("f0");
+            yield return new WaitForSeconds(0.01f);
+
+        } while (Time.time < endTime);
+                playerScoreText.text = Score.ToString();
     }
 }

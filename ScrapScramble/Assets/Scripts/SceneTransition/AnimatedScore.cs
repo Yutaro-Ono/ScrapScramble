@@ -8,7 +8,6 @@ public class AnimatedScore : MonoBehaviour
     public Text playerScoreText;
 
     //プレイヤーごとのスコア
-    public int []finalScore ;
     public int PlayerNum;
 
     void Start()

@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class PlayerAI : MonoBehaviour
 {
+    enum PlayerBehavior
+    {
+        RandomWalk,
+        Enemy_Tackle,
+        Enemy_WeaponAttack,
+        Player_Tackle,
+        Player_WeaponAttack
+    }
+
     // 自分のコンポーネント類
     PlayerStatus status;
     PlayerMovement moveScript;
-
-    // Waveを見て動きを判定する
-    WaveManagement waveManager;
+    SphereCollider detector;
 
     // ステージの隅っこ
     Vector3 cornerPos1, cornerPos2;
@@ -39,10 +46,18 @@ public class PlayerAI : MonoBehaviour
     // 武器操作フラグ
     bool weaponAttackFlag;
 
+    // 選択した行動
+    PlayerBehavior behavior;
+
+    // AI駆動時間
+    float timer;
+
+    // 前フレームにおけるタイマー
+    // 小数点以下を切り捨て
+    int prevTimer;
+
     private void Awake()
     {
-        waveManager = GameObject.Find("WaveManager").GetComponent<WaveManagement>();
-
         cornerPos1 = GameObject.Find("Corner Point1").transform.position;
         cornerPos2 = GameObject.Find("Corner Point2").transform.position;
     }
@@ -52,15 +67,30 @@ public class PlayerAI : MonoBehaviour
     {
         status = GetComponent<PlayerStatus>();
         moveScript = GetComponent<PlayerMovement>();
+        detector = transform.Find("Detector").GetComponent<SphereCollider>();
 
         targetVector = new Vector3(0, 0, 0);
 
         weaponAttackFlag = chargeFlag = tackleFlag = false;
+
+        timer = 0.0f;
+    }
+
+    private void FixedUpdate()
+    {
+        // 検出範囲を固定
+        // プレイヤーが巨大化すると、コリジョンも同じ倍率で大きくなるので調節
+        float size = 100.0f / transform.localScale.x;
+        detector.radius = size;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // 駆動時間を記録
+        prevTimer = (int)timer;
+        timer += Time.deltaTime;
+
         // 体当たり実行フラグの更新
         tackleFlag = false;
 
@@ -71,7 +101,7 @@ public class PlayerAI : MonoBehaviour
         Weapon weapon = status.GetCurrentWeapon();
         
         // 対エネミーWave？
-        vsEnemyWave = (waveManager.wave == WaveManagement.WAVE_NUM.WAVE_1_PVE || waveManager.wave == WaveManagement.WAVE_NUM.WAVE_3_PVE);
+        vsEnemyWave = (status.GetWaveManager().wave == WaveManagement.WAVE_NUM.WAVE_1_PVE || status.GetWaveManager().wave == WaveManagement.WAVE_NUM.WAVE_3_PVE);
 
         // 距離がある程度近ければランダム移動を完了とする
         if (randomWalkingFlag)
@@ -129,6 +159,7 @@ public class PlayerAI : MonoBehaviour
                     }
 
                     randomWalkingFlag = false;
+                    behavior = PlayerBehavior.Enemy_WeaponAttack;
                 }
 
                 // 体当たりが可能な場合
@@ -147,6 +178,7 @@ public class PlayerAI : MonoBehaviour
                     }
 
                     randomWalkingFlag = false;
+                    behavior = PlayerBehavior.Enemy_Tackle;
                 }
 
                 // 攻撃手段がない場合
@@ -174,7 +206,7 @@ public class PlayerAI : MonoBehaviour
         else
         {
             // じゃあどのWave？
-            bool vsPlayerWave = (waveManager.wave == WaveManagement.WAVE_NUM.WAVE_2_PVP || waveManager.wave == WaveManagement.WAVE_NUM.WAVE_4_PVP);
+            bool vsPlayerWave = (status.GetWaveManager().wave == WaveManagement.WAVE_NUM.WAVE_2_PVP || status.GetWaveManager().wave == WaveManagement.WAVE_NUM.WAVE_4_PVP);
 
             // 対プレイヤーWaveの場合
             if (vsPlayerWave)
@@ -189,21 +221,18 @@ public class PlayerAI : MonoBehaviour
             // そうでない（インターバルWave）場合
             else
             {
-                // とりあえずランダム移動
-                // これでもOKかも？
-                if (!randomWalkingFlag)
-                {
-                    SetRandomDestination();
-                }
+                // 動かない
+                CancelAllAction();
             }
         }
     }
 
     private void LateUpdate()
     {
-        int debugPlayerID = 1;
-        if (randomWalkingFlag && status.GetId() == debugPlayerID)
-        { Debug.Log("Player" + status.GetId() + targetVector); }
+        if ((int)timer - prevTimer >= 1 && status.GetId() == 1)
+        {
+            Debug.Log(behavior);
+        }
 
         // リストをクリア
         detectedEnemy.Clear();
@@ -303,6 +332,8 @@ public class PlayerAI : MonoBehaviour
 
         destination = new Vector3(moveX, 0, moveZ);
         targetVector = destination - transform.position;
+
+        behavior = PlayerBehavior.RandomWalk;
     }
 
     void CheckTargetDistance()
@@ -310,10 +341,20 @@ public class PlayerAI : MonoBehaviour
         Vector3 pos = transform.position;
         pos.y = 0;
 
-        Vector3 distance = targetVector - pos;
+        Vector3 distance = destination - pos;
         if (distance.magnitude <= 10.0f)
         {
             randomWalkingFlag = false;
         }
+    }
+
+    void CancelAllAction()
+    {
+        chargeFlag = false;
+        tackleFlag = false;
+        randomWalkingFlag = false;
+
+        destination = Vector3.zero;
+        targetVector = Vector3.zero;
     }
 }

@@ -7,6 +7,9 @@ public class PlayerStatus : MonoBehaviour
     // AI行動を行うかどうか
     public bool AIFlag;
 
+    // ウェーブの情報
+    WaveManagement waveManager;
+
     // 現在装備している武器
     Weapon currentWeapon;
 
@@ -34,6 +37,11 @@ public class PlayerStatus : MonoBehaviour
     public const int armedStageUpScore = armedStageUpResourceMass * ResourceCollision.pointAddition;
 
     float initialScale;
+
+    private void Awake()
+    {
+        waveManager = GameObject.Find("WaveManager").GetComponent<WaveManagement>();
+    }
 
     void Start()
     {
@@ -187,6 +195,11 @@ public class PlayerStatus : MonoBehaviour
     public int GetId()
     {
         return id;
+    }
+
+    public WaveManagement GetWaveManager()
+    {
+        return waveManager;
     }
 
     public GamepadInput.GamePad.Index GetControlIndex()

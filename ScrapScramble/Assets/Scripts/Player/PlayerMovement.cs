@@ -10,6 +10,9 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody myRigidbody;
 
     Vector3 prevPos;
+
+    // 初期位置
+    Vector3 initialPosition;
     
     // 移動関連
     float speed = 50.0f;
@@ -60,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //最初の時点でのプレイヤーのポジションを取得
         prevPos = GetComponent<Transform>().position;
+        initialPosition = prevPos;
 
         tacklingFlag = false;
 
@@ -72,14 +76,40 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        // 武器攻撃の受付
-        CheckAttackCommand();
+        // インターバルWaveでないときだけ操作を受け付ける
+        if (status.GetWaveManager().wave != WaveManagement.WAVE_NUM.WAVE_INTERVAL)
+        {
+            // 武器攻撃の受付
+            CheckAttackCommand();
 
-        // 移動操作受付
-        CheckMoveCommand();
+            // 移動操作受付
+            CheckMoveCommand();
 
-        // 体当たり操作受付
-        CheckTackleCommand();
+            // 体当たり操作受付
+            CheckTackleCommand();
+        }
+        // インターバルWaveでは動けないようにする
+        else
+        {
+            // 初期位置に戻す
+            transform.position = initialPosition;
+            transform.rotation = Quaternion.Euler(Vector3.zero);
+
+            // 移動を封じる
+            moveX = 0.0f;
+            moveZ = 0.0f;
+
+            // チャージを封じ、体当たりをキャンセル
+            chargeFlg = false;
+            chargeTimer = 0.0f;
+            tacklingFlag = false;
+            tacklePower = 0;
+            gameObject.layer = LayerMask.NameToLayer(normalLayerName);
+
+            // クールタイムを終わらせる
+            coolTimeFlag = false;
+            coolTimer = 0.0f;
+        }
 
         // レイヤーの更新
         string layerName = tacklingFlag ? tacklingLayerName : normalLayerName;

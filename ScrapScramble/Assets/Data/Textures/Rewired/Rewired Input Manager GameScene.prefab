@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2818121942852587756}
   - component: {fileID: 407171875490384794}
   m_Layer: 0
-  m_Name: Rewired Input Manager
+  m_Name: Rewired Input Manager GameScene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

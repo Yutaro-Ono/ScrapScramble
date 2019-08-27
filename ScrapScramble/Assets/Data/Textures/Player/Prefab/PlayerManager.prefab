@@ -540,6 +540,11 @@ PrefabInstance:
       propertyPath: SubModule.subEmitters.Array.data[0].emitter
       value: 
       objectReference: {fileID: 3418563867905315108}
+    - target: {fileID: 5285382701883947360, guid: 62f2af9a76f12a941be28cb59b4ab45c,
+        type: 3}
+      propertyPath: score
+      value: 700
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62f2af9a76f12a941be28cb59b4ab45c, type: 3}
 --- !u!4 &2832339255631791823 stripped

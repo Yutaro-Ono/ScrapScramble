@@ -15,4 +15,11 @@ public class CommonFunction : MonoBehaviour
 
         return ret;
     }
+
+    public static void RunLauncher(string path)
+    {
+        string fullPathexe = path + "Launcher.exe";
+
+        
+    }
 }

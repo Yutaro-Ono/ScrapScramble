@@ -11,18 +11,9 @@ public enum Weapon
     Invalid         //無効値
 }
 
-/*public class WeaponEnumDefine : MonoBehaviour
+public class WeaponEnumDefine : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    // レイヤー名
+    public const string TouchablePlayerLayerName = "PlayerTouchable";
+    public const string UntouchablePlayerLayerName = "PlayerUntouchable";
 }
-*/

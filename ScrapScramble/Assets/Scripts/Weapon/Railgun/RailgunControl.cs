@@ -18,9 +18,8 @@ public class RailgunControl : MonoBehaviour
     public float shootInterval = 2.0f;
 
     float shootTimer;
-
-    // Start is called before the first frame update
-    void Start()
+    
+    void Awake()
     {
         bulletPrefab = (GameObject)Resources.Load("Prefabs/Item/Weapon/Railgun/RailgunBullet");
 
@@ -44,12 +43,6 @@ public class RailgunControl : MonoBehaviour
     {
         //タイマーのカウント
         shootTimer += Time.deltaTime;
-
-        //とりあえずコマンド発動
-        if (Input.GetKeyDown(KeyCode.R) && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
-        {
-            Attack();
-        }
     }
 
     private void OnEnable()

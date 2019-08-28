@@ -18,9 +18,8 @@ public class GatlingControl : MonoBehaviour
 
     [SerializeField]
     Vector3 droppedModeScale;
-
-    // Start is called before the first frame update
-    void Start()
+    
+    void Awake()
     {
         bulletPrefab = (GameObject)Resources.Load("Prefabs/Item/Weapon/Gatling/GatlingBullet");
 
@@ -44,12 +43,6 @@ public class GatlingControl : MonoBehaviour
     {
         //タイマーのカウント
         shootTimer += Time.deltaTime;
-        
-        //とりあえずコマンド発動
-        if (Input.GetKey(KeyCode.G) && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
-        {
-            Attack();
-        }
     }
 
     public void Attack()

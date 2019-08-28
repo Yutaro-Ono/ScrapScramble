@@ -23,9 +23,8 @@ public class HammerControl : MonoBehaviour
     //攻撃アニメーション、準備アニメーションが再生中かどうかのフラグ
     //これがfalseの時にアニメーションが再生可能とする
     bool attackingFlag = false;
-
-    // Start is called before the first frame update
-    void Start()
+    
+    void Awake()
     {
         animator = GetComponent<Animator>();
         

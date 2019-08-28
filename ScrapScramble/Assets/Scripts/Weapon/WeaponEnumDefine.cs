@@ -16,4 +16,7 @@ public class WeaponEnumDefine : MonoBehaviour
     // レイヤー名
     public const string TouchablePlayerLayerName = "PlayerTouchable";
     public const string UntouchablePlayerLayerName = "PlayerUntouchable";
+
+    public const string StayingHammerLayerName = "StayingHammer";
+    public const string WeaponLayerName = "Weapon";
 }

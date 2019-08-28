@@ -31,6 +31,7 @@ public class weaponIcon : MonoBehaviour
     }
 
     // Update is called once per frame
+    /*
     void Update()
     {
         Debug.Log(status.GetCurrentWeapon());
@@ -67,5 +68,6 @@ public class weaponIcon : MonoBehaviour
         }
 
     }
+    */
 
 }

@@ -15,6 +15,10 @@ public class HammerKeepDown : StateMachineBehaviour
     {
         //タイマーの初期化
         timer = 0.0f;
+
+        // コリジョンの無効化
+        HammerControl control = animator.gameObject.GetComponent<HammerControl>();
+        control.hitCollider.enabled = false;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

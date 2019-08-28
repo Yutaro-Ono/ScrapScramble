@@ -53,13 +53,22 @@ public class HammerControl : MonoBehaviour
         }
     }
 
+    private void LateUpdate()
+    {
+        // レイヤーの切り替え
+        gameObject.layer = LayerMask.NameToLayer(attackingFlag ? WeaponEnumDefine.WeaponLayerName : WeaponEnumDefine.StayingHammerLayerName);
+    }
+
     private void OnEnable()
     {
         // ハンマー本体の回転の初期化
         hitCollider.gameObject.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+
+        // 各種フラグの初期化
+        attackingFlag = false;
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (droppedMode)
         {
@@ -104,9 +113,6 @@ public class HammerControl : MonoBehaviour
 
                 Debug.Log("ハンマー：エネミーにヒット、残りHP" + status.hitPoint);
             }
-
-            //コリジョンを無効にすることで一瞬だけ判定を行う
-            hitCollider.enabled = false;
         }
     }
 

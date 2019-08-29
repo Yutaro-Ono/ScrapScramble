@@ -284,7 +284,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // 角度の差を算出
-        float angle = 360 / dropMass;
+        float angle = 360.0f / (float)dropMass;
 
         // 排出する
         for (int i = 0; i < dropMass; ++i)

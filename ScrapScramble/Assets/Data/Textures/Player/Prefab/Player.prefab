@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67326933095dbe346bece4b446a37826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AIFlag: 0
+  AIFlag: 1
   score: 0
   hp: 100
   armedStage: 0
@@ -207,11 +207,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5201107472695555496}
     m_Modifications:
-    - target: {fileID: 6605167736261938096, guid: 63f8ce3d746adb743a08356a7d4bec0a,
-        type: 3}
-      propertyPath: m_Name
-      value: Core
-      objectReference: {fileID: 0}
     - target: {fileID: 5499761680353043942, guid: 63f8ce3d746adb743a08356a7d4bec0a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -266,6 +261,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6605167736261938096, guid: 63f8ce3d746adb743a08356a7d4bec0a,
+        type: 3}
+      propertyPath: m_Name
+      value: Core
       objectReference: {fileID: 0}
     - target: {fileID: 7063173875000125387, guid: 63f8ce3d746adb743a08356a7d4bec0a,
         type: 3}

@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: 5285382701883947360}
   - component: {fileID: 2611237456323759676}
   - component: {fileID: 7412779095273335527}
+  - component: {fileID: 226592775534211818}
+  - component: {fileID: 3228583052333408765}
   m_Layer: 12
   m_Name: Player
   m_TagString: Player
@@ -156,6 +158,34 @@ MonoBehaviour:
   hammerIcon: {fileID: 0}
   GatlingIcon: {fileID: 0}
   RailgunIcon: {fileID: 0}
+--- !u!114 &226592775534211818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908218819157281842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c1a4acc5ec196f4b9891c0173722a36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Effekseer: {fileID: 0}
+  chargeParticle: {fileID: 0}
+  chagePoints: {fileID: 0}
+--- !u!114 &3228583052333408765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908218819157281842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50f703f9dab511a43b697c28467c23e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulled: {fileID: 0}
 --- !u!1 &3326076075049878092
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,6 +237,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5201107472695555496}
     m_Modifications:
+    - target: {fileID: 6605167736261938096, guid: 63f8ce3d746adb743a08356a7d4bec0a,
+        type: 3}
+      propertyPath: m_Name
+      value: Core
+      objectReference: {fileID: 0}
     - target: {fileID: 5499761680353043942, guid: 63f8ce3d746adb743a08356a7d4bec0a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -261,11 +296,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6605167736261938096, guid: 63f8ce3d746adb743a08356a7d4bec0a,
-        type: 3}
-      propertyPath: m_Name
-      value: Core
       objectReference: {fileID: 0}
     - target: {fileID: 860117537182863523, guid: 63f8ce3d746adb743a08356a7d4bec0a,
         type: 3}

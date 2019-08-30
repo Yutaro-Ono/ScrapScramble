@@ -38,7 +38,7 @@ public class PlayerAI : MonoBehaviour
 
     // 攻撃対象であるプレイヤーを変更する間隔
     // 全員同時にプレイヤーを切り替えると面白くないので、個体ごとにランダムに決める
-    readonly float targetPlayerChangeInterval;
+    float targetPlayerChangeInterval;
 
     // 同じプレイヤーを狙っていた時間を記録するタイマー
     float targetPlayerTimer;
@@ -75,14 +75,10 @@ public class PlayerAI : MonoBehaviour
     // 小数点以下を切り捨て
     int prevTimer;
 
-    // readonlyな変数を書き換えることができるのはコンストラクタのみ
-    public PlayerAI()
-    {
-        targetPlayerChangeInterval = Random.Range(3.0f, 30.0f);
-    }
-
     private void Awake()
     {
+        targetPlayerChangeInterval = Random.Range(3.0f, 30.0f);
+
         cornerPos1 = GameObject.Find("Corner Point1").transform.position;
         cornerPos2 = GameObject.Find("Corner Point2").transform.position;
     }
@@ -118,6 +114,15 @@ public class PlayerAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // ブレークポイント
+        if (Input.GetKeyDown(KeyCode.Tab) && CommonFunction.GetAnyShiftPressed())
+        {
+            if (status.GetId() == 0)
+            {
+                if (true) ;
+            }
+        }
+
         // 駆動時間を記録
         prevTimer = (int)timer;
         timer += Time.deltaTime;
@@ -133,6 +138,11 @@ public class PlayerAI : MonoBehaviour
         
         // 対エネミーWave？
         vsEnemyWave = (status.GetWaveManager().wave == WaveManagement.WAVE_NUM.WAVE_1_PVE || status.GetWaveManager().wave == WaveManagement.WAVE_NUM.WAVE_3_PVE);
+
+        if (vsEnemyWave && targetPlayer != null)
+        {
+            if (true) ;
+        }
 
         // 距離がある程度近ければランダム移動を完了とする
         if (randomWalkingFlag)
@@ -179,7 +189,7 @@ public class PlayerAI : MonoBehaviour
 
     private void LateUpdate()
     {
-        if ((int)timer - prevTimer >= 1 && status.GetId() == 1)
+        if ((int)timer - prevTimer >= 1 && status.GetId() == 0)
         {
             Debug.Log(behavior);
         }

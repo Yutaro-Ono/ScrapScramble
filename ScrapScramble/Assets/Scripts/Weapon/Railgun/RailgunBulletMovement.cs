@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class RailgunBulletMovement : MonoBehaviour
 {
+    // ウェーブの情報
+    WaveManagement waveManager;
+
     // 発射したプレイヤーのオブジェクト
     GameObject shooterPlayer;
 
@@ -28,6 +31,9 @@ public class RailgunBulletMovement : MonoBehaviour
     // ヒットカウント
     int numHit;
 
+    // レイヤーの設定を行ったかどうか
+    bool layerSettingFlag = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +43,14 @@ public class RailgunBulletMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // レイヤーの設定
+        if (!layerSettingFlag)
+        {
+            bool isVsPlayerWave = (waveManager.wave == WaveManagement.WAVE_NUM.WAVE_2_PVP || waveManager.wave == WaveManagement.WAVE_NUM.WAVE_4_PVP);
+            gameObject.layer = LayerMask.NameToLayer(isVsPlayerWave ? WeaponEnumDefine.TouchablePlayerLayerName : WeaponEnumDefine.UntouchablePlayerLayerName);
+            layerSettingFlag = true;
+        }
+
         //前に進む
         gameObject.transform.position += gameObject.transform.forward * speed;
 
@@ -45,6 +59,12 @@ public class RailgunBulletMovement : MonoBehaviour
 
         //一定距離進んだとき消滅
         if (advanceDistance >= disappearDistance)
+        {
+            Destroy(gameObject);
+        }
+
+        // インターバルウェーブで消滅
+        if (waveManager.wave == WaveManagement.WAVE_NUM.WAVE_INTERVAL)
         {
             Destroy(gameObject);
         }
@@ -125,5 +145,6 @@ public class RailgunBulletMovement : MonoBehaviour
     public void SetShooterPlayer(GameObject in_shooterPlayer)
     {
         this.shooterPlayer = in_shooterPlayer;
+        waveManager = shooterPlayer.GetComponent<PlayerStatus>().GetWaveManager();
     }
 }

@@ -1251,6 +1251,9 @@ MonoBehaviour:
   winPlayerScore: 0
   PlayerNum: 0
   winPlayerText: {fileID: 1294018466}
+  tiePlayerNum: 0
+  tiePlayerNum2: 0
+  tiePlayerNum3: 0
 --- !u!1 &1382166745
 GameObject:
   m_ObjectHideFlags: 0

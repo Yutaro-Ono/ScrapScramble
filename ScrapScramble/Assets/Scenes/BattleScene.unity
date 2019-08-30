@@ -612,6 +612,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1449109273}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &699836145 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2670514652785187279, guid: 7ed4c2820c1b46d42957cc22f5f0d314,
+    type: 3}
+  m_PrefabInstance: {fileID: 1449109273}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &750119756 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 343577355970520389, guid: 250eccd4eb9be184a88f35276768a07e,
@@ -1051,6 +1057,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1449109273}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1234209212 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3867541119991101968, guid: 7ed4c2820c1b46d42957cc22f5f0d314,
+    type: 3}
+  m_PrefabInstance: {fileID: 1449109273}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1268437368 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 343577355083272621, guid: 250eccd4eb9be184a88f35276768a07e,
@@ -1362,6 +1374,39 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 19800004, guid: 7e9c50938e32351438a7df9ccad2f2a5,
         type: 3}
+    - target: {fileID: 574596675924359142, guid: 7ed4c2820c1b46d42957cc22f5f0d314,
+        type: 3}
+      propertyPath: chargeParticle
+      value: 
+      objectReference: {fileID: 1705969275368970569, guid: 5d149bf66b1bf8e42bf11adcce71ccf7,
+        type: 3}
+    - target: {fileID: 574596675924359142, guid: 7ed4c2820c1b46d42957cc22f5f0d314,
+        type: 3}
+      propertyPath: chagePoints
+      value: 
+      objectReference: {fileID: 29292117}
+    - target: {fileID: 7927634624065019533, guid: 7ed4c2820c1b46d42957cc22f5f0d314,
+        type: 3}
+      propertyPath: chargeParticle
+      value: 
+      objectReference: {fileID: 1705969275368970569, guid: 5d149bf66b1bf8e42bf11adcce71ccf7,
+        type: 3}
+    - target: {fileID: 7927634624065019533, guid: 7ed4c2820c1b46d42957cc22f5f0d314,
+        type: 3}
+      propertyPath: chagePoints
+      value: 
+      objectReference: {fileID: 699836145}
+    - target: {fileID: 9126346135798955346, guid: 7ed4c2820c1b46d42957cc22f5f0d314,
+        type: 3}
+      propertyPath: chargeParticle
+      value: 
+      objectReference: {fileID: 1705969275368970569, guid: 5d149bf66b1bf8e42bf11adcce71ccf7,
+        type: 3}
+    - target: {fileID: 9126346135798955346, guid: 7ed4c2820c1b46d42957cc22f5f0d314,
+        type: 3}
+      propertyPath: chagePoints
+      value: 
+      objectReference: {fileID: 1234209212}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ed4c2820c1b46d42957cc22f5f0d314, type: 3}
 --- !u!1001 &1472869083

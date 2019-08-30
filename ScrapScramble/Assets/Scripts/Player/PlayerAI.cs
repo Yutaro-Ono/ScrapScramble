@@ -10,7 +10,9 @@ public class PlayerAI : MonoBehaviour
         Enemy_Tackle,
         Enemy_WeaponAttack,
         Player_Tackle,
-        Player_WeaponAttack
+        Player_WeaponAttack,
+        Player_Escape,
+        StopCommand
     }
 
     // 自分のコンポーネント類
@@ -31,7 +33,7 @@ public class PlayerAI : MonoBehaviour
     List<GameObject> detectedEnemy = new List<GameObject>();
 
     // 検出されたプレイヤー
-    List<GameObject> detectedPlayer = new List<GameObject>();
+    List<GameObject> detectedPlayer = new List<GameObject>(3);
 
     // 攻撃対象に選んだ敵プレイヤー
     GameObject targetPlayer;
@@ -43,11 +45,17 @@ public class PlayerAI : MonoBehaviour
     // 同じプレイヤーを狙っていた時間を記録するタイマー
     float targetPlayerTimer;
 
+    // 他プレイヤーから逃げる行動をとるかのフラグ
+    bool escapeBehaviorFlag;
+
+    // 他プレイヤーから逃げる行動をとる確率（パーセンテージ）
+    float escapeBehaviorPercentage;
+
     // 移動、体当たりの方向
     Vector3 targetVector;
 
     // ランダム移動目的地
-    Vector3 destination;
+    Vector3 randomWalkDestination;
 
     // ランダム移動中であるかのフラグ
     bool randomWalkingFlag;
@@ -77,8 +85,6 @@ public class PlayerAI : MonoBehaviour
 
     private void Awake()
     {
-        targetPlayerChangeInterval = Random.Range(3.0f, 30.0f);
-
         cornerPos1 = GameObject.Find("Corner Point1").transform.position;
         cornerPos2 = GameObject.Find("Corner Point2").transform.position;
     }
@@ -100,7 +106,14 @@ public class PlayerAI : MonoBehaviour
 
         targetPlayer = null;
 
+        targetPlayerChangeInterval = Random.Range(3.0f, 30.0f);
+
         targetPlayerTimer = 0.0f;
+
+        escapeBehaviorPercentage = Random.Range(3.0f, 30.0f);
+        //escapeBehaviorPercentage = 0.0f;
+
+        escapeBehaviorFlag = false;
     }
 
     private void FixedUpdate()
@@ -150,7 +163,7 @@ public class PlayerAI : MonoBehaviour
             CheckTargetDistance();
 
             // 移動方向の更新
-            targetVector = destination - transform.position;
+            targetVector = randomWalkDestination - transform.position;
         }
 
         // 対エネミーWaveであれば
@@ -330,66 +343,92 @@ public class PlayerAI : MonoBehaviour
 
                 // ターゲット維持タイマーの初期化
                 targetPlayerTimer = 0.0f;
+
+                // 戦うか逃げるかの選択
+                // escapeBehaviorPercentage%の確率で逃げる行動をとる
+                escapeBehaviorFlag = (escapeBehaviorPercentage > Random.Range(0.0f, 100.0f));
             }
 
-            // ターゲットのいる方向を移動入力の方向とする
+            // ターゲットのいる方向から移動入力の方向を確定する
             // ただし、ランダム移動中の場合は除く
             if (!randomWalkingFlag)
             {
-                targetVector = targetPlayer.transform.position - gameObject.transform.position;
+                // ターゲットから逃げない場合、ターゲットがいる方向を移動入力の方向とする
+                if (!escapeBehaviorFlag)
+                {
+                    targetVector = targetPlayer.transform.position - gameObject.transform.position;
+                }
+
+                // ターゲットから逃げる場合、ターゲットがいる方向と反対方向を移動入力の方向とする
+                else
+                {
+                    targetVector = gameObject.transform.position - targetPlayer.transform.position;
+                }
+
+                // Y方向は0に
                 targetVector.y = 0.0f;
             }
 
-            // 行動判断
-            // 武器を持っている場合
-            // かつ、体当たりのチャージをしていない場合
-            if (weapon != Weapon.None && !chargeFlag)
+            // 敵プレイヤーから逃げない場合
+            if (!escapeBehaviorFlag)
             {
-                // ハンマー
-                if (weapon == Weapon.Hammer)
+                // 行動判断
+                // 武器を持っている場合
+                // かつ、体当たりのチャージをしていない場合
+                if (weapon != Weapon.None && !chargeFlag)
                 {
-                    if (targetVector.magnitude < 15.0f)
+                    // ハンマー
+                    if (weapon == Weapon.Hammer)
+                    {
+                        if (targetVector.magnitude < 15.0f)
+                        {
+                            weaponAttackFlag = true;
+                        }
+                    }
+
+                    // それ以外
+                    else
                     {
                         weaponAttackFlag = true;
                     }
+
+                    randomWalkingFlag = false;
+                    behavior = PlayerBehavior.Player_WeaponAttack;
                 }
 
-                // それ以外
+                // 体当たりが可能な場合
+                else if (!moveScript.GetCoolTimeFlag())
+                {
+                    // 体当たりの威力が3を超えた後、ランダムなタイミングで体当たりを実行
+                    if (moveScript.tacklePower >= 3 && Random.Range(0, 31) == 0)
+                    {
+                        chargeFlag = false;
+                        tackleFlag = true;
+                    }
+                    else
+                    {
+                        // 実行まではチャージ
+                        chargeFlag = true;
+                    }
+
+                    randomWalkingFlag = false;
+                    behavior = PlayerBehavior.Player_Tackle;
+                }
+
+                // 攻撃手段がない場合
                 else
                 {
-                    weaponAttackFlag = true;
+                    if (!randomWalkingFlag)
+                    {
+                        SetRandomDestination();
+                    }
                 }
-
-                randomWalkingFlag = false;
-                behavior = PlayerBehavior.Player_WeaponAttack;
             }
 
-            // 体当たりが可能な場合
-            else if (!moveScript.GetCoolTimeFlag())
-            {
-                // 体当たりの威力が3を超えた後、ランダムなタイミングで体当たりを実行
-                if (moveScript.tacklePower >= 3 && Random.Range(0, 31) == 0)
-                {
-                    chargeFlag = false;
-                    tackleFlag = true;
-                }
-                else
-                {
-                    // 実行まではチャージ
-                    chargeFlag = true;
-                }
-
-                randomWalkingFlag = false;
-                behavior = PlayerBehavior.Player_Tackle;
-            }
-
-            // 攻撃手段がない場合
+            // 敵プレイヤーから逃げる場合
             else
             {
-                if (!randomWalkingFlag)
-                {
-                    SetRandomDestination();
-                }
+                behavior = PlayerBehavior.Player_Escape;
             }
         }
 
@@ -471,8 +510,8 @@ public class PlayerAI : MonoBehaviour
         moveX = Random.Range(smaller.x, larger.x);
         moveZ = Random.Range(smaller.z, larger.z);
 
-        destination = new Vector3(moveX, 0, moveZ);
-        targetVector = destination - transform.position;
+        randomWalkDestination = new Vector3(moveX, 0, moveZ);
+        targetVector = randomWalkDestination - transform.position;
 
         behavior = PlayerBehavior.RandomWalk;
     }
@@ -482,7 +521,7 @@ public class PlayerAI : MonoBehaviour
         Vector3 pos = transform.position;
         pos.y = 0;
 
-        Vector3 distance = destination - pos;
+        Vector3 distance = randomWalkDestination - pos;
         if (distance.magnitude <= randomWalkGoalMargin)
         {
             randomWalkingFlag = false;
@@ -498,8 +537,10 @@ public class PlayerAI : MonoBehaviour
         targetPlayer = null;
         targetPlayerTimer = 0.0f;
 
-        destination = Vector3.zero;
+        randomWalkDestination = Vector3.zero;
         targetVector = Vector3.zero;
+
+        behavior = PlayerBehavior.StopCommand;
     }
 
     public Vector3 GetTargetVector()

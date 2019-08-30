@@ -173,7 +173,7 @@ public class WaveManagement : MonoBehaviour
 
         if (waveCount == 1)
         {
-            Debug.Log("第1ウェーブに入った");
+            //Debug.Log("第1ウェーブに入った");
             waveCount += 1;
         }
 
@@ -194,7 +194,7 @@ public class WaveManagement : MonoBehaviour
 
         if (waveCount == 2)
         {
-            Debug.Log("第2ウェーブに入った");
+            //Debug.Log("第2ウェーブに入った");
             waveCount += 1;
         }
 
@@ -214,7 +214,7 @@ public class WaveManagement : MonoBehaviour
 
         if (waveCount == 3)
         {
-            Debug.Log("第3ウェーブに入った");
+            //Debug.Log("第3ウェーブに入った");
             waveCount += 1;
         }
 
@@ -234,7 +234,7 @@ public class WaveManagement : MonoBehaviour
 
         if (waveCount == 4)
         {
-            Debug.Log("第4ウェーブに入った");
+            //Debug.Log("第4ウェーブに入った");
 
         }
 

@@ -292,6 +292,7 @@ public class PlayerMovement : MonoBehaviour
             // その資源が飛ばされるベクトル
             Vector3 forceDirection = forceDirectionBase;
             forceDirection = Quaternion.Euler(0, angle * i, 0) * forceDirection;
+            forceDirection.y += 3;
 
             // 資源のインスタンス生成
             GameObject resource = GameObject.Instantiate(resourcePrefab, gameObject.transform.position + forceDirection * dropDistance, Quaternion.identity);
@@ -343,6 +344,8 @@ public class PlayerMovement : MonoBehaviour
 
         // 資源の減算
         status.score -= (int)(dropMass * ResourceCollision.pointAddition) * 2;
+
+        Debug.Log("Player" + (status.GetId() + 1) + " : " + dropMass + "個の資源を排出");
 
         return dropMass;
     }

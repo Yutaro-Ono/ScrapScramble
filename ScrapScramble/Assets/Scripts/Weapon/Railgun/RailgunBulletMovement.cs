@@ -13,6 +13,9 @@ public class RailgunBulletMovement : MonoBehaviour
     // ヒットしたプレーヤーの情報を保存する
     GameObject prevPlayerObj;
 
+    // ヒットしたエネミーの情報のリスト
+    List<GameObject> hitEnemies = new List<GameObject>(2);
+
     //弾が進むスピード
     public float speed = 3.0f;
 
@@ -90,9 +93,7 @@ public class RailgunBulletMovement : MonoBehaviour
                 PlayerStatus status = other.GetComponent<PlayerStatus>();
                 Debug.Log("レールガンの弾がプレイヤーにヒット");
 
-                // 当たったプレーヤーの情報を保存
-                prevPlayerObj = other.gameObject;
-
+                // まだどのプレイヤーにもあたっていないとき
                 if(numHit == 0)
                 {
                     numHit++;
@@ -104,6 +105,9 @@ public class RailgunBulletMovement : MonoBehaviour
                     // ヒットカウントを進める
                     numHit++;
                 }
+
+                // 当たったプレーヤーの情報を保存
+                prevPlayerObj = other.gameObject;
 
                 if (numHit >= maxHit)
                 {
@@ -119,8 +123,15 @@ public class RailgunBulletMovement : MonoBehaviour
             Debug.Log("レールガンの弾がエネミーにヒット");
             status.hitPoint -= (short)power;
 
-            // ヒットカウントを進める
-            numHit++;
+            // これまで当たってきたものの中に、今のオブジェクトがなければ
+            if (!hitEnemies.Contains(other.gameObject))
+            {
+                // ヒットカウントを進める
+                numHit++;
+
+                // リストに追加
+                hitEnemies.Add(other.gameObject);
+            }
 
             if (numHit >= maxHit)
             {
@@ -128,18 +139,20 @@ public class RailgunBulletMovement : MonoBehaviour
                 numHit = 0;
             }
         }
-    }
 
-
-    private void OnCollisionEnter(Collision collision)
-    {
         //壁に当たった時
-        if (collision.gameObject.tag == "Wall")
+        else if (other.tag == "Wall")
         {
             Debug.Log("レールガンの弾が壁にぶち当たった");
 
             Destroy(gameObject);
         }
+    }
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        
     }
 
     public void SetShooterPlayer(GameObject in_shooterPlayer)

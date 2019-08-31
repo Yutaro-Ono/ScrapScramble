@@ -319,6 +319,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 400820307}
+  - component: {fileID: 400820308}
+  - component: {fileID: 400820309}
   m_Layer: 0
   m_Name: Player_1
   m_TagString: Untagged
@@ -340,6 +342,37 @@ Transform:
   m_Father: {fileID: 2027150800}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &400820308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400820306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c1a4acc5ec196f4b9891c0173722a36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chargePlayer: {fileID: 2068370303}
+  chargeParticle: {fileID: 1705969275368970569, guid: 5d149bf66b1bf8e42bf11adcce71ccf7,
+    type: 3}
+  chagePoints: {fileID: 2068370312}
+--- !u!114 &400820309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400820306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4889ea2797b543147900bd7bd0d828bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePlayer: {fileID: 2068370303}
+  damage: {fileID: 100014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
+  transfor: {fileID: 2068370312}
 --- !u!1 &473952216
 GameObject:
   m_ObjectHideFlags: 0
@@ -738,6 +771,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 771630631}
+  - component: {fileID: 771630632}
+  - component: {fileID: 771630633}
   m_Layer: 0
   m_Name: Player_2
   m_TagString: Untagged
@@ -759,6 +794,37 @@ Transform:
   m_Father: {fileID: 2027150800}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &771630632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771630630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c1a4acc5ec196f4b9891c0173722a36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chargePlayer: {fileID: 29292116}
+  chargeParticle: {fileID: 1705969275368970569, guid: 5d149bf66b1bf8e42bf11adcce71ccf7,
+    type: 3}
+  chagePoints: {fileID: 29292117}
+--- !u!114 &771630633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771630630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4889ea2797b543147900bd7bd0d828bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePlayer: {fileID: 29292116}
+  damage: {fileID: 100014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
+  transfor: {fileID: 29292117}
 --- !u!1001 &779481863
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -865,8 +931,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 907820171}
+  - component: {fileID: 907820172}
+  - component: {fileID: 907820173}
   m_Layer: 0
-  m_Name: Plaeyr_4
+  m_Name: Player_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -886,6 +954,37 @@ Transform:
   m_Father: {fileID: 2027150800}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &907820172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 907820170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c1a4acc5ec196f4b9891c0173722a36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chargePlayer: {fileID: 1234209211}
+  chargeParticle: {fileID: 1705969275368970569, guid: 5d149bf66b1bf8e42bf11adcce71ccf7,
+    type: 3}
+  chagePoints: {fileID: 1234209212}
+--- !u!114 &907820173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 907820170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4889ea2797b543147900bd7bd0d828bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePlayer: {fileID: 1234209211}
+  damage: {fileID: 100014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
+  transfor: {fileID: 1234209212}
 --- !u!1 &1003929376
 GameObject:
   m_ObjectHideFlags: 0
@@ -944,7 +1043,7 @@ PrefabInstance:
     - target: {fileID: 7934888141528449103, guid: df70514bacf04de428a50bd1ef8ee1b1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.1
+      value: 2.7
       objectReference: {fileID: 0}
     - target: {fileID: 7934888141528449103, guid: df70514bacf04de428a50bd1ef8ee1b1,
         type: 3}
@@ -1168,7 +1267,7 @@ PrefabInstance:
     - target: {fileID: 7934888141528449103, guid: df70514bacf04de428a50bd1ef8ee1b1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.2
+      value: -3.9
       objectReference: {fileID: 0}
     - target: {fileID: 7934888141528449103, guid: df70514bacf04de428a50bd1ef8ee1b1,
         type: 3}
@@ -1601,7 +1700,17 @@ PrefabInstance:
       propertyPath: damage
       value: 
       objectReference: {fileID: 100014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8937374823660921114, guid: 7ed4c2820c1b46d42957cc22f5f0d314, type: 3}
+    - {fileID: 8768393755546930163, guid: 7ed4c2820c1b46d42957cc22f5f0d314, type: 3}
+    - {fileID: 6047437987809800717, guid: 7ed4c2820c1b46d42957cc22f5f0d314, type: 3}
+    - {fileID: 574596675924359142, guid: 7ed4c2820c1b46d42957cc22f5f0d314, type: 3}
+    - {fileID: 4751194749928770970, guid: 7ed4c2820c1b46d42957cc22f5f0d314, type: 3}
+    - {fileID: 7758828136452551780, guid: 7ed4c2820c1b46d42957cc22f5f0d314, type: 3}
+    - {fileID: 7927634624065019533, guid: 7ed4c2820c1b46d42957cc22f5f0d314, type: 3}
+    - {fileID: 9126346135798955346, guid: 7ed4c2820c1b46d42957cc22f5f0d314, type: 3}
+    - {fileID: 5858185544323903045, guid: 7ed4c2820c1b46d42957cc22f5f0d314, type: 3}
+    - {fileID: 8867363160558589883, guid: 7ed4c2820c1b46d42957cc22f5f0d314, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7ed4c2820c1b46d42957cc22f5f0d314, type: 3}
 --- !u!1001 &1472869083
 PrefabInstance:
@@ -1924,6 +2033,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1577947126}
+  - component: {fileID: 1577947127}
+  - component: {fileID: 1577947128}
   m_Layer: 0
   m_Name: Player_3
   m_TagString: Untagged
@@ -1945,6 +2056,37 @@ Transform:
   m_Father: {fileID: 2027150800}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1577947127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577947125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c1a4acc5ec196f4b9891c0173722a36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chargePlayer: {fileID: 699836144}
+  chargeParticle: {fileID: 1705969275368970569, guid: 5d149bf66b1bf8e42bf11adcce71ccf7,
+    type: 3}
+  chagePoints: {fileID: 699836145}
+--- !u!114 &1577947128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577947125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4889ea2797b543147900bd7bd0d828bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePlayer: {fileID: 699836144}
+  damage: {fileID: 100014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
+  transfor: {fileID: 699836145}
 --- !u!1001 &1697759449
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -38,6 +38,9 @@ public class PlayerStatus : MonoBehaviour
 
     float initialScale;
 
+    public int gatlingDamage = 0;
+    public static int gatlingPatience = 10;
+
     private void Awake()
     {
         waveManager = GameObject.Find("WaveManager").GetComponent<WaveManagement>();

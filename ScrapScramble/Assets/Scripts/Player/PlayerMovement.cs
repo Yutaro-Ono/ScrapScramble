@@ -356,6 +356,22 @@ public class PlayerMovement : MonoBehaviour
         return dropMass;
     }
 
+    public uint OnHitGatlingBullet(int power, uint dropMass)
+    {
+        uint ret = 0;
+
+        status.gatlingDamage += power;
+
+        if (status.gatlingDamage > PlayerStatus.gatlingPatience)
+        {
+            ret = DropResource(dropMass);
+
+            status.gatlingDamage = 0;
+        }
+
+        return ret;
+    }
+
     // 武器による攻撃関数
     void Attack()
     {

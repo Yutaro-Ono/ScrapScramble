@@ -17,18 +17,29 @@ public class HammerControl : MonoBehaviour
     [SerializeField]
     Vector3 droppedModeScale;
 
+    // ウェーブ情報
+    WaveManagement wave;
+
     // 攻撃力（プレイヤーに対しては落とす資源の数）
     public short power = 3;
 
     //攻撃アニメーション、準備アニメーションが再生中かどうかのフラグ
     //これがfalseの時にアニメーションが再生可能とする
+    bool animatingFlag = false;
+
+    // 振り下ろしている間に接触したオブジェクト
+    List<GameObject> hitObject = new List<GameObject>(4);
+
+    // 振り下ろしているモーション中であるかのフラグ
     bool attackingFlag = false;
-    
+
     void Awake()
     {
         animator = GetComponent<Animator>();
         
         attackAnimScript = animator.GetBehaviour<HammerAttack>();
+
+        wave = transform.parent.parent.GetComponent<PlayerStatus>().GetWaveManager();
 
         if (attackAnimScript == null)
         {
@@ -50,12 +61,37 @@ public class HammerControl : MonoBehaviour
         {
             hitCollider.enabled = false;
         }
+
+        // 再生中アニメーションの情報取得
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        if (stateInfo.nameHash == Animator.StringToHash("Base Layer.HammerAttack"))
+        {
+            attackingFlag = true;
+        }
+        else
+        {
+            attackingFlag = false;
+        }
+
+        // 攻撃中でない間リストをクリア
+        if (!animatingFlag)
+        {
+            hitObject.Clear();
+        }
     }
 
     private void LateUpdate()
     {
         // レイヤーの切り替え
-        gameObject.layer = LayerMask.NameToLayer(attackingFlag ? WeaponEnumDefine.WeaponLayerName : WeaponEnumDefine.StayingHammerLayerName);
+        if (attackingFlag)
+        {
+            bool vsEnemyWave = (wave.wave == WaveManagement.WAVE_NUM.WAVE_1_PVE || wave.wave == WaveManagement.WAVE_NUM.WAVE_3_PVE);
+            gameObject.layer = LayerMask.NameToLayer(vsEnemyWave ? WeaponEnumDefine.UntouchablePlayerLayerName : WeaponEnumDefine.WeaponLayerName);
+        }
+        else
+        {
+            gameObject.layer = LayerMask.NameToLayer(WeaponEnumDefine.StayingHammerLayerName);
+        }
     }
 
     private void OnEnable()
@@ -64,7 +100,7 @@ public class HammerControl : MonoBehaviour
         hitCollider.gameObject.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
 
         // 各種フラグの初期化
-        attackingFlag = false;
+        animatingFlag = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -84,33 +120,45 @@ public class HammerControl : MonoBehaviour
         }
         else
         {
-            //if (animator.GetBool(attackAnimScript.otherBoolName) && other.tag == "Player")
-            if (other.tag == "Player")
+            bool vsEnemyWave = (wave.wave == WaveManagement.WAVE_NUM.WAVE_1_PVE || wave.wave == WaveManagement.WAVE_NUM.WAVE_3_PVE);
+            if (other.tag == "Player" && !vsEnemyWave)
             {
                 // 当たったプレイヤーが装備者自身でなければダメージ処理
                 if (other.gameObject != transform.parent.parent.gameObject)
                 {
-                    PlayerMovement move = other.GetComponent<PlayerMovement>();
-                    move.DropResource((uint)power);
-                    
-                    Debug.Log("ハンマー：プレイヤーにヒット");
+                    // そのひと振りで当たっていない相手なら
+                    if (!hitObject.Contains(other.gameObject))
+                    {
+                        PlayerMovement move = other.GetComponent<PlayerMovement>();
+                        move.DropResource((uint)power);
+
+                        hitObject.Add(other.gameObject);
+
+                        Debug.Log("ハンマー：プレイヤーにヒット");
+                    }
                 }
             }
 
             // エネミーに対しての判定
             else if (other.tag == "Enemy")
             {
-                // 対象のステータスを取得
-                EnemyStatus status = other.GetComponent<EnemyStatus>();
-                if (status == null)
+                // そのひと振りで当たっていない相手なら
+                if (!hitObject.Contains(other.gameObject))
                 {
-                    Debug.Log("ステータス取得失敗");
+                    // 対象のステータスを取得
+                    EnemyStatus status = other.GetComponent<EnemyStatus>();
+                    if (status == null)
+                    {
+                        Debug.Log("ステータス取得失敗");
+                    }
+
+                    // 敵にダメージ
+                    status.hitPoint -= power;
+
+                    hitObject.Add(other.gameObject);
+
+                    Debug.Log("ハンマー：エネミーにヒット、残りHP" + status.hitPoint);
                 }
-
-                // 敵にダメージ
-                status.hitPoint -= power;
-
-                Debug.Log("ハンマー：エネミーにヒット、残りHP" + status.hitPoint);
             }
         }
     }
@@ -119,19 +167,19 @@ public class HammerControl : MonoBehaviour
     public void Attack()
     {
         //ハンマー攻撃が作動中かどうかを判定。作動中でないときに攻撃モーションが発動
-        if (attackingFlag == false)
+        if (animatingFlag == false)
         {
             //トリガーによって攻撃モーション発動
             animator.SetTrigger(attackAnimScript.attackTrigger);
 
             //攻撃中のフラグを設定
             //攻撃モーションが一通り終わったときに、アニメーター側でfalseを代入する
-            attackingFlag = true;
+            animatingFlag = true;
         }
     }
 
     public bool SetAttackingFlag(bool value)
     {
-        return (attackingFlag = value);
+        return (animatingFlag = value);
     }
 }

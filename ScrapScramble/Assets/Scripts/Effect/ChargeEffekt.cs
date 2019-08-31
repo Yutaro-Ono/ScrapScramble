@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 public class ChargeEffekt : MonoBehaviour
 {
+    public GameObject chargePlayer;
     public GameObject chargeParticle;
     public Transform chagePoints;
     PlayerMovement playerMovement;
@@ -12,25 +13,23 @@ public class ChargeEffekt : MonoBehaviour
     GameObject expl;
     bool isParticlePlay;
     float initialScale;
-    int prevScore;
     // Start is called before the first frame update
     private void Start()
     {
-        playerMovement = GetComponent<PlayerMovement>();
-        status = GetComponent<PlayerStatus>();
-        playePos = GetComponent<Transform>().position;
+        playerMovement = chargePlayer.GetComponent<PlayerMovement>();
+        status = chargePlayer.GetComponent<PlayerStatus>();
+        playePos = chargePlayer.GetComponent<Transform>().position;
         initialScale = chargeParticle.transform.localScale.x;
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if (prevScore != status.score)
-        {
-            EffectBigger();
-        }
+       
         Charge();
-        prevScore = status.score;
+       
+       
+      
     }
 
     private void Charge()
@@ -48,6 +47,7 @@ public class ChargeEffekt : MonoBehaviour
             Destroy(expl, 0.1f);
             isParticlePlay = false;
         }
+        EffectBigger();
 
     }
 
@@ -58,9 +58,9 @@ public class ChargeEffekt : MonoBehaviour
         {
             if (i == status.armedStage)
             {
-                float scale = initialScale + (4.0f * i);
+                float scale = initialScale + (5.0f * i);
 
-                chargeParticle.transform.localScale = new Vector3(scale, scale, scale);
+                expl.transform.localScale = new Vector3(scale, scale, scale);
             }
         }
     }

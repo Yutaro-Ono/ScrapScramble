@@ -119,6 +119,12 @@ public class PlayerMovement : MonoBehaviour
         string layerName = tacklingFlag ? tacklingLayerName : normalLayerName;
         gameObject.layer = LayerMask.NameToLayer(layerName);
 
+        // スコアがマイナスの値をとらないよう調節
+        if (status.score < 0)
+        {
+            status.score = 0;
+        }
+
         // 進行方向を向く
         Vector3 positionDifference = transform.position - prevPos;
         if (positionDifference.magnitude > 0.01f)

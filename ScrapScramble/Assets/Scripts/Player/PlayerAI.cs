@@ -110,7 +110,7 @@ public class PlayerAI : MonoBehaviour
 
         targetPlayerTimer = 0.0f;
 
-        escapeBehaviorPercentage = Random.Range(3.0f, 30.0f);
+        escapeBehaviorPercentage = Random.Range(3.0f, 50.0f);
         //escapeBehaviorPercentage = 0.0f;
 
         escapeBehaviorFlag = false;
@@ -127,15 +127,6 @@ public class PlayerAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // ブレークポイント
-        if (Input.GetKeyDown(KeyCode.Tab) && CommonFunction.GetAnyShiftPressed())
-        {
-            if (status.GetId() == 0)
-            {
-                if (true) ;
-            }
-        }
-
         // 駆動時間を記録
         prevTimer = (int)timer;
         timer += Time.deltaTime;
@@ -151,12 +142,7 @@ public class PlayerAI : MonoBehaviour
         
         // 対エネミーWave？
         vsEnemyWave = (status.GetWaveManager().wave == WaveManagement.WAVE_NUM.WAVE_1_PVE || status.GetWaveManager().wave == WaveManagement.WAVE_NUM.WAVE_3_PVE);
-
-        if (vsEnemyWave && targetPlayer != null)
-        {
-            if (true) ;
-        }
-
+        
         // 距離がある程度近ければランダム移動を完了とする
         if (randomWalkingFlag)
         {

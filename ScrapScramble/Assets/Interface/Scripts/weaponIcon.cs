@@ -31,16 +31,15 @@ public class weaponIcon : MonoBehaviour
     }
 
     // Update is called once per frame
-    /*
     void Update()
     {
-        Debug.Log(status.GetCurrentWeapon());
+        //Debug.Log(status.GetCurrentWeapon());
 
         // 表示・非表示の管理
         if (status.GetCurrentWeapon() == Weapon.Hammer)
         {
             hammerIcon.enabled = true;
-            Debug.Log("ハンマー表示");
+            //Debug.Log("ハンマー表示");
         }
         else
         {
@@ -50,7 +49,7 @@ public class weaponIcon : MonoBehaviour
         if (status.GetCurrentWeapon() == Weapon.Gatling)
         {
             GatlingIcon.enabled = true;
-            Debug.Log("ガトリング表示");
+            //Debug.Log("ガトリング表示");
         }
         else
         {
@@ -60,7 +59,7 @@ public class weaponIcon : MonoBehaviour
         if (status.GetCurrentWeapon() == Weapon.Railgun)
         {
             RailgunIcon.enabled = true;
-            Debug.Log("レールガン表示");
+            //Debug.Log("レールガン表示");
         }
         else
         {
@@ -68,6 +67,4 @@ public class weaponIcon : MonoBehaviour
         }
 
     }
-    */
-
 }

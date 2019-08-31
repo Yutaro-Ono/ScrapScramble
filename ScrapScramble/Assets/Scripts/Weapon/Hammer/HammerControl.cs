@@ -18,7 +18,7 @@ public class HammerControl : MonoBehaviour
     Vector3 droppedModeScale;
 
     // ウェーブ情報
-    WaveManagement wave;
+    static WaveManagement wave = null;
 
     // 攻撃力（プレイヤーに対しては落とす資源の数）
     public short power = 3;
@@ -39,7 +39,10 @@ public class HammerControl : MonoBehaviour
         
         attackAnimScript = animator.GetBehaviour<HammerAttack>();
 
-        wave = transform.parent.parent.GetComponent<PlayerStatus>().GetWaveManager();
+        if (!droppedMode && wave == null)
+        {
+            wave = transform.parent.parent.GetComponent<PlayerStatus>().GetWaveManager();
+        }
 
         if (attackAnimScript == null)
         {

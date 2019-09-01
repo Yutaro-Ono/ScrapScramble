@@ -33,6 +33,9 @@ public class HammerControl : MonoBehaviour
     // 振り下ろしているモーション中であるかのフラグ
     bool attackingFlag = false;
 
+    // エフェクト再生タイミングでtrueになる変数
+    public bool effectPlayTiming = false;
+
     void Awake()
     {
         animator = GetComponent<Animator>();
@@ -73,6 +76,9 @@ public class HammerControl : MonoBehaviour
         }
         else
         {
+            // attackingFlagが真ならば真、偽ならば偽を代入
+            effectPlayTiming = attackingFlag;
+
             attackingFlag = false;
         }
 
@@ -85,6 +91,9 @@ public class HammerControl : MonoBehaviour
 
     private void LateUpdate()
     {
+        // 更新
+        effectPlayTiming = false;
+
         // レイヤーの切り替え
         if (attackingFlag)
         {
@@ -104,6 +113,7 @@ public class HammerControl : MonoBehaviour
 
         // 各種フラグの初期化
         animatingFlag = false;
+        effectPlayTiming = false;
     }
 
     private void OnTriggerEnter(Collider other)

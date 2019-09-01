@@ -18,7 +18,10 @@ public class RailgunControl : MonoBehaviour
     public float shootInterval = 2.0f;
 
     float shootTimer;
-    
+
+    // エフェクト再生タイミングでtrueになる変数
+    public bool effectPlayTiming = false;
+
     void Awake()
     {
         bulletPrefab = (GameObject)Resources.Load("Prefabs/Item/Weapon/Railgun/RailgunBullet");
@@ -45,10 +48,19 @@ public class RailgunControl : MonoBehaviour
         shootTimer += Time.deltaTime;
     }
 
+    private void LateUpdate()
+    {
+        // 更新
+        effectPlayTiming = true;
+    }
+
     private void OnEnable()
     {
         // クールタイム初期化
         shootTimer = shootInterval;
+
+        // エフェクトフラグ初期化
+        effectPlayTiming = false;
     }
 
     public void Attack()
@@ -65,6 +77,9 @@ public class RailgunControl : MonoBehaviour
 
             //タイマーを0秒にリセット
             shootTimer = 0.0f;
+
+            // エフェクト再生指示フラグ
+            effectPlayTiming = true;
         }
     }
 

@@ -18,7 +18,10 @@ public class GatlingControl : MonoBehaviour
 
     [SerializeField]
     Vector3 droppedModeScale;
-    
+
+    // エフェクト再生タイミングでtrueになる変数
+    public bool effectPlayTiming = false;
+
     void Awake()
     {
         bulletPrefab = (GameObject)Resources.Load("Prefabs/Item/Weapon/Gatling/GatlingBullet");
@@ -45,6 +48,18 @@ public class GatlingControl : MonoBehaviour
         shootTimer += Time.deltaTime;
     }
 
+    private void LateUpdate()
+    {
+        // 更新
+        effectPlayTiming = false;
+    }
+
+    private void OnEnable()
+    {
+        // エフェクトフラグ初期化
+        effectPlayTiming = false;
+    }
+
     public void Attack()
     {
         //タイマーの値が発射間隔の値を超えていた場合、弾を発射する
@@ -59,6 +74,9 @@ public class GatlingControl : MonoBehaviour
 
             //タイマーを0秒にリセット
             shootTimer = 0.0f;
+
+            // エフェクト再生指示フラグ
+            effectPlayTiming = true;
         }
     }
 

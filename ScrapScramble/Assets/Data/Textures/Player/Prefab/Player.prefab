@@ -67,8 +67,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 11, z: 18}
-  m_Center: {x: 0, y: 6.5, z: 0}
+  m_Size: {x: 10, y: 30, z: 18}
+  m_Center: {x: 0, y: 16, z: 0}
 --- !u!65 &661940197769968360
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -80,8 +80,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 20, z: 18}
-  m_Center: {x: 0, y: 6.5, z: 0}
+  m_Size: {x: 10, y: 45, z: 18}
+  m_Center: {x: 0, y: 16, z: 0}
 --- !u!114 &7980343266889029118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,11 +124,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67326933095dbe346bece4b446a37826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AIFlag: 0
+  AIFlag: 1
   score: 0
   hp: 100
   armedStage: 0
   chargeAttackPower: 0
+  gatlingDamage: 0
 --- !u!114 &2611237456323759676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,6 +272,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5201798478508716434, guid: 63f8ce3d746adb743a08356a7d4bec0a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5287444537982662566, guid: 63f8ce3d746adb743a08356a7d4bec0a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2905995730424446645, guid: 63f8ce3d746adb743a08356a7d4bec0a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173875000125387, guid: 63f8ce3d746adb743a08356a7d4bec0a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63f8ce3d746adb743a08356a7d4bec0a, type: 3}

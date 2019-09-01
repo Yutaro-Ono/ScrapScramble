@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -35,6 +36,9 @@ public class PlayerMovement : MonoBehaviour
 
     // ドロップ時に資源を放る強さ
     const float dropAddForceStlength = 500.0f;
+
+    // ドロップ時にどのくらいの距離に資源を生成するか
+    const float dropDistance = 15.0f;
 
     // 通常時のレイヤー名
     public const string normalLayerName = "PlayerLayer";
@@ -114,6 +118,12 @@ public class PlayerMovement : MonoBehaviour
         // レイヤーの更新
         string layerName = tacklingFlag ? tacklingLayerName : normalLayerName;
         gameObject.layer = LayerMask.NameToLayer(layerName);
+
+        // スコアがマイナスの値をとらないよう調節
+        if (status.score < 0)
+        {
+            status.score = 0;
+        }
 
         // 進行方向を向く
         Vector3 positionDifference = transform.position - prevPos;
@@ -267,8 +277,42 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        // 排出する
+        // 1つ目の資源を飛ばす方向をランダムに設定
+        Vector3 forceDirectionBase;
         {
+            // X, Z成分を-100～100でランダムに決定
+            float dirX = Random.Range(-100.0f, 100.0f);
+            float dirZ = Random.Range(-100.0f, 100.0f);
+
+            // ベクトル設定・正規化
+            forceDirectionBase = new Vector3(dirX, 0.0f, dirZ);
+            forceDirectionBase.Normalize();
+        }
+
+        // 角度の差を算出
+        float angle = 360.0f / (float)dropMass;
+
+        // 排出する
+        for (int i = 0; i < dropMass; ++i)
+        {
+            // その資源が飛ばされるベクトル
+            Vector3 forceDirection = forceDirectionBase;
+            forceDirection = Quaternion.Euler(0, angle * i, 0) * forceDirection;
+            forceDirection.y += 3;
+
+            // 資源のインスタンス生成
+            GameObject resource = GameObject.Instantiate(resourcePrefab, gameObject.transform.position + forceDirection * dropDistance, Quaternion.identity);
+
+            // 物理的に飛ばすため、資源のリジッドボディを取得
+            Rigidbody resRigidbody = resource.GetComponent<Rigidbody>();
+
+            // 飛ばす
+            resRigidbody.AddForce(forceDirection * dropAddForceStlength);
+        }
+
+        // 排出する(現在コメントアウト中)
+        {
+            /*
             //資源のインスタンス生成
             GameObject[] resource = new GameObject[dropMass];
             for (int i = 0; i < dropMass; i++)
@@ -301,12 +345,31 @@ public class PlayerMovement : MonoBehaviour
                 //ここでやっと飛ばす
                 resourceRigidbody[i].AddForce(dropDirection);
             }
+            */
         }
 
         // 資源の減算
         status.score -= (int)(dropMass * ResourceCollision.pointAddition) * 2;
 
+        Debug.Log("Player" + (status.GetId() + 1) + " : " + dropMass + "個の資源を排出");
+
         return dropMass;
+    }
+
+    public uint OnHitGatlingBullet(int power, uint dropMass)
+    {
+        uint ret = 0;
+
+        status.gatlingDamage += power;
+
+        if (status.gatlingDamage > PlayerStatus.gatlingPatience)
+        {
+            ret = DropResource(dropMass);
+
+            status.gatlingDamage = 0;
+        }
+
+        return ret;
     }
 
     // 武器による攻撃関数

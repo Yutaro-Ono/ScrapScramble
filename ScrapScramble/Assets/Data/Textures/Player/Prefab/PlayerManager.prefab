@@ -316,11 +316,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5285382701883947360, guid: 62f2af9a76f12a941be28cb59b4ab45c,
-        type: 3}
-      propertyPath: score
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 438270996070778035, guid: 62f2af9a76f12a941be28cb59b4ab45c,
         type: 3}
       propertyPath: hitCollider

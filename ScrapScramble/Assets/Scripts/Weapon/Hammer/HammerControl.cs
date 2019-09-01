@@ -116,7 +116,7 @@ public class HammerControl : MonoBehaviour
 
                 status.EquipWeapon(Weapon.Hammer);
 
-                Debug.Log("ハンマー：プレイヤー" + (status.GetId()) + "が取得");
+                Debug.Log("ハンマー：プレイヤー" + (status.GetId() + 1) + "が取得");
 
                 Destroy(gameObject);
             }

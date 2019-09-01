@@ -79,24 +79,28 @@ public class TransWaveProduct : MonoBehaviour
         // Waveがインターバルの時にUIをアクティブ化
         if (wave.wave == WaveManagement.WAVE_NUM.WAVE_INTERVAL)
         {
-            // PVEウェーブならウェーブ情報を「撃退」に
+            // 前のウェーブがPVEウェーブならウェーブ情報を「対戦」に
             if (wave.tmpWave == WaveManagement.WAVE_NUM.WAVE_1_PVE || wave.tmpWave == WaveManagement.WAVE_NUM.WAVE_3_PVE)
             {
-                waveIndex[0].SetActive(true);
+                waveIndex[1].SetActive(true);
+                waveIndex[0].SetActive(false);
             }
-            // PVPウェーブならウェーブ情報を「PVP」に
+            // 前のウェーブがPVPウェーブなら、ウェーブ情報を「撃退」に
             else if (wave.tmpWave == WaveManagement.WAVE_NUM.WAVE_2_PVP || wave.tmpWave == WaveManagement.WAVE_NUM.WAVE_4_PVP)
             {
                 waveIndex[0].SetActive(true);
+                waveIndex[1].SetActive(false);
             }
 
-            productUI.SetActive(true);
             wallAnim.SetBool("Interval", true);
+            productUI.SetActive(true);
+            waveInfo.SetActive(true);
         }
         else
         {
+            wallAnim.SetBool("Interval", false);
             productUI.SetActive(false);
-            wallAnim.SetBool("Interval", true);
+            waveInfo.SetActive(false);
         }
     }
 

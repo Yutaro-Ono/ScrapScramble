@@ -25,6 +25,9 @@ public class GatlingBulletMovement : MonoBehaviour
     // レイヤー情報を入れたかどうか
     bool layerSettingFlag = false;
 
+    // 対プレイヤーウェーブか
+    bool isVsPlayerWave;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,7 +40,7 @@ public class GatlingBulletMovement : MonoBehaviour
         // レイヤーを設定
         if (!layerSettingFlag)
         {
-            bool isVsPlayerWave = (waveManager.wave == WaveManagement.WAVE_NUM.WAVE_2_PVP || waveManager.wave == WaveManagement.WAVE_NUM.WAVE_4_PVP);
+            isVsPlayerWave = (waveManager.wave == WaveManagement.WAVE_NUM.WAVE_2_PVP || waveManager.wave == WaveManagement.WAVE_NUM.WAVE_4_PVP);
             gameObject.layer = LayerMask.NameToLayer(isVsPlayerWave ? WeaponEnumDefine.TouchablePlayerLayerName : WeaponEnumDefine.UntouchablePlayerLayerName);
             layerSettingFlag = true;
         }
@@ -64,7 +67,7 @@ public class GatlingBulletMovement : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //プレイヤーに当たった時
-        if (other.tag == "Player")
+        if (other.tag == "Player" && isVsPlayerWave)
         {
             //そのプレイヤ－が装備者自身でないとき
             if (other.gameObject != shooterPlayer)
@@ -79,7 +82,7 @@ public class GatlingBulletMovement : MonoBehaviour
                     move.DropResource((uint)power);
                 }
                 PlayerStatus status = other.GetComponent<PlayerStatus>();
-                Debug.Log("ガトリング：プレイヤー" + (status.GetId()) + "にヒット");
+                Debug.Log("ガトリング：プレイヤー" + (status.GetId() + 1) + "にヒット");
 
                 Destroy(gameObject);
             }
@@ -101,7 +104,7 @@ public class GatlingBulletMovement : MonoBehaviour
         //壁に当たった時
         if (collision.gameObject.tag == "Wall")
         {
-            Debug.Log("ガトリングの弾が壁にぶち当たった");
+            //Debug.Log("ガトリングの弾が壁にぶち当たった");
 
             Destroy(gameObject);
         }

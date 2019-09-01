@@ -8,7 +8,7 @@ public class ResourceCollision : MonoBehaviour
     Color color;
 
     //プレイヤーが獲得した時の資源ポイントの増分
-    public const int pointAddition = 100;
+    public const int pointAddition = 10;
 
     //ドロップ時からの経過時間
     float timeFromDropped = 0.0f;
@@ -70,11 +70,7 @@ public class ResourceCollision : MonoBehaviour
             flashPartFrame++;
         }
     }
-
-    private void FixedUpdate()
-    {
-    }
-
+    
     private void OnTriggerEnter(Collider other)
     {
         //衝突物がプレイヤーであれば、その資源獲得数に追加する。

@@ -37,6 +37,9 @@ public class RailgunBulletMovement : MonoBehaviour
     // レイヤーの設定を行ったかどうか
     bool layerSettingFlag = false;
 
+    // 対プレイヤーウェーブかどうか
+    bool isVsPlayerWave;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,7 +52,7 @@ public class RailgunBulletMovement : MonoBehaviour
         // レイヤーの設定
         if (!layerSettingFlag)
         {
-            bool isVsPlayerWave = (waveManager.wave == WaveManagement.WAVE_NUM.WAVE_2_PVP || waveManager.wave == WaveManagement.WAVE_NUM.WAVE_4_PVP);
+            isVsPlayerWave = (waveManager.wave == WaveManagement.WAVE_NUM.WAVE_2_PVP || waveManager.wave == WaveManagement.WAVE_NUM.WAVE_4_PVP);
             gameObject.layer = LayerMask.NameToLayer(isVsPlayerWave ? WeaponEnumDefine.TouchablePlayerLayerName : WeaponEnumDefine.UntouchablePlayerLayerName);
             layerSettingFlag = true;
         }
@@ -76,7 +79,7 @@ public class RailgunBulletMovement : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //プレイヤーに当たった時
-        if (other.tag == "Player")
+        if (other.tag == "Player" && isVsPlayerWave)
         {
             //そのプレイヤ－が装備者自身でないとき
             if (other.gameObject != shooterPlayer)
@@ -143,7 +146,7 @@ public class RailgunBulletMovement : MonoBehaviour
         //壁に当たった時
         else if (other.tag == "Wall")
         {
-            Debug.Log("レールガンの弾が壁にぶち当たった");
+            //Debug.Log("レールガンの弾が壁にぶち当たった");
 
             Destroy(gameObject);
         }

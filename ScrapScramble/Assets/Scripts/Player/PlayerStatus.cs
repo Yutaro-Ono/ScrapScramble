@@ -8,7 +8,7 @@ public class PlayerStatus : MonoBehaviour
     public bool AIFlag;
 
     // ウェーブの情報
-    WaveManagement waveManager;
+    static WaveManagement waveManager = null;
 
     // 現在装備している武器
     Weapon currentWeapon;
@@ -28,7 +28,7 @@ public class PlayerStatus : MonoBehaviour
     public int armedStage = 0;
     const int armedStageLimit = 4;      // 巨大化の段階数
     // 次の巨大化までいくつの資源オブジェクトが必要か。
-    public const int armedStageUpResourceMass = 10;
+    public const int armedStageUpResourceMass = 15;
     public short chargeAttackPower;
     bool getItem;
     bool nextBody;
@@ -40,14 +40,15 @@ public class PlayerStatus : MonoBehaviour
 
     public int gatlingDamage = 0;
     public static int gatlingPatience = 10;
-
-    private void Awake()
-    {
-        waveManager = GameObject.Find("WaveManager").GetComponent<WaveManagement>();
-    }
-
+    
     void Start()
     {
+        // ウェーブ情報取得
+        if (waveManager == null)
+        {
+            waveManager = PlayerManagement.GetWaveManager();
+        }
+
         // なにも装備していない状態
         currentWeapon = Weapon.None;
 

@@ -19,8 +19,10 @@ public class GatlingControl : MonoBehaviour
     [SerializeField]
     Vector3 droppedModeScale;
 
-    // Start is called before the first frame update
-    void Start()
+    // エフェクト再生タイミングでtrueになる変数
+    public bool effectPlayTiming = false;
+
+    void Awake()
     {
         bulletPrefab = (GameObject)Resources.Load("Prefabs/Item/Weapon/Gatling/GatlingBullet");
 
@@ -44,12 +46,18 @@ public class GatlingControl : MonoBehaviour
     {
         //タイマーのカウント
         shootTimer += Time.deltaTime;
-        
-        //とりあえずコマンド発動
-        if (Input.GetKey(KeyCode.G) && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
-        {
-            Attack();
-        }
+    }
+
+    private void LateUpdate()
+    {
+        // 更新
+        effectPlayTiming = false;
+    }
+
+    private void OnEnable()
+    {
+        // エフェクトフラグ初期化
+        effectPlayTiming = false;
     }
 
     public void Attack()
@@ -66,6 +74,9 @@ public class GatlingControl : MonoBehaviour
 
             //タイマーを0秒にリセット
             shootTimer = 0.0f;
+
+            // エフェクト再生指示フラグ
+            effectPlayTiming = true;
         }
     }
 

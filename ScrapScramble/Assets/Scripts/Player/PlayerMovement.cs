@@ -37,10 +37,10 @@ public class PlayerMovement : MonoBehaviour
     const float dropAddForceStlength = 500.0f;
 
     // 通常時のレイヤー名
-    const string normalLayerName = "PlayerLayer";
+    public const string normalLayerName = "PlayerLayer";
 
     // 体当たり中のレイヤー名
-    const string tacklingLayerName = "TacklingPlayerLayer";
+    public const string tacklingLayerName = "TacklingPlayerLayer";
 
     private void Awake()
     {

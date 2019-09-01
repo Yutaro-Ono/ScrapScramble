@@ -10,19 +10,27 @@ public class GameToResult : MonoBehaviour
     GameObject player2Obj;
     GameObject player3Obj;
     GameObject player4Obj;
+
+    WaveManagement waveManager;
     void Start()
     {
         player1Obj = GameObject.Find("Player1");
         player2Obj = GameObject.Find("Player2");
         player3Obj = GameObject.Find("Player3");
         player4Obj = GameObject.Find("Player4");
+
+        waveManager = GameObject.Find("WaveManager").GetComponent<WaveManagement>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (waveManager.timer < 0)
+        {
+            SceneTransition();
+        }
     }
+
     public void AssignScore()
     {
         PlayerStatus status1 = player1Obj.GetComponent<PlayerStatus>();

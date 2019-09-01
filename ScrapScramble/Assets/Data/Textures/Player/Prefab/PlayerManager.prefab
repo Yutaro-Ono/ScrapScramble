@@ -319,7 +319,7 @@ PrefabInstance:
     - target: {fileID: 5285382701883947360, guid: 62f2af9a76f12a941be28cb59b4ab45c,
         type: 3}
       propertyPath: score
-      value: 700
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 438270996070778035, guid: 62f2af9a76f12a941be28cb59b4ab45c,
         type: 3}
@@ -825,12 +825,6 @@ PrefabInstance:
       propertyPath: SubModule.subEmitters.Array.data[0].emitter
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 3228583052333408765, guid: 62f2af9a76f12a941be28cb59b4ab45c,
-        type: 3}
-      propertyPath: bulled
-      value: 
-      objectReference: {fileID: 8940760234637524307, guid: f18d7adfd925b0447bd5c4f32aae33fd,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62f2af9a76f12a941be28cb59b4ab45c, type: 3}
 --- !u!4 &3966792012821374552 stripped

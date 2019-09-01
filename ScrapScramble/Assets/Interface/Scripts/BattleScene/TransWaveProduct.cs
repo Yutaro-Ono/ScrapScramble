@@ -14,7 +14,7 @@ public class TransWaveProduct : MonoBehaviour
     WaveManagement wave;
 
     // 演出用UI
-    GameObject productUI;
+    public GameObject productUI;
 
 
     const float sceneChangeTime = 6.0f;
@@ -37,15 +37,15 @@ public class TransWaveProduct : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Waveがインターバルの時にUIをアクティブ化
-        if(wave.wave == WaveManagement.WAVE_NUM.WAVE_INTERVAL)
-        {
-            productUI.SetActive(true);
-        }
-        else
-        {
-            productUI.SetActive(false);
-        }
+        //// Waveがインターバルの時にUIをアクティブ化
+        //if (wave.wave == WaveManagement.WAVE_NUM.WAVE_INTERVAL)
+        //{
+        //    productUI.SetActive(true);
+        //}
+        //else
+        //{
+        //    productUI.SetActive(false);
+        //}
     }
 
 
@@ -59,6 +59,37 @@ public class TransWaveProduct : MonoBehaviour
         // 一秒ごとにタイマーを加算
         timer += 1.0f * Time.deltaTime;
 
+    }
+
+    // チュートリアル演出用関数
+    public bool PlayTutorialProduct(bool in_active)
+    {
+        // アクティブ化されたら
+        if(in_active == true)
+        {
+            productUI.SetActive(true);
+        }
+        if(in_active == false)
+        {
+            productUI.SetActive(false);
+        }
+
+        timer += 1.0f * Time.deltaTime;
+
+        if (timer >= 6.0f)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+
+    }
+
+    public void PlayWallAnim()
+    {
+        productUI.SetActive(true);
     }
 
 }

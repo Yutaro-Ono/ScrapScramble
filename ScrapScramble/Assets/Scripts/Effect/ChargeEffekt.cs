@@ -9,7 +9,6 @@ public class ChargeEffekt : MonoBehaviour
     public Transform chagePoints;
     PlayerMovement playerMovement;
     PlayerStatus status;
-    Vector3 playePos;
     GameObject expl;
     bool isParticlePlay;
     float initialScale;
@@ -18,7 +17,6 @@ public class ChargeEffekt : MonoBehaviour
     {
         playerMovement = chargePlayer.GetComponent<PlayerMovement>();
         status = chargePlayer.GetComponent<PlayerStatus>();
-        playePos = chargePlayer.GetComponent<Transform>().position;
         initialScale = chargeParticle.transform.localScale.x;
     }
 
@@ -40,20 +38,18 @@ public class ChargeEffekt : MonoBehaviour
 
             isParticlePlay = true;
             expl = Instantiate(chargeParticle, chagePoints) as GameObject;
-
+            EffectBigger();
         }
         if (playerMovement.chargeFlg == false)
         {
             Destroy(expl, 0.1f);
             isParticlePlay = false;
         }
-        EffectBigger();
 
     }
 
     void EffectBigger()
     {
-        // 巨大化を行う
         for (int i = 0; i < 4; i++)
         {
             if (i == status.armedStage)

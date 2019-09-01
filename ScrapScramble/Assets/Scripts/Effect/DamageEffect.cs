@@ -4,27 +4,21 @@ using UnityEngine;
 
 public class DamageEffect : MonoBehaviour
 {
-    public GameObject damagePlayer;
     public GameObject damage;
-    public Transform transfor;
-    GameObject expl;
+    Transform transfor;
+    GameObject ins;
     // Start is called before the first frame update
     void Start()
     {
-        transfor = damagePlayer.GetComponent<Transform>();
+        transfor = GetComponent<Transform>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnCollisionEnter(Collision collision)
     {
-        
-    }
-    void OnCollisionEnter(Collider other)
-    {
-        if (other.gameObject.name == "Enemy's Bullet")
+        if (collision.gameObject.tag == "BulletOfEnemy")
         {
-            expl=Instantiate(damage, transfor.position, transfor.rotation)as GameObject;
-            Destroy(expl, 1.1f);
+            ins=Instantiate(damage, transfor.position, transfor.rotation)as GameObject;
+            Destroy(ins, 0.5f);
         }
     }
 }

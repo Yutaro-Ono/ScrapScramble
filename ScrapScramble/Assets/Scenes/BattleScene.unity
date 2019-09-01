@@ -205,6 +205,19 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1449109273}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &29292126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29292116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4889ea2797b543147900bd7bd0d828bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: {fileID: 100014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,7 +333,6 @@ GameObject:
   m_Component:
   - component: {fileID: 400820307}
   - component: {fileID: 400820308}
-  - component: {fileID: 400820309}
   m_Layer: 0
   m_Name: Player_1
   m_TagString: Untagged
@@ -358,21 +370,6 @@ MonoBehaviour:
   chargeParticle: {fileID: 1705969275368970569, guid: 5d149bf66b1bf8e42bf11adcce71ccf7,
     type: 3}
   chagePoints: {fileID: 2068370312}
---- !u!114 &400820309
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 400820306}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4889ea2797b543147900bd7bd0d828bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damagePlayer: {fileID: 2068370303}
-  damage: {fileID: 100014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
-  transfor: {fileID: 2068370312}
 --- !u!1 &473952216
 GameObject:
   m_ObjectHideFlags: 0
@@ -681,6 +678,19 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1449109273}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &699836154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 699836144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4889ea2797b543147900bd7bd0d828bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: {fileID: 100014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
 --- !u!114 &750119756 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 343577355970520389, guid: 250eccd4eb9be184a88f35276768a07e,
@@ -772,7 +782,6 @@ GameObject:
   m_Component:
   - component: {fileID: 771630631}
   - component: {fileID: 771630632}
-  - component: {fileID: 771630633}
   m_Layer: 0
   m_Name: Player_2
   m_TagString: Untagged
@@ -810,21 +819,6 @@ MonoBehaviour:
   chargeParticle: {fileID: 1705969275368970569, guid: 5d149bf66b1bf8e42bf11adcce71ccf7,
     type: 3}
   chagePoints: {fileID: 29292117}
---- !u!114 &771630633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 771630630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4889ea2797b543147900bd7bd0d828bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damagePlayer: {fileID: 29292116}
-  damage: {fileID: 100014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
-  transfor: {fileID: 29292117}
 --- !u!1001 &779481863
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -932,7 +926,6 @@ GameObject:
   m_Component:
   - component: {fileID: 907820171}
   - component: {fileID: 907820172}
-  - component: {fileID: 907820173}
   m_Layer: 0
   m_Name: Player_4
   m_TagString: Untagged
@@ -970,21 +963,6 @@ MonoBehaviour:
   chargeParticle: {fileID: 1705969275368970569, guid: 5d149bf66b1bf8e42bf11adcce71ccf7,
     type: 3}
   chagePoints: {fileID: 1234209212}
---- !u!114 &907820173
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 907820170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4889ea2797b543147900bd7bd0d828bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damagePlayer: {fileID: 1234209211}
-  damage: {fileID: 100014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
-  transfor: {fileID: 1234209212}
 --- !u!1 &1003929376
 GameObject:
   m_ObjectHideFlags: 0
@@ -1252,6 +1230,19 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1449109273}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1234209221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1234209211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4889ea2797b543147900bd7bd0d828bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: {fileID: 100014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
 --- !u!1001 &1248890615
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2034,7 +2025,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1577947126}
   - component: {fileID: 1577947127}
-  - component: {fileID: 1577947128}
   m_Layer: 0
   m_Name: Player_3
   m_TagString: Untagged
@@ -2072,21 +2062,6 @@ MonoBehaviour:
   chargeParticle: {fileID: 1705969275368970569, guid: 5d149bf66b1bf8e42bf11adcce71ccf7,
     type: 3}
   chagePoints: {fileID: 699836145}
---- !u!114 &1577947128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1577947125}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4889ea2797b543147900bd7bd0d828bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damagePlayer: {fileID: 699836144}
-  damage: {fileID: 100014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
-  transfor: {fileID: 699836145}
 --- !u!1001 &1697759449
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2316,6 +2291,19 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1449109273}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2068370313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068370303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4889ea2797b543147900bd7bd0d828bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: {fileID: 100014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
 --- !u!1001 &2074705849
 PrefabInstance:
   m_ObjectHideFlags: 0

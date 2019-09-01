@@ -51,7 +51,7 @@ public class RailgunControl : MonoBehaviour
     private void LateUpdate()
     {
         // 更新
-        effectPlayTiming = true;
+        effectPlayTiming = false;
     }
 
     private void OnEnable()

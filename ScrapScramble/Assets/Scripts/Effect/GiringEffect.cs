@@ -5,37 +5,32 @@ using UnityEngine;
 public class GiringEffect : MonoBehaviour
 {
     public GameObject gtringEffect;
-    public GameObject Player;
-    PlayerInput input;
+    public GameObject gtring;
     Transform transfor;
-    //PlayerStatus status;
     GameObject ins;
+    GatlingControl gatlingControl;
     bool isParticlePlay;
-    // Start is called before the first frame update
+
     void Start()
     {
-        transfor= Player.GetComponent<Transform>();
-        input = Player.GetComponent<PlayerInput>();
-        //status= Player.GetComponent<PlayerStatus>();
+        transfor= GetComponent<Transform>();
+        gatlingControl = gtring.GetComponent<GatlingControl>();
+
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        GtringEffect();
     }
     void GtringEffect()
     {
-        if (input.GetWeaponAttackInput()&& isParticlePlay==false)
+        if (gatlingControl.effectPlayTiming==true)
         {
-            isParticlePlay = true;
-            ins = Instantiate(gtringEffect, transfor.position, transfor.rotation) as GameObject;
+            ins = Instantiate(gtringEffect, transfor) as GameObject;
         }
-        if (!input.GetWeaponAttackInput())
+        if (gatlingControl.effectPlayTiming == false)
         {
             Destroy(ins, 0.1f);
-            isParticlePlay = false;
-          
         }
-    }
+}
 }

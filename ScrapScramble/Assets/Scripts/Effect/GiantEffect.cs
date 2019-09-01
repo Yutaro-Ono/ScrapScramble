@@ -31,10 +31,20 @@ public class GiantEffect : MonoBehaviour
                 if (i == status.armedStage)
                 {
                     float scale = initialScale + (5.0f * i);
-
-                    expl.transform.localScale = new Vector3(scale, scale, scale);
+              
+                expl.transform.localScale = new Vector3(scale, scale, scale);
                 }
             }
-        
+        //if (isParticlePlay == false)
+        //{
+        //    expl = Instantiate(giant, giantPoints) as GameObject;
+        //    isParticlePlay = true;
+
+        //}
+        //if (isParticlePlay == true)
+        //{
+        //    Destroy(expl, 0.1f);
+        //    isParticlePlay = false;
+        //}
     }
 }

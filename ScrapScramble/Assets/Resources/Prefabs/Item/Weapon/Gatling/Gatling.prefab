@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 732643424361186541}
+  - component: {fileID: 3212334142781022484}
   m_Layer: 0
   m_Name: Shoot Point
   m_TagString: Untagged
@@ -30,6 +31,20 @@ Transform:
   m_Father: {fileID: 8882248585570939137}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3212334142781022484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6899053647364427593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 383cfdbf5c047ea40bf59388f9dc31c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gtringEffect: {fileID: 100006, guid: c888f0c922d622147bbdbe2ca794142b, type: 3}
+  gtring: {fileID: 7718661938856201726}
 --- !u!1 &7718661938856201726
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,6 +107,7 @@ MonoBehaviour:
   shootInterval: 0.1
   droppedMode: 1
   droppedModeScale: {x: 3, y: 3, z: 3}
+  effectPlayTiming: 0
 --- !u!1001 &1920753947452866903
 PrefabInstance:
   m_ObjectHideFlags: 0

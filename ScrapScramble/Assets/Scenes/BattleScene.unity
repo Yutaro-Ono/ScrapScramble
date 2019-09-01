@@ -211,7 +211,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09b18bcd06d22c440b0b57fc1066952b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  railgunEffect: {fileID: 100004, guid: b46890100828db6429ff69c322b45893, type: 3}
+  railgunEffect: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9,
+    type: 3}
   railgun: {fileID: 1669524855}
 --- !u!1 &29292116 stripped
 GameObject:
@@ -1576,17 +1577,37 @@ PrefabInstance:
       propertyPath: damage
       value: 
       objectReference: {fileID: 100014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
-    m_RemovedComponents:
-    - {fileID: 8937374823660921114, guid: 7ed4c2820c1b46d42957cc22f5f0d314, type: 3}
-    - {fileID: 8768393755546930163, guid: 7ed4c2820c1b46d42957cc22f5f0d314, type: 3}
-    - {fileID: 6047437987809800717, guid: 7ed4c2820c1b46d42957cc22f5f0d314, type: 3}
-    - {fileID: 574596675924359142, guid: 7ed4c2820c1b46d42957cc22f5f0d314, type: 3}
-    - {fileID: 4751194749928770970, guid: 7ed4c2820c1b46d42957cc22f5f0d314, type: 3}
-    - {fileID: 7758828136452551780, guid: 7ed4c2820c1b46d42957cc22f5f0d314, type: 3}
-    - {fileID: 7927634624065019533, guid: 7ed4c2820c1b46d42957cc22f5f0d314, type: 3}
-    - {fileID: 9126346135798955346, guid: 7ed4c2820c1b46d42957cc22f5f0d314, type: 3}
-    - {fileID: 5858185544323903045, guid: 7ed4c2820c1b46d42957cc22f5f0d314, type: 3}
-    - {fileID: 8867363160558589883, guid: 7ed4c2820c1b46d42957cc22f5f0d314, type: 3}
+    - target: {fileID: 5793226761895629553, guid: 7ed4c2820c1b46d42957cc22f5f0d314,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5793226761895629553, guid: 7ed4c2820c1b46d42957cc22f5f0d314,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -16.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 5793226761895629553, guid: 7ed4c2820c1b46d42957cc22f5f0d314,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 23.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 5793226761895629553, guid: 7ed4c2820c1b46d42957cc22f5f0d314,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5793226761895629553, guid: 7ed4c2820c1b46d42957cc22f5f0d314,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5793226761895629553, guid: 7ed4c2820c1b46d42957cc22f5f0d314,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ed4c2820c1b46d42957cc22f5f0d314, type: 3}
 --- !u!1001 &1472869083
 PrefabInstance:
@@ -1894,6 +1915,26 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1528673964 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8194840148797083434, guid: 7ed4c2820c1b46d42957cc22f5f0d314,
+    type: 3}
+  m_PrefabInstance: {fileID: 1449109273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1528673966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1528673964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b912d08d72d66ca4fb0110f2b05591bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hammerEffect: {fileID: 100002, guid: 99c73c92ac40473459640b165473206f, type: 3}
+  hammer: {fileID: 2021298529}
 --- !u!4 &1537449302 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8419651352895151301, guid: 7970614edf14f5e449bfc29e9f62ac1a,
@@ -2025,20 +2066,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1449109273}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2021298534
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2021298529}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b912d08d72d66ca4fb0110f2b05591bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hammerEffect: {fileID: 100002, guid: 99c73c92ac40473459640b165473206f, type: 3}
-  hammer: {fileID: 2021298529}
 --- !u!114 &2058641613 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 343577354455739724, guid: 250eccd4eb9be184a88f35276768a07e,

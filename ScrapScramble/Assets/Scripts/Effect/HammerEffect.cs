@@ -19,9 +19,9 @@ public class HammerEffect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Gtring();
+        Hammer();
     }
-    void Gtring()
+    void Hammer()
     {
         if (hammerControl.effectPlayTiming == true)
         {
@@ -29,7 +29,7 @@ public class HammerEffect : MonoBehaviour
         }
         if (hammerControl.effectPlayTiming == false)
         {
-            Destroy(ins, 0.1f);
+            Destroy(ins, 0.3f);
         }
     }
 }

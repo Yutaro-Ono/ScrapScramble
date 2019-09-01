@@ -823,6 +823,18 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1111412522, guid: 9666588df9948a54b910c9775f14e9ab, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 218549172, guid: 9666588df9948a54b910c9775f14e9ab, type: 3}
+      propertyPath: m_Name
+      value: Info_PlayerWave
+      objectReference: {fileID: 0}
+    - target: {fileID: 1918032652, guid: 9666588df9948a54b910c9775f14e9ab, type: 3}
+      propertyPath: m_Name
+      value: Info_EnemyWave
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9666588df9948a54b910c9775f14e9ab, type: 3}
 --- !u!1 &1003929376
@@ -882,9 +894,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputID: 1
+  isGameStart: 0
+  isGameEnd: 0
   tutorialObj:
   - {fileID: 0}
   - {fileID: 0}
+  wave: {fileID: 0}
+  transAnim: {fileID: 0}
 --- !u!1 &1107165918
 GameObject:
   m_ObjectHideFlags: 0
@@ -1002,6 +1018,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d79c807ac2740d49a48b5da1df7572b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  productUI: {fileID: 0}
+  waveInfo: {fileID: 0}
+  waveIndex:
+  - {fileID: 0}
+  - {fileID: 0}
   timer: 0
 --- !u!114 &1203261477 stripped
 MonoBehaviour:

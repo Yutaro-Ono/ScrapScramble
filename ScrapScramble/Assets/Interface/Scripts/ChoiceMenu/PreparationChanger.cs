@@ -35,10 +35,10 @@ public class PreparationChanger : MonoBehaviour
         for(int i = 0; i < playerAllNum; ++i)
         {
             playerReady[i] = GameObject.Find("ReadyPlayer_" + (i + 1)).gameObject;
-            playerReady[i].SetActive(true);
+            playerReady[i].SetActive(false);
 
             playerWait[i] = GameObject.Find("WaitPlayer_" + (i + 1)).gameObject;
-            playerWait[i].SetActive(false);
+            playerWait[i].SetActive(true);
         }
     }
 

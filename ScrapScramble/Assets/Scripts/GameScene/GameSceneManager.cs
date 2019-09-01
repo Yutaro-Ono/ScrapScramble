@@ -16,9 +16,9 @@ public class GameSceneManager : MonoBehaviour
     // チュートリアル表示フラグ(1枚目、2枚目)
     bool[] tutorial = new bool[2];
     // ゲーム開始フラグ
-    bool isGameStart;
+    public bool isGameStart;
     // ゲーム終了フラグ
-    bool isGameEnd;
+    public bool isGameEnd;
 
     // 次のシーンへ移行するフラグ
     bool toNext;
@@ -61,41 +61,74 @@ public class GameSceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(tutorial[0] == true)
+
+        if(isGameStart == false)
+        {
+            TutorialUpdate();
+        }
+
+        if(isGameStart == true)
+        {
+            tutorial[1] = false;
+            tutorialObj[1].SetActive(false);
+        }
+    }
+
+    // チュートリアルでの更新処理
+    void TutorialUpdate()
+    {
+
+        // チュートリアル1枚目の表示
+        if (tutorial[0] == true)
         {
             tutorialObj[0].SetActive(true);
 
             Debug.Log("チュートリアル1");
 
             // Aボタン入力を確認したら演出を開始し、チュートリアル2に移行
-            if(Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                toNext = true;
+            }
+
+            if (toNext == true)
+            {
+                tutorial[1] = transAnim.PlayTutorialProduct(true);
+                
+                // タイマーを初期化しtoNextをfalse
+                if(tutorial[1] == true)
+                {
+                    transAnim.InitTimer();
+                    toNext = false;
+                }
+            }
+        }
+
+        // チュートリアル2枚目の表示
+        if (tutorial[1] == true)
+        {
+            tutorial[0] = false;
+            tutorialObj[0].SetActive(false);
+            tutorialObj[1].SetActive(true);
+
+            // Aボタン入力を確認したら演出を開始し、ゲーム開始のフラグを返す
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 toNext = true;
             }
 
             if(toNext == true)
             {
-                toNext = tutorial[0] = transAnim.PlayTutorialProduct(true);
+                // アニメの再生が終わったらゲームを開始
+                isGameStart = transAnim.PlayTutorialProduct(true);
             }
-
         }
-
-
-        if (tutorial[1] == true)
-        {
-            tutorialObj[0].SetActive(false);
-            tutorialObj[1].SetActive(true);
-
-            transAnim.PlayIntervalProduct();
-
-
-        }
-
-
-        //if(isGameStart == true)
-        //{
-
-        //}
-
     }
+
+    // ゲーム開始したかどうかのゲッター
+    public bool GetGameStartFlag()
+    {
+        return isGameStart;
+    }
+
 }

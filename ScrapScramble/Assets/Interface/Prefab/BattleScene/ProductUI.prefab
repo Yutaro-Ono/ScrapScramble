@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 218549175}
   - component: {fileID: 218549174}
   m_Layer: 5
-  m_Name: Info_PlayerPhase
+  m_Name: Info_PlayerWave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -503,7 +503,7 @@ GameObject:
   - component: {fileID: 1918032655}
   - component: {fileID: 1918032654}
   m_Layer: 5
-  m_Name: Info_EnemyPhase
+  m_Name: Info_EnemyWave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

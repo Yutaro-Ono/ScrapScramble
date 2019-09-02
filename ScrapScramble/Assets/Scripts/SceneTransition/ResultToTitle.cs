@@ -11,6 +11,10 @@ public class ResultToTitle : MonoBehaviour
 
     const float maxHoldTime = 2.0f;
 
+    public float nowHoldTimeForQuitApp;
+
+    const float maxHoldTimeForQuitApp = 2.0f; 
+
     private void Start()
     {
         for (int i = 0; i < PlayerManagement.playerNum; ++i)
@@ -29,6 +33,7 @@ public class ResultToTitle : MonoBehaviour
         }
 
         nowHoldTime = 0.0f;
+        nowHoldTimeForQuitApp = 0.0f;
     }
 
     private void Update()
@@ -50,8 +55,26 @@ public class ResultToTitle : MonoBehaviour
             }
         }
 
+        // 誰かがBボタンを押しているかどうか
+        bool pressB = false;
+        for (int i = 0; i < PlayerManagement.playerNum; ++i)
+        {
+            // AIの場合はこの先を見ない
+            if (controllers[i] == null)
+            {
+                continue;
+            }
+
+            // Bボタンが押されていれば即座に抜ける
+            if (pressB = controllers[i].GetButton("B"))
+            {
+                break;
+            }
+        }
+
         // Aボタンが押されている間
-        if (pressA || Input.GetKey(KeyCode.Space))
+        // ただし、アプリ終了のカウントが0の時だけ
+        if ((pressA || Input.GetKey(KeyCode.Space)) && nowHoldTimeForQuitApp == 0.0f)
         {
             nowHoldTime += Time.deltaTime;
         }
@@ -59,12 +82,47 @@ public class ResultToTitle : MonoBehaviour
         else if (nowHoldTime > 0 && nowHoldTime < maxHoldTime)
         {
             nowHoldTime -= Time.deltaTime / 1.5f;
+
+            if (nowHoldTime < 0)
+            {
+                nowHoldTime = 0.0f;
+            }
         }
 
-        // 十分な時間押されていればシーンを遷移
+        // Bボタンが押されている間
+        // ただし、タイトルシーンへのカウントが0の時だけ
+        if ((pressB || Input.GetKey(KeyCode.Tab)) && nowHoldTime == 0.0f)
+        {
+            nowHoldTimeForQuitApp += Time.deltaTime;
+        }
+        // Bが押されていない間減少
+        else if (nowHoldTimeForQuitApp > 0 && nowHoldTimeForQuitApp < maxHoldTimeForQuitApp)
+        {
+            nowHoldTimeForQuitApp -= Time.deltaTime / 1.5f;
+
+            if (nowHoldTimeForQuitApp < 0)
+            {
+                nowHoldTimeForQuitApp = 0.0f;
+            }
+        }
+
+        // 十分な時間Aが押されていればシーンを遷移
         if (nowHoldTime >= maxHoldTime)
         {
             BackToTitle();
+        }
+
+        // 十分な時間Bが押されていればゲームを終了
+        if (nowHoldTimeForQuitApp >= maxHoldTimeForQuitApp)
+        {
+            // エディタ上ならこっち
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+
+            // スタンドアロン実行（実機での実行のことかな？）ならこっち
+#elif UNITY_STANDALONE
+    UnityEngine.Application.Quit();
+#endif
         }
     }
 

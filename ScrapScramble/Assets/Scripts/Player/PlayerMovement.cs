@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     float speed = 50.0f;
     float moveX = 0.0f;
     float moveZ = 0.0f;
-
+    public bool moveFlag;
     // 体当たり関連
     public bool chargeFlg = false;
     float chargeTimer = 0.0f;
@@ -45,11 +45,7 @@ public class PlayerMovement : MonoBehaviour
 
     // 体当たり中のレイヤー名
     public const string tacklingLayerName = "TacklingPlayerLayer";
-
-    private void Awake()
-    {
-    }
-
+    
     private void Start()
     {
         status = GetComponent<PlayerStatus>();
@@ -81,8 +77,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        // インターバルWaveでないときだけ操作を受け付ける
-        if (status.GetWaveManager().wave != WaveManagement.WAVE_NUM.WAVE_INTERVAL)
+        // インターバルWaveまたはチュートリアル表示中でないときだけ操作を受け付ける
+        WaveManagement.WAVE_NUM currentWave = status.GetWaveManager().wave;
+        if (currentWave != WaveManagement.WAVE_NUM.WAVE_INTERVAL && currentWave != WaveManagement.WAVE_NUM.WAVE_TUTORIAL)
         {
             // 武器攻撃の受付
             CheckAttackCommand();
@@ -250,7 +247,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Brake()
     {
-        bool moveFlag = (moveX != 0 || moveZ != 0);
+        moveFlag = (moveX != 0 || moveZ != 0);
 
         if ((!moveFlag && !tacklingFlag) || chargeFlg)
         {

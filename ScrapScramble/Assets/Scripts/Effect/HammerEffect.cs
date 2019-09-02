@@ -29,7 +29,7 @@ public class HammerEffect : MonoBehaviour
         }
         if (hammerControl.effectPlayTiming == false)
         {
-            Destroy(ins, 0.3f);
+            Destroy(ins, 0.5f);
         }
     }
 }

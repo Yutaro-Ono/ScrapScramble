@@ -29,7 +29,7 @@ public class RailgunEffect : MonoBehaviour
         }
         if (railgunControl.effectPlayTiming == false)
         {
-            Destroy(ins, 0.2f);
+            Destroy(ins, 0.8f);
         }
     }
 }

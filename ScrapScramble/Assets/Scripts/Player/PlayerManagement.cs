@@ -46,13 +46,13 @@ public class PlayerManagement : MonoBehaviour
         }
 
         // AIか否かの設定
-        if (TitleToGame.playerNum != 0)
+        if (ChoiceMenuSceneController.playerNum != 0)
         {
             for (int lplayerNum = 0; lplayerNum < playerNum; lplayerNum++)
             {
                 PlayerStatus status = player[lplayerNum].GetComponent<PlayerStatus>();
 
-                if (TitleToGame.playerNum <= lplayerNum + 1)
+                if (ChoiceMenuSceneController.getReady[lplayerNum])
                 {
                     status.AIFlag = false;
                 }
@@ -60,6 +60,16 @@ public class PlayerManagement : MonoBehaviour
                 {
                     status.AIFlag = true;
                 }
+            }
+        }
+        // 参加者0なら全員AI
+        else
+        {
+            for (int i = 0; i < playerNum; ++i)
+            {
+                PlayerStatus status = player[i].GetComponent<PlayerStatus>();
+
+                status.AIFlag = true;
             }
         }
     }

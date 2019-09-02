@@ -48,6 +48,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+    }
+
+    private void Start()
+    {
         status = GetComponent<PlayerStatus>();
         input = GetComponent<PlayerInput>();
         myRigidbody = GetComponent<Rigidbody>();
@@ -61,10 +65,7 @@ public class PlayerMovement : MonoBehaviour
             AI = null;
             transform.Find("Detector").GetComponent<SphereCollider>().enabled = false;
         }
-    }
 
-    private void Start()
-    {
         //最初の時点でのプレイヤーのポジションを取得
         prevPos = GetComponent<Transform>().position;
         initialPosition = prevPos;

@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5285382701883947360}
   - component: {fileID: 2611237456323759676}
   - component: {fileID: 7412779095273335527}
+  - component: {fileID: 2234871966606124366}
   m_Layer: 12
   m_Name: Player
   m_TagString: Player
@@ -126,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67326933095dbe346bece4b446a37826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AIFlag: 1
+  AIFlag: 0
   score: 0
   hp: 100
   armedStage: 0
@@ -159,6 +160,19 @@ MonoBehaviour:
   hammerIcon: {fileID: 0}
   GatlingIcon: {fileID: 0}
   RailgunIcon: {fileID: 0}
+--- !u!114 &2234871966606124366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908218819157281842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4889ea2797b543147900bd7bd0d828bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: {fileID: 100014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
 --- !u!1 &3326076075049878092
 GameObject:
   m_ObjectHideFlags: 0

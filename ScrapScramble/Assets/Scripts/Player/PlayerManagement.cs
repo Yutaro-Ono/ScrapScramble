@@ -12,6 +12,9 @@ public class PlayerManagement : MonoBehaviour
     // いずれ使うことになると思う
     uint AINum;
 
+    // ウェーブ情報
+    static WaveManagement waveManager;
+
     // プレイヤーモデルの名称テンプレート
     string PlayerModelObjectNameTemplate = "Player_";
 
@@ -21,6 +24,9 @@ public class PlayerManagement : MonoBehaviour
     // Start関数よりも前に呼び出される関数
     private void Awake()
     {
+        // ウェーブ情報取得
+        waveManager = GameObject.Find("WaveManager").GetComponent<WaveManagement>();
+
         // 子のプレイヤーオブジェクトを取得
         for (int i = 0; i < playerNum; ++i)
         {
@@ -92,5 +98,10 @@ public class PlayerManagement : MonoBehaviour
     {
         AINum = value;
         return AINum;
+    }
+
+    public static WaveManagement GetWaveManager()
+    {
+        return waveManager;
     }
 }

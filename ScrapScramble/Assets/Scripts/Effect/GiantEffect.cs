@@ -15,7 +15,7 @@ public class GiantEffect : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        status.GetComponent<PlayerStatus>();
+        status=GetComponent<PlayerStatus>();
         giantPoints = player.GetComponent<Transform>();
     }
 

@@ -52,10 +52,12 @@ public class GameSceneManager : MonoBehaviour
         {
             // チュートリアルを取得
             tutorialObj[i] = GameObject.Find("TutorialPic_" + (i + 1)).gameObject;
-            // チュートリアルを隠す
-            tutorialObj[i].SetActive(false);
+
         }
 
+        // チュートリアル1枚目は表示、2枚目は非表示
+        tutorialObj[0].SetActive(true);
+        tutorialObj[1].SetActive(false);
     }
 
     // Update is called once per frame
@@ -81,7 +83,6 @@ public class GameSceneManager : MonoBehaviour
         // チュートリアル1枚目の表示
         if (tutorial[0] == true)
         {
-            tutorialObj[0].SetActive(true);
 
             Debug.Log("チュートリアル1");
 
@@ -98,6 +99,7 @@ public class GameSceneManager : MonoBehaviour
                 // タイマーを初期化しtoNextをfalse
                 if(tutorial[1] == true)
                 {
+                    tutorialObj[0].SetActive(false);
                     transAnim.InitTimer();
                     toNext = false;
                 }
@@ -108,7 +110,6 @@ public class GameSceneManager : MonoBehaviour
         if (tutorial[1] == true)
         {
             tutorial[0] = false;
-            tutorialObj[0].SetActive(false);
             tutorialObj[1].SetActive(true);
 
             // Aボタン入力を確認したら演出を開始し、ゲーム開始のフラグを返す

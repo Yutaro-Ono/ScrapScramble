@@ -21,19 +21,19 @@ public class TitleSceneController : MonoBehaviour
     void Update()
     {
         // 誰か一人でもAボタンを押せばフラグを真に
-        bool anyonePressA = false;
+        bool anyonePressDownA = false;
         for (int i = 0; i < PlayerManagement.playerNum; ++i)
         {
-            anyonePressA = players[i].GetButton("A");
+            anyonePressDownA = players[i].GetButtonDown("A");
 
             // 押されればそれ以上の走査をしない
-            if (anyonePressA)
+            if (anyonePressDownA)
             {
                 break;
             }
         }
 
-        if(Input.GetKey(KeyCode.Space) || anyonePressA)
+        if(Input.GetKey(KeyCode.Space) || anyonePressDownA)
         {
             SceneManager.LoadScene("ChoiceMenuScene");
         }

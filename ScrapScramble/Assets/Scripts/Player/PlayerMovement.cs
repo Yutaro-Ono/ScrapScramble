@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     float speed = 50.0f;
     float moveX = 0.0f;
     float moveZ = 0.0f;
-
+    public bool moveFlag;
     // 体当たり関連
     public bool chargeFlg = false;
     float chargeTimer = 0.0f;
@@ -249,7 +249,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Brake()
     {
-        bool moveFlag = (moveX != 0 || moveZ != 0);
+        moveFlag = (moveX != 0 || moveZ != 0);
 
         if ((!moveFlag && !tacklingFlag) || chargeFlg)
         {

@@ -30,7 +30,7 @@ public class GiringEffect : MonoBehaviour
         }
         if (gatlingControl.effectPlayTiming == false)
         {
-            Destroy(ins, 0.1f);
+            Destroy(ins, 0.22f);
         }
 }
 }

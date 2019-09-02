@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public class GameSceneManager : MonoBehaviour
 {
-    //// パッド入力情報
-    //Rewired.Player input;
+    // パッド入力情報
+    Rewired.Player[] input = new Rewired.Player[PlayerManagement.playerNum];
 
-    public int inputID = 1;            // プレイヤー1の入力のみ認識する
+    //public int inputID = 1;            // プレイヤー1の入力のみ認識する
 
     public const int allTutorialNum = 2;
 
@@ -30,6 +30,13 @@ public class GameSceneManager : MonoBehaviour
     public GameObject wave;
     // 画面演出
     public TransWaveProduct transAnim;
+
+    // プレイヤーマネージャ
+    PlayerManagement playerManager;
+
+    // チュートリアル画面切り替えから数秒は無効
+    float tutorialShowTimer;
+    const float tutorialShowTime = 2.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -58,6 +65,25 @@ public class GameSceneManager : MonoBehaviour
         // チュートリアル1枚目は表示、2枚目は非表示
         tutorialObj[0].SetActive(true);
         tutorialObj[1].SetActive(false);
+
+        // プレイヤーマネージャ取得
+        playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManagement>();
+
+        for (int i = 0; i < PlayerManagement.playerNum; ++i)
+        {
+            // AIなら
+            if (playerManager.player[i].GetComponent<PlayerStatus>().AIFlag)
+            {
+                input[i] = null;
+            }
+            // プレイヤーなら
+            else
+            {
+                input[i] = Rewired.ReInput.players.GetPlayer(i);
+            }
+        }
+
+        tutorialShowTimer = 0.0f;
     }
 
     // Update is called once per frame
@@ -79,6 +105,23 @@ public class GameSceneManager : MonoBehaviour
     // チュートリアルでの更新処理
     void TutorialUpdate()
     {
+        tutorialShowTimer += Time.deltaTime;
+
+        // Aボタンの確認
+        bool pressDownA = false;
+        for (int i = 0; i < PlayerManagement.playerNum; ++i)
+        {
+            if (input[i] == null)
+            {
+                continue;
+            }
+
+            // Aボタンが押されたループを抜ける
+            if (pressDownA = input[i].GetButtonDown("A"))
+            {
+                break;
+            }
+        }
 
         // チュートリアル1枚目の表示
         if (tutorial[0] == true)
@@ -87,9 +130,10 @@ public class GameSceneManager : MonoBehaviour
             Debug.Log("チュートリアル1");
 
             // Aボタン入力を確認したら演出を開始し、チュートリアル2に移行
-            if (Input.GetKeyDown(KeyCode.Space))
+            if ((Input.GetKeyDown(KeyCode.Space) || pressDownA) && tutorialShowTimer > tutorialShowTime)
             {
                 toNext = true;
+                tutorialShowTimer = 0.0f;
             }
 
             if (toNext == true)
@@ -113,9 +157,10 @@ public class GameSceneManager : MonoBehaviour
             tutorialObj[1].SetActive(true);
 
             // Aボタン入力を確認したら演出を開始し、ゲーム開始のフラグを返す
-            if (Input.GetKeyDown(KeyCode.Space))
+            if ((Input.GetKeyDown(KeyCode.Space) || pressDownA) && tutorialShowTimer > tutorialShowTime)
             {
                 toNext = true;
+                tutorialShowTimer = 0.0f;
             }
 
             if(toNext == true)

@@ -16,7 +16,7 @@ public class ChoiceMenuSceneController : MonoBehaviour
     const int maxPlayer = 4;
 
     // プレイヤーの準備状況を格納
-    bool[] getReady = new bool[maxPlayer];
+    public static bool[] getReady = new bool[maxPlayer];
 
     // 次のシーンへ行けるかどうかのフラグ(これがtrueになって初めてscene遷移が行える)
     private bool pushStart;
@@ -24,20 +24,32 @@ public class ChoiceMenuSceneController : MonoBehaviour
     // 次のシーン(ゲームを開始するかどうかのフラグ)
     private bool startGame;
 
+    // コントローラ操作
+    public static PreparationChanger[] playerControllers = new PreparationChanger[maxPlayer];
+
+    private void Awake()
+    {
+        // コントローラ操作を取得
+        for (int i = 0; i < maxPlayer; ++i)
+        {
+            playerControllers[i] = GameObject.Find("Player_" + (i + 1)).GetComponent<PreparationChanger>();
+        }
+    }
+
     // scene開始時処理
     void Start()
     {
-        //// プレイヤーの準備状況を初期化
-        //for(int i = 0; i < maxPlayer; i++)
-        //{
-        //    getReady[i] = false;
-        //}
-
-        // ※デバッグ用初期化(準備状況が最初からtrue)※
-        for (int i = 0; i < maxPlayer; i++)
+        // プレイヤーの準備状況を初期化
+        for(int i = 0; i < maxPlayer; i++)
         {
-            getReady[i] = true;
+            getReady[i] = false;
         }
+
+        //// ※デバッグ用初期化(準備状況が最初からtrue)※
+        //for (int i = 0; i < maxPlayer; i++)
+        //{
+        //    getReady[i] = true;
+        //}
 
         // プレイ人数を初期化
         playerNum = 0;
@@ -80,19 +92,24 @@ public class ChoiceMenuSceneController : MonoBehaviour
         // プレイヤーの準備状況を更新
         for (int i = 0; i < maxPlayer; i++)
         {
+            getReady[i] = playerControllers[i].GetReadyFlag();
 
+            if (getReady[i])
+            {
+                pushStart = getReady[i];
+            }
         }
 
         // 1Pの準備が完了していたらゲーム開始を可能とする(1Pが起点)
-        if (getReady[0] == true)
-        {
-            pushStart = true;
-        }
-        else
-        {
-            // ※デバッグ用処理ストップ※
-            // pushStart = false;
-        }
+        //if (getReady[0] == true)
+        //{
+        //    pushStart = true;
+        //}
+        //else
+        //{
+        //    // ※デバッグ用処理ストップ※
+        //    // pushStart = false;
+        //}
     }
 
     // ゲームシーンへ遷移させる

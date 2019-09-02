@@ -224,6 +224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nowHoldTime: 0
+  nowHoldTimeForQuitApp: 0
 --- !u!4 &784258257
 Transform:
   m_ObjectHideFlags: 0
@@ -604,7 +605,43 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7701469117651749736, guid: 48f43bd199dba484fa9a43d48b114214,
+        type: 3}
+      propertyPath: m_FillAmount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8380210681377264407, guid: 48f43bd199dba484fa9a43d48b114214,
+        type: 3}
+      propertyPath: m_FillOrigin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8380210681377264407, guid: 48f43bd199dba484fa9a43d48b114214,
+        type: 3}
+      propertyPath: m_FillAmount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7657220881140592198, guid: 48f43bd199dba484fa9a43d48b114214,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8018679433615789746, guid: 48f43bd199dba484fa9a43d48b114214,
+        type: 3}
+      propertyPath: m_FillOrigin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8018679433615789746, guid: 48f43bd199dba484fa9a43d48b114214,
+        type: 3}
+      propertyPath: m_FillAmount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7352631367935639084, guid: 48f43bd199dba484fa9a43d48b114214,
+        type: 3}
+      propertyPath: m_FillAmount
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6196924098724113667, guid: 48f43bd199dba484fa9a43d48b114214, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 48f43bd199dba484fa9a43d48b114214, type: 3}
 --- !u!1001 &3881942629470379206
 PrefabInstance:

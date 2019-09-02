@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FilledResult : MonoBehaviour
+public class FilledResultQuit : MonoBehaviour
 {
-
     // ロードバー(画像の取得用)
     Image loadBar;
 
@@ -27,6 +26,7 @@ public class FilledResult : MonoBehaviour
         result = sceneManager.GetComponent<ResultToTitle>();
         loadBar = GetComponent<Image>();
 
+
         // 最大時間を取得
         maxHoldTime = result.GetMaxFillTime();
 
@@ -37,7 +37,7 @@ public class FilledResult : MonoBehaviour
     void Update()
     {
 
-        nowHoldTime = result.nowHoldTime;
+        nowHoldTime = result.nowHoldTimeForQuitApp;
 
         if (nowHoldTime > 0.0f)
         {

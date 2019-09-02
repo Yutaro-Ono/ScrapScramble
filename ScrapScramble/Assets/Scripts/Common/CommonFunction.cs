@@ -15,4 +15,18 @@ public class CommonFunction : MonoBehaviour
 
         return ret;
     }
+
+    public static void CheckEscapeForQuitApp()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+            
+#elif UNITY_STANDALONE
+            UnityEngine.Application.Quit();
+            
+#endif
+        }
+    }
 }

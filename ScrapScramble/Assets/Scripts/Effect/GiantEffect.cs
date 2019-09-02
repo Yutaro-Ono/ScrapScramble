@@ -10,6 +10,7 @@ public class GiantEffect : MonoBehaviour
     PlayerStatus status;
     float initialScale;
     GameObject expl;
+    int kazu;
     bool isParticlePlay;
     // Start is called before the first frame update
     void Start()
@@ -30,21 +31,21 @@ public class GiantEffect : MonoBehaviour
             {
                 if (i == status.armedStage)
                 {
-                    float scale = initialScale + (5.0f * i);
-              
-                expl.transform.localScale = new Vector3(scale, scale, scale);
+                   kazu = status.armedStage;
+                   isParticlePlay = true;
+                   
+
                 }
             }
-        //if (isParticlePlay == false)
-        //{
-        //    expl = Instantiate(giant, giantPoints) as GameObject;
-        //    isParticlePlay = true;
+        if (kazu!=status.armedStage)
+        {
+            expl = Instantiate(giant, giantPoints) as GameObject;
+            isParticlePlay = false;
 
-        //}
-        //if (isParticlePlay == true)
-        //{
-        //    Destroy(expl, 0.1f);
-        //    isParticlePlay = false;
-        //}
+        }
+        if (isParticlePlay == false)
+        {
+            Destroy(expl, 0.4f);
+        }
     }
 }

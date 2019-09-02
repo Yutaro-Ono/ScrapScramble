@@ -40,7 +40,19 @@ public class PlayerStatus : MonoBehaviour
 
     public int gatlingDamage = 0;
     public static int gatlingPatience = 5;
-    
+
+    // エフェクト再生タイミング(巨大化するとき)
+    public bool becomeBiggerEffectPlayTiming = false;
+
+    // エフェクト再生タイミング(小さくなる時)
+    public bool becomeSmallerEffectPlayTiming = false;
+
+    // エフェクト再生タイミング(資源を落とすとき)
+    public bool dropResourceEffectPlayTiming = false;
+
+    // エフェクト再生タイミング(資源を得たとき)
+    public bool obtainResourceEffectPlayTiming = false;
+
     void Start()
     {
         // ウェーブ情報取得
@@ -86,6 +98,9 @@ public class PlayerStatus : MonoBehaviour
     
     void BodyBigger()
     {
+        // チェック前の変数を保存
+        int beforeArmedStage = armedStage;
+
         // 巨大化の段階チェック
         for (int i = 0; i < armedStageLimit; i++)
         {
@@ -105,6 +120,20 @@ public class PlayerStatus : MonoBehaviour
                 gameObject.transform.localScale = new Vector3(scale, scale, scale);
             }
         }
+
+        // ビフォーアフター比較
+        // 巨大化した時
+        if (beforeArmedStage < armedStage)
+        {
+            // エフェクト再生指示
+            becomeBiggerEffectPlayTiming = true;
+        }
+        // 小さくなったとき
+        else if (beforeArmedStage > armedStage)
+        {
+            // エフェクト再生指示
+            becomeSmallerEffectPlayTiming = true;
+        }
     }
 
     void Update()
@@ -112,6 +141,19 @@ public class PlayerStatus : MonoBehaviour
         if (prevScore != score)
         {
             BodyBigger();
+
+            // エフェクト指示
+            // 資源を得たとき
+            if (prevScore < score)
+            {
+                // エフェクト再生指示
+                obtainResourceEffectPlayTiming = true;
+            }
+            // 資源を落としたとき
+            else
+            {
+                dropResourceEffectPlayTiming = true;
+            }
         }
 
         // デバッグ的にコマンドで装備変更
@@ -138,7 +180,15 @@ public class PlayerStatus : MonoBehaviour
         // スコア値を記録
         prevScore = score;
     }
-    
+
+    private void LateUpdate()
+    {
+        becomeBiggerEffectPlayTiming = false;
+        becomeSmallerEffectPlayTiming = false;
+        dropResourceEffectPlayTiming = false;
+        obtainResourceEffectPlayTiming = false;
+    }
+
     // 現在装備している武器を取得
     public Weapon GetCurrentWeapon()
     {

@@ -20,5 +20,10 @@ public class DamageEffect : MonoBehaviour
             ins=Instantiate(damage, transfor.position, transfor.rotation)as GameObject;
             Destroy(ins, 0.5f);
         }
+        if (collision.gameObject.tag == "BulletOfPlayer")
+        {
+            ins = Instantiate(damage, transfor.position, transfor.rotation) as GameObject;
+            Destroy(ins, 0.5f);
+        }
     }
 }

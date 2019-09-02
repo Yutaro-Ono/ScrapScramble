@@ -5,18 +5,14 @@ using UnityEngine;
 public class GiantEffect : MonoBehaviour
 {
     public GameObject giant;
-    public GameObject player;
     Transform giantPoints;
     PlayerStatus status;
-    float initialScale;
     GameObject expl;
-    int kazu;
-    bool isParticlePlay;
     // Start is called before the first frame update
     void Start()
     {
         status=GetComponent<PlayerStatus>();
-        giantPoints = player.GetComponent<Transform>();
+        giantPoints = GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -27,25 +23,15 @@ public class GiantEffect : MonoBehaviour
     void GiantEfe()
     {
        
-            for (int i = 0; i < 4; i++)
-            {
-                if (i == status.armedStage)
-                {
-                   kazu = status.armedStage;
-                   isParticlePlay = true;
-                   
-
-                }
-            }
-        if (kazu!=status.armedStage)
+           
+        if (status.becomeBiggerEffectPlayTiming==true)
         {
             expl = Instantiate(giant, giantPoints) as GameObject;
-            isParticlePlay = false;
 
         }
-        if (isParticlePlay == false)
+        if (status.becomeBiggerEffectPlayTiming ==false)
         {
-            Destroy(expl, 0.4f);
+            Destroy(expl, 1f);
         }
     }
 }

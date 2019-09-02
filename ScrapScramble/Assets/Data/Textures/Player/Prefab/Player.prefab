@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 6087072885947054235}
   - component: {fileID: 142368820847881162}
   - component: {fileID: 3782653433888762635}
+  - component: {fileID: 7135600685902519027}
   m_Layer: 12
   m_Name: Player
   m_TagString: Player
@@ -137,6 +138,10 @@ MonoBehaviour:
   armedStage: 0
   chargeAttackPower: 0
   gatlingDamage: 0
+  becomeBiggerEffectPlayTiming: 0
+  becomeSmallerEffectPlayTiming: 0
+  dropResourceEffectPlayTiming: 0
+  obtainResourceEffectPlayTiming: 0
 --- !u!114 &2611237456323759676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,6 +307,20 @@ MonoBehaviour:
   sud: {fileID: 5896764486270419889, guid: ab9096f279787864388f3c8cca5e3bb6, type: 3}
   sound1: {fileID: 8300000, guid: b049660b860c8334a852b54855bce599, type: 3}
   sound2: {fileID: 8300000, guid: f42ee6c61e2b5a049b588a485b2f267f, type: 3}
+--- !u!114 &7135600685902519027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908218819157281842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b928dbdaca486d342afc5d272af03da3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  giant: {fileID: 908218819157281842}
+  player: {fileID: 908218819157281842}
 --- !u!1 &3326076075049878092
 GameObject:
   m_ObjectHideFlags: 0

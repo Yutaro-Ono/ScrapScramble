@@ -68,7 +68,7 @@ public class WinningPlayer : MonoBehaviour
 
         if (PlayerNum == 0)
         {
-            winPlayerText.text = "Plaeyr1Win";
+            winPlayerText.text = "Player1Win";
         }
         if (PlayerNum == 1)
         {

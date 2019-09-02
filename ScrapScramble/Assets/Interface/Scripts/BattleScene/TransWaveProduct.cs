@@ -52,6 +52,7 @@ public class TransWaveProduct : MonoBehaviour
         waveInfo = GameObject.Find("NextWaveInfo");
         // 撃退フェーズ
         waveIndex[0] = GameObject.Find("Info_EnemyWave");
+        waveIndex[0].SetActive(false);
         // 対戦ウェーブ
         waveIndex[1] = GameObject.Find("Info_PlayerWave");
 

@@ -765,6 +765,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1918032652, guid: 9666588df9948a54b910c9775f14e9ab, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9666588df9948a54b910c9775f14e9ab, type: 3}
 --- !u!1 &1003929376
@@ -1202,11 +1206,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5430290707806894331, guid: 7ed4c2820c1b46d42957cc22f5f0d314,
-        type: 3}
-      propertyPath: sud
-      value: 
-      objectReference: {fileID: 5896764486270419889}
     - target: {fileID: 1936792801224855285, guid: 7ed4c2820c1b46d42957cc22f5f0d314,
         type: 3}
       propertyPath: m_Name
@@ -1418,6 +1417,11 @@ PrefabInstance:
       propertyPath: damage
       value: 
       objectReference: {fileID: 100014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
+    - target: {fileID: 5430290707806894331, guid: 7ed4c2820c1b46d42957cc22f5f0d314,
+        type: 3}
+      propertyPath: sud
+      value: 
+      objectReference: {fileID: 5896764486270419889}
     - target: {fileID: 7483534836027973631, guid: 7ed4c2820c1b46d42957cc22f5f0d314,
         type: 3}
       propertyPath: giant
@@ -1436,6 +1440,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1714681308540598, guid: 5cbc537826220e04592d5a41a0dd985f,
         type: 3}
+    - target: {fileID: 3504586719304117767, guid: 7ed4c2820c1b46d42957cc22f5f0d314,
+        type: 3}
+      propertyPath: sud
+      value: 
+      objectReference: {fileID: 5896764486270419889}
+    - target: {fileID: 6439925487413266284, guid: 7ed4c2820c1b46d42957cc22f5f0d314,
+        type: 3}
+      propertyPath: sud
+      value: 
+      objectReference: {fileID: 5896764486270419889}
+    - target: {fileID: 5331383283604595891, guid: 7ed4c2820c1b46d42957cc22f5f0d314,
+        type: 3}
+      propertyPath: sud
+      value: 
+      objectReference: {fileID: 5896764486270419889}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ed4c2820c1b46d42957cc22f5f0d314, type: 3}
 --- !u!1001 &1472869083
@@ -2104,20 +2123,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1449109273}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2068370317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2068370303}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b928dbdaca486d342afc5d272af03da3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  giant: {fileID: 1714681308540598, guid: 5cbc537826220e04592d5a41a0dd985f, type: 3}
-  player: {fileID: 2068370303}
 --- !u!1001 &2074705849
 PrefabInstance:
   m_ObjectHideFlags: 0

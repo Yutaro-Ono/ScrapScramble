@@ -46,7 +46,7 @@ public class GameToResult : MonoBehaviour
     public void SceneTransition()
     {
         AssignScore();
-        SceneManager.LoadScene("ResultScene");
+        SceneManager.LoadScene("Ono_ResultScene");
     }
    
 }

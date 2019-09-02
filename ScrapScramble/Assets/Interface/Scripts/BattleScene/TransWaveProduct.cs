@@ -136,7 +136,8 @@ public class TransWaveProduct : MonoBehaviour
 
         timer += 1.0f * Time.deltaTime;
 
-        if (timer >= 3.0f)
+        // 0.8秒で次へ
+        if (timer >= 0.8f)
         {
             wallAnim.SetBool("Tutorial", false);
             return true;

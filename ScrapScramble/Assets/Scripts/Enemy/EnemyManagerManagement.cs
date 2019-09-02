@@ -40,6 +40,7 @@ public class EnemyManagerManagement : MonoBehaviour
     void Start()
     {
         resourcePrefab = (GameObject)Resources.Load(resourcePrefabPath);
+        ResourceCollision.SetWaveManager(waveManager);
 
         hammerPrefab = (GameObject)Resources.Load(weaponPrefabFolderDirectory + "Hammer/Hammer");
         gatlingPrefab = (GameObject)Resources.Load(weaponPrefabFolderDirectory + "Gatling/Gatling");

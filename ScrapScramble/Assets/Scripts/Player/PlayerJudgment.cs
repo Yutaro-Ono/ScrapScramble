@@ -58,13 +58,26 @@ public class PlayerJudgment : MonoBehaviour
     }
     void OnCollisionEnter(Collision other)
     {
-     
         PlayerMovement playerMove = GetComponent<PlayerMovement>();
         PlayerStatus playerStatus = GetComponent<PlayerStatus>();
+
         if (other.gameObject.tag == "Enemy")
         {
             EnemyStatus eneStatus = other.gameObject.GetComponent<EnemyStatus>();
             eneStatus.hitPoint -= (short)playerMove.tacklePower;
+        }
+
+        else if (other.gameObject.tag == "Player")
+        {
+            WaveManagement.WAVE_NUM wave = playerStatus.GetWaveManager().wave;
+            bool isVsPlayerWave = (wave == WaveManagement.WAVE_NUM.WAVE_2_PVP || wave == WaveManagement.WAVE_NUM.WAVE_4_PVP);
+
+            if (isVsPlayerWave && other.gameObject.layer == LayerMask.NameToLayer(PlayerMovement.tacklingLayerName))
+            {
+                PlayerMovement opponentMove = other.gameObject.GetComponent<PlayerMovement>();
+
+                playerMove.DropResource((uint)opponentMove.tacklePower);
+            }
         }
     }
 }

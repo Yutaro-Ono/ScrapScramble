@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 753991162373209382}
+  - component: {fileID: 1735783927999080067}
   m_Layer: 0
   m_Name: Shoot Point
   m_TagString: Untagged
@@ -30,6 +31,21 @@ Transform:
   m_Father: {fileID: 8200524897952582761}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1735783927999080067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044321447659491066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09b18bcd06d22c440b0b57fc1066952b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  railgunEffect: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9,
+    type: 3}
+  railgun: {fileID: 1290706784419795836}
 --- !u!1 &1290706784419795836
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,6 +108,7 @@ MonoBehaviour:
   droppedMode: 1
   droppedModeScale: {x: 1, y: 1, z: 1}
   shootInterval: 2
+  effectPlayTiming: 0
 --- !u!1001 &8222491854105343933
 PrefabInstance:
   m_ObjectHideFlags: 0

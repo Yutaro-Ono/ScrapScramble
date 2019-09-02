@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class RailgunBulletMovement : MonoBehaviour
 {
+    // ウェーブの情報
+    WaveManagement waveManager;
+
     // 発射したプレイヤーのオブジェクト
     GameObject shooterPlayer;
 
     // ヒットしたプレーヤーの情報を保存する
     GameObject prevPlayerObj;
+
+    // ヒットしたエネミーの情報のリスト
+    List<GameObject> hitEnemies = new List<GameObject>(2);
 
     //弾が進むスピード
     public float speed = 3.0f;
@@ -28,6 +34,12 @@ public class RailgunBulletMovement : MonoBehaviour
     // ヒットカウント
     int numHit;
 
+    // レイヤーの設定を行ったかどうか
+    bool layerSettingFlag = false;
+
+    // 対プレイヤーウェーブかどうか
+    bool isVsPlayerWave;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +49,14 @@ public class RailgunBulletMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // レイヤーの設定
+        if (!layerSettingFlag)
+        {
+            isVsPlayerWave = (waveManager.wave == WaveManagement.WAVE_NUM.WAVE_2_PVP || waveManager.wave == WaveManagement.WAVE_NUM.WAVE_4_PVP);
+            gameObject.layer = LayerMask.NameToLayer(isVsPlayerWave ? WeaponEnumDefine.TouchablePlayerLayerName : WeaponEnumDefine.UntouchablePlayerLayerName);
+            layerSettingFlag = true;
+        }
+
         //前に進む
         gameObject.transform.position += gameObject.transform.forward * speed;
 
@@ -48,12 +68,18 @@ public class RailgunBulletMovement : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        // インターバルウェーブで消滅
+        if (waveManager.wave == WaveManagement.WAVE_NUM.WAVE_INTERVAL)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         //プレイヤーに当たった時
-        if (other.tag == "Player")
+        if (other.tag == "Player" && isVsPlayerWave)
         {
             //そのプレイヤ－が装備者自身でないとき
             if (other.gameObject != shooterPlayer)
@@ -70,9 +96,7 @@ public class RailgunBulletMovement : MonoBehaviour
                 PlayerStatus status = other.GetComponent<PlayerStatus>();
                 Debug.Log("レールガンの弾がプレイヤーにヒット");
 
-                // 当たったプレーヤーの情報を保存
-                prevPlayerObj = other.gameObject;
-
+                // まだどのプレイヤーにもあたっていないとき
                 if(numHit == 0)
                 {
                     numHit++;
@@ -84,6 +108,9 @@ public class RailgunBulletMovement : MonoBehaviour
                     // ヒットカウントを進める
                     numHit++;
                 }
+
+                // 当たったプレーヤーの情報を保存
+                prevPlayerObj = other.gameObject;
 
                 if (numHit >= maxHit)
                 {
@@ -99,8 +126,15 @@ public class RailgunBulletMovement : MonoBehaviour
             Debug.Log("レールガンの弾がエネミーにヒット");
             status.hitPoint -= (short)power;
 
-            // ヒットカウントを進める
-            numHit++;
+            // これまで当たってきたものの中に、今のオブジェクトがなければ
+            if (!hitEnemies.Contains(other.gameObject))
+            {
+                // ヒットカウントを進める
+                numHit++;
+
+                // リストに追加
+                hitEnemies.Add(other.gameObject);
+            }
 
             if (numHit >= maxHit)
             {
@@ -108,22 +142,25 @@ public class RailgunBulletMovement : MonoBehaviour
                 numHit = 0;
             }
         }
-    }
 
-
-    private void OnCollisionEnter(Collision collision)
-    {
         //壁に当たった時
-        if (collision.gameObject.tag == "Wall")
+        else if (other.tag == "Wall")
         {
-            Debug.Log("レールガンの弾が壁にぶち当たった");
+            //Debug.Log("レールガンの弾が壁にぶち当たった");
 
             Destroy(gameObject);
         }
     }
 
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        
+    }
+
     public void SetShooterPlayer(GameObject in_shooterPlayer)
     {
         this.shooterPlayer = in_shooterPlayer;
+        waveManager = shooterPlayer.GetComponent<PlayerStatus>().GetWaveManager();
     }
 }

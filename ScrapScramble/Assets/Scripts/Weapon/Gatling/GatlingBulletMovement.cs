@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GatlingBulletMovement : MonoBehaviour
 {
+    // ウェーブ情報
+    WaveManagement waveManager;
+
     //発射したプレイヤーのオブジェクト
     GameObject shooterPlayer;
 
@@ -19,6 +22,12 @@ public class GatlingBulletMovement : MonoBehaviour
     //進んだ距離
     float advanceDistance = 0.0f;
 
+    // レイヤー情報を入れたかどうか
+    bool layerSettingFlag = false;
+
+    // 対プレイヤーウェーブか
+    bool isVsPlayerWave;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +37,14 @@ public class GatlingBulletMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // レイヤーを設定
+        if (!layerSettingFlag)
+        {
+            isVsPlayerWave = (waveManager.wave == WaveManagement.WAVE_NUM.WAVE_2_PVP || waveManager.wave == WaveManagement.WAVE_NUM.WAVE_4_PVP);
+            gameObject.layer = LayerMask.NameToLayer(isVsPlayerWave ? WeaponEnumDefine.TouchablePlayerLayerName : WeaponEnumDefine.UntouchablePlayerLayerName);
+            layerSettingFlag = true;
+        }
+
         //前に進む
         gameObject.transform.position += gameObject.transform.forward * speed;
 
@@ -39,12 +56,18 @@ public class GatlingBulletMovement : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        // インターバルウェーブでは消滅
+        if (waveManager.wave == WaveManagement.WAVE_NUM.WAVE_INTERVAL)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         //プレイヤーに当たった時
-        if (other.tag == "Player")
+        if (other.tag == "Player" && isVsPlayerWave)
         {
             //そのプレイヤ－が装備者自身でないとき
             if (other.gameObject != shooterPlayer)
@@ -59,7 +82,7 @@ public class GatlingBulletMovement : MonoBehaviour
                     move.DropResource((uint)power);
                 }
                 PlayerStatus status = other.GetComponent<PlayerStatus>();
-                Debug.Log("ガトリング：プレイヤー" + (status.GetId()) + "にヒット");
+                Debug.Log("ガトリング：プレイヤー" + (status.GetId() + 1) + "にヒット");
 
                 Destroy(gameObject);
             }
@@ -81,7 +104,7 @@ public class GatlingBulletMovement : MonoBehaviour
         //壁に当たった時
         if (collision.gameObject.tag == "Wall")
         {
-            Debug.Log("ガトリングの弾が壁にぶち当たった");
+            //Debug.Log("ガトリングの弾が壁にぶち当たった");
 
             Destroy(gameObject);
         }
@@ -95,5 +118,6 @@ public class GatlingBulletMovement : MonoBehaviour
     public void SetShooterPlayer(GameObject in_shooterPlayer)
     {
         this.shooterPlayer = in_shooterPlayer;
+        waveManager = in_shooterPlayer.GetComponent<PlayerStatus>().GetWaveManager();
     }
 }

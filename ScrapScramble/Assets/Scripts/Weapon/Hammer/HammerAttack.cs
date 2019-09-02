@@ -22,6 +22,9 @@ public class HammerAttack : StateMachineBehaviour
         {
             Debug.Log("ハンマーコントロールの取得失敗");
         }
+
+        //コリジョンを有効化
+        control.hitCollider.enabled = true;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -34,8 +37,6 @@ public class HammerAttack : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         Debug.Log("ハンマー：攻撃アニメーション終了");
-        //コリジョンを有効化
-        control.hitCollider.enabled = true;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

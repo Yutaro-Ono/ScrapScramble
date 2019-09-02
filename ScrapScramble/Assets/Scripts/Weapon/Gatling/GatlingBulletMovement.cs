@@ -79,7 +79,7 @@ public class GatlingBulletMovement : MonoBehaviour
                         Debug.Log("ガトリング弾：プレイヤーの資源のドロップに失敗");
                     }
 
-                    move.DropResource((uint)power);
+                    move.OnHitGatlingBullet(power, (uint)power);
                 }
                 PlayerStatus status = other.GetComponent<PlayerStatus>();
                 Debug.Log("ガトリング：プレイヤー" + (status.GetId() + 1) + "にヒット");

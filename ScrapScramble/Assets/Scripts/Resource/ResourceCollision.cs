@@ -7,6 +7,9 @@ public class ResourceCollision : MonoBehaviour
     MeshRenderer meshRenderer;
     Color color;
 
+    // ウェーブ情報
+    static WaveManagement waveManager = null;
+
     //プレイヤーが獲得した時の資源ポイントの増分
     public const int pointAddition = 10;
 
@@ -69,6 +72,11 @@ public class ResourceCollision : MonoBehaviour
 
             flashPartFrame++;
         }
+
+        if (waveManager != null && waveManager.wave == WaveManagement.WAVE_NUM.WAVE_INTERVAL)
+        {
+            Destroy(gameObject);
+        }
     }
     
     private void OnTriggerEnter(Collider other)
@@ -84,6 +92,14 @@ public class ResourceCollision : MonoBehaviour
 
             playerStatus.score += pointAddition;
             Destroy(gameObject);
+        }
+    }
+
+    public static void SetWaveManager(WaveManagement in_waveManager)
+    {
+        if (waveManager == null)
+        {
+            waveManager = in_waveManager;
         }
     }
 }

@@ -177,7 +177,7 @@ public class PlayerAI : MonoBehaviour
                 */
             }
 
-            // そうでない（インターバルWave）場合
+            // そうでない（インターバル、またはチュートリアルWave）場合
             else
             {
                 // 動かない

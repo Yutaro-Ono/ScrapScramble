@@ -72,4 +72,10 @@ public class ResultToTitle : MonoBehaviour
     {
         SceneManager.LoadScene("New_Title");
     }
+
+    
+    public float GetMaxFillTime()
+    {
+        return maxHoldTime;
+    }
 }

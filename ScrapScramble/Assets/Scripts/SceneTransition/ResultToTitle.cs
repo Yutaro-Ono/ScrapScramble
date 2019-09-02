@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ResultToTitle : MonoBehaviour
 {
-    Rewired.Player player1;
+    Rewired.Player[] controllers = new Rewired.Player[PlayerManagement.playerNum];
 
     public float nowHoldTime;
 
@@ -13,15 +13,45 @@ public class ResultToTitle : MonoBehaviour
 
     private void Start()
     {
-        player1 = Rewired.ReInput.players.GetPlayer(0);
+        for (int i = 0; i < PlayerManagement.playerNum; ++i)
+        {
+            // その番号のプレイヤーがAIでなければ
+            if (ChoiceMenuSceneController.getReady[i])
+            {
+                // 操作受付
+                controllers[i] = Rewired.ReInput.players.GetPlayer(i);
+            }
+            // AIであれば
+            else
+            {
+                controllers[i] = null;
+            }
+        }
 
         nowHoldTime = 0.0f;
     }
 
     private void Update()
     {
+        // 誰かがAボタンを押しているかどうか
+        bool pressA = false;
+        for (int i = 0; i < PlayerManagement.playerNum; ++i)
+        {
+            // AIの場合はこの先を見ない
+            if (controllers[i] == null)
+            {
+                continue;
+            }
+
+            // Aボタンが押されていれば即座に抜ける
+            if (pressA = controllers[i].GetButton("A"))
+            {
+                break;
+            }
+        }
+
         // Aボタンが押されている間
-        if (player1.GetButton("A"))
+        if (pressA || Input.GetKey(KeyCode.Space))
         {
             nowHoldTime += Time.deltaTime;
         }
@@ -40,6 +70,6 @@ public class ResultToTitle : MonoBehaviour
 
     public void BackToTitle()
     {
-        SceneManager.LoadScene("TitleScene");
+        SceneManager.LoadScene("New_Title");
     }
 }

@@ -19,6 +19,9 @@ public class FilledLoadBar : MonoBehaviour
     // scene管理スクリプト
     ChoiceMenuSceneController scene;
 
+    // コントローラ操作
+    PreparationChanger[] playerControllers = new PreparationChanger[PreparationChanger.playerAllNum];
+
     // 開始時処理
     void Start()
     {
@@ -27,13 +30,29 @@ public class FilledLoadBar : MonoBehaviour
         loadBar = GetComponent<Image>();
 
         nowHoldTime = 0.0f;
+
+        for (int i = 0; i < PreparationChanger.playerAllNum; ++i)
+        {
+            this.playerControllers[i] = ChoiceMenuSceneController.playerControllers[i];
+        }
     }
 
     // 更新処理
     void Update()
     {
-        // 1Pの準備が完了している状態の時、スペースキーを長押しでゲーム開始
-        if(Input.GetKey(KeyCode.Space)　&& scene.GetPushStart() == true)
+        // 次シーンへ遷移する操作がされているかのチェック  
+        bool command = false;
+        for (int i = 0; i < PreparationChanger.playerAllNum; ++i)
+        {
+            // 誰か一人でもその操作をしていれば真として、ループを抜ける
+            if (command = playerControllers[i].GetToNextSceneCommand())
+            {
+                break;
+            }
+        }
+
+        // 誰かしらの準備が完了している場合、特定操作でゲージ上昇
+        if((Input.GetKey(KeyCode.Space) || command) && scene.GetPushStart() == true)
         {
             if(nowHoldTime <= maxHoldTime)
             {

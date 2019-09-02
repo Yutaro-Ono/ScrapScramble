@@ -20,31 +20,90 @@ public class PreparationChanger : MonoBehaviour
     public const int playerAllNum = 4;
 
     // 準備状態UI格納用
-    public GameObject[] playerReady = new GameObject[playerAllNum];
+    public GameObject playerReady;
 
     // 待機状態UI格納用
-    public GameObject[] playerWait = new GameObject[playerAllNum];
+    public GameObject playerWait;
+
+    // 対応するコントローラ
+    Rewired.Player controller;
+
+    // プレイヤー（AIでない）として参加するかどうか
+    bool readyFlag;
+
+    // 準備状態になった押下であるか
+    bool holdFromBecomeReady;
+
+    // 次シーンへ遷移する操作をしたかどうか
+    bool toNextSceneCommand;
 
     // Start is called before the first frame update
     void Start()
     {
+        readyFlag = false;
+        holdFromBecomeReady = false;
+        toNextSceneCommand = false;
+
         sceneManager = GameObject.Find("SceneManager");
         scene = sceneManager.GetComponent<ChoiceMenuSceneController>();
 
         // プレイヤーの準備状態と待機状態のオブジェクトを取得
-        for(int i = 0; i < playerAllNum; ++i)
-        {
-            playerReady[i] = GameObject.Find("ReadyPlayer_" + (i + 1)).gameObject;
-            playerReady[i].SetActive(false);
+        int number = playerNum + 1;
+        playerReady = transform.Find("ReadyPlayer_" + number).gameObject;
+        playerWait = transform.Find("WaitPlayer_" + number).gameObject;
+        playerReady.SetActive(false);
+        playerWait.SetActive(true);
 
-            playerWait[i] = GameObject.Find("WaitPlayer_" + (i + 1)).gameObject;
-            playerWait[i].SetActive(true);
-        }
+        // コントローラ情報を取得
+        controller = Rewired.ReInput.players.GetPlayer(playerNum);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        // Aボタンを押したとき
+        if (controller.GetButton("A"))
+        {
+            // 準備フラグが偽であるとき、準備状態にする
+            if (!readyFlag)
+            {
+                readyFlag = true;
+                holdFromBecomeReady = true;
+                playerReady.SetActive(true);
+                playerWait.SetActive(false);
+            }
+
+            // 準備フラグが真で、準備フラグが立った押下でなければ（準備状態になって、一度離された上で押されたなら）
+            else if (!holdFromBecomeReady)
+            {
+                toNextSceneCommand = true;
+            }
+        }
+
+        // Aボタンが押されていないとき
+        else
+        {
+            holdFromBecomeReady = false;
+            
+            toNextSceneCommand = false;
+        }
+
+        // Bボタンが押されていれば、準備状態をキャンセル
+        if (controller.GetButton("B"))
+        {
+            readyFlag = false;
+            playerReady.SetActive(false);
+            playerWait.SetActive(true);
+        }
+    }
+
+    public bool GetReadyFlag()
+    {
+        return readyFlag;
+    }
+
+    public bool GetToNextSceneCommand()
+    {
+        return toNextSceneCommand;
     }
 }

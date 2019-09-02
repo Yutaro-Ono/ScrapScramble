@@ -11,19 +11,30 @@ using UnityEngine.UI;
 
 public class WaveManagement : MonoBehaviour
 {
+    //----------------------------------------------------//
+    // Wave制御
+    //---------------------------------------------------//
     // バトルWAVEの制限時間
     public const float limitTime = 120.0f;
     // WAVE間のインターバルタイマー
     public const float intervalTime = 6.0f;
-
     // 制限時間カウント用タイマー
     public float timer;
     // インターバル時のタイマー
     public float intervalTimer;
 
+    //-----------------------------------------------------//
+    // ゲームオブジェクト
+    //-----------------------------------------------------//
+    // sceneManager
+    GameObject sceneManager;
+    GameSceneManager scene;
+
+    //-----------------------------------------------------//
+    // テキスト
+    //----------------------------------------------------//
     // タイマー表示UI(テキスト)格納用
     public Text timerText;
-
     // ウェーブ表示UI(テキスト)格納用
     public Text waveText;
 
@@ -40,7 +51,8 @@ public class WaveManagement : MonoBehaviour
         WAVE_2_PVP,
         WAVE_3_PVE,
         WAVE_4_PVP,
-        WAVE_INTERVAL
+        WAVE_INTERVAL,
+        WAVE_TUTORIAL
     }
 
     public WAVE_NUM wave;
@@ -58,7 +70,14 @@ public class WaveManagement : MonoBehaviour
     {
         InitTime();
         timer = limitTime;
-        wave = WAVE_NUM.WAVE_1_PVE;
+
+        // 最初のウェーブ(チュートリアル)
+        wave = WAVE_NUM.WAVE_TUTORIAL;
+        tmpWave = wave;
+
+        // SceneManagerとGameSceneManagerスクリプトの取得
+        sceneManager = GameObject.Find("SceneManager");
+        scene = sceneManager.GetComponent<GameSceneManager>();
 
         waveCount = 1;
         enableText = false;
@@ -68,48 +87,23 @@ public class WaveManagement : MonoBehaviour
     void Update()
     {
 
-        if (toInterval == true)
+        // ゲームが開始したらウェーブを更新(チュートリアル時のみ)
+        if(scene.GetGameStartFlag() == true && wave == WAVE_NUM.WAVE_TUTORIAL)
         {
-            enableText = true;
-            EnterInterval();
+            wave = WAVE_NUM.WAVE_1_PVE;
         }
 
-        if (toNextWave == true)
+        // ゲーム開始フラグが立ったら更新
+        if(scene.GetGameStartFlag())
         {
-            InitTime();
+            WaveUpdate();
         }
 
-        // WAVE管理
-        switch (wave)
-        {
-            case WAVE_NUM.WAVE_1_PVE:
-                FirstWave();
-                break;
-
-            case WAVE_NUM.WAVE_2_PVP:
-                SecondWave();
-                break;
-
-            case WAVE_NUM.WAVE_3_PVE:
-                ThirdWave();
-                break;
-
-            case WAVE_NUM.WAVE_4_PVP:
-                FourthWave();
-                break;
-
-            case WAVE_NUM.WAVE_INTERVAL:
-                IntervalWave();
-                break;
-
-            default:
-                break;
-        }
-
-        // WAVEのUI表示
-        ToStringWave(enableText);
 
     }
+
+
+
 
     // タイマーに制限時間分を代入し初期化
     void InitTime()
@@ -164,7 +158,6 @@ public class WaveManagement : MonoBehaviour
     // WAVEごとの処理
     //
     //--------------------------------------------------------//
-
     // 第一ウェーブの処理
     void FirstWave()
     {
@@ -256,5 +249,50 @@ public class WaveManagement : MonoBehaviour
         }
     }
 
+
+    // Wave制御
+    void WaveUpdate()
+    {
+        if (toInterval == true)
+        {
+            enableText = true;
+            EnterInterval();
+        }
+
+        if (toNextWave == true)
+        {
+            InitTime();
+        }
+
+        // WAVE管理
+        switch (wave)
+        {
+            case WAVE_NUM.WAVE_1_PVE:
+                FirstWave();
+                break;
+
+            case WAVE_NUM.WAVE_2_PVP:
+                SecondWave();
+                break;
+
+            case WAVE_NUM.WAVE_3_PVE:
+                ThirdWave();
+                break;
+
+            case WAVE_NUM.WAVE_4_PVP:
+                FourthWave();
+                break;
+
+            case WAVE_NUM.WAVE_INTERVAL:
+                IntervalWave();
+                break;
+
+            default:
+                break;
+        }
+
+        // WAVEのUI表示
+        ToStringWave(enableText);
+    }
 
 }

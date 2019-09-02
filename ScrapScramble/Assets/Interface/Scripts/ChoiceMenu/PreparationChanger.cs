@@ -8,13 +8,6 @@ using UnityEngine.UI;
 
 public class PreparationChanger : MonoBehaviour
 {
-    // Image(Ready)
-    Image readyImg;
-    GameObject ready;
-    // Image(Wait)
-    Image waitImg;
-    GameObject wait;
-
     // ChoiceMenuSceneCo...が格納されているオブジェクト
     GameObject sceneManager;
     // scene管理スクリプト
@@ -23,37 +16,35 @@ public class PreparationChanger : MonoBehaviour
     // 何Pか(現段階ではInspector上で番号を指定)
     public int playerNum;
 
+    // 全プレイヤー数
+    public const int playerAllNum = 4;
+
+    // 準備状態UI格納用
+    public GameObject[] playerReady = new GameObject[playerAllNum];
+
+    // 待機状態UI格納用
+    public GameObject[] playerWait = new GameObject[playerAllNum];
+
     // Start is called before the first frame update
     void Start()
     {
         sceneManager = GameObject.Find("SceneManager");
         scene = sceneManager.GetComponent<ChoiceMenuSceneController>();
 
-        ready = this.transform.Find("Ready").gameObject;
-        readyImg = ready.gameObject.GetComponent<Image>();
+        // プレイヤーの準備状態と待機状態のオブジェクトを取得
+        for(int i = 0; i < playerAllNum; ++i)
+        {
+            playerReady[i] = GameObject.Find("ReadyPlayer_" + (i + 1)).gameObject;
+            playerReady[i].SetActive(false);
 
-        wait = this.transform.Find("Wait").gameObject;
-        waitImg = wait.gameObject.GetComponent<Image>();
-
-        readyImg.enabled = false;
-        waitImg.enabled = true;
+            playerWait[i] = GameObject.Find("WaitPlayer_" + (i + 1)).gameObject;
+            playerWait[i].SetActive(true);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        // アタッチされたオブジェクトのプレイヤー番号に応じて、準備状態を取得。画像の表示非表示を切り替える
-        if(scene.GetPlayerReady(playerNum) == true)
-        {
-            readyImg.enabled = true;
-            waitImg.enabled = false;
-        }
-        else
-        {
-            readyImg.enabled = false;
-            waitImg.enabled = true;
-        }
-
-
+        
     }
 }

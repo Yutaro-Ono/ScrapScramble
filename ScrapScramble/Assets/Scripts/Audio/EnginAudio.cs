@@ -22,6 +22,8 @@ public class EnginAudio : MonoBehaviour
         audioSource2.clip = sound2;
         audioSource.loop = true;
         audioSource2.loop = true;
+        audioSource.volume = 0.2f;
+        audioSource2.volume = 0.2f;
     }
 
     // Update is called once per frame

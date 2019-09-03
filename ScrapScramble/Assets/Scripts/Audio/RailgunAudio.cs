@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class RailgunAudio : MonoBehaviour
 {
-    public GameObject player;
     public AudioClip sound1;
     AudioSource audioSource;
     RailgunControl railgunControl;
@@ -12,7 +11,8 @@ public class RailgunAudio : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        railgunControl = player.GetComponent<RailgunControl>();
+        railgunControl = GetComponent<RailgunControl>();
+        audioSource.volume =0.8f;
     }
 
     // Update is called once per frame
@@ -24,7 +24,7 @@ public class RailgunAudio : MonoBehaviour
     {
         if(railgunControl.effectPlayTiming==true)
         {
-            audioSource.PlayOneShot(sound1);
+            audioSource.Play();
         }
     }
 }

@@ -124,6 +124,9 @@ public class ResultToTitle : MonoBehaviour
     UnityEngine.Application.Quit();
 #endif
         }
+
+        // エスケープキーが押されていればゲームを終了する関数
+        CommonFunction.CheckEscapeForQuitApp();
     }
 
     public void BackToTitle()

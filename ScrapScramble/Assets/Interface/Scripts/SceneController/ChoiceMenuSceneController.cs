@@ -81,6 +81,9 @@ public class ChoiceMenuSceneController : MonoBehaviour
 
         // プレイヤーの準備状況を更新
         CheckReady();
+
+        // エスケープキーが押されていればゲームを終了する関数
+        CommonFunction.CheckEscapeForQuitApp();
     }
 
     //-------------------------------------------------------------------------------------------------------------//

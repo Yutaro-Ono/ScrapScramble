@@ -33,9 +33,12 @@ public class TitleSceneController : MonoBehaviour
             }
         }
 
-        if(Input.GetKey(KeyCode.Space) || anyonePressDownA)
+        if(Input.GetKeyDown(KeyCode.Space) || anyonePressDownA)
         {
             SceneManager.LoadScene("ChoiceMenuScene");
         }
+
+        // エスケープが押されていればゲームを終了する関数
+        CommonFunction.CheckEscapeForQuitApp();
     }
 }

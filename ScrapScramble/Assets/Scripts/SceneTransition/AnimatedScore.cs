@@ -14,7 +14,7 @@ public class AnimatedScore : MonoBehaviour
     {
 
 
-        StartCoroutine(ScoreAnimation(GameToResult.finalScore[PlayerNum], 2));
+        StartCoroutine(ScoreAnimation(GameToResult.finalScore[PlayerNum - 1], 2));
     }
 
 

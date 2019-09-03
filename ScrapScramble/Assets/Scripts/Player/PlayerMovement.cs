@@ -296,10 +296,19 @@ public class PlayerMovement : MonoBehaviour
             // その資源が飛ばされるベクトル
             Vector3 forceDirection = forceDirectionBase;
             forceDirection = Quaternion.Euler(0, angle * i, 0) * forceDirection;
-            forceDirection.y += 3;
+
+            // 巨大化段階から、オブジェクトの座標からどのくらい距離をとるかを計算
+            float distanceRate = status.GetInitialScale() + (PlayerStatus.armedStageUpScaleIncrease * status.armedStage);
+
+            // 生成点を巨大化段階によって調節
+            float distance = dropDistance * distanceRate;
+
+            // 生成点を計算
+            Vector3 instantiatePoint = gameObject.transform.position + forceDirection * distance;
+            instantiatePoint.y = dropDistance;
 
             // 資源のインスタンス生成
-            GameObject resource = GameObject.Instantiate(resourcePrefab, gameObject.transform.position + forceDirection * dropDistance, Quaternion.identity);
+            GameObject resource = GameObject.Instantiate(resourcePrefab, instantiatePoint, Quaternion.identity);
 
             // 物理的に飛ばすため、資源のリジッドボディを取得
             Rigidbody resRigidbody = resource.GetComponent<Rigidbody>();

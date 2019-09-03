@@ -29,6 +29,8 @@ public class PlayerStatus : MonoBehaviour
     const int armedStageLimit = 4;      // 巨大化の段階数
     // 次の巨大化までいくつの資源オブジェクトが必要か。
     public const int armedStageUpResourceMass = 25;
+    // 巨大化したときのスケール値の増分
+    public const float armedStageUpScaleIncrease = 0.5f;
     public short chargeAttackPower;
     bool getItem;
     bool nextBody;
@@ -115,7 +117,7 @@ public class PlayerStatus : MonoBehaviour
         {
             if (i == armedStage)
             {
-                float scale = initialScale + (0.5f * i);
+                float scale = initialScale + (armedStageUpScaleIncrease * i);
 
                 gameObject.transform.localScale = new Vector3(scale, scale, scale);
             }
@@ -259,5 +261,10 @@ public class PlayerStatus : MonoBehaviour
     public GamepadInput.GamePad.Index GetControlIndex()
     {
         return GamepadInput.GamePad.CastIntToIndex(id);
+    }
+
+    public float GetInitialScale()
+    {
+        return initialScale;
     }
 }

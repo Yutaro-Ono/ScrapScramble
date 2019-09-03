@@ -320,7 +320,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   giant: {fileID: 908218819157281842}
-  player: {fileID: 908218819157281842}
 --- !u!1 &3326076075049878092
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,11 +371,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5201107472695555496}
     m_Modifications:
-    - target: {fileID: 7934888141528449090, guid: df70514bacf04de428a50bd1ef8ee1b1,
-        type: 3}
-      propertyPath: m_Name
-      value: SandDust
-      objectReference: {fileID: 0}
     - target: {fileID: 7934888141528449103, guid: df70514bacf04de428a50bd1ef8ee1b1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -447,6 +441,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7934888141528449090, guid: df70514bacf04de428a50bd1ef8ee1b1,
+        type: 3}
+      propertyPath: m_Name
+      value: SandDust
+      objectReference: {fileID: 0}
     - target: {fileID: 7934888141528449100, guid: df70514bacf04de428a50bd1ef8ee1b1,
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
@@ -467,11 +466,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5201107472695555496}
     m_Modifications:
-    - target: {fileID: 6605167736261938096, guid: 63f8ce3d746adb743a08356a7d4bec0a,
-        type: 3}
-      propertyPath: m_Name
-      value: Core
-      objectReference: {fileID: 0}
     - target: {fileID: 5499761680353043942, guid: 63f8ce3d746adb743a08356a7d4bec0a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -527,6 +521,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6605167736261938096, guid: 63f8ce3d746adb743a08356a7d4bec0a,
+        type: 3}
+      propertyPath: m_Name
+      value: Core
+      objectReference: {fileID: 0}
     - target: {fileID: 5201798478508716434, guid: 63f8ce3d746adb743a08356a7d4bec0a,
         type: 3}
       propertyPath: m_IsActive
@@ -567,11 +566,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5201107472695555496}
     m_Modifications:
-    - target: {fileID: 7934888141528449090, guid: df70514bacf04de428a50bd1ef8ee1b1,
-        type: 3}
-      propertyPath: m_Name
-      value: SandDust (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 7934888141528449103, guid: df70514bacf04de428a50bd1ef8ee1b1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -641,6 +635,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7934888141528449090, guid: df70514bacf04de428a50bd1ef8ee1b1,
+        type: 3}
+      propertyPath: m_Name
+      value: SandDust (1)
       objectReference: {fileID: 0}
     - target: {fileID: 7934888141528449100, guid: df70514bacf04de428a50bd1ef8ee1b1,
         type: 3}

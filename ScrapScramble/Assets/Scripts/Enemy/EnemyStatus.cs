@@ -39,7 +39,7 @@ public class EnemyStatus : MonoBehaviour
     //ボーナスエネミーになる確率
     //０～１００の間でランダムに生成された値が、この値未満であればボーナスエネミーである
     //とりあえず30%に設定
-    const ushort bonusEnemyPercentage = (bonusEnemyJudgeNumberMax * 10) / 10;
+    const ushort bonusEnemyPercentage = (bonusEnemyJudgeNumberMax * 3) / 10;
     
     // Start is called before the first frame update
     void Start()

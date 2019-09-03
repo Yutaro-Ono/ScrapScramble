@@ -58,7 +58,10 @@ public class RailgunControl : MonoBehaviour
     {
         // クールタイム初期化
         shootTimer = shootInterval;
+    }
 
+    private void OnDisable()
+    {
         // エフェクトフラグ初期化
         effectPlayTiming = false;
     }

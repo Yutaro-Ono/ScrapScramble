@@ -11,7 +11,8 @@ public class BattleBgm : MonoBehaviour
     AudioSource audioSource;
     AudioSource audioSource2;
     PlayerStatus status;
-   
+    float WaveCount;
+    float count;
     bool isAudioePlay;
     void Start()
     {
@@ -23,13 +24,15 @@ public class BattleBgm : MonoBehaviour
         audioSource2.clip = sound2;
         audioSource.loop = true;
         audioSource2.loop = true;
-        audioSource.volume = 0.5f;
+        audioSource.volume = 0.7f;
         audioSource2.volume = 0.5f;
     }
 
     // Update is called once per frame
     void Update()
     {
+        WaveCount++;
+        count++;
         RingEnginAudio();
     }
     void RingEnginAudio()
@@ -39,19 +42,28 @@ public class BattleBgm : MonoBehaviour
         bool isVsEnemyWave = (wave == WaveManagement.WAVE_NUM.WAVE_1_PVE || wave == WaveManagement.WAVE_NUM.WAVE_3_PVE);
         if (isVsEnemyWave==false && isAudioePlay == true)
         {
+           
             audioSource2.Pause();
-
-            audioSource.Play();
-
+            if (WaveCount > 590.0f)
+            {
+                audioSource.Play();
+               
+            }
+            count = 0;
             isAudioePlay = false;
         }
         if (isVsEnemyWave==true && isAudioePlay == false)
         {
             audioSource.Pause();
+           
+            if(count>590.0f)
+            {
+                audioSource2.Play();
+                
+            }
+            WaveCount = 0;
 
-            audioSource2.Play();
-
-            isAudioePlay = true;
+              isAudioePlay = true;
 
         }
     }

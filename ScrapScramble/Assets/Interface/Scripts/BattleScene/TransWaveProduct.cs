@@ -28,7 +28,6 @@ public class TransWaveProduct : MonoBehaviour
 
     Animator wallAnim;
 
-
     //------------------------------------------------------//
     // 演出制御
     //-----------------------------------------------------//
@@ -77,20 +76,26 @@ public class TransWaveProduct : MonoBehaviour
 
     void GameUpdate()
     {
+
+
         // Waveがインターバルの時にUIをアクティブ化
         if (wave.wave == WaveManagement.WAVE_NUM.WAVE_INTERVAL)
         {
-            // 前のウェーブがPVEウェーブならウェーブ情報を「対戦」に
+            // 前のウェーブがPVEウェーブならウェーブ情報を「対戦」にして、アニメーショントリガーをオン
             if (wave.tmpWave == WaveManagement.WAVE_NUM.WAVE_1_PVE || wave.tmpWave == WaveManagement.WAVE_NUM.WAVE_3_PVE)
             {
                 waveIndex[1].SetActive(true);
                 waveIndex[0].SetActive(false);
+
+                wallAnim.SetTrigger("Panel");
             }
-            // 前のウェーブがPVPウェーブなら、ウェーブ情報を「撃退」に
+            // 前のウェーブがPVPウェーブなら、ウェーブ情報を「撃退」にして、アニメーショントリガーをオン
             else if (wave.tmpWave == WaveManagement.WAVE_NUM.WAVE_2_PVP || wave.tmpWave == WaveManagement.WAVE_NUM.WAVE_4_PVP)
             {
                 waveIndex[0].SetActive(true);
                 waveIndex[1].SetActive(false);
+
+                wallAnim.SetTrigger("Panel");
             }
 
             wallAnim.SetBool("Interval", true);
@@ -103,6 +108,32 @@ public class TransWaveProduct : MonoBehaviour
             productUI.SetActive(false);
             waveInfo.SetActive(false);
         }
+
+
+        // チュートリアル後の「撃退ウェーブ」表示
+        if (wave.tmpTimer <= 1.0f && wave.wave == WaveManagement.WAVE_NUM.WAVE_TUTORIAL)
+        {
+            productUI.SetActive(true);
+            waveInfo.SetActive(true);
+            waveIndex[0].SetActive(true);
+
+            wallAnim.SetTrigger("1stBattle");
+
+            Debug.Log("撃退ウェーブ表示");
+
+            AnimatorStateInfo stateInfo = wallAnim.GetCurrentAnimatorStateInfo(0);
+            if(stateInfo.normalizedTime < 1.0f)
+            {
+
+            }
+            else
+            {
+                productUI.SetActive(false);
+                waveInfo.SetActive(false);
+                waveIndex[0].SetActive(false);
+            }
+        }
+        
     }
 
     // インターバル中の演出

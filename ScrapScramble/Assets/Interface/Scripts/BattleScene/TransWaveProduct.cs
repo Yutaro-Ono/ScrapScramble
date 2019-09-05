@@ -26,7 +26,10 @@ public class TransWaveProduct : MonoBehaviour
     // ウェーブ情報UI(子：撃退ウェーブ、対戦ウェーブ)
     public GameObject[] waveIndex = new GameObject[2];
 
+    // 壁の開閉演出アニメーター
     Animator wallAnim;
+    // パネルの表示や移動のアニメーター
+    Animator panelAnim;
 
     //------------------------------------------------------//
     // 演出制御
@@ -59,7 +62,7 @@ public class TransWaveProduct : MonoBehaviour
 
         // アニメーター取得
         wallAnim = productUI.GetComponent<Animator>();
-
+        panelAnim = waveInfo.GetComponent<Animator>();
 
         timer = 0.0f;
     }
@@ -111,13 +114,13 @@ public class TransWaveProduct : MonoBehaviour
 
 
         // チュートリアル後の「撃退ウェーブ」表示
-        if (wave.tmpTimer <= 1.0f && wave.wave == WaveManagement.WAVE_NUM.WAVE_TUTORIAL)
+        if (wave.tmpTimer <= 0.5f && wave.wave == WaveManagement.WAVE_NUM.WAVE_TUTORIAL)
         {
             productUI.SetActive(true);
             waveInfo.SetActive(true);
             waveIndex[0].SetActive(true);
 
-            wallAnim.SetTrigger("1stBattle");
+            panelAnim.SetTrigger("1stBattle");
 
             Debug.Log("撃退ウェーブ表示");
 

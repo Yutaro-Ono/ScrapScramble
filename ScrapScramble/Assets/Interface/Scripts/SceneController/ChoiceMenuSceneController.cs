@@ -58,6 +58,9 @@ public class ChoiceMenuSceneController : MonoBehaviour
         // ※デバッグ用初期化(1Pが完了していなくてもスタート可能)※
         pushStart = true;
         startGame = false;
+
+        // バトルシーンのデバッグ機能を切る
+        DebugObject.debugFlag = false;
     }
 
     // 更新処理

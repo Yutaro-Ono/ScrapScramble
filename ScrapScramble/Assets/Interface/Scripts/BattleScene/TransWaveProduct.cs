@@ -21,15 +21,13 @@ public class TransWaveProduct : MonoBehaviour
     //---------------------------------------------------//
     // 演出用UI
     public GameObject productUI;
-    // ウェーブ情報UI(親)
-    public GameObject waveInfo;
     // ウェーブ情報UI(子：撃退ウェーブ、対戦ウェーブ)
     public GameObject[] waveIndex = new GameObject[2];
 
     // 壁の開閉演出アニメーター
     Animator wallAnim;
     // パネルの表示や移動のアニメーター
-    Animator panelAnim;
+    public Animator[] panelAnim = new Animator[2];
 
     //------------------------------------------------------//
     // 演出制御
@@ -50,19 +48,21 @@ public class TransWaveProduct : MonoBehaviour
 
         // scene上から演出用UIを見つける
         productUI = GameObject.Find("ProductUI");
-        // ウェーブ情報(親)
-        waveInfo = GameObject.Find("NextWaveInfo");
-        // 撃退フェーズ
-        waveIndex[0] = GameObject.Find("Info_EnemyWave");
-        waveIndex[0].SetActive(false);
-        // 対戦ウェーブ
-        waveIndex[1] = GameObject.Find("Info_PlayerWave");
 
-        productUI.SetActive(false);
+        // ウェーブ情報を表示するパネルオブジェクトとそのアニメーターの取得
+        waveIndex[0] = GameObject.Find("PVEpanel");
+        waveIndex[1] = GameObject.Find("PVPpanel");
+        panelAnim[0] = waveIndex[0].GetComponent<Animator>();
+        panelAnim[1] = waveIndex[1].GetComponent<Animator>();
+
+        // 一旦パネルをすべて隠す
+        for(int i = 0; i < 2; ++i)
+        {
+            waveIndex[i].SetActive(false);
+        }
 
         // アニメーター取得
         wallAnim = productUI.GetComponent<Animator>();
-        panelAnim = waveInfo.GetComponent<Animator>();
 
         timer = 0.0f;
     }
@@ -80,9 +80,14 @@ public class TransWaveProduct : MonoBehaviour
     void GameUpdate()
     {
 
-
+        // チュートリアル後の「撃退ウェーブ」表示
+        if (wave.tmpTimer <= 6.0f && wave.wave == WaveManagement.WAVE_NUM.WAVE_TUTORIAL)
+        {
+            waveIndex[0].SetActive(true);
+            panelAnim[0].SetTrigger("Entry");
+        }
         // Waveがインターバルの時にUIをアクティブ化
-        if (wave.wave == WaveManagement.WAVE_NUM.WAVE_INTERVAL)
+        else if (wave.wave == WaveManagement.WAVE_NUM.WAVE_INTERVAL)
         {
             // 前のウェーブがPVEウェーブならウェーブ情報を「対戦」にして、アニメーショントリガーをオン
             if (wave.tmpWave == WaveManagement.WAVE_NUM.WAVE_1_PVE || wave.tmpWave == WaveManagement.WAVE_NUM.WAVE_3_PVE)
@@ -90,7 +95,7 @@ public class TransWaveProduct : MonoBehaviour
                 waveIndex[1].SetActive(true);
                 waveIndex[0].SetActive(false);
 
-                wallAnim.SetTrigger("Panel");
+                panelAnim[1].SetTrigger("Open");
             }
             // 前のウェーブがPVPウェーブなら、ウェーブ情報を「撃退」にして、アニメーショントリガーをオン
             else if (wave.tmpWave == WaveManagement.WAVE_NUM.WAVE_2_PVP || wave.tmpWave == WaveManagement.WAVE_NUM.WAVE_4_PVP)
@@ -98,43 +103,15 @@ public class TransWaveProduct : MonoBehaviour
                 waveIndex[0].SetActive(true);
                 waveIndex[1].SetActive(false);
 
-                wallAnim.SetTrigger("Panel");
+                panelAnim[0].SetTrigger("Open");
             }
 
             wallAnim.SetBool("Interval", true);
-            productUI.SetActive(true);
-            waveInfo.SetActive(true);
         }
         else
         {
             wallAnim.SetBool("Interval", false);
-            productUI.SetActive(false);
-            waveInfo.SetActive(false);
-        }
-
-
-        // チュートリアル後の「撃退ウェーブ」表示
-        if (wave.tmpTimer <= 0.5f && wave.wave == WaveManagement.WAVE_NUM.WAVE_TUTORIAL)
-        {
-            productUI.SetActive(true);
-            waveInfo.SetActive(true);
-            waveIndex[0].SetActive(true);
-
-            panelAnim.SetTrigger("1stBattle");
-
-            Debug.Log("撃退ウェーブ表示");
-
-            AnimatorStateInfo stateInfo = wallAnim.GetCurrentAnimatorStateInfo(0);
-            if(stateInfo.normalizedTime < 1.0f)
-            {
-
-            }
-            else
-            {
-                productUI.SetActive(false);
-                waveInfo.SetActive(false);
-                waveIndex[0].SetActive(false);
-            }
+            // productUI.SetActive(false);
         }
         
     }
@@ -155,8 +132,6 @@ public class TransWaveProduct : MonoBehaviour
     // チュートリアル演出用関数
     public bool PlayTutorialProduct(bool in_active)
     {
-        // チュートリアル中はウェーブ情報を隠しておく
-        waveInfo.SetActive(false);
 
         // アクティブ化されたら演出UIをアクティブ化し、アニメーションを再生
         if (in_active == true)

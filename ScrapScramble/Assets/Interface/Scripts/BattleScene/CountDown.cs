@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class CountDown : MonoBehaviour
 {
-    const float MAX_TIME = 4.0f;
+    const float MAX_TIME = 6.0f;
 
     // カウントダウン用のイメージを保管しているオブジェクト
     public GameObject[] timerImg = new GameObject[4];
@@ -72,7 +72,7 @@ public class CountDown : MonoBehaviour
     // カウントダウン処理
     public float CountTimer()
     {
-        erapsedTime -= Time.deltaTime;
+        erapsedTime -= 1.0f * Time.deltaTime;
         return erapsedTime;
     }
 

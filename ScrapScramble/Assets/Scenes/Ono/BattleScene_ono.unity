@@ -811,6 +811,11 @@ PrefabInstance:
       propertyPath: waveManager
       value: 
       objectReference: {fileID: 1937325655}
+    - target: {fileID: 5896764486270419890, guid: f0effe44ebc062b47bea9889cf9ffdc6,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0effe44ebc062b47bea9889cf9ffdc6, type: 3}
 --- !u!1 &905686161 stripped

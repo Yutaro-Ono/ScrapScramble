@@ -168,7 +168,7 @@ public class PlayerMovement : MonoBehaviour
 
     void CheckMoveCommand()
     {
-        if (status.AIFlag)
+        if (status.AIFlag && AI != null)
         {
             Vector3 AIMove = AI.GetTargetVector();
 

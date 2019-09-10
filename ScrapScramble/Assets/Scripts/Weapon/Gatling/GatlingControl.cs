@@ -54,7 +54,7 @@ public class GatlingControl : MonoBehaviour
         effectPlayTiming = false;
     }
 
-    private void OnEnable()
+    private void OnDisable()
     {
         // エフェクトフラグ初期化
         effectPlayTiming = false;

@@ -7,6 +7,10 @@ public class ResultToTitle : MonoBehaviour
 {
     Rewired.Player[] controllers = new Rewired.Player[PlayerManagement.playerNum];
 
+    bool prevButton;
+
+    public bool playSoundFlag;
+
     public float nowHoldTime;
 
     const float maxHoldTime = 2.0f;
@@ -34,10 +38,16 @@ public class ResultToTitle : MonoBehaviour
 
         nowHoldTime = 0.0f;
         nowHoldTimeForQuitApp = 0.0f;
+
+        prevButton = false;
+        playSoundFlag = false;
     }
 
     private void Update()
     {
+        // 効果音フラグの更新
+        playSoundFlag = false;
+
         // 誰かがAボタンを押しているかどうか
         bool pressA = false;
         for (int i = 0; i < PlayerManagement.playerNum; ++i)
@@ -72,11 +82,14 @@ public class ResultToTitle : MonoBehaviour
             }
         }
 
+        bool pressedAorB = false;
+
         // Aボタンが押されている間
         // ただし、アプリ終了のカウントが0の時だけ
         if ((pressA || Input.GetKey(KeyCode.Space)) && nowHoldTimeForQuitApp == 0.0f)
         {
             nowHoldTime += Time.deltaTime;
+            pressedAorB = true;
         }
         // Aが押されていない間は減少
         else if (nowHoldTime > 0 && nowHoldTime < maxHoldTime)
@@ -94,6 +107,7 @@ public class ResultToTitle : MonoBehaviour
         if ((pressB || Input.GetKey(KeyCode.Tab)) && nowHoldTime == 0.0f)
         {
             nowHoldTimeForQuitApp += Time.deltaTime;
+            pressedAorB = true;
         }
         // Bが押されていない間減少
         else if (nowHoldTimeForQuitApp > 0 && nowHoldTimeForQuitApp < maxHoldTimeForQuitApp)
@@ -105,6 +119,12 @@ public class ResultToTitle : MonoBehaviour
                 nowHoldTimeForQuitApp = 0.0f;
             }
         }
+
+        // このフレームでボタンが押されたときに効果音再生指示
+        playSoundFlag = (!prevButton && pressedAorB);
+
+        // ボタン押下フラグの記録
+        prevButton = pressedAorB;
 
         // 十分な時間Aが押されていればシーンを遷移
         if (nowHoldTime >= maxHoldTime)
@@ -124,6 +144,9 @@ public class ResultToTitle : MonoBehaviour
     UnityEngine.Application.Quit();
 #endif
         }
+
+        // エスケープキーが押されていればゲームを終了する関数
+        CommonFunction.CheckEscapeForQuitApp();
     }
 
     public void BackToTitle()

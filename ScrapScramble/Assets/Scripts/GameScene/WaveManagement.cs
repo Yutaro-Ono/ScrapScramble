@@ -30,6 +30,12 @@ public class WaveManagement : MonoBehaviour
     GameObject sceneManager;
     GameSceneManager scene;
 
+    // 開始時のカウントダウン
+    GameObject countDown;
+    CountDown count;
+
+    public int tmpTimer;
+
     //-----------------------------------------------------//
     // テキスト
     //----------------------------------------------------//
@@ -59,6 +65,9 @@ public class WaveManagement : MonoBehaviour
     // 前回のWAVE番号の保管用
     public WAVE_NUM tmpWave;
 
+    // ゲームが開始したかどうか
+    public bool isGameStart;
+
     // テキスト表示enable
     public bool enableText;
 
@@ -79,26 +88,43 @@ public class WaveManagement : MonoBehaviour
         sceneManager = GameObject.Find("SceneManager");
         scene = sceneManager.GetComponent<GameSceneManager>();
 
+        //カウントダウンオブジェクトとスクリプトの取得
+        countDown = GameObject.Find("CountDown");
+        count = countDown.GetComponent<CountDown>();
+
         waveCount = 1;
         enableText = false;
+
+        isGameStart = false;
     }
 
     // Update is called once per frame
     void Update()
     {
 
+        // ゲーム開始フラグが立ったらカウントダウン処理
+        if(scene.GetGameStartFlag() && isGameStart == false)
+        {
+            tmpTimer = (int)count.CountTimer();
+
+            count.ActivateAnim(tmpTimer);
+
+            if(tmpTimer < -1)
+            {
+                isGameStart = true;
+            }
+        }
+
         // ゲームが開始したらウェーブを更新(チュートリアル時のみ)
-        if(scene.GetGameStartFlag() == true && wave == WAVE_NUM.WAVE_TUTORIAL)
+        if (isGameStart == true && wave == WAVE_NUM.WAVE_TUTORIAL)
         {
             wave = WAVE_NUM.WAVE_1_PVE;
         }
 
-        // ゲーム開始フラグが立ったら更新
-        if(scene.GetGameStartFlag())
+        if (isGameStart == true)
         {
             WaveUpdate();
         }
-
 
     }
 

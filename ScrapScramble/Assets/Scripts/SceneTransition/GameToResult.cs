@@ -25,10 +25,14 @@ public class GameToResult : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // タイマーが0以下になったら次のシーンへ遷移
         if (waveManager.timer < 0)
         {
             SceneTransition();
         }
+
+        // エスケープキーが押されていればゲームを終了する関数
+        CommonFunction.CheckEscapeForQuitApp();
     }
 
     public void AssignScore()

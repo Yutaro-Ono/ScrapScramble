@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 public class TitleSceneController : MonoBehaviour
 {
     Rewired.Player[] players = new Rewired.Player[PlayerManagement.playerNum];
+    
+    bool prevButton;
+
+    public bool playSoundFlag;
 
     // Start is called before the first frame update
     void Start()
@@ -15,6 +19,9 @@ public class TitleSceneController : MonoBehaviour
         {
             players[i] = Rewired.ReInput.players.GetPlayer(i);
         }
+
+        prevButton = false;
+        playSoundFlag = false;
     }
 
     // Update is called once per frame
@@ -33,9 +40,18 @@ public class TitleSceneController : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.Space) || anyonePressDownA)
+        // 前のフレームで押されていれば
+        // 効果音再生のために一フレームずらす
+        if(prevButton)
         {
             SceneManager.LoadScene("ChoiceMenuScene");
+        }
+
+        // フラグ記録
+        if (Input.GetKeyDown(KeyCode.Space) || anyonePressDownA)
+        {
+            playSoundFlag = true;
+            prevButton = true;
         }
 
         // エスケープが押されていればゲームを終了する関数

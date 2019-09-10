@@ -14,6 +14,10 @@ public class FilledLoadBar : MonoBehaviour
     // 現在の長押し時間
     float nowHoldTime;
 
+    bool prevButton;
+
+    public bool playSoundButton;
+
     // ChoiceMenuSceneCo...が格納されているオブジェクト
     GameObject sceneManager;
     // scene管理スクリプト
@@ -28,6 +32,9 @@ public class FilledLoadBar : MonoBehaviour
         sceneManager = GameObject.Find("SceneManager");
         scene = sceneManager.GetComponent<ChoiceMenuSceneController>();
         loadBar = GetComponent<Image>();
+
+        prevButton = false;
+        playSoundButton = false;
 
         nowHoldTime = 0.0f;
 
@@ -50,6 +57,12 @@ public class FilledLoadBar : MonoBehaviour
                 break;
             }
         }
+
+        // ボタンがこのフレームで押されたなら効果音再生
+        playSoundButton = (command && !prevButton);
+
+        // フラグ記録
+        prevButton = command;
 
         // 誰かしらの準備が完了している場合、特定操作でゲージ上昇
         if((Input.GetKey(KeyCode.Space) || command) && scene.GetPushStart() == true)

@@ -37,12 +37,18 @@ public class PreparationChanger : MonoBehaviour
     // 次シーンへ遷移する操作をしたかどうか
     bool toNextSceneCommand;
 
+    public bool playReadySoundFlag;
+    public bool playWaitSoundFlag;
+
     // Start is called before the first frame update
     void Start()
     {
         readyFlag = false;
         holdFromBecomeReady = false;
         toNextSceneCommand = false;
+
+        playReadySoundFlag = false;
+        playWaitSoundFlag = false;
 
         sceneManager = GameObject.Find("SceneManager");
         scene = sceneManager.GetComponent<ChoiceMenuSceneController>();
@@ -71,6 +77,8 @@ public class PreparationChanger : MonoBehaviour
                 holdFromBecomeReady = true;
                 playerReady.SetActive(true);
                 playerWait.SetActive(false);
+
+                playReadySoundFlag = true;
             }
 
             // 準備フラグが真で、準備フラグが立った押下でなければ（準備状態になって、一度離された上で押されたなら）
@@ -91,6 +99,11 @@ public class PreparationChanger : MonoBehaviour
         // Bボタンが押されていれば、準備状態をキャンセル
         if (controller.GetButton("B"))
         {
+            if (readyFlag)
+            {
+                playWaitSoundFlag = true;
+            }
+
             readyFlag = false;
             playerReady.SetActive(false);
             playerWait.SetActive(true);

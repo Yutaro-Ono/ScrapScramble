@@ -24,8 +24,8 @@ public class BattleBgm : MonoBehaviour
         audioSource2.clip = sound2;
         audioSource.loop = true;
         audioSource2.loop = true;
-        audioSource.volume = 0.7f;
-        audioSource2.volume = 0.5f;
+        audioSource.volume = 0.5f;
+        audioSource2.volume = 0.3f;
     }
 
     // Update is called once per frame
@@ -45,7 +45,6 @@ public class BattleBgm : MonoBehaviour
         {
            
             audioSource2.Pause();
-            if (WaveCount > 290.0f)
             {
                 audioSource.Play();
                
@@ -57,7 +56,6 @@ public class BattleBgm : MonoBehaviour
         {
             audioSource.Pause();
            
-            if(count>290.0f)
             {
                 audioSource2.Play();
                 

@@ -68,67 +68,67 @@ public class WinningPlayer : MonoBehaviour
 
         if (PlayerNum == 0)
         {
-            winPlayerText.text = "Player1Win";
+            winPlayerText.text = "Player1 Win";
         }
         if (PlayerNum == 1)
         {
-            winPlayerText.text = "Player2Win";
+            winPlayerText.text = "Player2 Win";
         }
         if (PlayerNum == 2)
         {
-            winPlayerText.text = "Player3Win";
+            winPlayerText.text = "Player3 Win";
         }
         if (PlayerNum == 3)
         {
-            winPlayerText.text = "Player4Win";
+            winPlayerText.text = "Player4 Win";
         }
 
         if ( PlayerNum==0&& tiePlayerNum == 1)
             {
-                winPlayerText.text = "Plaeyr1&2Win";
+                winPlayerText.text = "Player1 & 2 Win";
             }
             if ( PlayerNum == 0&&tiePlayerNum == 2)
             {
-                winPlayerText.text = "Plaeyr1&3Win";
+                winPlayerText.text = "Player1 & 3 Win";
             }
             if (PlayerNum == 0 && tiePlayerNum == 3)
             {
-                winPlayerText.text = "Plaeyr1&4Win";
+                winPlayerText.text = "Player1 & 4 Win";
 
             }
            if (PlayerNum == 1 && tiePlayerNum == 2)
             {
-                winPlayerText.text = "Plaeyr2&3Win";
+                winPlayerText.text = "Player2 & 3 Win";
             }
             if (PlayerNum == 1 && tiePlayerNum == 3)
             {
-                winPlayerText.text = "Plaeyr2&4Win";
+                winPlayerText.text = "Player2 & 4 Win";
             }
             if (PlayerNum == 2 && tiePlayerNum == 3)
             {
-                winPlayerText.text = "Plaeyr3&4Win";
+                winPlayerText.text = "Player3 & 4 Win";
             }
             if (PlayerNum == 0 && tiePlayerNum == 2&&tiePlayerNum2==1)
             {
-                winPlayerText.text = "Plaeyr1&2&3Win";
+                winPlayerText.text = "Player1 & 2 & 3 Win";
             }
             if (PlayerNum == 0 && tiePlayerNum == 3 && tiePlayerNum2 == 2)
             {
-                winPlayerText.text = "Plaeyr1&3&4Win";
+                winPlayerText.text = "Player1 & 3 & 4 Win";
             }
             if (PlayerNum == 0 && tiePlayerNum == 3 && tiePlayerNum2 == 1)
             {
-                winPlayerText.text = "Plaeyr1&2&4Win";
+                winPlayerText.text = "Player1 & 2 & 4 Win";
             }
             if (PlayerNum == 1 && tiePlayerNum == 3 && tiePlayerNum2 == 2)
             {
-                winPlayerText.text = "Plaeyr2&3&4Win";
+                winPlayerText.text = "Player2 & 3 & 4 Win";
             }
           
-                if (PlayerNum == 0 && tiePlayerNum == 3 && tiePlayerNum2 == 2 && tiePlayerNum3 == 1)
-                {
-                    winPlayerText.text = "Draw";
-                }
+            if (PlayerNum == 0 && tiePlayerNum == 3 && tiePlayerNum2 == 2 && tiePlayerNum3 == 1)
+            {
+                winPlayerText.text = "引き分け";
+            }
             
         
       

@@ -69,6 +69,10 @@ public class PlayerJudgment : MonoBehaviour
 
         else if (other.gameObject.tag == "Player")
         {
+
+            // 現フレームでの座標を記録
+            playerMove.prevPos = transform.position;
+
             WaveManagement.WAVE_NUM wave = playerStatus.GetWaveManager().wave;
             bool isVsPlayerWave = (wave == WaveManagement.WAVE_NUM.WAVE_2_PVP || wave == WaveManagement.WAVE_NUM.WAVE_4_PVP);
 

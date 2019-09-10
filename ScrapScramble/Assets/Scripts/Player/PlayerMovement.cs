@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     PlayerAI AI;
     Rigidbody myRigidbody;
 
-    Vector3 prevPos;
+    public Vector3 prevPos;
 
     // 初期位置
     Vector3 initialPosition;
@@ -122,16 +122,6 @@ public class PlayerMovement : MonoBehaviour
         {
             status.score = 0;
         }
-
-        // 進行方向を向く
-        Vector3 positionDifference = transform.position - prevPos;
-        if (positionDifference.magnitude > 0.01f)
-        {
-            transform.rotation = Quaternion.LookRotation(positionDifference);
-        }
-
-        // 現フレームでの座標を記録
-        prevPos = transform.position;
     }
 
     private void FixedUpdate()
@@ -144,6 +134,20 @@ public class PlayerMovement : MonoBehaviour
 
         // 静止処理
         Brake();
+
+        // 進行方向を向く
+        Vector3 positionDifference = transform.position - prevPos;
+        if (positionDifference.magnitude > 0.01f)
+        {
+            transform.rotation = Quaternion.LookRotation(positionDifference);
+            //myRigidbody.rotation = Quaternion.LookRotation(positionDifference);
+
+            //if (status.GetId() == 0)
+            //{ Debug.Log(prevPos + ", " + transform.position); }
+        }
+
+        // 現フレームでの座標を記録
+        prevPos = transform.position;
     }
 
     public bool GetCoolTimeFlag()
@@ -164,7 +168,7 @@ public class PlayerMovement : MonoBehaviour
 
     void CheckMoveCommand()
     {
-        if (status.AIFlag)
+        if (status.AIFlag && AI != null)
         {
             Vector3 AIMove = AI.GetTargetVector();
 

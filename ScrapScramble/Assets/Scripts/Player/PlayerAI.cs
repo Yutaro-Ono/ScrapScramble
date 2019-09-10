@@ -110,10 +110,12 @@ public class PlayerAI : MonoBehaviour
 
         targetPlayerTimer = 0.0f;
 
-        escapeBehaviorPercentage = Random.Range(3.0f, 50.0f);
+        escapeBehaviorPercentage = Random.Range(40.0f, 75.0f);
         //escapeBehaviorPercentage = 0.0f;
 
         escapeBehaviorFlag = false;
+
+        Debug.Log("PlayerAI" + status.GetId() + " targetPlayerChangeInterval : " + targetPlayerChangeInterval);
     }
 
     private void FixedUpdate()
@@ -383,7 +385,8 @@ public class PlayerAI : MonoBehaviour
                 }
 
                 // 体当たりが可能な場合
-                else if (!moveScript.GetCoolTimeFlag())
+                // 一時無効
+                else if (false && !moveScript.GetCoolTimeFlag())
                 {
                     // 体当たりの威力が3を超えた後、ランダムなタイミングで体当たりを実行
                     if (moveScript.tacklePower >= 3 && Random.Range(0, 31) == 0)

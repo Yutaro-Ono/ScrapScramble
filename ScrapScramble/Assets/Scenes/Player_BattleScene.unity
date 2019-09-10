@@ -2617,21 +2617,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 186378353066382240, guid: 6c7994606bbdfcf46b68ce17cbbfe00c,
-        type: 3}
-      propertyPath: AIFlag.Array.data[1]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 186378353066382240, guid: 6c7994606bbdfcf46b68ce17cbbfe00c,
-        type: 3}
-      propertyPath: AIFlag.Array.data[2]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 186378353066382240, guid: 6c7994606bbdfcf46b68ce17cbbfe00c,
-        type: 3}
-      propertyPath: AIFlag.Array.data[3]
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c7994606bbdfcf46b68ce17cbbfe00c, type: 3}
 --- !u!1001 &4222952178215046548

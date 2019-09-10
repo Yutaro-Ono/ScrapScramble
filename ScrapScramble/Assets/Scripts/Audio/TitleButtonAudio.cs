@@ -4,40 +4,32 @@ using UnityEngine;
 
 public class TitleButtonAudio : MonoBehaviour
 {
-    Rewired.Player[] controllers = new Rewired.Player[PlayerManagement.playerNum];
-    public AudioClip sound;
-    AudioSource audioSource;
 
+    public AudioClip sound;
+    public GameObject Object;
+    AudioSource audioSource;
+    TitleSceneController titleSceneController;
     // Start is called before the first frame update
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        for (int i = 0; i < PlayerManagement.playerNum; ++i)
-        {
-            // その番号のプレイヤーがAIでなければ
-            if (ChoiceMenuSceneController.getReady[i])
-            {
-                // 操作受付
-                controllers[i] = Rewired.ReInput.players.GetPlayer(i);
-            }
-            // AIであれば
-            else
-            {
-                controllers[i] = null;
-            }
-        }
+        titleSceneController = Object.GetComponent<TitleSceneController>();
         audioSource.clip = sound;
     }
 
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < PlayerManagement.playerNum; ++i)
+    
+        if(titleSceneController.playSoundFlag==true)
         {
-            if (controllers[i].GetButton("A"))
-            {
-                audioSource.Play();
-            }
+            audioSource.Play();
         }
+        else
+        {
+            audioSource.Stop();
+        }
+            
+        
     }
 }

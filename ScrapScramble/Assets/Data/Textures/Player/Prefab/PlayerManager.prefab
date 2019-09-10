@@ -119,6 +119,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7135600685902519027, guid: 62f2af9a76f12a941be28cb59b4ab45c,
+        type: 3}
+      propertyPath: giant
+      value: 
+      objectReference: {fileID: 1714681308540598, guid: 5cbc537826220e04592d5a41a0dd985f,
+        type: 3}
     - target: {fileID: 438270996070778035, guid: 62f2af9a76f12a941be28cb59b4ab45c,
         type: 3}
       propertyPath: hitCollider
@@ -316,6 +322,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7135600685902519027, guid: 62f2af9a76f12a941be28cb59b4ab45c,
+        type: 3}
+      propertyPath: giant
+      value: 
+      objectReference: {fileID: 1714681308540598, guid: 5cbc537826220e04592d5a41a0dd985f,
+        type: 3}
     - target: {fileID: 438270996070778035, guid: 62f2af9a76f12a941be28cb59b4ab45c,
         type: 3}
       propertyPath: hitCollider
@@ -513,6 +525,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7135600685902519027, guid: 62f2af9a76f12a941be28cb59b4ab45c,
+        type: 3}
+      propertyPath: giant
+      value: 
+      objectReference: {fileID: 1714681308540598, guid: 5cbc537826220e04592d5a41a0dd985f,
+        type: 3}
     - target: {fileID: 438270996070778035, guid: 62f2af9a76f12a941be28cb59b4ab45c,
         type: 3}
       propertyPath: hitCollider
@@ -710,6 +728,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7135600685902519027, guid: 62f2af9a76f12a941be28cb59b4ab45c,
+        type: 3}
+      propertyPath: giant
+      value: 
+      objectReference: {fileID: 1714681308540598, guid: 5cbc537826220e04592d5a41a0dd985f,
+        type: 3}
     - target: {fileID: 438270996070778035, guid: 62f2af9a76f12a941be28cb59b4ab45c,
         type: 3}
       propertyPath: hitCollider

@@ -816,6 +816,11 @@ PrefabInstance:
       propertyPath: waveManager
       value: 
       objectReference: {fileID: 1937325655}
+    - target: {fileID: 5896764486270419890, guid: f0effe44ebc062b47bea9889cf9ffdc6,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0effe44ebc062b47bea9889cf9ffdc6, type: 3}
 --- !u!1 &905686161 stripped
@@ -1613,7 +1618,23 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1714681308540598, guid: 5cbc537826220e04592d5a41a0dd985f,
         type: 3}
+    - target: {fileID: 7483534836027973631, guid: 7ed4c2820c1b46d42957cc22f5f0d314,
+        type: 3}
+      propertyPath: playerPos
+      value: 
+      objectReference: {fileID: 29292116}
     - target: {fileID: 1019826006000252564, guid: 7ed4c2820c1b46d42957cc22f5f0d314,
+        type: 3}
+      propertyPath: giant
+      value: 
+      objectReference: {fileID: 1714681308540598, guid: 5cbc537826220e04592d5a41a0dd985f,
+        type: 3}
+    - target: {fileID: 1019826006000252564, guid: 7ed4c2820c1b46d42957cc22f5f0d314,
+        type: 3}
+      propertyPath: playerPos
+      value: 
+      objectReference: {fileID: 699836144}
+    - target: {fileID: 2199147072105223499, guid: 7ed4c2820c1b46d42957cc22f5f0d314,
         type: 3}
       propertyPath: giant
       value: 
@@ -1621,10 +1642,9 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 2199147072105223499, guid: 7ed4c2820c1b46d42957cc22f5f0d314,
         type: 3}
-      propertyPath: giant
+      propertyPath: playerPos
       value: 
-      objectReference: {fileID: 1714681308540598, guid: 5cbc537826220e04592d5a41a0dd985f,
-        type: 3}
+      objectReference: {fileID: 1234209211}
     - target: {fileID: 3504586719304117767, guid: 7ed4c2820c1b46d42957cc22f5f0d314,
         type: 3}
       propertyPath: sud
@@ -1646,6 +1666,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1714681308540598, guid: 5cbc537826220e04592d5a41a0dd985f,
         type: 3}
+    - target: {fileID: 2027839077112744195, guid: 7ed4c2820c1b46d42957cc22f5f0d314,
+        type: 3}
+      propertyPath: playerPos
+      value: 
+      objectReference: {fileID: 2068370303}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ed4c2820c1b46d42957cc22f5f0d314, type: 3}
 --- !u!1001 &1472869083

@@ -29,12 +29,13 @@ public class BattleBgm : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
         WaveCount++;
         count++;
         RingEnginAudio();
     }
+   
     void RingEnginAudio()
     {
         WaveManagement.WAVE_NUM wave = status.GetWaveManager().wave;
@@ -44,7 +45,7 @@ public class BattleBgm : MonoBehaviour
         {
            
             audioSource2.Pause();
-            if (WaveCount > 590.0f)
+            if (WaveCount > 290.0f)
             {
                 audioSource.Play();
                
@@ -56,7 +57,7 @@ public class BattleBgm : MonoBehaviour
         {
             audioSource.Pause();
            
-            if(count>590.0f)
+            if(count>290.0f)
             {
                 audioSource2.Play();
                 
